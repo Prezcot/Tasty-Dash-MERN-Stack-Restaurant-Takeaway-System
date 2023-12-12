@@ -1,0 +1,24 @@
+services:
+  server:
+    build:
+      context: .
+    container_name: Server
+    ports:
+      - 3001:3001
+    working_dir: /usr/src/app
+    volumes:
+      - ./server:/usr/src/app
+    command:  node index.js && npm i
+
+  app:
+    build:
+      context: .
+    container_name: Client
+    volumes:
+      - ./client/src:/usr/src/app/src
+      - ./client/public:/usr/src/app/public
+      - ./client:/usr/src/app
+    ports:
+      - 3000:3000
+    working_dir: /usr/src/app
+    command: npm start && npm i
