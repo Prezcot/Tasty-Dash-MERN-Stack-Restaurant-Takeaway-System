@@ -7,7 +7,7 @@ function SendData() {
   const sendData = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3001/data/name/send", data);
+      await axios.post("http://localhost:3001/testing/data/send", data);
       console.log("Data sent to route successfully");
     } catch (e) {
       console.error("Error:", e);
