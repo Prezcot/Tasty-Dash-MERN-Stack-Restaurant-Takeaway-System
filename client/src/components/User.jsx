@@ -47,77 +47,69 @@ const User=()=>{ //you cant use export default here because you are assigning
             localStorage.setItem("page","User");
         }
     }
-    async function handleSubmit(event)
+    async function handleSignUp(event)
     {
         console.log("registering");
         event.preventDefault();
-        await axios.post("http://192.168.1.120:3001/users/register",{username,email,phonenumber,address,password,cnfrmpassword}).then(changePage);
+        await axios.post("http://192.168.1.120:3001/users/signup",{username,email,phonenumber,address,password,cnfrmpassword}).then(changePage);
+        
+    }
+    async function handleSignIn(event)
+    {
+        console.log("registering");
+        event.preventDefault();
+        await axios.post("http://192.168.1.120:3001/users/signin",{username,email,phonenumber,address,password,cnfrmpassword}).then(changePage);
         
     }
     if (page=="User")
     {
         return(
-            <div style={{"margin-top":"2%","display":"flex"}}>
-                <div style={{"border-right":"5px solid black","margin-left":"6%","padding-right":"5%"}}>
+            <div style={{"margin-top":"2%","display":"flex","width":"100%"}}>
+                <div style={{"border-right":"5px solid black","margin-left":"10%","padding-right":"8%"}}>
                     <h1 style={{color:"black"}}>Sign In</h1>
                     <br></br>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSignIn}>
                         <table id="login">
                             <tr>
-                                <Tabcol>Name: </Tabcol> 
-                                <td style={{"padding-bottom":"2%","padding-left":"5px","font-size":"30px"}}><UserInput type="text" id="name" placeholder="Name" onChange={(e)=>username=e.target.value}/></td>
-                            </tr>
-                            <tr>
-                                <Tabcol>Email: </Tabcol>
-                                <Tabcol style={{"padding-left":"5px"}}><UserInput type="text" id="email" placeholder="Email" onChange={(e)=>email=e.target.value}/></Tabcol>
-                            </tr>
-                            <tr>
-                                <Tabcol>Phone Number: </Tabcol>
-                                <Tabcol style={{"padding-left":"5px"}}><UserInput type="text" id="phonenumber" placeholder="Phone Number" onChange={(e)=>phonenumber=e.target.value}/></Tabcol>
+                                <Tabcol>Username: </Tabcol> 
+                                <td style={{"padding-bottom":"2%","padding-left":"2%","font-size":"30px"}}><UserInput type="text" id="name" placeholder="Name" onChange={(e)=>username=e.target.value}/></td>
                             </tr>
                             <tr>
                                 <Tabcol>Password: </Tabcol>
-                                <Tabcol style={{"padding-left":"5px"}}><UserInput type="password" id="password" placeholder="Password" onChange={(e)=>password=e.target.value}/></Tabcol>
+                                <Tabcol style={{"padding-left":"2%"}}><UserInput type="password" id="password" placeholder="Password" onChange={(e)=>password=e.target.value}/></Tabcol>
                             </tr>
                             <input style={{"width":"50%","background-color":"grey","color":"white","border-radius":"10px","border":"1px solid black"}} type="submit" value="Sign In"></input>
                         </table>
                     </form>
                 </div>
-                <div style={{"padding-left":"5%"}}>
-                <h1 style={{color:"black"}}>Sign Up</h1>
-                    <br></br>
-                    <form onSubmit={handleSubmit}>
-                        <table id="login">
-                            <tr>
-                                <Tabcol>Name: </Tabcol> 
-                                <td style={{"padding-bottom":"2%","padding-left":"5px","font-size":"30px"}}><UserInput type="text" id="name" placeholder="Name" onChange={(e)=>username=e.target.value}/></td>
-                            </tr>
-                            <tr>
-                                <Tabcol>Email: </Tabcol>
-                                <Tabcol style={{"padding-left":"5px"}}><UserInput type="text" id="email" placeholder="Email" onChange={(e)=>email=e.target.value}/></Tabcol>
-                            </tr>
-                            <tr>
-        
-                            </tr>
-                            <tr>
-                                <Tabcol>Phone Number: </Tabcol>
-                                <Tabcol style={{"padding-left":"5px"}}><UserInput type="text" id="phonenumber" placeholder="Phone Number" onChange={(e)=>phonenumber=e.target.value}/></Tabcol>
-                            </tr>
-                            <tr>
-                                <Tabcol>Address: </Tabcol>
-                                <Tabcol style={{"padding-left":"5px"}}><UserInput type="text" id="address" placeholder="Address" onChange={(e)=>address=e.target.value}/></Tabcol>
-                            </tr>
-                            <tr>
-                                <Tabcol>Password: </Tabcol>
-                                <Tabcol style={{"padding-left":"5px"}}><UserInput type="password" id="password" placeholder="Password" onChange={(e)=>password=e.target.value}/></Tabcol>
-                            </tr>
-                            <tr>
-                                <Tabcol>Confirm Password: </Tabcol>
-                                <Tabcol style={{"padding-left":"5px"}}><UserInput type="password" id="confirmpassword" placeholder="Confirm Password" onChange={(e)=>cnfrmpassword=e.target.value}/></Tabcol>
-                            </tr>
-                            <input style={{"width":"50%","background-color":"grey","color":"white","border-radius":"10px","border":"1px solid black"}} type="submit" value="Sign Up"></input>
-                        </table>
-                    </form>
+                <div style={{"padding-left":"4%"}}>
+                    <h1 style={{color:"black"}}>Sign Up</h1>
+                        <br></br>
+                        <form onSubmit={handleSignUp}>
+                            <table id="login">
+                                <tr>
+                                    <Tabcol>Name: </Tabcol> 
+                                    <td style={{"padding-bottom":"2%","padding-left":"2%","font-size":"30px"}}><UserInput type="text" id="name" placeholder="Name" onChange={(e)=>username=e.target.value}/></td>
+                                </tr>
+                                <tr>
+                                    <Tabcol>Email: </Tabcol>
+                                    <Tabcol style={{"padding-left":"2%"}}><UserInput type="text" id="email" placeholder="Email" onChange={(e)=>email=e.target.value}/></Tabcol>
+                                </tr>
+                                <tr>
+                                    <Tabcol>Phone Number: </Tabcol>
+                                    <Tabcol style={{"padding-left":"2%"}}><UserInput type="text" id="phonenumber" placeholder="Phone Number" onChange={(e)=>phonenumber=e.target.value}/></Tabcol>
+                                </tr>
+                                <tr>
+                                    <Tabcol>Password: </Tabcol>
+                                    <Tabcol style={{"padding-left":"2%"}}><UserInput type="password" id="password" placeholder="Password" onChange={(e)=>password=e.target.value}/></Tabcol>
+                                </tr>
+                                <tr>
+                                    <Tabcol>Confirm Password: </Tabcol>
+                                    <Tabcol style={{"padding-left":"2%"}}><UserInput type="password" id="confirmpassword" placeholder="Confirm Password" onChange={(e)=>cnfrmpassword=e.target.value}/></Tabcol>
+                                </tr>
+                                <input style={{"width":"50%","background-color":"grey","color":"white","border-radius":"10px","border":"1px solid black"}} type="submit" value="Sign Up"></input>
+                            </table>
+                        </form>
                 </div>
             </div>
         )
