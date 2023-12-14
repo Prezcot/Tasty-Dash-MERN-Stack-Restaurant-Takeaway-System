@@ -5,7 +5,7 @@ let bodyParser=require("body-parser");
 let cors=require("cors");
 let User=require("./routes/User.js");
 const mongoose = require('mongoose');
-const uri = "mongodb+srv://admin:admin@restaurant-database.b7ewk2m.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://admin:admin1234@restaurant-database.b7ewk2m.mongodb.net/?retryWrites=true&w=majority";
 app.use(cors());
 app.use(bodyParser.json());
 
