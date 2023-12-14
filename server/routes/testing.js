@@ -1,9 +1,12 @@
 const router = require("express").Router();
 
-router.route("/").get((req, res) => {
+router.get("/", (req, res) => {
   res.send("Permission Denied");
 });
 
-router.route("/data/send").post(async (req, res) => {});
+router.post("/data/send", async (req, res) => {
+  let data = req.body;
+  console.log(data);
+});
 
 module.exports = router;

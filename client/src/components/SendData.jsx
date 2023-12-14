@@ -6,25 +6,27 @@ function SendData() {
 
   const sendData = async (e) => {
     e.preventDefault();
-    try {
-      await axios.post("http://localhost:3001/testing/data/send", data);
-      console.log("Data sent to route successfully");
-    } catch (e) {
-      console.error("Error:", e);
-    }
+    await axios
+      .post("http://localhost:3001/testing/data/send", data)
+      .then(() => {
+        console.log("Data has been sent succefully");
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
   };
 
   return (
     <>
       <br />
-      <form action={sendData}>
+      <form onSubmit={sendData}>
         <input
           type="text"
           name="name"
           id="name"
-          onChange={setData((e) => {
-            name: e.target.value;
-          })}
+          onChange={(e) => {
+            setData({ name: e.target.value });
+          }}
         />
         <button type="submit">Submit!!!</button>
       </form>
