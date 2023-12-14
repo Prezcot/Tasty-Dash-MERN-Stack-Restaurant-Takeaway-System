@@ -51,7 +51,7 @@ const User=()=>{ //you cant use export default here because you are assigning
     {
         console.log("registering");
         event.preventDefault();
-        await axios.post("http://192.168.1.120:3001/register",{username,email,phonenumber,address,password,cnfrmpassword}).then(changePage);
+        await axios.post("http://192.168.1.120:3001/users/register",{username,email,phonenumber,address,password,cnfrmpassword}).then(changePage);
         
     }
     if (page=="User")
@@ -72,23 +72,12 @@ const User=()=>{ //you cant use export default here because you are assigning
                                 <Tabcol style={{"padding-left":"5px"}}><UserInput type="text" id="email" placeholder="Email" onChange={(e)=>email=e.target.value}/></Tabcol>
                             </tr>
                             <tr>
-        
-                            </tr>
-                            <tr>
                                 <Tabcol>Phone Number: </Tabcol>
                                 <Tabcol style={{"padding-left":"5px"}}><UserInput type="text" id="phonenumber" placeholder="Phone Number" onChange={(e)=>phonenumber=e.target.value}/></Tabcol>
                             </tr>
                             <tr>
-                                <Tabcol>Address: </Tabcol>
-                                <Tabcol style={{"padding-left":"5px"}}><UserInput type="text" id="address" placeholder="Address" onChange={(e)=>address=e.target.value}/></Tabcol>
-                            </tr>
-                            <tr>
                                 <Tabcol>Password: </Tabcol>
                                 <Tabcol style={{"padding-left":"5px"}}><UserInput type="password" id="password" placeholder="Password" onChange={(e)=>password=e.target.value}/></Tabcol>
-                            </tr>
-                            <tr>
-                                <Tabcol>Confirm Password: </Tabcol>
-                                <Tabcol style={{"padding-left":"5px"}}><UserInput type="password" id="confirmpassword" placeholder="Confirm Password" onChange={(e)=>cnfrmpassword=e.target.value}/></Tabcol>
                             </tr>
                             <input style={{"width":"50%","background-color":"grey","color":"white","border-radius":"10px","border":"1px solid black"}} type="submit" value="Sign In"></input>
                         </table>

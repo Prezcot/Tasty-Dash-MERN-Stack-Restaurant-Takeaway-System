@@ -3,17 +3,10 @@ let express = require('express');
 let app = express();
 let bodyParser=require("body-parser");
 let cors=require("cors");
+let User=require("./routes/User.js");
 app.use(cors());
 app.use(bodyParser.json());
-app.get('/',(req,res) => {
-    res.send('hello there!!!');
-});
-
-app.post("/register",(req,res,next)=>{
-    const {username,email,phonenumber,address,password,cnfrmpassword}=req.body;
-    console.log(username);
-    res.status(200).json({message:"Successfully Received Data !"});
-})
+app.use("/users",User);
 app.listen(port,() => {
     console.log("Running on port: " + port);
 });
