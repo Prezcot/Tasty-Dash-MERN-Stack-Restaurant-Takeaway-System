@@ -1,13 +1,14 @@
 let port = 3001;
-let express = require('express');
+let express = require("express");
 let app = express();
-let bodyParser=require("body-parser");
 let cors=require("cors");
-let User=require("./routes/User.js");
 const mongoose = require('mongoose');
-const uri = "mongodb+srv://admin:admin1234@restaurant-database.b7ewk2m.mongodb.net/?retryWrites=true&w=majority";
+let User=require("./routes/User.js");
+const testingRouter = require("./routes/testing");
+//const uri = "mongodb+srv://admin:admin1234@restaurant-database.b7ewk2m.mongodb.net/?retryWrites=true&w=majority";
+require("dotenv").config();
+const uri = process.env.ATLAS_URI;
 app.use(cors());
-app.use(bodyParser.json());
 
 async function run() {
     try {
@@ -24,6 +25,15 @@ async function run() {
 run();
 app.use("/users",User);
 
-app.listen(port,() => {
-    console.log("Running on port: " + port);
+
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello there!!!");
+});
+
+app.use("/testing", testingRouter);
+
+app.listen(port, () => {
+  console.log("Listening on port: " + port);
 });
