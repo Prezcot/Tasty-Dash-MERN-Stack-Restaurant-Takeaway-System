@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from "react";
-import NavBar from "/MyData/GitHub/restaurant-ordering-system/client/src/components/NavBar";
 import styled from "styled-components";
 import axios from "axios";
 import SignUp from "./SignUp";
@@ -18,6 +17,7 @@ const SignIn=()=>{ //you cant use export default here because you are assigning
     const [username,setUsername]=useState();
     const [password,setPassword]=useState();
     const [currentlychked,setChecked]=useState(null);
+    const [error,setError]=useState(null);
 
     useEffect(()=>{ //this useEffect hook will only run by default if the page variable has changed thus avoiding
         //the too many re-renders error.
@@ -29,7 +29,8 @@ const SignIn=()=>{ //you cant use export default here because you are assigning
         {
             setPage("SignUp");
         }
-        else{
+        else if (localStorage.getItem("page")=="Menu")
+        {
             setPage("Menu");
         }
     });
@@ -66,23 +67,42 @@ const SignIn=()=>{ //you cant use export default here because you are assigning
             localStorage.setItem("page","SignUp");
         }
     }
+    function handleError() //also called a render method
+    {
+        if (error)
+        {
+            return(
+                <center>
+                    <div style={{"display":"inline-flex","align-items":"center","border":"0.5vh solid red","border-radius":"3vh","padding-top":"2vh","padding-left":"2vh","padding-right":"2vh"}}>
+                        <p style={{"text-align":"center","font-weight":"bold","color":"red"}}>{error}</p>
+                    </div>
+                </center>
+            )
+        }
+    }
     async function handleSignIn(event)
     {
         console.log("signin");
         event.preventDefault();
-        if (currentlychked==true)
+        if (username && password && username.length>=3 && password.length>=8)
         {
-            localStorage.setItem("checked",JSON.stringify(currentlychked));
-            localStorage.setItem("username",username);
-            localStorage.setItem("password",password);
+            await axios.post("http://192.168.1.121:3001/users/signin",{username,password}).then(()=>changePage("Menu")).catch((err)=>setError(err.response.data.error));
+            if (currentlychked==true)
+            {
+                localStorage.setItem("checked",JSON.stringify(currentlychked));
+                localStorage.setItem("username",username);
+                localStorage.setItem("password",password);
 
+            }
+            else{
+                localStorage.setItem("checked",JSON.stringify(currentlychked));
+                localStorage.removeItem("username");
+                localStorage.removeItem("password");
+            }
         }
         else{
-            localStorage.setItem("checked",JSON.stringify(currentlychked));
-            localStorage.removeItem("username");
-            localStorage.removeItem("password");
+            setError("Please Enter Valid Data");
         }
-        await axios.post("http://192.168.1.121:3001/users/signin",{username,email,phonenumber,password,cnfrmpassword}).then(()=>changePage("Menu"));
         
     }
     if (page=="SignIn")//use vh and vw for margins and padding and other attributes 
@@ -93,6 +113,9 @@ const SignIn=()=>{ //you cant use export default here because you are assigning
                     <center>
                         <h1 style={{color:"black"}}>Sign In</h1>
                     </center>
+                    <br></br>
+                    {handleError()}
+                    {()=>changePage("Menu")}
                     <br></br>
                     <form onSubmit={handleSignIn}>
                         <table id="login" >
@@ -123,7 +146,7 @@ const SignIn=()=>{ //you cant use export default here because you are assigning
     }
     if (page=="SignUp")
     {
-        <SignUp />
+        return <SignUp />
     }
     if (page=="Menu")
     {
