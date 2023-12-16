@@ -84,9 +84,13 @@ const SignIn=()=>{ //you cant use export default here because you are assigning
     {
         console.log("signin");
         event.preventDefault();
-        if (username && password && username.length>=3 && password.length>=8)
+        if (username && password && username.length>=3 && password.length>=3)
         {
-            await axios.post("http://192.168.1.121:3001/users/signin",{username,password}).then(()=>changePage("Menu")).catch((err)=>setError(err.response.data.error));
+            await axios.post("http://192.168.1.121:3001/users/signin",{username,password}).then(()=>
+            {   localStorage.setItem("page","Menu");
+                setPage("Menu");
+            }).catch((err)=>setError(err.response.data.message));
+
             if (currentlychked==true)
             {
                 localStorage.setItem("checked",JSON.stringify(currentlychked));
@@ -121,15 +125,15 @@ const SignIn=()=>{ //you cant use export default here because you are assigning
                         <table id="login" >
                             <tr>
                                 <Tabcol>Username: </Tabcol> 
-                                <td style={{"padding-bottom":"2vh","font-size":"4vh"}}><input type="text" value={username} placeholder="Username" onChange={(e)=>setUsername(e.target.value)}/></td>
+                                <td style={{"padding-bottom":"2vh","font-size":"4vh"}}><UserInput type="text" value={username} placeholder="Username" onChange={(e)=>setUsername(e.target.value)}/></td>
                             </tr>
                             <tr>
                                 <Tabcol>Password: </Tabcol>
-                                <Tabcol><input type="password" value={password} placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/></Tabcol>
+                                <Tabcol><UserInput type="password" value={password} placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/></Tabcol>
                             </tr>
                             <tr>
                                 <td>
-                                <input style={{width:"2vw",height:"2vh"}} type="checkbox" checked={currentlychked} onChange={(e)=>setChecked(e.target.checked)}></input>
+                                <UserInput style={{width:"2vw",height:"2vh"}} type="checkbox" checked={currentlychked} onChange={(e)=>setChecked(e.target.checked)}/>
                                 <p style={{display:"inline",fontSize:"3vh"}}>Remember Me ?</p>
                                 </td>
                             </tr>
@@ -153,7 +157,7 @@ const SignIn=()=>{ //you cant use export default here because you are assigning
         return(
             <div>
                 This is route to menu page
-                <button id="back" onClick={changePage("SignIn")}>Go Back</button>
+                <button id="back" onClick={()=>changePage("SignIn")}>Go Back</button>
             </div>
         )
     }
