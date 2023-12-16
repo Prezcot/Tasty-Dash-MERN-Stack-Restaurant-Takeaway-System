@@ -11,7 +11,7 @@ const users= mongoose.model("users",UserSchema); // you can now use this to crea
 router.post("/signin",async (req,res,next)=>{ //This route handler handles all signin requests
     const {username,email,phonenumber,password,cnfrmpassword}=req.body;
     console.log(username);
-    var query=await users.find({username:username}).catch((err)=>res.status(400).json({message:err}));
+    var query=await users.find({username:username,password:password}).catch((err)=>res.status(400).json({message:err}));
     if (query.length>0)
     {
         res.status(200).json({message:"Account Registered"});
@@ -19,16 +19,15 @@ router.post("/signin",async (req,res,next)=>{ //This route handler handles all s
     }
     else
     {
-        res.status(400).json({message:"Account Not Registered"});
+        res.status(400).json({message:"Account Not Registered/Invalid Credentials"});
         console.log("Data Does Not Exist In Database");
     }
-    //const User=new user({username,email,phonenumber,password})
-    //await User.save().then(()=>res.status(200).json({message:"Successfully Received Data !"})).catch((err)=>res.status(400).json({error:"Unsuccessful"}));
 });
 
 router.post("/signup",async(req,res,next)=>{ //This route handler handles all signup requests
-    const {username,email,phonenumber,password,cnfrmpassword} = req.body;
-    var query=await users.find({username}).catch((err)=>console.log(err));
+    const {username,email,phonenumber,password} = req.body;
+    //var password=bcrypt.hash(password,10); figure out how to hash a password and save that hash to compare later DO HASHING ON CLIENT SIDE
+    var query=await users.find({username:username,phonenumber:phonenumber}).catch((err)=>console.log(err));
     if (query.length>0)
     {
         res.status(400).json({message:"Account Already Exists"});

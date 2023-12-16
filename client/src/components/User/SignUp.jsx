@@ -39,14 +39,20 @@ function SignUp()
 
     async function handleSignUp(event)
     {
-        console.log("registering");
         event.preventDefault();
         try{
-            if (username.length>=3 && validator.isEmail(email) && phonenumber.length==10 && password.length>=3 && cnfrmpassword==password)
+            setUsername(username.toLowerCase().trim());
+            setPassword(password.trim());
+            if (username.length>=3 && validator.isEmail(email) && !isNaN(phonenumber) && phonenumber.length==10 && password.length>=3 && cnfrmpassword==password)
             {
-                await axios.post("http://192.168.1.121:3001/users/signup",{username,email,phonenumber,password,cnfrmpassword}).then(()=><SignIn/>).catch((err)=>setError(err.response.data.message));
+                await axios.post("http://192.168.1.121:3001/users/signup",{username,email,phonenumber,password}).then(()=><SignIn/>).catch((err)=>setError(err.response.data.message));
             }
-            else if (password!=cnfrmpassword){
+            else if (isNaN(phonenumber))
+            {
+                setError("Please Enter A Valid Phone Number");
+            }
+            else if (password!=cnfrmpassword)
+            {
                 setError("Passwords Not Matching");
             }
             else if (!validator.isEmail(email))
