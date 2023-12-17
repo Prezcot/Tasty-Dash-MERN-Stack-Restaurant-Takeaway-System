@@ -2,6 +2,10 @@ let port = 3001;
 let express = require("express");
 let app = express();
 let cors = require("cors");
+
+const testingRouter = require("./routes/testing");
+const menuRouter = require("./routes/menu");
+
 let mongoose = require("mongoose");
 require("dotenv").config();
 
@@ -16,15 +20,17 @@ connection.once("open", () => {
 
 app.use(cors());
 app.use(express.json());
+app.use("/testing", testingRouter);
+app.use("/menu", menuRouter);
 
 app.get("/", (req, res) => {
-  res.send("Hello there!!!");
+  res.send("Hello there!!!")
 });
 
-const testingRouter = require("./routes/testing");
 
-app.use("/testing", testingRouter);
 
 app.listen(port, () => {
   console.log("Listening on port: " + port);
 });
+
+
