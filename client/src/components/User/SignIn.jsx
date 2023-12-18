@@ -22,15 +22,6 @@ const SignIn = () => {
   const [error, setError] = useState(null);
   const [showAdminDashboard, setShowAdminDashboard] = useState(false);
 
-  function goToAdminDashboard() {
-    console.log("Go to dashboard is running");
-    setShowAdminDashboard(true);
-    console.log(showAdminDashboard);
-    if (showAdminDashboard) {
-      return <AdminDashboard />;
-    }
-  }
-
   useEffect(() => {
     //this useEffect hook will only run by default if the page variable has changed thus avoiding
     //the too many re-renders error.
@@ -124,6 +115,10 @@ const SignIn = () => {
       setError("Please Enter Valid Data");
     }
   }
+  if (showAdminDashboard)
+  {
+    return <AdminDashboard />
+  }
   if (page == "SignIn") {
     //use vh and vw for margins and padding and other attributes
     return (
@@ -136,7 +131,7 @@ const SignIn = () => {
       >
         {/* just for testing please ignore */}
 
-        <button onClick={goToAdminDashboard}>
+        <button onClick={()=>setShowAdminDashboard(true)}>
           Just for testing -will go to the dashboard
         </button>
 
@@ -231,6 +226,7 @@ const SignIn = () => {
       </div>
     );
   }
+  
 };
 
 export default SignIn;
