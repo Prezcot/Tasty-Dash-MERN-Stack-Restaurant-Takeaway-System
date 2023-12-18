@@ -12,11 +12,6 @@ const Tabcol = styled.td`
   font-size: 4vh;
 `;
 
-function goToAdminDashboard() {
-  console.log("Go to dashboard is running");
-  return <AdminDashboard />;
-}
-
 const SignIn = () => {
   //you cant use export default here because you are assigning
   //an arrow function to it and you cant simultaneously export and assign.
@@ -25,6 +20,16 @@ const SignIn = () => {
   const [password, setPassword] = useState();
   const [currentlychked, setChecked] = useState(null);
   const [error, setError] = useState(null);
+  const [showAdminDashboard, setShowAdminDashboard] = useState(false);
+
+  function goToAdminDashboard() {
+    console.log("Go to dashboard is running");
+    setShowAdminDashboard(true);
+    console.log(showAdminDashboard);
+    if (showAdminDashboard) {
+      return <AdminDashboard />;
+    }
+  }
 
   useEffect(() => {
     //this useEffect hook will only run by default if the page variable has changed thus avoiding
