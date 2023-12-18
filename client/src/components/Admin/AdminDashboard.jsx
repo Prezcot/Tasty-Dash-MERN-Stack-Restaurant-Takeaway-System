@@ -2,8 +2,16 @@ import { useEffect, useState } from "react";
 import AdminNavBar from "./AdminNavBar";
 import axios from "axios";
 
-const AdminDashboard = async () => {
+const AdminDashboard = () => {
   const [order_data, set_order_data] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/admin_dashboard_data/receive/order_data")
+      .then((res) => {
+        set_order_data(res.data);
+      });
+  });
 
   return (
     <>

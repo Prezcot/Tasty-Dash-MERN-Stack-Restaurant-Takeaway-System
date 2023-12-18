@@ -18,7 +18,7 @@ router.get("/receive/order_data", async (req, res) => {
     let data = await item.find();
     res.json(data);
   } catch (err) {
-    console.log("gae");
+    console.log("Admin Dashboard data wasn't sent");
   }
 });
 
