@@ -1,3 +1,6 @@
+import Dashboard from "./User/Dashboard";
+import { useState } from "react";
+import UserNavBar from "./User/UserNavBar";
 function NavBar() {
   return (
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -65,17 +68,7 @@ function NavBar() {
               </a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
+          <img src="/images/usericon.png" width="70px" height="50px" />
         </div>
       </div>
     </nav>

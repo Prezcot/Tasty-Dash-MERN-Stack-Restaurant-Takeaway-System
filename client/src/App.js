@@ -2,14 +2,13 @@ import NavBar from "./components/NavBar";
 import SignIn from "./components/User/SignIn";
 import SendData from "./components/SendData";
 import Menu from "./components/Menu";
-import Dashboard from "./components/User/Dashboard";
+import UserNavBar from "./components/User/UserNavBar";
 
 function App() {
   return (
     <>
-      {/* <SignIn /> */}
+      <SignIn />
       {/* <SendData /> */}
-      <Dashboard></Dashboard>
     </>
   );
 }

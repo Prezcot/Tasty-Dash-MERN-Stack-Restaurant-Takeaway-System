@@ -1,16 +1,11 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import UserNavBar from "./UserNavBar";
+import SignIn from "./SignIn";
 
 function Dashboard()
 {
-
-    useEffect(()=>{
-
-
-    })
     return(
         <div>
-            <UserNavBar></UserNavBar>
             Dashboard
         </div>
     )

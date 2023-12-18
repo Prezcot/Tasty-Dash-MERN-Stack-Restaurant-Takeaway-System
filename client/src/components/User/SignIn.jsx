@@ -4,6 +4,7 @@ import axios from "axios";
 import SignUp from "./SignUp";
 import AdminDashboard from "../Admin/AdminDashboard";
 import Menu from "../Menu";
+import Dashboard from "./Dashboard";
 const UserInput = styled.input`
   border: 1px solid grey;
   border-radius: 1vh;
@@ -22,13 +23,12 @@ const SignIn = () => {
   const [currentlychked, setChecked] = useState(null);
   const [error, setError] = useState(null);
   const [showAdminDashboard, setShowAdminDashboard] = useState(false);
-
   useEffect(() => {
     //this useEffect hook will only run by default if the page variable has changed thus avoiding
     //the too many re-renders error.
     if (!localStorage.getItem("page") || localStorage.getItem("page") == "SignIn") 
     {
-      setPage("SignIn");
+        setPage("SignIn");
     } else if (localStorage.getItem("page") == "SignUp") {
       setPage("SignUp");
     } else if (localStorage.getItem("page") == "Menu") {
