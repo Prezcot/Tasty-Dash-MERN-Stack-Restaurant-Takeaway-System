@@ -3,14 +3,10 @@ import { useState } from "react";
 import Dashboard from "./Dashboard";
 
 function NavBar(props) {
-  const [page,setPage]=useState(false);
-  if (props.isDashboard=="true")
-  {
-    return(
-      <Dashboard></Dashboard>
-    )
-  }
-  else{
+  const [page, setPage] = useState(false);
+  if (props.isDashboard == "true") {
+    return <Dashboard></Dashboard>;
+  } else {
     return (
       <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -78,7 +74,12 @@ function NavBar(props) {
                   </a>
                 </li>
               </ul>
-              <img src="/images/usericon.png" onClick={()=>setPage(true)} width="70px" height="50px" />
+              <img
+                src="/images/usericon.png"
+                onClick={() => setPage(true)}
+                width="70px"
+                height="50px"
+              />
             </div>
           </div>
         </nav>
