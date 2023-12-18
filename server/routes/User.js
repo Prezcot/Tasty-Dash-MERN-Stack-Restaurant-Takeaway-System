@@ -26,7 +26,7 @@ router.post("/signin",async (req,res,next)=>{ //This route handler handles all s
 
 router.post("/signup",async(req,res,next)=>{ //This route handler handles all signup requests
     var {username,email,phonenumber,password} = req.body;
-    password=bcrypt.hash(password,10); //figure out how to hash a password and save that hash to compare later.
+    password= await bcrypt.hash(password,10); //figure out how to hash a password and save that hash to compare later.
     var query=await users.find({username:username,phonenumber:phonenumber}).catch((err)=>console.log(err));
     if (query.length>0)
     {
