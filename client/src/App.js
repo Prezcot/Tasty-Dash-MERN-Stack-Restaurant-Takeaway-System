@@ -7,9 +7,9 @@ import Dashboard from "./components/User/Dashboard";
 function App() {
   return (
     <>
-      {/* <SignIn /> */}
+      <SignIn />
       {/* <SendData /> */}
-      <Dashboard></Dashboard>
+      {/* <Dashboard></Dashboard> */}
     </>
   );
 }
