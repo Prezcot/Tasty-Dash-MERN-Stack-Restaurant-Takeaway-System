@@ -5,9 +5,10 @@ import Item from './Item';
 import Cart from './Cart';
 import React from 'react';
 import '../App.css';
-
+import NavBar from './NavBar';
 function Menu() {
   const [items, setItems] = useState([]);
+
   useEffect(() => {
     axios.get('http://localhost:3001/menu/data')
       .then(response => {
@@ -29,9 +30,10 @@ function Menu() {
       )
     );
   };
-
+  //try render the navbar for each component 
   return (
     <>
+    <NavBar></NavBar>
       {items.map((item) => (
         <Item
           item={item}
