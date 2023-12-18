@@ -1,30 +1,34 @@
 let port = 3001;
 let express = require("express");
 let app = express();
-let cors = require("cors");
-let mongoose = require("mongoose");
-require("dotenv").config();
-
-const uri = process.env.ATLAS_URI;
-
-mongoose.connect(uri);
-
-const connection = mongoose.connection;
-connection.once("open", () => {
-  console.log("MongoDB database connection established successfully");
-});
-
-app.use(cors());
+let cors=require("cors");
 app.use(express.json());
+const mongoose = require('mongoose');
+let User=require("./routes/User.js");
+const testingRouter = require("./routes/testing");
+require("dotenv").config(); //so by using this basically when deploying to the cloud you would define
+//these environment variables in the cloud service itself so that the public cannot see it in source code.
+const uri = process.env.ATLAS_URI;
+app.use(cors());
+async function run() {
+  try {
+      await mongoose.connect(uri);
+      console.log("You successfully connected to MongoDB!");
+  } catch (error) {
+      console.error("Error connecting to MongoDB: ", error);
+    }
+}; 
+run();
+
+app.use("/users",User);
+
 
 app.get("/", (req, res) => {
   res.send("Hello there!!!");
 });
 
-const testingRouter = require("./routes/testing");
-
 app.use("/testing", testingRouter);
 
 app.listen(port, () => {
   console.log("Listening on port: " + port);
-});
+})

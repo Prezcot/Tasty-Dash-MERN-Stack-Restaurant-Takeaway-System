@@ -8,7 +8,7 @@ services:
     working_dir: /usr/src/app
     volumes:
       - ./server:/usr/src/app
-    command:  node index.js && ./startup.sh
+    command: npm start
   app:
     build:
       context: .
