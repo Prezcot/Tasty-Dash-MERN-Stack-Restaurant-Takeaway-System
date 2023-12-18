@@ -3,6 +3,7 @@ import axios from "axios";
 import {useState,useEffect} from "react";
 import styled from "styled-components";
 import validator from 'validator';
+import Menu from "../Menu";
 const UserInput=styled.input`
   border: 1px solid grey;
   border-radius: 1vh;
@@ -46,7 +47,7 @@ function SignUp()
             //setPassword(bcrypt.hash(password,10));
             if (username.length>=3 && validator.isEmail(email) && !isNaN(phonenumber) && phonenumber.length==10 && password.length>=3 && cnfrmpassword==password)
             {
-                await axios.post("http://localhost:3001/users/signup",{username,email,phonenumber,password}).then(()=><SignIn/>).catch((err)=>setError(err.response.data.message));
+                await axios.post("http://localhost:3001/users/signup",{username,email,phonenumber,password}).then(()=>setPage("Menu")).catch((err)=>setError(err.response.data.message));
             }
             else if (isNaN(phonenumber))
             {
@@ -71,6 +72,11 @@ function SignUp()
     {
         localStorage.setItem("page","SignIn");
         return <SignIn></SignIn>
+    }
+    if (page=="Menu")
+    {
+        localStorage.setItem("page","Menu");
+        return <Menu></Menu>
     }
     else{
         return(
