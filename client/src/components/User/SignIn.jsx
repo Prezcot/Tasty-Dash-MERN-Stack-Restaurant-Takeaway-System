@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import SignUp from "./SignUp";
 import AdminDashboard from "../Admin/AdminDashboard";
+import Menu from "../Menu";
 const UserInput = styled.input`
   border: 1px solid grey;
   border-radius: 1vh;
@@ -217,12 +218,7 @@ const SignIn = () => {
   }
   if (page == "Menu") {
     return (
-      <div>
-        This is route to menu page
-        <button id="back" onClick={() => changePage("SignIn")}>
-          Go Back
-        </button>
-      </div>
+      <Menu></Menu>
     );
   }
 };
