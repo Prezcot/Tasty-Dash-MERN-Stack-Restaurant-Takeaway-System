@@ -5,7 +5,6 @@ import SendData from "./components/SendData";
 function App() {
   return (
     <>
-      <NavBar />
       <SignIn />
       {/* <SendData /> */}
     </>
