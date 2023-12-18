@@ -34,7 +34,7 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
         console.log("Data Already Exists In Database");
     }
     else{
-        const User=new users({username:username,email:email,phonenumber:phonenumber,password:password});
+        const User=new users({username,email,phonenumber,password});
         console.log("Inserting");
         await User.save().then(()=>res.status(200).json({message:"Successful Register"})).catch((err)=>res.status(400).json({message:err}));
         //the anonymous function inside .then promise handler would have a parameter that is related to the outer function which is User.save
