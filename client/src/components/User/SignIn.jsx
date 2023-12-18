@@ -86,7 +86,7 @@ const SignIn=()=>{ //you cant use export default here because you are assigning
         event.preventDefault();
         if (username && password && username.length>=3 && password.length>=3)
         {
-            await axios.post("http://192.168.1.121:3001/users/signin",{username,password}).then(()=>
+            await axios.post("http://localhost:3001/users/signin",{username,password}).then(()=>
             {   localStorage.setItem("page","Menu");
                 setPage("Menu");
             }).catch((err)=>setError(err.response.data.message));
