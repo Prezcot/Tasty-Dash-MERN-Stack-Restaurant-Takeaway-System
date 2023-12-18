@@ -46,7 +46,7 @@ function Menu() {
   };
   return (
     <>
-      <NavBar onDashboardClick={toggleDashboard}></NavBar>
+      <NavBar onDashboardClick={()=>setShowDashboard(true)}></NavBar>
       {items.map((item) => (
         <Item
           item={item}
