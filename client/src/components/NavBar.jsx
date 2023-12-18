@@ -1,8 +1,7 @@
 import Dashboard from "./User/Dashboard";
 import { useState } from "react";
 import UserNavBar from "./User/UserNavBar";
-function NavBar({ onDashboardClick }) {
-  const [profile, setProfile] = useState(false);
+function NavBar(props) {
 
   return (
     <>
@@ -73,17 +72,10 @@ function NavBar({ onDashboardClick }) {
             </ul>
             <img
               src="/images/usericon.png"
-              onClick={onDashboardClick}
+              onClick={props.onDashboardClick}
               width="100px"
               height="100px"
             />
-            <button
-              onClick={() => {
-                setProfile(true);
-              }}
-            >
-              yay!
-            </button>
           </div>
         </div>
       </nav>
