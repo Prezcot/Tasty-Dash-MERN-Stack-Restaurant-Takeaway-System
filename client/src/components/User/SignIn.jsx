@@ -95,7 +95,7 @@ const SignIn = () => {
     event.preventDefault();
     if (username && password && username.length >= 3 && password.length >= 3) {
       await axios
-        .post("http://192.168.1.121:3001/users/signin", { username, password })
+        .post("http://localhost:3001/users/signin", { username, password })
         .then(() => {
           localStorage.setItem("page", "Menu");
           setPage("Menu");
@@ -115,9 +115,8 @@ const SignIn = () => {
       setError("Please Enter Valid Data");
     }
   }
-  if (showAdminDashboard)
-  {
-    return <AdminDashboard />
+  if (showAdminDashboard) {
+    return <AdminDashboard />;
   }
   if (page == "SignIn") {
     //use vh and vw for margins and padding and other attributes
@@ -131,7 +130,7 @@ const SignIn = () => {
       >
         {/* just for testing please ignore */}
 
-        <button onClick={()=>setShowAdminDashboard(true)}>
+        <button onClick={() => setShowAdminDashboard(true)}>
           Just for testing -will go to the dashboard
         </button>
 
@@ -226,7 +225,6 @@ const SignIn = () => {
       </div>
     );
   }
-  
 };
 
 export default SignIn;
