@@ -26,10 +26,8 @@ const SignIn = () => {
   useEffect(() => {
     //this useEffect hook will only run by default if the page variable has changed thus avoiding
     //the too many re-renders error.
-    if (
-      !localStorage.getItem("page") ||
-      localStorage.getItem("page") == "SignIn"
-    ) {
+    if (!localStorage.getItem("page") || localStorage.getItem("page") == "SignIn") 
+    {
       setPage("SignIn");
     } else if (localStorage.getItem("page") == "SignUp") {
       setPage("SignUp");
