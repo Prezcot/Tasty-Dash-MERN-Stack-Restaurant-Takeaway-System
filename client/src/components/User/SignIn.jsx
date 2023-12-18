@@ -130,7 +130,7 @@ const SignIn = () => {
         {/* just for testing please ignore */}
 
         <button onClick={() => setShowAdminDashboard(true)}>
-          Just for testing -will go to the dashboard
+          Just for testing - will go to the dashboard
         </button>
 
         <div
