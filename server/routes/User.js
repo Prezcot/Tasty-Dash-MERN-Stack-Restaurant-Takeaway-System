@@ -25,8 +25,8 @@ router.post("/signin",async (req,res,next)=>{ //This route handler handles all s
 });
 
 router.post("/signup",async(req,res,next)=>{ //This route handler handles all signup requests
-    const {username,email,phonenumber,password} = req.body;
-    //var password=bcrypt.hash(password,10); figure out how to hash a password and save that hash to compare later DO HASHING ON CLIENT SIDE
+    var {username,email,phonenumber,password} = req.body;
+    password=bcrypt.hash(password,10); //figure out how to hash a password and save that hash to compare later.
     var query=await users.find({username:username,phonenumber:phonenumber}).catch((err)=>console.log(err));
     if (query.length>0)
     {
@@ -34,7 +34,7 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
         console.log("Data Already Exists In Database");
     }
     else{
-        const User=new users({username,email,phonenumber,password});
+        const User=new users({username:username,email:email,phonenumber:phonenumber,password:password});
         console.log("Inserting");
         await User.save().then(()=>res.status(200).json({message:"Successful Register"})).catch((err)=>res.status(400).json({message:err}));
         //the anonymous function inside .then promise handler would have a parameter that is related to the outer function which is User.save

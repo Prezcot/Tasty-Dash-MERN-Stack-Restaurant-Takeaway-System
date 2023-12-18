@@ -3,7 +3,6 @@ import axios from "axios";
 import {useState,useEffect} from "react";
 import styled from "styled-components";
 import validator from 'validator';
-
 const UserInput=styled.input`
   border: 1px solid grey;
   border-radius: 1vh;
@@ -43,6 +42,8 @@ function SignUp()
         try{
             setUsername(username.toLowerCase().trim());
             setPassword(password.trim());
+            //var hashedpassword=bcrypt.hash(password,10);
+            //setPassword(bcrypt.hash(password,10));
             if (username.length>=3 && validator.isEmail(email) && !isNaN(phonenumber) && phonenumber.length==10 && password.length>=3 && cnfrmpassword==password)
             {
                 await axios.post("http://192.168.1.121:3001/users/signup",{username,email,phonenumber,password}).then(()=><SignIn/>).catch((err)=>setError(err.response.data.message));
