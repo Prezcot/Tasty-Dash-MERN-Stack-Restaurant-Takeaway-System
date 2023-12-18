@@ -5,7 +5,7 @@ import Item from './Item';
 import Cart from './Cart';
 import React from 'react';
 import '../App.css';
-import UserNavBar from './User/UserNavBar';
+import NavBar from './NavBar';
 function Menu() {
   const [items, setItems] = useState([]);
 
@@ -33,6 +33,7 @@ function Menu() {
   //try render the navbar for each component 
   return (
     <>
+    <NavBar></NavBar>
       {items.map((item) => (
         <Item
           item={item}

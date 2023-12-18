@@ -2,6 +2,16 @@ import Dashboard from "./User/Dashboard";
 import { useState } from "react";
 import UserNavBar from "./User/UserNavBar";
 function NavBar() {
+  const [profile,setProfile]=useState(false);
+  function showProfile()
+  {
+    if (profile)
+    {
+      <Dashboard></Dashboard>
+    }  
+    console.log("Going in ShowPROFILE");
+  }
+  showProfile();
   return (
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
@@ -68,7 +78,7 @@ function NavBar() {
               </a>
             </li>
           </ul>
-          <img src="/images/usericon.png" width="70px" height="50px" />
+          <img src="/images/usericon.png" onClick={()=>{setProfile(true)}} width="100px" height="100px"/>
         </div>
       </div>
     </nav>

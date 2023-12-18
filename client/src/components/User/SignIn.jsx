@@ -17,24 +17,24 @@ const Tabcol = styled.td`
 const SignIn = () => {
   //you cant use export default here because you are assigning
   //an arrow function to it and you cant simultaneously export and assign.
-  const [page, setPage] = useState();
+  const [page, setPage] = useState("SignIn");
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [currentlychked, setChecked] = useState(null);
   const [error, setError] = useState(null);
   const [showAdminDashboard, setShowAdminDashboard] = useState(false);
-  useEffect(() => {
-    //this useEffect hook will only run by default if the page variable has changed thus avoiding
-    //the too many re-renders error.
-    if (!localStorage.getItem("page") || localStorage.getItem("page") == "SignIn") 
-    {
-        setPage("SignIn");
-    } else if (localStorage.getItem("page") == "SignUp") {
-      setPage("SignUp");
-    } else if (localStorage.getItem("page") == "Menu") {
-      setPage("Menu");
-    }
-  });
+  // useEffect(() => {
+  //   //this useEffect hook will only run by default if the page variable has changed thus avoiding
+  //   //the too many re-renders error.
+  //   if (localStorage.getItem("page") == "SignIn") 
+  //   {
+  //       setPage("SignIn");
+  //   } else if (localStorage.getItem("page") == "SignUp") {
+  //     setPage("SignUp");
+  //   } else if (localStorage.getItem("page") == "Menu") {
+  //     setPage("Menu");
+  //   }
+  // });
 
   useEffect(() => {
     if (!localStorage.getItem("checked")) {
