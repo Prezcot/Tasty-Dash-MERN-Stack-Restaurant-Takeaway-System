@@ -27,7 +27,7 @@ const AdminDashboard = () => {
       let [productName, quantity] = line.split(",");
       string += `${productName} : ${quantity}<br />`;
     });
-    return { __html: string };
+    return string;
   }
 
   return (
@@ -44,7 +44,7 @@ const AdminDashboard = () => {
               <br />
               {items.email}
               <br />
-              <div dangerouslySetInnerHTML={displayProductItems(items)}></div>
+              {ReactHtmlParser(displayProductItems(items))}
             </li>
           </>
         ))}
