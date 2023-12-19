@@ -4,7 +4,7 @@ let bcrypt=require("bcrypt");
 const mongoose = require('mongoose');
 require("dotenv").config();
 const uri = process.env.ATLAS_URI;
-const UserSchema=new mongoose.Schema({username:String,email:String,phonenumber:String,password:String});
+const UserSchema=new mongoose.Schema({username:String,type:String,email:String,phonenumber:String,password:String});
 const users= mongoose.model("users",UserSchema); // you can now use this to create other users
 
 
@@ -23,18 +23,26 @@ router.post("/signin",async (req,res,next)=>{ //This route handler handles all s
     }
     if (query.length>0 && valid)
     {
-        res.status(200).json({message:"Account Registered"});
-        console.log("Data Exists In Database");
+        if (query[0].type=="User")
+        {
+            res.status(200).json({message:"Account Registered",user:"User"});
+            console.log("Data Exists In Database (User)");
+        }
+        else{
+            res.status(200).json({message:"Account Registered",user:"Admin"});
+            console.log("Data Exists In Database (Admin)");
+        }
     }
     else
     {
         res.status(400).json({message:"Account Not Registered/Invalid Credentials"});
-        console.log("Data Does Not Exist In Database");
+        console.log("Data Does Not Exist In Database (Not User/Admin)");
     }
 });
 
 router.post("/signup",async(req,res,next)=>{ //This route handler handles all signup requests
     var {username,email,phonenumber,password} = req.body;
+    var type="User";
     password= await bcrypt.hash(password,10); //figure out how to hash a password and save that hash to compare later.
     var finduser=await users.find({username:username}).catch((err)=>console.log(err));
     var findphonenumber=await users.find({phonenumber:phonenumber}).catch((err)=>console.log(err));
@@ -45,7 +53,7 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
         console.log("Data Already Exists In Database");
     }
     else{
-        const User=new users({username,email,phonenumber,password});
+        const User=new users({username,type,email,phonenumber,password});
         console.log("Inserting");
         await User.save().then(()=>res.status(200).json({message:"Successful Register"})).catch((err)=>res.status(400).json({message:err}));
         //the anonymous function inside .then promise handler would have a parameter that is related to the outer function which is User.save

@@ -80,8 +80,13 @@ function SignUp()
     }
     else{
         return(
-            <div style={{"display":"flex","flex-direction":"column","align-items":"center"}}>
-                <div style={{"margin-top":"5vh","border":"0.75vh solid black","box-shadow":"0 0 8 4 red","padding":"2vh","border-radius":"15px"}}>
+            <div style={{display:"flex",flexDirection:"column",alignItems:"center",backgroundImage:`url("/images/LoginBackground.jpg")`,
+            backgroundSize: "100vw 100vh",
+            backgroundRepeat:"no-repeat",
+            width:"100vw",
+            height:"100vh",}}>
+                <div style={{marginTop:"5vh",border:"0.4vh solid black",boxShadow:"0px 0px 10px 3px white",padding:"2vh",borderRadius:"15px",backgroundColor:"white",
+              opacity:"93%"}}>
                     <center>
                         <h1 style={{color:"black"}}>Sign Up</h1>
                     </center>
@@ -92,7 +97,7 @@ function SignUp()
                         <table id="signup" >
                             <tr>
                                 <Tabcol>Username: </Tabcol> 
-                                <td style={{"padding-bottom":"1vh","font-size":"3vh"}}><UserInput type="text" placeholder="Username" onChange={(e)=>setUsername(e.target.value)}/></td>
+                                <td style={{paddingBottom:"1vh",fontSize:"3vh"}}><UserInput type="text" placeholder="Username" onChange={(e)=>setUsername(e.target.value)}/></td>
                             </tr>
                             <tr>
                                 <Tabcol>Email: </Tabcol>
@@ -113,7 +118,7 @@ function SignUp()
                         </table>
                         <br></br>
                         <center>
-                            <input style={{"width":"50%","background-color":"green","color":"white","border-radius":"10px","border":"1px solid black"}} type="submit" value="Sign Up"></input>
+                            <input style={{width:"50%",backgroundColor:"green","color":"white",borderRadius:"10px",border:"0.1vh solid black"}} type="submit" value="Sign Up"></input>
                             <p>Already a member ? <b style={{cursor:"pointer"}} onClick={()=>setPage("SignIn")}>Sign In</b></p>
                         </center>
                     </form>
