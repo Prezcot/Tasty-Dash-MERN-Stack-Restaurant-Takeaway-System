@@ -10,7 +10,7 @@ const UserInput=styled.input`
 `;
 const Tabcol=styled.td`
     padding-bottom:2vh;
-    font-size:4vh;
+    font-size:3vh;
 `;
 
 function SignUp()
@@ -81,7 +81,7 @@ function SignUp()
     else{
         return(
             <div style={{"display":"flex","flex-direction":"column","align-items":"center"}}>
-                <div style={{"margin-top":"5vh","border":"0.75vh solid black","padding":"2vh","border-radius":"15px"}}>
+                <div style={{"margin-top":"5vh","border":"0.75vh solid black","box-shadow":"0 0 8 4 red","padding":"2vh","border-radius":"15px"}}>
                     <center>
                         <h1 style={{color:"black"}}>Sign Up</h1>
                     </center>
@@ -92,7 +92,7 @@ function SignUp()
                         <table id="signup" >
                             <tr>
                                 <Tabcol>Username: </Tabcol> 
-                                <td style={{"padding-bottom":"2vh","font-size":"4vh"}}><UserInput type="text" placeholder="Username" onChange={(e)=>setUsername(e.target.value)}/></td>
+                                <td style={{"padding-bottom":"1vh","font-size":"3vh"}}><UserInput type="text" placeholder="Username" onChange={(e)=>setUsername(e.target.value)}/></td>
                             </tr>
                             <tr>
                                 <Tabcol>Email: </Tabcol>

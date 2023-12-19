@@ -11,7 +11,7 @@ const UserInput = styled.input`
 `;
 const Tabcol = styled.td`
   padding-bottom: 2vh;
-  font-size: 4vh;
+  font-size: 3vh;
 `;
 
 const SignIn = () => {
@@ -23,18 +23,18 @@ const SignIn = () => {
   const [currentlychked, setChecked] = useState(null);
   const [error, setError] = useState(null);
   const [showAdminDashboard, setShowAdminDashboard] = useState(false);
-  // useEffect(() => {
-  //   //this useEffect hook will only run by default if the page variable has changed thus avoiding
-  //   //the too many re-renders error.
-  //   if (localStorage.getItem("page") == "SignIn")
-  //   {
-  //       setPage("SignIn");
-  //   } else if (localStorage.getItem("page") == "SignUp") {
-  //     setPage("SignUp");
-  //   } else if (localStorage.getItem("page") == "Menu") {
-  //     setPage("Menu");
-  //   }
-  // });
+  useEffect(() => {
+    //this useEffect hook will only run by default if the page variable has changed thus avoiding
+    //the too many re-renders error.
+    if (localStorage.getItem("page") == "SignIn")
+    {
+        setPage("SignIn");
+    } else if (localStorage.getItem("page") == "SignUp") {
+      setPage("SignUp");
+    } else if (localStorage.getItem("page") == "Menu") {
+      setPage("Menu");
+    }
+  });
 
   useEffect(() => {
     if (!localStorage.getItem("checked")) {
@@ -152,7 +152,7 @@ const SignIn = () => {
             <table id="login">
               <tr>
                 <Tabcol>Username: </Tabcol>
-                <td style={{ "padding-bottom": "2vh", "font-size": "4vh" }}>
+                <td style={{ "padding-bottom": "1vh", "font-size": "3vh" }}>
                   <UserInput
                     type="text"
                     value={username}
@@ -180,7 +180,7 @@ const SignIn = () => {
                     checked={currentlychked}
                     onChange={(e) => setChecked(e.target.checked)}
                   />
-                  <p style={{ display: "inline", fontSize: "3vh" }}>
+                  <p style={{ display: "inline", fontSize: "2vh" }}>
                     Remember Me ?
                   </p>
                 </td>

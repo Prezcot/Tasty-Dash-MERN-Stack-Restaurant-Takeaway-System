@@ -7,8 +7,8 @@ import UserNavBar from "./components/User/UserNavBar";
 function App() {
   return (
     <>
-      {/* <SignIn /> */}
-      {<Menu></Menu>}
+      <SignIn />
+      {/* {<Menu></Menu>} */}
       {/* <SendData /> */}
       {/* <Dashboard></Dashboard> */}
     </>

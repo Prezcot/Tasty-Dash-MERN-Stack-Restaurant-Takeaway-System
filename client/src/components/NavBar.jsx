@@ -73,8 +73,8 @@ function NavBar(props) {
             <img
               src="/images/usericon.png"
               onClick={props.onDashboardClick}
-              width="100px"
-              height="100px"
+              width="60px"
+              height="50px"
             />
           </div>
         </div>
