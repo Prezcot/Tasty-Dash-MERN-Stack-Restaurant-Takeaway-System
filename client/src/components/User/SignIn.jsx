@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import SignUp from "./SignUp";
 import AdminDashboard from "../Admin/AdminDashboard";
-import Menu from "../Menu";
+import Menu from "../Menu/Menu";
 import Dashboard from "./Dashboard";
 const UserInput = styled.input`
   border: 1px solid grey;

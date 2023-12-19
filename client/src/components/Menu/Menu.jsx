@@ -5,8 +5,8 @@ import Item from "./Item";
 import Cart from "./Cart";
 import React from "react";
 import "../App.css";
-import NavBar from "./NavBar";
-import Dashboard from "./User/Dashboard";
+import NavBar from "../NavBar";
+import Dashboard from "../User/Dashboard";
 function Menu() {
   const [items, setItems] = useState([]);
   const [showDashboard, setShowDashboard] = useState(false);
