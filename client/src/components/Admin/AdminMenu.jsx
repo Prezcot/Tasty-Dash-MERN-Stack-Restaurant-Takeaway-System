@@ -26,20 +26,7 @@ function AdminMenu() {
           });
       }, []);
     
-      // Callback function to update the items array
-      const updateItems = (itemId, action) => {
-        setItems((prevItems) =>
-          prevItems.map((item) =>
-            item.itemId === itemId
-              ? {
-                  ...item,
-                  quantity:
-                    action === "add" ? item.quantity + 1 : item.quantity - 1,
-                }
-              : item
-          )
-        );
-      };
+
       const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewItemData((prevData) => ({
@@ -77,7 +64,6 @@ function AdminMenu() {
       const addNewItem = async () => {
         try {
           const newItem = {
-            itemId:items.length + 1,
             itemName: newItemData.itemName,
             itemDescription: newItemData.itemDescription,
             itemPrice: newItemData.itemPrice,
@@ -102,13 +88,30 @@ function AdminMenu() {
           console.error(error);
         }
       };
+      const deleteItem = async (itemName) => {
+        try {
+          // Use encodeURIComponent to handle special characters in the itemName
+          const encodedItemName = encodeURIComponent(itemName);
+      
+          await axios.delete(`http://localhost:3001/menu/delete/${encodedItemName}`);
+      
+          // After deleting the item, fetch updated data
+          const updatedItemsResponse = await axios.get('http://localhost:3001/menu/data');
+          setItems(updatedItemsResponse.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      
   
     return (
       <>
       {items.map((item) => (
         <AdminItem
-          item={item}
-        />
+        key={item.itemName}
+        item={item}
+        onDelete={() => deleteItem(item.itemName)}
+      />
       ))}
       <div>
         <h2>Add New Item</h2>

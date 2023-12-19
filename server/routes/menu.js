@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 
 
 const Menu = mongoose.model('Menu', new mongoose.Schema({
-    itemId: Number,
     itemName: String,
     itemDescription: String,
     itemPrice: Number,
@@ -26,7 +25,6 @@ router.get('/data', async (req, res) => {
   router.post('/add', async (req, res) => {
     try {
       const newItemData = req.body;
-  
       const addedItem = await Menu.create(newItemData);
       res.json(addedItem);
     } catch (error) {
@@ -34,5 +32,32 @@ router.get('/data', async (req, res) => {
       res.status(500).json({ message: "Failed to add item to the database" });
     }
   });
+  
+  router.delete('/delete/:itemName', async (req, res) => {
+    const itemName = decodeURIComponent(req.params.itemName);
+  
+    try {
+      console.log(`Deleting item with name: ${itemName}`);
+  
+      // Use Mongoose to find and delete the document based on item name
+      const deletedItem = await Menu.findOneAndDelete({ itemName: itemName });
+  
+      if (!deletedItem) {
+        console.log('Item not found');
+        return res.status(404).json({ error: 'Item not found' });
+      }
+  
+      console.log('Item deleted successfully');
+      return res.json({ message: 'Item deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting item:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+  
+  
+  
+  
 
 module.exports = router;

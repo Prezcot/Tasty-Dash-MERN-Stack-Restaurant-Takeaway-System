@@ -1,5 +1,5 @@
 
-function AdminItem({item}) {
+function AdminItem({ item, onDelete }) {
     return (
       <div className="menu-card">
         <img src={item.itemImage} alt={item.itemName} />
@@ -14,7 +14,7 @@ function AdminItem({item}) {
               Edit
             </button>
           </div>
-          <button className="add-to-cart">Delete</button>
+          <button className="add-to-cart" onClick={onDelete}>Delete</button>
         </div>
       </div>
     );
