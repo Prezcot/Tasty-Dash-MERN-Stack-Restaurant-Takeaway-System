@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import AdminNavBar from "./AdminNavBar";
 import ReactHtmlParser from "react-html-parser";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import axios from "axios";
 
 const AdminDashboard = () => {
@@ -35,16 +37,28 @@ const AdminDashboard = () => {
       <AdminNavBar />
       <h1 className="display-6">Pending Orders</h1>
       <ul className="list-group">
-        <li className="list-group-item">Testing1</li>
-        <li className="list-group-item">Testing2</li>
-        {order_data.map((items) => (
+        {order_data.map((items, index) => (
           <>
-            <li className="list-group-item">
-              {items.username}
+            <li key={index} className="list-group-item">
+              Name: {items.username}
               <br />
-              {items.email}
+              Email: {items.email}
+              <br />
+              Contact: {items.email}
               <br />
               {ReactHtmlParser(displayProductItems(items))}
+              <span class="d-flex mt-4">
+                <button
+                  type="button"
+                  class="btn btn-success me-4 bi-check btn-lg"
+                >
+                  <i class="bi bi-check">Approve</i>
+                </button>
+                <button type="button" class="btn btn-danger btn-lg">
+                  <i class="bi bi-x">Decline</i>
+                </button>
+                <div className="">Order Status: </div>:
+              </span>
             </li>
           </>
         ))}
