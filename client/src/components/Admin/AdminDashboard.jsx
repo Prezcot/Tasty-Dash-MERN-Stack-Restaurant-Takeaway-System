@@ -3,6 +3,7 @@ import AdminNavBar from "./AdminNavBar";
 import ReactHtmlParser from "react-html-parser";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "bootstrap-icons/icons/";
 import axios from "axios";
 
 const AdminDashboard = () => {
