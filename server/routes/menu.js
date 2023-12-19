@@ -23,5 +23,16 @@ router.get('/data', async (req, res) => {
         res.status(500).json({ message:"Server is throwing a fit ryt now!" })
     }
   });
+  router.post('/add', async (req, res) => {
+    try {
+      const newItemData = req.body;
+  
+      const addedItem = await Menu.create(newItemData);
+      res.json(addedItem);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Failed to add item to the database" });
+    }
+  });
 
 module.exports = router;
