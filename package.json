@@ -3,5 +3,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "cd ./server && npm start",
     "client": "cd ./client && npm start"
+  },
+  "dependencies": {
+    "react-html-parser": "^2.0.2"
   }
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import AdminNavBar from "./AdminNavBar";
+import ReactHtmlParser from "react-html-parser";
 import axios from "axios";
 
 const AdminDashboard = () => {
