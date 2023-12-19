@@ -2,7 +2,6 @@ import Dashboard from "./User/Dashboard";
 import { useState } from "react";
 import UserNavBar from "./User/UserNavBar";
 function NavBar(props) {
-
   return (
     <>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

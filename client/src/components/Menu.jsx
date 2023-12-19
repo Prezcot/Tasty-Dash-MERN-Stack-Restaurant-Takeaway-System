@@ -41,12 +41,9 @@ function Menu() {
     return <Dashboard></Dashboard>;
   }
 
-  const toggleDashboard = () => {
-    setShowDashboard(true);
-  };
   return (
     <>
-      <NavBar onDashboardClick={()=>setShowDashboard(true)}></NavBar>
+      <NavBar onDashboardClick={() => setShowDashboard(true)}></NavBar>
       {items.map((item) => (
         <Item
           item={item}
