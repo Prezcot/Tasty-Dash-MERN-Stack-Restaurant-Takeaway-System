@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import AdminNavBar from "./AdminNavBar";
-import ReactHtmlParser from "react-html-parser";
+import parse from "html-react-parser";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "bootstrap-icons/icons/";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
 
 const AdminDashboard = () => {
@@ -47,18 +47,15 @@ const AdminDashboard = () => {
               <br />
               Contact: {items.email}
               <br />
-              {ReactHtmlParser(displayProductItems(items))}
+              {parse(displayProductItems(items))}
               <span class="d-flex mt-4">
-                <button
-                  type="button"
-                  class="btn btn-success me-4 bi-check btn-lg"
-                >
+                <button type="button" class="btn btn-success me-4 btn-lg">
                   <i class="bi bi-check">Approve</i>
                 </button>
                 <button type="button" class="btn btn-danger btn-lg">
                   <i class="bi bi-x">Decline</i>
                 </button>
-                <div className="">Order Status: </div>:
+                <div className="ml-3">Order Status: </div>:
               </span>
             </li>
           </>
