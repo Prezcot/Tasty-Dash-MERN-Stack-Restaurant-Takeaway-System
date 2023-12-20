@@ -31,7 +31,7 @@ const SignIn = () => {
       setPage("SignIn");
     } else if (localStorage.getItem("page") == "SignUp") {
       setPage("SignUp");
-    } else if (localStorage.getItem("page") == "Menu") {
+    } else if (sessionStorage.getItem("page") == "Menu") {
       setPage("Menu");
     } else if (localStorage.getItem("page") == "Admin") {
       setPage("Admin");
@@ -39,12 +39,12 @@ const SignIn = () => {
   });
 
   useEffect(() => {
-    if (!localStorage.getItem("checked")) {
-      localStorage.setItem("checked", "false");
+    if (!sessionStorage.getItem("checked")) {
+      sessionStorage.setItem("checked", "false");
       setChecked(false);
-    } else if (localStorage.getItem("checked") == "true") {
-      setUsername(localStorage.getItem("username"));
-      setPassword(localStorage.getItem("password"));
+    } else if (sessionStorage.getItem("checked") == "true") {
+      setUsername(sessionStorage.getItem("username"));
+      setPassword(sessionStorage.getItem("password"));
       setChecked(true);
     }
   }, []);
@@ -52,13 +52,13 @@ const SignIn = () => {
   function changePage(newpage) {
     if (newpage == "Menu") {
       setPage("Menu");
-      localStorage.setItem("page", "Menu");
+      sessionStorage.setItem("page", "Menu");
     } else if (newpage == "SignIn") {
       setPage("SignIn");
-      localStorage.setItem("page", "SignIn");
+      sessionStorage.setItem("page", "SignIn");
     } else if (newpage == "SignUp") {
       setPage("SignUp");
-      localStorage.setItem("page", "SignUp");
+      sessionStorage.setItem("page", "SignUp");
     }
   }
   function handleError() {
@@ -109,13 +109,12 @@ const SignIn = () => {
         .catch((err) => setError(err.response.data.message));
 
       if (currentlychked == true) {
-        localStorage.setItem("checked", JSON.stringify(currentlychked));
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);
+        sessionStorage.setItem("checked", JSON.stringify(currentlychked));
+        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("password", password);
       } else {
-        localStorage.setItem("checked", JSON.stringify(currentlychked));
-        localStorage.removeItem("username");
-        localStorage.removeItem("password");
+        sessionStorage.setItem("checked", JSON.stringify(currentlychked));
+        sessionStorage.removeItem("password");
       }
     } else {
       setError("Please Enter Valid Data");

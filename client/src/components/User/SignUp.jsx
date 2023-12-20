@@ -70,12 +70,12 @@ function SignUp()
     };
     if (page=="SignIn")
     {
-        localStorage.setItem("page","SignIn");
+        sessionStorage.setItem("page","SignIn");
         return <SignIn></SignIn>
     }
     if (page=="Menu")
     {
-        localStorage.setItem("page","Menu");
+        sessionStorage.setItem("page","Menu");
         return <Menu></Menu>
     }
     else{
