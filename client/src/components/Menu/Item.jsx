@@ -20,7 +20,7 @@ function Item({ item, onAddToCart, onRemoveFromCart }) {
 
   return (
     <div className="menu-card">
-      <img src={"./images/" + item.itemImage}/>
+      <img src={item.itemImage} alt={item.itemName} />
       <div className="menu-info">
         <h3>{item.itemName}</h3>
         <p>{item.itemDescription}</p>

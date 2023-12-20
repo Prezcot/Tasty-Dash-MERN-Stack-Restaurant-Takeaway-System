@@ -5,8 +5,8 @@ import Item from "./Item";
 import Cart from "./Cart";
 import React from "react";
 import "../App.css";
-import NavBar from "./NavBar";
-import Dashboard from "./User/Dashboard";
+import NavBar from "../NavBar";
+import Dashboard from "../User/Dashboard";
 function Menu() {
   const [items, setItems] = useState([]);
   const [showDashboard, setShowDashboard] = useState(false);
@@ -24,10 +24,10 @@ function Menu() {
   }, []);
 
   // Callback function to update the items array
-  const updateItems = (itemId, action) => {
+  const updateItems = (itemName, action) => {
     setItems((prevItems) =>
       prevItems.map((item) =>
-        item.itemId === itemId
+        item.itemName === itemName
           ? {
               ...item,
               quantity:
@@ -47,8 +47,8 @@ function Menu() {
       {items.map((item) => (
         <Item
           item={item}
-          onAddToCart={() => updateItems(item.itemId, "add")}
-          onRemoveFromCart={() => updateItems(item.itemId, "remove")}
+          onAddToCart={() => updateItems(item.itemName, "add")}
+          onRemoveFromCart={() => updateItems(item.itemName, "remove")}
         />
       ))}
       <Cart items={items} />

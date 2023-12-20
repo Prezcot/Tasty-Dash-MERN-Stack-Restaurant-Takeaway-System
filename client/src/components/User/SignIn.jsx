@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import SignUp from "./SignUp";
 import AdminDashboard from "../Admin/AdminDashboard";
-import Menu from "../Menu";
+import Menu from "../Menu/Menu";
 import Dashboard from "./Dashboard";
 const UserInput = styled.input`
   border: 1px solid grey;
@@ -33,6 +33,8 @@ const SignIn = () => {
       setPage("SignUp");
     } else if (localStorage.getItem("page") == "Menu") {
       setPage("Menu");
+    } else if (localStorage.getItem("page")=="Admin"){
+      setPage("Admin");
     }
   });
 
@@ -95,9 +97,16 @@ const SignIn = () => {
     if (username && password && username.length >= 3 && password.length >= 3) {
       await axios
         .post("http://localhost:3001/users/signin", { username, password })
-        .then(() => {
-          localStorage.setItem("page", "Menu");
-          setPage("Menu");
+        .then((res) => {
+          if (res.data.user=="User")
+          {
+            localStorage.setItem("page", "Menu");
+            setPage("Menu");
+          }
+          else{
+            localStorage.setItem("page","Admin")
+            setShowAdminDashboard(true)
+          }
         })
         .catch((err) => setError(err.response.data.message));
 
@@ -224,6 +233,9 @@ const SignIn = () => {
   }
   if (page == "Menu") {
     return <Menu></Menu>;
+  }
+  if (page=="Admin"){
+    return <AdminDashboard></AdminDashboard>
   }
 };
 

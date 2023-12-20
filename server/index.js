@@ -2,7 +2,7 @@ let port = 3001;
 let express = require("express");
 let app = express();
 let cors = require("cors");
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 require("dotenv").config();
 const mongoose = require("mongoose");
 app.use(cors());

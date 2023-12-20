@@ -3,7 +3,7 @@ import axios from "axios";
 import {useState,useEffect} from "react";
 import styled from "styled-components";
 import validator from 'validator';
-import Menu from "../Menu";
+import Menu from "../Menu/Menu";
 const UserInput=styled.input`
   border: 1px solid grey;
   border-radius: 1vh;

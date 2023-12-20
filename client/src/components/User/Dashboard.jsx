@@ -12,9 +12,11 @@ function Dashboard() {
     }
   return (
     <div>
-      <NavBar></NavBar>
-      Dashboard
-      <button onClick={()=>setPage("SignIn")}>Log Out</button>
+        <NavBar></NavBar>
+        Dashboard
+        <div style={{flexDirection:"row",alignItems:"flex-end"}}>
+            <button onClick={()=>setPage("SignIn")}>Log Out</button>
+        </div>
     </div>
   );
 }
