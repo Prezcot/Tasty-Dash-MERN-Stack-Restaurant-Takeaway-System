@@ -5,6 +5,7 @@ import SignUp from "./SignUp";
 import AdminDashboard from "../Admin/AdminDashboard";
 import Menu from "../Menu/Menu";
 import Dashboard from "./Dashboard";
+import AdminNavBar from "../Admin/AdminNavBar";
 const UserInput = styled.input`
   border: 1px solid grey;
   border-radius: 1vh;
@@ -26,14 +27,13 @@ const SignIn = () => {
   useEffect(() => {
     //this useEffect hook will only run by default if the page variable has changed thus avoiding
     //the too many re-renders error.
-    if (localStorage.getItem("page") == "SignIn")
-    {
-        setPage("SignIn");
+    if (localStorage.getItem("page") == "SignIn") {
+      setPage("SignIn");
     } else if (localStorage.getItem("page") == "SignUp") {
       setPage("SignUp");
     } else if (localStorage.getItem("page") == "Menu") {
       setPage("Menu");
-    } else if (localStorage.getItem("page")=="Admin"){
+    } else if (localStorage.getItem("page") == "Admin") {
       setPage("Admin");
     }
   });
@@ -98,14 +98,12 @@ const SignIn = () => {
       await axios
         .post("http://localhost:3001/users/signin", { username, password })
         .then((res) => {
-          if (res.data.user=="User")
-          {
+          if (res.data.user == "User") {
             localStorage.setItem("page", "Menu");
             setPage("Menu");
-          }
-          else{
-            localStorage.setItem("page","Admin")
-            setShowAdminDashboard(true)
+          } else {
+            localStorage.setItem("page", "Admin");
+            setShowAdminDashboard(true);
           }
         })
         .catch((err) => setError(err.response.data.message));
@@ -124,108 +122,108 @@ const SignIn = () => {
     }
   }
   if (showAdminDashboard) {
-    return <AdminDashboard />;
+    return <AdminNavBar />;
   }
   if (page == "SignIn") {
     //use vh and vw for margins and padding and other attributes
     return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          backgroundImage: `url("/images/LoginBackground.jpg")`,
+          backgroundSize: "100vw 100vh",
+          backgroundRepeat: "no-repeat",
+          width: "100vw",
+          height: "100vh",
+        }}
+      >
+        {/* just for testing please ignore */}
+
+        <button onClick={() => setShowAdminDashboard(true)}>
+          Just for testing - will go to the dashboard
+        </button>
+
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            backgroundImage:`url("/images/LoginBackground.jpg")`,
-            backgroundSize: "100vw 100vh",
-            backgroundRepeat:"no-repeat",
-            width:"100vw",
-            height:"100vh",
+            marginTop: "5vh",
+            border: "0.4vh solid black",
+            boxShadow: "0px 0px 10px 3px white",
+            padding: "2vh",
+            borderRadius: "15px",
+            backgroundColor: "white",
+            opacity: "93%",
           }}
         >
-          {/* just for testing please ignore */}
-
-          <button onClick={() => setShowAdminDashboard(true)}>
-            Just for testing - will go to the dashboard
-          </button>
-
-          <div
-            style={{
-              marginTop: "5vh",
-              border: "0.4vh solid black",
-              boxShadow:"0px 0px 10px 3px white",
-              padding: "2vh",
-              borderRadius: "15px",
-              backgroundColor:"white",
-              opacity:"93%"
-            }}
-          >
+          <center>
+            <h1 style={{ color: "black" }}>Sign In</h1>
+          </center>
+          <br></br>
+          {handleError()}
+          {() => changePage("Menu")}
+          <br></br>
+          <form onSubmit={handleSignIn}>
+            <table id="login">
+              <tr>
+                <Tabcol>Username: </Tabcol>
+                <td style={{ paddingBottom: "1vh", fontSize: "3vh" }}>
+                  <UserInput
+                    type="text"
+                    value={username}
+                    placeholder="Username"
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <Tabcol>Password: </Tabcol>
+                <Tabcol>
+                  <UserInput
+                    type="password"
+                    value={password}
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Tabcol>
+              </tr>
+              <tr>
+                <td>
+                  <UserInput
+                    style={{ width: "2vw", height: "2vh" }}
+                    type="checkbox"
+                    checked={currentlychked}
+                    onChange={(e) => setChecked(e.target.checked)}
+                  />
+                  <p style={{ display: "inline", fontSize: "2vh" }}>
+                    Remember Me ?
+                  </p>
+                </td>
+              </tr>
+            </table>
+            <br></br>
             <center>
-              <h1 style={{ color: "black" }}>Sign In</h1>
+              <input
+                style={{
+                  width: "50%",
+                  backgroundColor: "green",
+                  color: "white",
+                  borderRadius: "10px",
+                  border: "0.1vh solid black",
+                }}
+                type="submit"
+                value="Sign In"
+              ></input>
+              <p
+                style={{ cursor: "pointer" }}
+                onClick={() => changePage("SignUp")}
+              >
+                <u>Create an account</u>
+              </p>
             </center>
-            <br></br>
-            {handleError()}
-            {() => changePage("Menu")}
-            <br></br>
-            <form onSubmit={handleSignIn}>
-              <table id="login">
-                <tr>
-                  <Tabcol>Username: </Tabcol>
-                  <td style={{ paddingBottom: "1vh", fontSize: "3vh" }}>
-                    <UserInput
-                      type="text"
-                      value={username}
-                      placeholder="Username"
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <Tabcol>Password: </Tabcol>
-                  <Tabcol>
-                    <UserInput
-                      type="password"
-                      value={password}
-                      placeholder="Password"
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </Tabcol>
-                </tr>
-                <tr>
-                  <td>
-                    <UserInput
-                      style={{ width: "2vw", height: "2vh" }}
-                      type="checkbox"
-                      checked={currentlychked}
-                      onChange={(e) => setChecked(e.target.checked)}
-                    />
-                    <p style={{ display: "inline", fontSize: "2vh" }}>
-                      Remember Me ?
-                    </p>
-                  </td>
-                </tr>
-              </table>
-              <br></br>
-              <center>
-                <input
-                  style={{
-                    width: "50%",
-                    backgroundColor: "green",
-                    color: "white",
-                    borderRadius: "10px",
-                    border: "0.1vh solid black",
-                  }}
-                  type="submit"
-                  value="Sign In"
-                ></input>
-                <p
-                  style={{ cursor: "pointer" }}
-                  onClick={() => changePage("SignUp")}
-                >
-                  <u>Create an account</u>
-                </p>
-              </center>
-            </form>
-          </div>
+          </form>
         </div>
+      </div>
     );
   }
   if (page == "SignUp") {
@@ -234,8 +232,8 @@ const SignIn = () => {
   if (page == "Menu") {
     return <Menu></Menu>;
   }
-  if (page=="Admin"){
-    return <AdminDashboard></AdminDashboard>
+  if (page == "Admin") {
+    return <AdminNavBar></AdminNavBar>;
   }
 };
 

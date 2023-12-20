@@ -53,7 +53,7 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <AdminNavBar />
+      {/* <AdminNavBar /> */}
       <h1 className="display-6">Pending Orders</h1>
       <ul className="list-group">
         {order_data.map((items, index) => (
