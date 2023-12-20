@@ -4,9 +4,11 @@ let bcrypt=require("bcrypt");
 const mongoose = require('mongoose');
 require("dotenv").config();
 const uri = process.env.ATLAS_URI;
+const item=require("../Schemas/Schemas");
 const UserSchema=new mongoose.Schema({username:String,type:String,email:String,phonenumber:String,password:String});
 const users= mongoose.model("users",UserSchema); // you can now use this to create other users
 
+if(mongoose.models && mongoose.models.tasks) return mongoose.models.tasks;
 router.get("/userinfo/:username",async (req,res,next)=>
 {
     var username=req.params.username;
@@ -71,20 +73,27 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
     }
 });
 
-router.post("/checkpassword",async(req,res,next)=>{
-    var {username,password}=req.body;
+router.put("/checkpassword",async(req,res,next)=>{
+    var {username,currentpassword,newpassword}=req.body;
     var query= await users.find({username:username}).catch((err)=>console.log(err));
-
+    var hashedPassword= await bcrypt.hash(newpassword,10);
     if (query.length>0)
     {
-        var valid=bcrypt.compare(password,query[0].password);
+        var valid= await bcrypt.compare(currentpassword,query[0].password);
+        var doesExist=await bcrypt.compare(newpassword,query[0].password);
         if (valid)
         {
-            res.status(200);
-            console.log("Correct Password");
+            if (!doesExist)
+            {
+                await users.updateOne({username:username},{password:hashedPassword});
+                res.status(200).json({message:"Password Successfully Changed"});
+            }
+            else{
+                res.status(400).json({message:"Current & New Password Matching"});
+            }
         }
         else{
-            res.status(400).json({err:"Incorrect Password"});
+            res.status(400).json({message:"Incorrect Password"});
             console.log("Incorrect Password");
         }
     }
@@ -92,8 +101,16 @@ router.post("/checkpassword",async(req,res,next)=>{
         console.log("DEVERR:Account Not Existing (sessionStorage issue");
         res.status(400);
     }
-
 });
+
+router.delete("/deleteaccount",async(req,res,next)=>{
+    var username=req.body;
+    console.log(username);
+    //await users.deleteOne({username:username}).then((res)=>{res.status(200).json({message:"Successfully Deleted Account"})});
+    console.log("Users deleted");
+    //await item.deleteMany({username:username}).then((res)=>{res.status(200).json({message:"Successfully Deleted Account"})});
+    console.log("Orders deleted");
+})
 
 
 

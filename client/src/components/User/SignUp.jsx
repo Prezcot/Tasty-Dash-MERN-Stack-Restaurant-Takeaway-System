@@ -45,9 +45,13 @@ function SignUp()
             setPassword(password.trim());
             //var hashedpassword=bcrypt.hash(password,10);
             //setPassword(bcrypt.hash(password,10));
-            if (username.length>=3 && validator.isEmail(email) && !isNaN(phonenumber) && phonenumber.length==10 && password.length>=3 && cnfrmpassword==password)
+            if (username.length>=3 && validator.isEmail(email) && !isNaN(phonenumber) && phonenumber.length==10 && password.length>=5 && cnfrmpassword==password)
             {
                 await axios.post("http://localhost:3001/users/signup",{username,email,phonenumber,password}).then(()=>setPage("Menu")).catch((err)=>setError(err.response.data.message));
+            }
+            else if (!username.length>=3)
+            {
+                setError("Please Enter Username Between 3 And 12 Characters");
             }
             else if (isNaN(phonenumber))
             {
@@ -60,6 +64,14 @@ function SignUp()
             else if (!validator.isEmail(email))
             {
                 setError("Invalid Email");
+            }
+            else if (phonenumber.length!=10)
+            {
+                setError("Please Enter Phone Number With 10 Digits");
+            }
+            else if(password.length<5)
+            {
+                setError("Please Enter Password Above 4 Characters")
             }
             else{
                 setError("Please Enter Valid Data");

@@ -34,6 +34,9 @@ function Dashboard() {
         sessionStorage.setItem("page","SignIn");
         return <SignIn></SignIn>
     }
+    else{
+        sessionStorage.setItem("page","Dashboard");
+    }
     function handleError() {
         //also called a render method
         if (error) {
@@ -67,13 +70,30 @@ function Dashboard() {
     async function handleSubmit(event)
     {
         event.preventDefault();
-        if (currentpassword && newpassword && confirmpassword && currentpassword.length >= 3 && newpassword.length >= 3 && confirmpassword.length>=3)
-        {
-            await axios.post("http://localhost:3001/users/checkpassword",{username,currentpassword,newpassword}).then((res)=>}).catch((err)=>setError(err.response.data.err));
+        if (currentpassword && newpassword && confirmpassword)
+        {   
+            if (currentpassword.length>=5 || newpassword.length>=5)
+            {
+                if(confirmpassword==newpassword)
+                {
+                    await axios.put("http://localhost:3001/users/checkpassword",{username,currentpassword,newpassword}).then((res)=>setError(res.data.message)).catch((err)=>setError(err.response.data.message));
+                }
+                else{
+                    setError("Passwords Not Matching");
+                }
+            }
+            else{
+                setError("Please Enter Password Above 8 Characters");
+            }
         }
         else{
             setError("Please Enter Valid Data");
         }
+    }
+    async function handleDelete()
+    {
+        console.log(username);
+        await axios.delete("http://localhost:3001/users/deleteaccount",username).then(()=>{setPage(true)}).catch((err)=>{console.log(err)});
     }
   return (
     // <div style={{background:`url("/images/UserDashboardBackground.jpg")`,width:"100vw",height:"100vh",backgroundRepeat:"no-repeat"}}></div>
@@ -87,9 +107,10 @@ function Dashboard() {
                 <p style={{fontSize:"1.5vw"}}>Username: {userinfo.username}</p>
                 <p style={{fontSize:"1.5vw"}}>Email: {userinfo.email}</p>
                 <p style={{fontSize:"1.5vw"}}>Phone Number: {userinfo.phonenumber}</p>
+                <button style={{backgroundColor: "red",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={handleDelete}>Delete Account</button>
             </div>
             <div style={{marginRight:"0.5vw"}}>
-                <button style={{border:"2px solid black",marginLeft:"23vw"}} onClick={()=>setPage("SignIn")}>Log Out</button>
+                <button style={{marginLeft:"23vw",backgroundColor: "green",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={()=>setPage("SignIn")}>Log Out</button>
                 <br></br>
                 {handleError()}
                 <form onSubmit={handleSubmit}>

@@ -35,6 +35,8 @@ const SignIn = () => {
       setPage("Menu");
     } else if (sessionStorage.getItem("page")=="Admin"){
       setPage("Admin");
+    } else if (sessionStorage.getItem("page")=="Dashboard"){
+      setPage("Dashboard");
     }
   });
 
@@ -94,31 +96,41 @@ const SignIn = () => {
   async function handleSignIn(event) {
     console.log("signin");
     event.preventDefault();
-    if (username && password && username.length >= 3 && password.length >= 3) {
-      await axios
-        .post("http://localhost:3001/users/signin", { username, password })
-        .then((res) => {
-          if (res.data.user=="User")
-          {
-            sessionStorage.setItem("page", "Menu");
-            setPage("Menu");
-          }
-          else{
-            sessionStorage.setItem("page","Admin")
-            setShowAdminDashboard(true)
-          }
-          
-        })
-        .catch((err) => setError(err.response.data.message));
+    if (username && password) {
+      if (username.length >= 3 && username.length<=12)
+        {
+          if (password.length >= 5)
+            {
+              await axios
+                .post("http://localhost:3001/users/signin", { username, password })
+                .then((res) => {
+                  if (res.data.user=="User")
+                  {
+                    sessionStorage.setItem("page", "Menu");
+                    setPage("Menu");
+                  }
+                  else{
+                    sessionStorage.setItem("page","Admin")
+                    setShowAdminDashboard(true)
+                  }
+                  
+                })
+                .catch((err) => setError(err.response.data.message));
 
-      if (currentlychked == true) {
-        sessionStorage.setItem("checked", JSON.stringify(currentlychked));
-        sessionStorage.setItem("username", username);
-        sessionStorage.setItem("password", password);
-      } else {
-        sessionStorage.setItem("checked", JSON.stringify(currentlychked));
-        sessionStorage.removeItem("password");
-      }
+              if (currentlychked == true) {
+                sessionStorage.setItem("checked", JSON.stringify(currentlychked));
+                sessionStorage.setItem("username", username);
+                sessionStorage.setItem("password", password);
+              } else {
+                sessionStorage.setItem("checked", JSON.stringify(currentlychked));
+                sessionStorage.removeItem("password");
+              }
+            }else{
+              setError("Please Enter Password Above 4 Characters");
+            }
+        }else{
+          setError("Please Enter Username Between 3 And 12 Characters");
+        }
     } else {
       setError("Please Enter Valid Data");
     }
@@ -236,6 +248,9 @@ const SignIn = () => {
   }
   if (page=="Admin"){
     return <AdminDashboard></AdminDashboard>
+  }
+  if (page=="Dashboard"){
+    return <Dashboard></Dashboard>
   }
 };
 
