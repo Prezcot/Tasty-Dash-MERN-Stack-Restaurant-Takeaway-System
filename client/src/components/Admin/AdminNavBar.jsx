@@ -90,7 +90,7 @@ const AdminNavBar = () => {
         </div>
       </nav>
       {page === "admin_dashboard" && <AdminDashboard />}
-      {page === "admim_add_menu_items" && <AdminMenu />}
+      {page === "admin_add_menu_items" && <AdminMenu />}
     </>
   );
 };
