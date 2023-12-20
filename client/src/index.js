@@ -4,6 +4,7 @@ import App from "./App";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "socket.io-client/dist/socket.io.min.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -11,4 +12,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-

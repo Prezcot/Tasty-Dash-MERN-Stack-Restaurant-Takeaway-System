@@ -1,15 +1,20 @@
 let port = 3001;
 let express = require("express");
-let app = express();
-let cors = require("cors");
-app.use(express.json({ limit: '10mb' }));
-require("dotenv").config();
 const mongoose = require("mongoose");
+const { Server } = require("socket.io");
+let cors = require("cors");
+let app = express();
 app.use(cors());
-let User = require("./routes/User.js");
+app.use(express.json({ limit: "10mb" }));
+require("dotenv").config();
+
+const User = require("./routes/User.js");
 const testingRouter = require("./routes/testing");
 const menuRouter = require("./routes/menu");
 const adminDashboardData = require("./routes/AdminDashboardData");
+
+// const server = createServer(app);
+const io = new Server();
 
 const uri = process.env.ATLAS_URI;
 
@@ -36,3 +41,6 @@ app.listen(port, () => {
   console.log("Listening on port: " + port);
 });
 
+io.on("connection", (socket) => {
+  console.log("a user connected");
+});
