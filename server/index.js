@@ -35,3 +35,4 @@ app.use("/admin_dashboard_data", adminDashboardData);
 app.listen(port, () => {
   console.log("Listening on port: " + port);
 });
+

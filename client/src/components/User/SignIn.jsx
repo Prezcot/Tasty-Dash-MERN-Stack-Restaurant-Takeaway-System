@@ -35,6 +35,8 @@ const SignIn = () => {
       setPage("Menu");
     } else if (localStorage.getItem("page") == "Admin") {
       setPage("Admin");
+    } else if (sessionStorage.getItem("page")=="Dashboard"){
+      setPage("Dashboard");
     }
   });
 
@@ -94,28 +96,41 @@ const SignIn = () => {
   async function handleSignIn(event) {
     console.log("signin");
     event.preventDefault();
-    if (username && password && username.length >= 3 && password.length >= 3) {
-      await axios
-        .post("http://localhost:3001/users/signin", { username, password })
-        .then((res) => {
-          if (res.data.user == "User") {
-            localStorage.setItem("page", "Menu");
-            setPage("Menu");
-          } else {
-            localStorage.setItem("page", "Admin");
-            setShowAdminDashboard(true);
-          }
-        })
-        .catch((err) => setError(err.response.data.message));
+    if (username && password) {
+      if (username.length >= 3 && username.length<=12)
+        {
+          if (password.length >= 5)
+            {
+              await axios
+                .post("http://localhost:3001/users/signin", { username, password })
+                .then((res) => {
+                  if (res.data.user=="User")
+                  {
+                    sessionStorage.setItem("page", "Menu");
+                    setPage("Menu");
+                  }
+                  else{
+                    sessionStorage.setItem("page","Admin")
+                    setShowAdminDashboard(true)
+                  }
+                  
+                })
+                .catch((err) => setError(err.response.data.message));
 
-      if (currentlychked == true) {
-        sessionStorage.setItem("checked", JSON.stringify(currentlychked));
-        sessionStorage.setItem("username", username);
-        sessionStorage.setItem("password", password);
-      } else {
-        sessionStorage.setItem("checked", JSON.stringify(currentlychked));
-        sessionStorage.removeItem("password");
-      }
+              if (currentlychked == true) {
+                sessionStorage.setItem("checked", JSON.stringify(currentlychked));
+                sessionStorage.setItem("username", username);
+                sessionStorage.setItem("password", password);
+              } else {
+                sessionStorage.setItem("checked", JSON.stringify(currentlychked));
+                sessionStorage.removeItem("password");
+              }
+            }else{
+              setError("Please Enter Password Above 4 Characters");
+            }
+        }else{
+          setError("Please Enter Username Between 3 And 12 Characters");
+        }
     } else {
       setError("Please Enter Valid Data");
     }
@@ -159,70 +174,70 @@ const SignIn = () => {
             <h1 style={{ color: "black" }}>Sign In</h1>
           </center>
           <br></br>
-          {handleError()}
-          {() => changePage("Menu")}
-          <br></br>
-          <form onSubmit={handleSignIn}>
-            <table id="login">
-              <tr>
-                <Tabcol>Username: </Tabcol>
-                <td style={{ paddingBottom: "1vh", fontSize: "3vh" }}>
-                  <UserInput
-                    type="text"
-                    value={username}
-                    placeholder="Username"
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <Tabcol>Password: </Tabcol>
-                <Tabcol>
-                  <UserInput
-                    type="password"
-                    value={password}
-                    placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </Tabcol>
-              </tr>
-              <tr>
-                <td>
-                  <UserInput
-                    style={{ width: "2vw", height: "2vh" }}
-                    type="checkbox"
-                    checked={currentlychked}
-                    onChange={(e) => setChecked(e.target.checked)}
-                  />
-                  <p style={{ display: "inline", fontSize: "2vh" }}>
-                    Remember Me ?
-                  </p>
-                </td>
-              </tr>
-            </table>
+            {handleError()}
+            {/* {() => changePage("Menu")} */}
             <br></br>
-            <center>
-              <input
-                style={{
-                  width: "50%",
-                  backgroundColor: "green",
-                  color: "white",
-                  borderRadius: "10px",
-                  border: "0.1vh solid black",
-                }}
-                type="submit"
-                value="Sign In"
-              ></input>
-              <p
-                style={{ cursor: "pointer" }}
-                onClick={() => changePage("SignUp")}
-              >
-                <u>Create an account</u>
-              </p>
-            </center>
-          </form>
+            <form onSubmit={handleSignIn}>
+              <table id="login">
+                <tr>
+                  <Tabcol>Username: </Tabcol>
+                  <td style={{ paddingBottom: "1vh", fontSize: "3vh" }}>
+                    <UserInput
+                      type="text"
+                      value={username}
+                      placeholder="Username"
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <Tabcol>Password: </Tabcol>
+                  <Tabcol>
+                    <UserInput
+                      type="password"
+                      value={password}
+                      placeholder="Password"
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </Tabcol>
+                </tr>
+                <tr>
+                  <td>
+                    <UserInput
+                      style={{ width: "2vw", height: "2vh" }}
+                      type="checkbox"
+                      checked={currentlychked}
+                      onChange={(e) => setChecked(e.target.checked)}
+                    />
+                    <p style={{ display: "inline", fontSize: "2vh" }}>
+                      Remember Me ?
+                    </p>
+                  </td>
+                </tr>
+              </table>
+              <br></br>
+              <center>
+                <input
+                  style={{
+                    width: "50%",
+                    backgroundColor: "green",
+                    color: "white",
+                    borderRadius: "10px",
+                    border: "0.1vh solid black",
+                  }}
+                  type="submit"
+                  value="Sign In"
+                ></input>
+                <p
+                  style={{ cursor: "pointer" }}
+                  onClick={() => changePage("SignUp")}
+                >
+                  <u>Create an account</u>
+                </p>
+              </center>
+            </form>
+          </div>
         </div>
-      </div>
     );
   }
   if (page == "SignUp") {
@@ -233,6 +248,9 @@ const SignIn = () => {
   }
   if (page == "Admin") {
     return <AdminNavBar></AdminNavBar>;
+  }
+  if (page=="Dashboard"){
+    return <Dashboard></Dashboard>
   }
 };
 

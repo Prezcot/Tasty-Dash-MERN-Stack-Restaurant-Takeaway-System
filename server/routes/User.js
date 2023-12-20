@@ -4,12 +4,22 @@ let bcrypt=require("bcrypt");
 const mongoose = require('mongoose');
 require("dotenv").config();
 const uri = process.env.ATLAS_URI;
+const item=require("../Schemas/Schemas");
 const UserSchema=new mongoose.Schema({username:String,type:String,email:String,phonenumber:String,password:String});
 const users= mongoose.model("users",UserSchema); // you can now use this to create other users
 
-router.get("/userinfo",(req,res,next)=>{
-    res.status(200).json({message:"Yes im server"});
+if(mongoose.models && mongoose.models.tasks) return mongoose.models.tasks;
+router.get("/userinfo/:username",async (req,res,next)=>
+{
+    var username=req.params.username;
+    var query=await users.find({username:username}).catch((err)=>res.status(400).json({message:err}));
+    if (query.length>0)
+    {
+        res.status(200).json({username:query[0].username,email:query[0].email,phonenumber:query[0].phonenumber});
+    }
 });
+
+
 router.post("/signin",async (req,res,next)=>{ //This route handler handles all signin requests
     const {username,email,phonenumber,password,cnfrmpassword}=req.body;
     console.log(password);
@@ -61,6 +71,50 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
         //the anonymous function inside .then promise handler would have a parameter that is related to the outer function which is User.save
         //which is the response from User.save() basically.
     }
+});
+
+router.put("/checkpassword",async(req,res,next)=>{
+    var {username,currentpassword,newpassword}=req.body;
+    var query= await users.find({username:username}).catch((err)=>console.log(err));
+    var hashedPassword= await bcrypt.hash(newpassword,10);
+    if (query.length>0)
+    {
+        var valid= await bcrypt.compare(currentpassword,query[0].password);
+        var doesExist=await bcrypt.compare(newpassword,query[0].password);
+        if (valid)
+        {
+            if (!doesExist)
+            {
+                await users.updateOne({username:username},{password:hashedPassword});
+                res.status(200).json({message:"Password Successfully Changed"});
+            }
+            else{
+                res.status(400).json({message:"Current & New Password Matching"});
+            }
+        }
+        else{
+            res.status(400).json({message:"Incorrect Password"});
+            console.log("Incorrect Password");
+        }
+    }
+    else{
+        console.log("DEVERR:Account Not Existing (sessionStorage issue");
+        res.status(400);
+    }
+});
+
+router.put("/deleteaccount",async(req,res,next)=>{
+    res.status(200);
+    var username=req.body;
+    console.log(username);
+    //await users.deleteOne({username:username}).then((res)=>{res.status(200).json({message:"Successfully Deleted Account"})});
+    console.log("Users deleted");
+    //await item.deleteMany({username:username}).then((res)=>{res.status(200).json({message:"Successfully Deleted Account"})});
+    console.log("Orders deleted");
 })
+
+
+
+
 
 module.exports=router;
