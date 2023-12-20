@@ -7,9 +7,17 @@ const uri = process.env.ATLAS_URI;
 const UserSchema=new mongoose.Schema({username:String,type:String,email:String,phonenumber:String,password:String});
 const users= mongoose.model("users",UserSchema); // you can now use this to create other users
 
-router.get("/userinfo",(req,res,next)=>{
-    res.status(200).json({message:"Yes im server"});
+router.get("/userinfo/:username",async (req,res,next)=>
+{
+    var username=req.params.username;
+    var query=await users.find({username:username}).catch((err)=>res.status(400).json({message:err}));
+    if (query.length>0)
+    {
+        res.status(200).json({username:query[0].username,email:query[0].email,phonenumber:query[0].phonenumber});
+    }
 });
+
+
 router.post("/signin",async (req,res,next)=>{ //This route handler handles all signin requests
     const {username,email,phonenumber,password,cnfrmpassword}=req.body;
     console.log(password);
@@ -61,6 +69,34 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
         //the anonymous function inside .then promise handler would have a parameter that is related to the outer function which is User.save
         //which is the response from User.save() basically.
     }
-})
+});
+
+router.post("/checkpassword",async(req,res,next)=>{
+    var {username,password}=req.body;
+    var query= await users.find({username:username}).catch((err)=>console.log(err));
+
+    if (query.length>0)
+    {
+        var valid=bcrypt.compare(password,query[0].password);
+        if (valid)
+        {
+            res.status(200);
+            console.log("Correct Password");
+        }
+        else{
+            res.status(400).json({err:"Incorrect Password"});
+            console.log("Incorrect Password");
+        }
+    }
+    else{
+        console.log("DEVERR:Account Not Existing (sessionStorage issue");
+        res.status(400);
+    }
+
+});
+
+
+
+
 
 module.exports=router;
