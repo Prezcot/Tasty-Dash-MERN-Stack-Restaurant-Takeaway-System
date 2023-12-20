@@ -27,10 +27,14 @@ router.put("/set_order_status", async (req, res) => {
   order_id = req.body.order_id;
   order_status = req.body.order_status;
   console.log(order_id, " ", order_status);
-
-  await item.findByIdAndUpdate(order_id, {
-    order_status: order_status,
-  });
+  try {
+    await item.findByIdAndUpdate(order_id, {
+      order_status: order_status,
+    });
+    res.json("Data changed Successfully");
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 module.exports = router;

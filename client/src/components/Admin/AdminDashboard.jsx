@@ -8,7 +8,6 @@ import axios from "axios";
 
 const AdminDashboard = () => {
   const [order_data, set_order_data] = useState([]);
-  // const [render, set_render] = useState([]);
 
   var grabData = async () => {
     await axios
@@ -24,7 +23,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     grabData();
-  });
+  }, []);
 
   const display_product_items = (items) => {
     let string = "";
@@ -37,16 +36,19 @@ const AdminDashboard = () => {
 
   const update_order_status = async (order_id, new_status) => {
     console.log(order_id);
-    try {
-      const res = await axios.put(
-        "http://localhost:3001/admin_dashboard_data/set_order_status",
-        { order_id: order_id, order_status: new_status }
-      );
-    } catch (err) {
-      console.error(err);
-    } finally {
-      grabData();
-    }
+
+    await axios
+      .put("http://localhost:3001/admin_dashboard_data/set_order_status", {
+        order_id: order_id,
+        order_status: new_status,
+      })
+      .then((res) => {
+        console.log(res);
+        grabData();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
@@ -58,11 +60,11 @@ const AdminDashboard = () => {
           <div key={index}>
             <li
               className={`list-group-item fs-5 ${
-                items.order_status === "approved"
+                items.order_status === "Approved"
                   ? "list-group-item-success"
-                  : items.order_status === "declined"
+                  : items.order_status === "Declined"
                   ? "list-group-item-danger"
-                  : ""
+                  : "list-group-item-warning"
               }`}
             >
               Name: {items.username}
@@ -76,14 +78,14 @@ const AdminDashboard = () => {
                 <button
                   type="button"
                   className="btn btn-success me-4 btn-lg"
-                  onClick={() => update_order_status(items._id, "approved")}
+                  onClick={() => update_order_status(items._id, "Approved")}
                 >
                   <i className="bi bi-check">Approve</i>
                 </button>
                 <button
                   type="button"
                   className="btn btn-danger btn-lg"
-                  onClick={() => update_order_status(items._id, "declined")}
+                  onClick={() => update_order_status(items._id, "Declined")}
                 >
                   <i className="bi bi-x">Decline</i>
                 </button>
