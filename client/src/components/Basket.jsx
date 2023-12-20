@@ -1,6 +1,7 @@
 import React from "react";
 import Product from "./Product";
 import SummaryItem from "./SummaryItem";
+import { useState } from "react";
 
 function Basket(){
 
@@ -18,6 +19,19 @@ function Basket(){
 
     //setter variable
     localStorage.setItem("wonder","false");
+    
+    //state for summary
+    let [updatedqty, setUpdatedQty] = useState("false");
+
+    function UpdateSummary(){
+        console.log(updatedqty)
+        if (updatedqty == true){
+            setUpdatedQty(false);
+        }
+        else{
+            setUpdatedQty(true);
+        }
+    }
 
     function setInstructions(e){
         instruction = e.target.value;
@@ -40,7 +54,7 @@ function Basket(){
                 <div className="confirm">
                     <h2 className="textcolor">Confirm your order</h2>
                     {cart.map((item,index)=>(
-                        <Product itemProp={item} indexProp={index} cartProp={cart}/>
+                        <Product itemProp={item} indexProp={index} cartProp={cart} updateProp={()=>UpdateSummary()}/>
                     ))}
                     
                     <div className="instruction">
@@ -51,7 +65,9 @@ function Basket(){
 
                 <div className="summary">
                     <h2 className="textcolor">Order Summary</h2>
-                    <SummaryItem/>
+                    {cart.map((item,index)=>(
+                    <SummaryItem itemProp2={item} indexProp2={index} cartProp2={cart}/>
+                    ))}
                     <div className="finalize">
                         <div id="indi-detail">
                             <p className="textcolor">Total</p>

@@ -1,12 +1,20 @@
 import React from "react";
+import { useState } from "react";
 
-function SummaryItem (){
+function SummaryItem ({itemProp2, indexProp2, cartProp2}){
+
+    let [name2, price2, qty2] = itemProp2.split(",");
+    let totalPrice = parseInt(price2)*parseInt(qty2);
     return(
         <div className="details">
             <div id="indi-detail">
-                <p className="textcolor">Mutton Biryani</p>
-                <p className="textcolor">x 3</p>
-                <p className="textcolor">1800</p>
+                <div>
+                <p className="textcolor">{name2} (x {qty2})</p>
+                </div>
+
+                <div>
+                <p className="textcolor">{totalPrice}</p>
+                </div>
             </div>
         </div>
     );
