@@ -7,7 +7,9 @@ const uri = process.env.ATLAS_URI;
 const UserSchema=new mongoose.Schema({username:String,type:String,email:String,phonenumber:String,password:String});
 const users= mongoose.model("users",UserSchema); // you can now use this to create other users
 
-
+router.get("/userinfo",(req,res,next)=>{
+    res.status(200).json({message:"Yes im server"});
+});
 router.post("/signin",async (req,res,next)=>{ //This route handler handles all signin requests
     const {username,email,phonenumber,password,cnfrmpassword}=req.body;
     console.log(password);
