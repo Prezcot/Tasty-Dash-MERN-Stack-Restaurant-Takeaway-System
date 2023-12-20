@@ -93,7 +93,7 @@ function Dashboard() {
     async function handleDelete()
     {
         console.log(username);
-        await axios.delete("http://localhost:3001/users/deleteaccount",username).then(()=>{setPage(true)}).catch((err)=>{console.log(err)});
+        await axios.put("http://localhost:3001/users/deleteaccount",username).then((res)=>console.log(res.data)).catch((err)=>{console.log(err)});
     }
   return (
     // <div style={{background:`url("/images/UserDashboardBackground.jpg")`,width:"100vw",height:"100vh",backgroundRepeat:"no-repeat"}}></div>

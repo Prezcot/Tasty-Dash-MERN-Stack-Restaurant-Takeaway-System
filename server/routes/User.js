@@ -103,7 +103,8 @@ router.put("/checkpassword",async(req,res,next)=>{
     }
 });
 
-router.delete("/deleteaccount",async(req,res,next)=>{
+router.put("/deleteaccount",async(req,res,next)=>{
+    res.status(200);
     var username=req.body;
     console.log(username);
     //await users.deleteOne({username:username}).then((res)=>{res.status(200).json({message:"Successfully Deleted Account"})});
