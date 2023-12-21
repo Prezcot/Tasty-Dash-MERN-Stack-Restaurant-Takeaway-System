@@ -35,6 +35,7 @@ const AdminNavBar = () => {
                   }`}
                   aria-current="page"
                   onClick={() => switch_page("admin_dashboard")}
+                  style={{ cursor: "pointer" }}
                 >
                   Pending Orders
                 </a>
@@ -45,6 +46,7 @@ const AdminNavBar = () => {
                     page === "admin_add_menu_items" ? "active" : ""
                   }`}
                   onClick={() => switch_page("admin_add_menu_items")}
+                  style={{ cursor: "pointer" }}
                 >
                   Add New Menu Item
                 </a>
