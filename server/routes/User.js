@@ -4,9 +4,7 @@ let bcrypt=require("bcrypt");
 const mongoose = require('mongoose');
 require("dotenv").config();
 const uri = process.env.ATLAS_URI;
-const item=require("../Schemas/Schemas");
-const UserSchema=new mongoose.Schema({username:String,type:String,email:String,phonenumber:String,password:String});
-const users= mongoose.model("users",UserSchema); // you can now use this to create other users
+const {item,Menu,users}=require("../Schemas/Schemas");
 
 router.get("/userinfo/:username",async (req,res,next)=>
 {
