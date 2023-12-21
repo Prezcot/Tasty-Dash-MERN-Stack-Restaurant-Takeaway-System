@@ -21,7 +21,6 @@ router.get("/userinfo/:username",async (req,res,next)=>
 
 router.post("/signin",async (req,res,next)=>{ //This route handler handles all signin requests
     const {username,email,phonenumber,password,cnfrmpassword}=req.body;
-    console.log(password);
     var valid=false;
     var query=await users.find({username:username}).catch((err)=>res.status(400).json({message:err}));
     // var finddoc=await users.find({username:username,password:password}).catch((err)=>res.status(400).json({message:err}));
@@ -29,25 +28,20 @@ router.post("/signin",async (req,res,next)=>{ //This route handler handles all s
     if (query.length>0)
     {
         valid= await bcrypt.compare(password,query[0].password);
-        console.log(query[0].password);
-        console.log(valid);
     }
     if (query.length>0 && valid)
     {
         if (query[0].type=="User")
         {
             res.status(200).json({message:"Account Registered",user:"User"});
-            console.log("Data Exists In Database (User)");
         }
         else{
             res.status(200).json({message:"Account Registered",user:"Admin"});
-            console.log("Data Exists In Database (Admin)");
         }
     }
     else
     {
         res.status(400).json({message:"Account Not Registered/Invalid Credentials"});
-        console.log("Data Does Not Exist In Database (Not User/Admin)");
     }
 });
 
@@ -61,11 +55,9 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
     if (finduser.length>0 || findphonenumber.length>0 || findemail.length>0)
     {
         res.status(400).json({message:"Account Already Exists"});
-        console.log("Data Already Exists In Database");
     }
     else{
         const User=new users({username,type,email,phonenumber,password});
-        console.log("Inserting");
         await User.save().then(()=>res.status(200).json({message:"Successful Register"})).catch((err)=>res.status(400).json({message:err}));
         //the anonymous function inside .then promise handler would have a parameter that is related to the outer function which is User.save
         //which is the response from User.save() basically.
@@ -93,20 +85,16 @@ router.put("/checkpassword",async(req,res,next)=>{
         }
         else{
             res.status(400).json({message:"Incorrect Password"});
-            console.log("Incorrect Password");
         }
     }
     else{
-        console.log("DEVERR:Account Not Existing (sessionStorage issue");
         res.status(400);
     }
 });
 
 router.put("/deleteaccount",async(req,res,next)=>{
     var {username}=req.body;
-    console.log(username+"huh");
     var query=await users.deleteOne({username:username});
-    await item.deleteMany({username:username});
     if (query)
     {
         res.status(200).json({message:"Successfully Deleted Account"});  
@@ -114,8 +102,6 @@ router.put("/deleteaccount",async(req,res,next)=>{
     else{
         res.status(400).json({message:"Successfully Deleted Account"});
     }
-    console.log("Users deleted");
-    console.log("Orders deleted");
 })
 
 

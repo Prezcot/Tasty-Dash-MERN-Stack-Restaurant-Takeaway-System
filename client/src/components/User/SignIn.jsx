@@ -104,7 +104,6 @@ const SignIn = () => {
     }
   }
   async function handleSignIn(event) {
-    console.log("signin");
     event.preventDefault();
     if (username && password) {
       if (username.length >= 3 && username.length <= 12) {

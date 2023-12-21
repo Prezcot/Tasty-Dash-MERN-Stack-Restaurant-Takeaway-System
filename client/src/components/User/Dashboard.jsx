@@ -25,7 +25,7 @@ function Dashboard() {
     useEffect(()=>{
         async function getUserInfo()
         {
-            await axios.get(`http://localhost:3001/users/userinfo/${username}`).then((res)=>setUserInfo(res.data)).catch((err)=>console.log("get isnt workin"+err));
+            await axios.get(`http://localhost:3001/users/userinfo/${username}`).then((res)=>setUserInfo(res.data)).catch((err)=>console.log(err));
         }
         getUserInfo();
     },[]);
@@ -93,14 +93,13 @@ function Dashboard() {
     async function handleDelete()
     {
         const username=sessionStorage.getItem("username");
-        console.log(username);
-        await axios.put("http://localhost:3001/users/deleteaccount",{username}).then(()=>setPage(true)).catch((err)=>{console.log("ITS NOT WORKING")});
+        await axios.put("http://localhost:3001/users/deleteaccount",{username}).then(()=>setPage(true)).catch((err)=>{console.log(err)});
     }
   return (
     // <div style={{background:`url("/images/UserDashboardBackground.jpg")`,width:"100vw",height:"100vh",backgroundRepeat:"no-repeat"}}></div>
-    <div>
+    <div style={{background:`url("/images/UserDashboardBackground.png")`,width:"100vw",height:"100vh",backgroundRepeat:"no-repeat"}}>
         <NavBar></NavBar>
-        <div style={{display:"flex",flexDirection:"row",marginTop:"1vh",justifyContent:"space-between"}}>
+        <div style={{display:"flex",flexDirection:"row",marginTop:"1vh",justifyContent:"space-between",color:"white"}}>
             <div>
                 <h1>Dashboard</h1>
                 <p style={{fontSize:"2vw",display:"inline"}}>Welcome, {userinfo.username}</p>
