@@ -22,6 +22,7 @@ function SignUp()
     const [password,setPassword]=useState();
     const [page,setPage]=useState();
     const [error,setError]=useState(null);
+    sessionStorage.removeItem("password");
 
     function handleError() //also called a render method
     {
