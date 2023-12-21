@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-function Product ({itemProp,indexProp, cartProp, updateProp}){
+function Product ({itemProp,indexProp, cartProp, updateProp, quantityProp}){
 
     let [name, price, qty] = itemProp.split(",");
     console.log("full cart"+cartProp);
@@ -14,15 +14,21 @@ function Product ({itemProp,indexProp, cartProp, updateProp}){
             updateProp();
             setQuantity(quantity=quantity-1);
             cartProp[indexProp] = name+","+price+","+(JSON.stringify(quantity));
+            quantityProp[name] = quantity;
             sessionStorage.setItem("cart",JSON.stringify(cartProp));
+            sessionStorage.setItem("menuCart", JSON.stringify(quantityProp));
             console.log("changedItem"+cartProp[indexProp]);
+            
         };
         if(e.target.name=="plus"){
             updateProp();
             setQuantity(quantity=quantity+1);
             cartProp[indexProp] = name+","+price+","+(JSON.stringify(quantity));
+            quantityProp[name] = quantity;
             sessionStorage.setItem("cart",JSON.stringify(cartProp));
+            sessionStorage.setItem("menuCart", JSON.stringify(quantityProp));
             console.log("changedItem"+cartProp[indexProp]);
+            
         };
     }
 

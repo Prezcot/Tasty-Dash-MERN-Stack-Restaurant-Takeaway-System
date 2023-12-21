@@ -6,6 +6,11 @@ import AdminDashboard from "../Admin/AdminDashboard";
 import Menu from "../Menu/Menu";
 import Dashboard from "./Dashboard";
 import AdminNavBar from "../Admin/AdminNavBar";
+<<<<<<< Updated upstream
+=======
+import Basket from "../Order/Basket";
+
+>>>>>>> Stashed changes
 import "socket.io-client";
 import { io } from "socket.io-client";
 
@@ -46,6 +51,8 @@ const SignIn = () => {
       setPage("Admin");
     } else if (sessionStorage.getItem("page") == "Dashboard") {
       setPage("Dashboard");
+    } else if (sessionStorage.getItem("page") == "Basket") {
+      setPage("Basket");
     }
   });
 
@@ -70,7 +77,14 @@ const SignIn = () => {
     } else if (newpage == "SignUp") {
       setPage("SignUp");
       sessionStorage.setItem("page", "SignUp");
+<<<<<<< Updated upstream
     } 
+=======
+    } else if (newpage == "Basket") {
+      setPage("Basket");
+      sessionStorage.setItem("page", "Basket");
+    }
+>>>>>>> Stashed changes
   }
   function handleError() {
     //also called a render method
@@ -248,6 +262,9 @@ const SignIn = () => {
   }
   if (page == "Dashboard") {
     return <Dashboard></Dashboard>;
+  }
+  if (page == "Basket") {
+    return <Basket></Basket>;
   }
 };
 
