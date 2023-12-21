@@ -2,6 +2,7 @@ let port = 3001;
 let express = require("express");
 const mongoose = require("mongoose");
 const { Server } = require("socket.io");
+const { createServer } = require("node:http");
 let cors = require("cors");
 let app = express();
 app.use(cors());
@@ -13,8 +14,13 @@ const testingRouter = require("./routes/testing");
 const menuRouter = require("./routes/menu");
 const adminDashboardData = require("./routes/AdminDashboardData");
 
-// const server = createServer(app);
-const io = new Server();
+const server = createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
 
 const uri = process.env.ATLAS_URI;
 
@@ -37,10 +43,13 @@ app.use("/menu", menuRouter);
 app.use("/testing", testingRouter);
 app.use("/admin_dashboard_data", adminDashboardData);
 
-app.listen(port, () => {
-  console.log("Listening on port: " + port);
-});
-
 io.on("connection", (socket) => {
   console.log("a user connected");
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
+});
+
+server.listen(port, () => {
+  console.log("Listening on port: " + port);
 });
