@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+
+//AdminDashboardData.js
 const item = mongoose.model("orders", {
   username: String,
   order_id: String,
@@ -8,4 +10,27 @@ const item = mongoose.model("orders", {
   order_status: String,
 });
 
-module.exports = item;
+//menu.js
+const Menu = mongoose.model(
+  "Menu",
+  new mongoose.Schema({
+    itemName: String,
+    itemDescription: String,
+    itemPrice: Number,
+    itemImage: String,
+    quantity: Number,
+  }),
+  "menu"
+);
+
+//User.js
+const UserSchema = new mongoose.Schema({
+  username: String,
+  type: String,
+  email: String,
+  phonenumber: String,
+  password: String,
+});
+const users = mongoose.model("users", UserSchema); // you can now use this to create other users
+
+module.exports = { item, Menu, users };

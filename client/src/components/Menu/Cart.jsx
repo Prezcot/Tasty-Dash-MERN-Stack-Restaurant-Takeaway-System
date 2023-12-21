@@ -16,9 +16,12 @@ function Cart({ items, quantityMap}) {
   
   return (
     <div className="cart">
-      <h2>Shopping Cart</h2>
-      <p>Number of Unique Items: {uniqueItemsCount}</p>
-      <ul>
+      <div class="cart-icon">
+        <img src="/images/carticon.png" alt="Shopping Cart"/>
+        <span class="unique-items-count">{uniqueItemsCount}</span>
+        
+      </div>
+      <ul class="cart-items-list">
         {cartItems.map((item) => (
           <li key={item.itemName}>
             {item.itemName} - Quantity: {quantityMap[item.itemName]}

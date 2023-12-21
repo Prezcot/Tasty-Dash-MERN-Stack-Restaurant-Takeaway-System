@@ -6,6 +6,7 @@ import AdminDashboard from "../Admin/AdminDashboard";
 import Menu from "../Menu/Menu";
 import Dashboard from "./Dashboard";
 import AdminNavBar from "../Admin/AdminNavBar";
+import Basket from "../Order/Basket";
 
 import "socket.io-client";
 import { io } from "socket.io-client";
@@ -37,16 +38,18 @@ const SignIn = () => {
   useEffect(() => {
     //this useEffect hook will only run by default if the page variable has changed thus avoiding
     //the too many re-renders error.
-    if (localStorage.getItem("page") == "SignIn") {
+    if (sessionStorage.getItem("page") == "SignIn") {
       setPage("SignIn");
-    } else if (localStorage.getItem("page") == "SignUp") {
+    } else if (sessionStorage.getItem("page") == "SignUp") {
       setPage("SignUp");
     } else if (sessionStorage.getItem("page") == "Menu") {
       setPage("Menu");
-    } else if (localStorage.getItem("page") == "Admin") {
+    } else if (sessionStorage.getItem("page") == "Admin") {
       setPage("Admin");
     } else if (sessionStorage.getItem("page") == "Dashboard") {
       setPage("Dashboard");
+    } else if (sessionStorage.getItem("page") == "Basket") {
+      setPage("Basket");
     }
   });
 
@@ -71,6 +74,9 @@ const SignIn = () => {
     } else if (newpage == "SignUp") {
       setPage("SignUp");
       sessionStorage.setItem("page", "SignUp");
+    } else if (newpage == "Basket") {
+      setPage("Basket");
+      sessionStorage.setItem("page", "Basket");
     }
   }
   function handleError() {
@@ -104,7 +110,6 @@ const SignIn = () => {
     }
   }
   async function handleSignIn(event) {
-    console.log("signin");
     event.preventDefault();
     if (username && password) {
       if (username.length >= 3 && username.length <= 12) {
@@ -121,10 +126,9 @@ const SignIn = () => {
               }
             })
             .catch((err) => setError(err.response.data.message));
-
+          sessionStorage.setItem("username", username);  
           if (currentlychked == true) {
             sessionStorage.setItem("checked", JSON.stringify(currentlychked));
-            sessionStorage.setItem("username", username);
             sessionStorage.setItem("password", password);
           } else {
             sessionStorage.setItem("checked", JSON.stringify(currentlychked));
@@ -233,12 +237,7 @@ const SignIn = () => {
                 type="submit"
                 value="Sign In"
               ></input>
-              <p
-                style={{ cursor: "pointer" }}
-                onClick={() => changePage("SignUp")}
-              >
-                <u>Create an account</u>
-              </p>
+              <p style={{ cursor: "pointer"}} onClick={() => changePage("SignUp")}><u>Create an account</u></p>
             </center>
           </form>
         </div>
@@ -256,6 +255,9 @@ const SignIn = () => {
   }
   if (page == "Dashboard") {
     return <Dashboard></Dashboard>;
+  }
+  if (page == "Basket") {
+    return <Basket></Basket>;
   }
 };
 

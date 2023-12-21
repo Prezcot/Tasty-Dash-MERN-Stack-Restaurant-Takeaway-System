@@ -2,14 +2,7 @@ const router = require("express").Router();
 const mongoose = require("mongoose");
 
 
-
-const Menu = mongoose.model('Menu', new mongoose.Schema({
-    itemName: String,
-    itemDescription: String,
-    itemPrice: Number,
-    itemImage: String,
-    quantity: Number
-}),'menu');
+const {item,Menu,users}=require("../Schemas/Schemas");
 
 
 
