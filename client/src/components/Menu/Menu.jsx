@@ -50,16 +50,7 @@ const updateItems = (itemName, action) => {
     return <Dashboard></Dashboard>;
   }
 
-<<<<<<< Updated upstream
   return (
-=======
-  const toggleDashboard = () => {
-    setShowDashboard(true);
-  };
-
-  
-return (
->>>>>>> Stashed changes
     <>
       <NavBar onDashboardClick={() => setShowDashboard(true)}></NavBar>
       {items.map((item) => (
