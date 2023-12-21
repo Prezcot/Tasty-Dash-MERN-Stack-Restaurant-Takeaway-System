@@ -8,7 +8,7 @@ import AdminMenu from "./components/Admin/AdminMenu";
 function App() {
   return (
     <>
-      <SignIn/>
+      <SignIn />
       {/* {<Menu></Menu>} */}
       {/* <SendData /> */}
       {/* <Dashboard></Dashboard> */}
