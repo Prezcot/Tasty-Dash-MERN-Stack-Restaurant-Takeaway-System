@@ -55,8 +55,7 @@
 
 .menu-actions {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-evenly;
   padding: 15px;
 }
 

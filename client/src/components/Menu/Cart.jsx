@@ -1,19 +1,27 @@
 // Cart.jsx
 
-import React from 'react';
 
-function Cart({ items }) {
+import React, { useEffect } from 'react';
+
+function Cart({ items, quantityMap}) {
   // Calculate the number of unique items brought
-  const uniqueItemsCount = items.filter((item) => item.quantity > 0).length;
+  
+  const cartItems = items.filter((item) => quantityMap[item.itemName] > 0);
+  const uniqueItemsCount = cartItems.length;
 
+  const formattedCart = cartItems.map((item) => `${item.itemName},${item.itemPrice},${quantityMap[item.itemName] }`);
+  useEffect(() => {
+    sessionStorage.setItem("cart", JSON.stringify(formattedCart));
+  }, [formattedCart]);
+  
   return (
     <div className="cart">
       <h2>Shopping Cart</h2>
       <p>Number of Unique Items: {uniqueItemsCount}</p>
       <ul>
-        {items.map((item) => (
-          <li key={item.itemId}>
-            {item.itemName} - Quantity: {item.quantity}
+        {cartItems.map((item) => (
+          <li key={item.itemName}>
+            {item.itemName} - Quantity: {quantityMap[item.itemName]}
           </li>
         ))}
       </ul>

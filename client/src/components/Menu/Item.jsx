@@ -1,19 +1,22 @@
 // Item.jsx
+import React, { useEffect, useState } from 'react';
 
-import React, { useState } from 'react';
+function Item({ item, quantity, onAddToCart, onRemoveFromCart }) {
+  const [localQuantity, setLocalQuantity] = useState();
 
-
-function Item({ item, onAddToCart, onRemoveFromCart }) {
-  const [quantity, setQuantity] = useState(0);
+  useEffect(() => {
+    // Update local state when the quantity prop changes
+    setLocalQuantity(quantity);
+  }, [quantity]);
 
   const handleAddToCart = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+    setLocalQuantity((prevQuantity) => prevQuantity + 1);
     onAddToCart(); // Notify the parent component about the add action
   };
 
   const handleRemoveFromCart = () => {
-    if (quantity > 0) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
+    if (localQuantity > 0) {
+      setLocalQuantity((prevQuantity) => prevQuantity - 1);
       onRemoveFromCart(); // Notify the parent component about the remove action
     }
   };
@@ -24,19 +27,18 @@ function Item({ item, onAddToCart, onRemoveFromCart }) {
       <div className="menu-info">
         <h3>{item.itemName}</h3>
         <p>{item.itemDescription}</p>
-        <p>Price: ${item.itemPrice.toFixed(2)}</p>
+        <p>Price: Rs. {item.itemPrice.toFixed(2)}</p>
       </div>
       <div className="menu-actions">
         <div className="quantity">
           <button className="remove-from-cart" onClick={handleRemoveFromCart}>
             -
           </button>
-          <span className="quantity-in-cart">{item.quantity}</span>
+          <span className="quantity-in-cart">{localQuantity}</span>
           <button className="add-to-cart" onClick={handleAddToCart}>
             +
           </button>
         </div>
-        <button className="add-to-cart">Add to Cart</button>
       </div>
     </div>
   );
