@@ -173,7 +173,7 @@ body{
   width: 93%;
   padding: 20px;
   background-color:black;
-  height:inherit;
+  height:100%;
 }
 .confirm, .summary {
   background-color: #242424;
@@ -188,6 +188,7 @@ body{
   padding-top: 10px; /*Not sure about this or the one above*/
   position:relative;
   background-color:#242424;
+  height:fit-content;
 }
 .summary {
   width: 30%;
@@ -224,7 +225,7 @@ body{
 
 
 .textarea{
-  width:900px;
+  width:inherit;
   height:100px;
   border-radius: 10px;
   font-size: large;
@@ -243,7 +244,7 @@ body{
 
 .instruction{
   bottom: 0%; /* Add this line */
-  width: fit-content; /* Add this line */
+  width: 100%; /* Add this line */
   background-color:#242424;
 }
 

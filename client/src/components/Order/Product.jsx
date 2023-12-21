@@ -37,7 +37,7 @@ function Product ({itemProp,indexProp, cartProp, updateProp, quantityProp}){
     if (quantity > 0) {
         return(
             <div className="item">
-                <img src="/images/Biryani.png" width="130px" height="106px"/>
+                <img src="/images/default.png" width="130px" height="106px"/>
                 <label>{name}</label>
                 <label>Rs.{price} each</label>
                 <div className="counter">
