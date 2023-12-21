@@ -2,6 +2,7 @@ let port = 3001;
 let express = require("express");
 const mongoose = require("mongoose");
 const { Server } = require("socket.io");
+const { createServer } = require("node:http");
 let cors = require("cors");
 let app = express();
 app.use(cors());
@@ -13,7 +14,7 @@ const testingRouter = require("./routes/testing");
 const menuRouter = require("./routes/menu");
 const adminDashboardData = require("./routes/AdminDashboardData");
 
-// const server = createServer(app);
+const server = createServer(app);
 const io = new Server();
 
 const uri = process.env.ATLAS_URI;
