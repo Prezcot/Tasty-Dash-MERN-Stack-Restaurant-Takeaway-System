@@ -8,7 +8,6 @@ const item=require("../Schemas/Schemas");
 const UserSchema=new mongoose.Schema({username:String,type:String,email:String,phonenumber:String,password:String});
 const users= mongoose.model("users",UserSchema); // you can now use this to create other users
 
-if(mongoose.models && mongoose.models.tasks) return mongoose.models.tasks;
 router.get("/userinfo/:username",async (req,res,next)=>
 {
     var username=req.params.username;
