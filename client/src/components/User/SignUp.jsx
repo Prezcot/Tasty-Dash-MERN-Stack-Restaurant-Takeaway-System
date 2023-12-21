@@ -37,18 +37,45 @@ function SignUp()
             )
         }
     }
-
+    function checkForSpecialChar(password)
+    {
+        const regex=/[`!,.@#$%^&*()_+\-=\[\]{};':"\\|<>\/?~]/;
+        return regex.test(password);
+    }
+    function checkForUpperCase(password)
+    {
+        const regex=/[A-Z]/;
+        return regex.test(password);
+    }
+    function checkForLowerCase(password)
+    {
+        const regex=/[a-z]/;
+        return regex.test(password);
+    }
     async function handleSignUp(event)
     {
         event.preventDefault();
         try{
             setUsername(username.toLowerCase().trim());
             setPassword(password.trim());
+            
             //var hashedpassword=bcrypt.hash(password,10);
             //setPassword(bcrypt.hash(password,10));
-            if (username.length>=3 && validator.isEmail(email) && !isNaN(phonenumber) && phonenumber.length==10 && password.length>=5 && cnfrmpassword==password)
+            if (checkForLowerCase(password) && checkForUpperCase(password) && checkForSpecialChar(password) && username.length>=3 && validator.isEmail(email) && !isNaN(phonenumber) && phonenumber.length==10 && password.length>=5 && cnfrmpassword==password)
             {
                 await axios.post("http://localhost:3001/users/signup",{username,email,phonenumber,password}).then(()=>setPage("Menu")).catch((err)=>setError(err.response.data.message));
+            }
+            else if (!checkForSpecialChar(password))
+            {
+                setError("Password Must Contain A Special Character");
+            }
+            else if (!checkForLowerCase(password))
+            {
+                setError("Password Must Contain A Lower Case Character");
+            }
+            else if (!checkForUpperCase(password))
+            {
+                setError("Password Must Contain A Upper Case Character");
             }
             else if (!username.length>=3)
             {

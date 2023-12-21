@@ -121,10 +121,9 @@ const SignIn = () => {
               }
             })
             .catch((err) => setError(err.response.data.message));
-
+          sessionStorage.setItem("username", username);  
           if (currentlychked == true) {
             sessionStorage.setItem("checked", JSON.stringify(currentlychked));
-            sessionStorage.setItem("username", username);
             sessionStorage.setItem("password", password);
           } else {
             sessionStorage.setItem("checked", JSON.stringify(currentlychked));
@@ -233,13 +232,14 @@ const SignIn = () => {
                 type="submit"
                 value="Sign In"
               ></input>
-              <p
-                style={{ cursor: "pointer" }}
-                onClick={() => changePage("SignUp")}
-              >
-                <u>Create an account</u>
-              </p>
             </center>
+            <br></br>
+            <div style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
+              <p style={{ cursor: "pointer",display:"inline"}} onClick={() => changePage("SignUp")}>
+                <u>Forgot Password ?</u>
+              </p>
+              <p style={{ cursor: "pointer",display:"inline"}} onClick={() => changePage("SignUp")}><u>Create an account</u></p>
+            </div>
           </form>
         </div>
       </div>
