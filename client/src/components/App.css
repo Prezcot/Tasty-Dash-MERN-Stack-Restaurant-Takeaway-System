@@ -173,7 +173,7 @@ body{
   width: 93%;
   padding: 20px;
   background-color:black;
-  height:inherit;
+  height:100vh;
 }
 .confirm, .summary {
   background-color: #242424;
