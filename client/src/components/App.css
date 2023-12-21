@@ -63,6 +63,10 @@
   display: flex;
   align-items: center;
 }
+.cart{
+  display: contents;
+  border: 5px solid black;
+}
 
 button {
   cursor: pointer;
@@ -80,4 +84,32 @@ button {
 
 .remove-from-cart {
   background-color: #DC3545;
+}
+.cart-icon {
+  position: fixed;
+  top: 2%;
+  right: 2%;
+  display: flex;
+  align-items: center;
+}
+
+.cart-icon img {
+  width: 40px; 
+  height: 40px;
+}
+
+.unique-items-count {
+  background-color: #ff5733; /* Choose your preferred background color */
+  color: white;
+  padding: 6px 10px; /* Adjust padding for better visibility */
+  border-radius: 50%;
+  font-size: 12px; /* Adjust font size for unique items count */
+  font-weight: bold; /* Make the text bold */
+}
+.cart-items-list {
+  display: none;
+}
+
+.cart:hover .cart-items-list {
+  display: block;
 }
