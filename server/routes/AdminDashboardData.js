@@ -1,6 +1,6 @@
 const { default: mongoose } = require("mongoose");
 const router = require("express").Router();
-const {item,Menu,users}=require("../Schemas/Schemas");
+const { item, Menu, users } = require("../Schemas/Schemas");
 
 router.get("/", (req, res) => {
   res.send("Permission Denied");

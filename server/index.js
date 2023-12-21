@@ -45,6 +45,11 @@ app.use("/admin_dashboard_data", adminDashboardData);
 
 io.on("connection", (socket) => {
   console.log("a user connected");
+
+  socket.on("order_status_update", () => {
+    io.emit("order_status_update");
+  });
+
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });

@@ -21,10 +21,10 @@ const Tabcol = styled.td`
 `;
 
 //charith you can ignore these lines they are for the socket testing
-const socket = io("http://localhost:3001/");
-socket.on("connect", () => {
-  console.log("Connected to the server via WebSocket!");
-});
+// const socket = io("http://localhost:3001/");
+// socket.on("connect", () => {
+//   console.log("Connected to the server via WebSocket!");
+// });
 
 const SignIn = () => {
   //you cant use export default here because you are assigning

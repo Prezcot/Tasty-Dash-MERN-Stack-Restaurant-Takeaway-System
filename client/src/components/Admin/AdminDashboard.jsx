@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
+import { io } from "socket.io-client";
 
 const AdminDashboard = () => {
   const [order_data, set_order_data] = useState([]);
@@ -23,9 +24,16 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     grabData();
+    const socket = io("http://localhost:3001");
+    socket.on("order_status_update", () => {
+      grabData();
+    });
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
-  const display_product_items = (items) => {
+  const displayProductItems = (items) => {
     let string = "";
     items.items.forEach((line) => {
       let [productName, quantity] = line.split(",");
@@ -34,7 +42,7 @@ const AdminDashboard = () => {
     return string;
   };
 
-  const update_order_status = async (order_id, new_status) => {
+  const updateOrderStatus = async (order_id, new_status) => {
     console.log(order_id);
 
     await axios
@@ -44,6 +52,8 @@ const AdminDashboard = () => {
       })
       .then((res) => {
         console.log(res);
+        const socket = io("http://localhost:3001/");
+        socket.emit("order_status_update");
         grabData();
       })
       .catch((err) => {
@@ -73,19 +83,19 @@ const AdminDashboard = () => {
               <br />
               Contact: {items.email}
               <br />
-              {parse(display_product_items(items))}
+              {parse(displayProductItems(items))}
               <span className="d-flex mt-3">
                 <button
                   type="button"
                   className="btn btn-success me-4 btn-lg"
-                  onClick={() => update_order_status(items._id, "Approved")}
+                  onClick={() => updateOrderStatus(items._id, "Approved")}
                 >
                   <i className="bi bi-check">Approve</i>
                 </button>
                 <button
                   type="button"
                   className="btn btn-danger btn-lg"
-                  onClick={() => update_order_status(items._id, "Declined")}
+                  onClick={() => updateOrderStatus(items._id, "Declined")}
                 >
                   <i className="bi bi-x">Decline</i>
                 </button>
