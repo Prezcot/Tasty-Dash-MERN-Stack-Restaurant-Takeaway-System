@@ -6,7 +6,6 @@ import AdminDashboard from "../Admin/AdminDashboard";
 import Menu from "../Menu/Menu";
 import Dashboard from "./Dashboard";
 import AdminNavBar from "../Admin/AdminNavBar";
-
 import "socket.io-client";
 import { io } from "socket.io-client";
 
@@ -37,13 +36,13 @@ const SignIn = () => {
   useEffect(() => {
     //this useEffect hook will only run by default if the page variable has changed thus avoiding
     //the too many re-renders error.
-    if (localStorage.getItem("page") == "SignIn") {
+    if (sessionStorage.getItem("page") == "SignIn") {
       setPage("SignIn");
-    } else if (localStorage.getItem("page") == "SignUp") {
+    } else if (sessionStorage.getItem("page") == "SignUp") {
       setPage("SignUp");
     } else if (sessionStorage.getItem("page") == "Menu") {
       setPage("Menu");
-    } else if (localStorage.getItem("page") == "Admin") {
+    } else if (sessionStorage.getItem("page") == "Admin") {
       setPage("Admin");
     } else if (sessionStorage.getItem("page") == "Dashboard") {
       setPage("Dashboard");
@@ -71,7 +70,7 @@ const SignIn = () => {
     } else if (newpage == "SignUp") {
       setPage("SignUp");
       sessionStorage.setItem("page", "SignUp");
-    }
+    } 
   }
   function handleError() {
     //also called a render method
@@ -104,7 +103,6 @@ const SignIn = () => {
     }
   }
   async function handleSignIn(event) {
-    console.log("signin");
     event.preventDefault();
     if (username && password) {
       if (username.length >= 3 && username.length <= 12) {
@@ -232,14 +230,8 @@ const SignIn = () => {
                 type="submit"
                 value="Sign In"
               ></input>
+              <p style={{ cursor: "pointer"}} onClick={() => changePage("SignUp")}><u>Create an account</u></p>
             </center>
-            <br></br>
-            <div style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
-              <p style={{ cursor: "pointer",display:"inline"}} onClick={() => changePage("SignUp")}>
-                <u>Forgot Password ?</u>
-              </p>
-              <p style={{ cursor: "pointer",display:"inline"}} onClick={() => changePage("SignUp")}><u>Create an account</u></p>
-            </div>
           </form>
         </div>
       </div>
