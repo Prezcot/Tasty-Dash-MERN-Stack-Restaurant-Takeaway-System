@@ -3,11 +3,10 @@ import Product from "./Product";
 import SummaryItem from "./SummaryItem";
 import "../App.css";
 import Menu from "../Menu/Menu";
+import NavBar from "../NavBar";
 
 function Basket() {
   const [page, setPage] = useState("Basket");
-  
-  
   
   let instruction = "";
 
@@ -54,7 +53,7 @@ function Basket() {
   if (page == "Basket"){
     return (
       <>
-  
+        <NavBar/>
         <div className="header">
           <h1 className="title">Your Basket</h1>
           <div id="tomenu">
