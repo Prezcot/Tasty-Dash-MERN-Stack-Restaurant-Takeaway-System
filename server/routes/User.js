@@ -104,12 +104,18 @@ router.put("/checkpassword",async(req,res,next)=>{
 });
 
 router.put("/deleteaccount",async(req,res,next)=>{
-    res.status(200);
-    var username=req.body;
-    console.log(username);
-    //await users.deleteOne({username:username}).then((res)=>{res.status(200).json({message:"Successfully Deleted Account"})});
+    var {username}=req.body;
+    console.log(username+"huh");
+    var query=await users.deleteOne({username:username});
+    await item.deleteMany({username:username});
+    if (query)
+    {
+        res.status(200).json({message:"Successfully Deleted Account"});  
+    }
+    else{
+        res.status(400).json({message:"Successfully Deleted Account"});
+    }
     console.log("Users deleted");
-    //await item.deleteMany({username:username}).then((res)=>{res.status(200).json({message:"Successfully Deleted Account"})});
     console.log("Orders deleted");
 })
 
