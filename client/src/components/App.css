@@ -113,3 +113,154 @@ button {
 .cart:hover .cart-items-list {
   display: block;
 }
+
+
+
+
+
+
+/*Chamath's CSS*/
+.title{
+  padding-left: 55px;
+  color:#FFFFFF;
+  margin-top: 15px;
+  margin-bottom: a15px;;
+}
+
+.textcolor{
+  color:white;
+}
+body{
+  background-color: #000000;
+  margin: 0;
+  height: 100vh;
+}
+.header
+{
+  display: flex;
+  justify-content:space-between;
+  background-color: black;
+}
+
+#tomenu{
+  display: flex;
+  justify-content:space-between;
+  /* margin: auto; */
+  background-color: black;
+  margin-right: 55px;
+}
+
+#arrow{
+  margin: auto;
+}
+
+#menu-button{
+  background-color: #000000;
+  color:#FFFFFF;
+  border:none;
+}
+
+.basketcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: black;
+}
+
+.basket {
+  display: flex;
+  justify-content:space-between;
+  width: 93%;
+  padding: 20px;
+  background-color:black;
+}
+.confirm, .summary {
+  background-color: #242424;
+  padding: 20px;
+}
+.confirm {
+  width: 70%;
+  border-radius: 10px;
+  margin-right: 50px;
+  margin-bottom: 20px;
+  padding:20px;
+  padding-top: 10px; /*Not sure about this or the one above*/
+  position:relative;
+  background-color:#242424;
+}
+.summary {
+  width: 30%;
+  border-radius: 10px;
+  padding:10px;
+  padding-top: 20px; /*Not sure about this or the one above*/
+  height:65vh;
+  position: relative; /* Add this line */
+}
+.item{
+  background-color: white;
+  border-radius: 10px;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding:10px;
+  margin:20px;
+}
+
+.counter{
+  display:flex;
+  align-items: center;
+}
+
+.counter-button{
+  width:20px;
+  height:20px;
+}
+
+#counter-number{
+  margin:10px;
+}
+
+
+.textarea{
+  width:900px;
+  height:100px;
+  border-radius: 10px;
+  font-size: large;
+  padding: 10px;
+}
+
+.details{
+
+}
+
+.finalize{
+  border-top: 1px solid #F85606;
+  position: absolute; /* Add this line */
+  bottom: 0%; /* Add this line */
+  width: 95%; /* Add this line */
+  background-color: #242424;
+}
+
+.instruction{
+  bottom: 0%; /* Add this line */
+  width: fit-content; /* Add this line */
+  background-color:#242424;
+}
+
+#payment-button {
+  display: block; /* Add this line */
+  margin: auto; /* Add this line */
+  margin-bottom: 20px; /* Add this line */
+  border-radius: 30px;
+  height:50px;
+  width: 250px;
+  background-color: #F85606;
+  color: #FFFFFF;
+  font-size: medium;
+}
+
+#indi-detail{
+  display: flex;
+  justify-content: space-between;
+}
