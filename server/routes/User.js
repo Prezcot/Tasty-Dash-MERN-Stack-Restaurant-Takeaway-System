@@ -104,8 +104,4 @@ router.put("/deleteaccount",async(req,res,next)=>{
     }
 })
 
-
-
-
-
 module.exports=router;

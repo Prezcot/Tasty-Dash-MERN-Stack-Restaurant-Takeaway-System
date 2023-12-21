@@ -25,6 +25,7 @@ function Dashboard() {
     useEffect(()=>{
         async function getUserInfo()
         {
+            //you have to use req.params to send over data/variables to the server when dealing with get requests as data cant be sent in the body
             await axios.get(`http://localhost:3001/users/userinfo/${username}`).then((res)=>setUserInfo(res.data)).catch((err)=>console.log(err));
         }
         getUserInfo();
