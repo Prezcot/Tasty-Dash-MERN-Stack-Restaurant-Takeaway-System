@@ -3,7 +3,6 @@ import AdminNavBar from "./AdminNavBar";
 import parse from "html-react-parser";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
 import { io } from "socket.io-client";
 
@@ -63,8 +62,10 @@ const AdminDashboard = () => {
 
   return (
     <>
-      {/* <AdminNavBar /> */}
-      <h1 className="display-6">Pending Orders</h1>
+      <h1 className="display-6" style={{ paddingTop: "60px" }}>
+        Pending Orders
+      </h1>
+      <i className="fas fa-exclamation-circle"></i>
       <ul className="list-group">
         {order_data.map((items, index) => (
           <div key={index}>
@@ -74,6 +75,8 @@ const AdminDashboard = () => {
                   ? "list-group-item-success"
                   : items.order_status === "Declined"
                   ? "list-group-item-danger"
+                  : items.order_status === "Order Collected"
+                  ? "list-group-item-dark"
                   : "list-group-item-warning"
               }`}
             >
@@ -83,7 +86,14 @@ const AdminDashboard = () => {
               <br />
               Contact: {items.email}
               <br />
-              {parse(displayProductItems(items))}
+              Additional Instructions:{" "}
+              <span className="text-info">{items.instructions}</span>
+              <br />
+              <div className="text-muted">
+                {parse(displayProductItems(items))}
+              </div>
+              <b>Order Total: {items.order_total}</b>
+              <br />
               <span className="d-flex mt-3">
                 <button
                   type="button"
@@ -94,10 +104,19 @@ const AdminDashboard = () => {
                 </button>
                 <button
                   type="button"
-                  className="btn btn-danger btn-lg"
+                  className="btn btn-danger me-4 btn-lg"
                   onClick={() => updateOrderStatus(items._id, "Declined")}
                 >
                   <i className="bi bi-x">Decline</i>
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-warning btn-lg"
+                  onClick={() =>
+                    updateOrderStatus(items._id, "Order Collected")
+                  }
+                >
+                  <i>Order Collected</i>
                 </button>
                 <h4
                   style={{
