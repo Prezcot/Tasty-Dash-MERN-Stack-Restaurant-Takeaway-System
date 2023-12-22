@@ -8,7 +8,7 @@ import axios from "axios";
 
 function Basket() {
   const [page, setPage] = useState("Basket");
-  
+
   let instructionfromcust = "";
 
   // Thinals side
@@ -17,22 +17,19 @@ function Basket() {
   let quantityMap = JSON.parse(sessionStorage.getItem("menuCart"));
   // my side
   let cart = JSON.parse(sessionStorage.getItem("cart"));
-  
 
   // state for summary
   let [updatedqty, setUpdatedQty] = useState(false);
 
-
-// TO trigger the order summary update
+  // TO trigger the order summary update
   function UpdateSummary() {
     setUpdatedQty((previousval) => !previousval);
   }
 
-
-// To collect the instruction provided
+  // To collect the instruction provided
   function setInstructions(e) {
     instructionfromcust = e.target.value;
-    console.log("instruction received: "+instructionfromcust)
+    console.log("instruction received: " + instructionfromcust);
   }
 
   let [finalTotal, setFinalTotal] = useState(0);
@@ -40,79 +37,95 @@ function Basket() {
   useEffect(() => {
     // Calculate the total when cart changes
     let total = cart.reduce((acc, item) => {
-      let [name,price ,quantity ] = item.split(",");
-      return acc + parseInt(price*quantity);
+      let [name, price, quantity] = item.split(",");
+      return acc + parseInt(price * quantity);
     }, 0);
 
     setFinalTotal(total);
   }, [cart]);
-  function backToMenu(){
-    setPage("Menu")
+  function backToMenu() {
+    setPage("Menu");
     sessionStorage.setItem("page", "Menu");
   }
 
-
   //sending order data to mongo
-  async function handleOrder(){
+  async function handleOrder() {
     let orderDetails = {
       username: sessionStorage.getItem("username"),
       order_id: "5",
       payment_id: "68464",
       email: "chami@gmail.com",
       items: cart,
-      order_status:"pending",
-      instructions:instructionfromcust,
-      order_total:finalTotal,
+      order_status: "pending",
+      instructions: instructionfromcust,
+      order_total: finalTotal,
     };
 
-    await axios.post('http://localhost:3001/basket/addorder', orderDetails);
+    await axios.post("http://localhost:3001/basket/addorder", orderDetails);
   }
-  
-  if (page == "Basket"){
+
+  if (page == "Basket") {
     return (
       <>
-      <div className="everything">
-          <NavBar/>
+        <div className="everything">
+          <NavBar />
           <div className="header">
             <h1 className="title">Your Basket</h1>
             <div id="tomenu">
-              <img id="arrow" src="/images/Arrow.png" width="50px" height="15px" />
-              <button id="menu-button" onClick={backToMenu}>Back to Menu</button>
+              <img
+                id="arrow"
+                src="/images/Arrow.png"
+                width="50px"
+                height="15px"
+              />
+              <button id="menu-button" onClick={backToMenu}>
+                Back to Menu
+              </button>
             </div>
           </div>
-    
+
           <div className="basketcontainer">
             <div className="basket">
               <div className="confirm">
                 <h2 className="textcolor">Confirm your order</h2>
                 {cart.map((item, index) => (
-                  <Product 
-                  itemProp={item} 
-                  indexProp={index}
-                  cartProp={cart} 
-                  quantityProp={quantityMap}
-                  updateProp={() => UpdateSummary()}
-                  
+                  <Product
+                    itemProp={item}
+                    indexProp={index}
+                    cartProp={cart}
+                    quantityProp={quantityMap}
+                    updateProp={() => UpdateSummary()}
                   />
                 ))}
-    
+
                 <div className="instruction">
-                  <h3 className="textcolor">Special Instructions for Preparation</h3>
-                  <textarea className="textarea" onChange={setInstructions}></textarea>
+                  <h3 className="textcolor">
+                    Special Instructions for Preparation
+                  </h3>
+                  <textarea
+                    className="textarea"
+                    onChange={setInstructions}
+                  ></textarea>
                 </div>
               </div>
-    
+
               <div className="summary">
                 <h2 className="textcolor">Order Summary</h2>
                 {cart.map((item, index) => (
-                  <SummaryItem itemProp2={item} indexProp2={index} cartProp2={cart}/>
+                  <SummaryItem
+                    itemProp2={item}
+                    indexProp2={index}
+                    cartProp2={cart}
+                  />
                 ))}
                 <div className="finalize">
                   <div id="indi-detail">
                     <p className="textcolor">Total</p>
                     <p className="textcolor">Rs.{finalTotal}</p>
                   </div>
-                  <button id="payment-button" onClick={handleOrder}><b>Proceed to Payment</b></button>
+                  <button id="payment-button" onClick={handleOrder}>
+                    <b>Proceed to Payment</b>
+                  </button>
                 </div>
               </div>
             </div>
@@ -121,11 +134,9 @@ function Basket() {
       </>
     );
   }
-  if (page == "Menu"){
-    return <Menu></Menu>
+  if (page == "Menu") {
+    return <Menu></Menu>;
   }
-  
 }
-
 
 export default Basket;

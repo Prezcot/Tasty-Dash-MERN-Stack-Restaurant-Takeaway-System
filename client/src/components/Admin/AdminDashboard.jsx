@@ -60,6 +60,20 @@ const AdminDashboard = () => {
       });
   };
 
+  //experimental code from here
+
+  const sortedOrderData = [...order_data].sort((a, b) => {
+    if (a.order_status === "pending" && b.order_status !== "pending") {
+      return -1;
+    } else if (a.order_status !== "pending" && b.order_status === "pending") {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+
+  //to here
+
   return (
     <>
       <h1 className="display-6" style={{ paddingTop: "60px" }}>
@@ -67,7 +81,8 @@ const AdminDashboard = () => {
       </h1>
       <i className="fas fa-exclamation-circle"></i>
       <ul className="list-group">
-        {order_data.map((items, index) => (
+        {/* {order_data.map((items, index) => ( */}
+        {sortedOrderData.map((items, index) => (
           <div key={index}>
             <li
               className={`list-group-item fs-5 ${
