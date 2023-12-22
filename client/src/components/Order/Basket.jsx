@@ -56,7 +56,7 @@ function Basket() {
       payment_id: "68464",
       email: "chami@gmail.com",
       items: cart,
-      order_status: "pending",
+      order_status: "Pending",
       instructions: instructionfromcust,
       order_total: finalTotal,
     };

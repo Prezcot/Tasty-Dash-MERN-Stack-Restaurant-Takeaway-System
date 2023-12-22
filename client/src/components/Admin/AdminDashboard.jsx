@@ -60,19 +60,21 @@ const AdminDashboard = () => {
       });
   };
 
-  //experimental code from here
-
   const sortedOrderData = [...order_data].sort((a, b) => {
-    if (a.order_status === "pending" && b.order_status !== "pending") {
-      return -1;
-    } else if (a.order_status !== "pending" && b.order_status === "pending") {
-      return 1;
-    } else {
-      return 0;
-    }
-  });
+    const orderStatusOrder = {
+      Pending: 0,
+      Approved: 1,
+      "Order Collected": 2,
+    };
+    const orderStatusA = orderStatusOrder[a.order_status];
+    const orderStatusB = orderStatusOrder[b.order_status];
 
-  //to here
+    if (orderStatusA < orderStatusB) {
+      return -1;
+    } else if (orderStatusA > orderStatusB) {
+      return 1;
+    } else return 0;
+  });
 
   return (
     <>
