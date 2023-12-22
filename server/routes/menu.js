@@ -47,6 +47,18 @@ router.get('/data', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+  router.put("/edit/:itemName", async (req, res) => {
+    const itemName = decodeURIComponent(req.params.itemName);
+    const updatedItemData = req.body;
+    try {
+      await Menu.findOneAndUpdate({ itemName }, { $set: updatedItemData });
+      res.status(200).send("Item updated successfully");
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+  
   
   
   

@@ -1,18 +1,49 @@
+// AdminItem.jsx
+import React, { useState } from "react";
+import axios from "axios";
+function AdminItem({ item, onDelete, onEdit}) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedPrice, setEditedPrice] = useState(item.itemPrice);
 
-function AdminItem({ item, onDelete }) {
+  const handlePriceChange = (e) => {
+    setEditedPrice(e.target.value);
+  };
+
+  const handleEditClick = async () => {
+    if (isEditing) {
+      let setNewItemData = ({
+        itemName: item.itemName,
+        itemDescription: item.itemDescription,
+        itemPrice: editedPrice,
+        itemImage: item.itemImage,
+      });
+      await axios.put(`http://localhost:3001/menu/edit/${setNewItemData.itemName}`, setNewItemData);
+      setIsEditing(false);
+    } else {
+      // Enter edit mode
+      setIsEditing(true);
+    }
+  };
     return (
       <div className="menu-card">
         <img src={item.itemImage} alt={item.itemName} />
         <div className="menu-info">
           <h3>{item.itemName}</h3>
           <p>{item.itemDescription}</p>
-          <p>Price: ${item.itemPrice.toFixed(2)}</p>
+          <p>{isEditing ? (
+            <input
+              type="number"
+              step="0.01"
+              value={editedPrice}
+              onChange={handlePriceChange}
+            />
+          ) : (
+            `Price: Rs. ${editedPrice}`
+          )}</p>
         </div>
         <div className="menu-actions">
           <div className="quantity">
-            <button className="remove-from-cart">
-              Edit
-            </button>
+            <button className="remove-from-cart" onClick={handleEditClick}>Edit</button>
           </div>
           <button className="add-to-cart" onClick={onDelete}>Delete</button>
         </div>

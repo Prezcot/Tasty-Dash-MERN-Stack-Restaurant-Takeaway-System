@@ -7,11 +7,12 @@ import "../App.css";
 
 function AdminMenu() {
     const [items, setItems] = useState([]);
+    const [editingItemId, setEditingItemId] = useState(null);
     const [newItemData, setNewItemData] = useState({
         itemName: '',
         itemDescription: '',
         itemPrice: 0,
-        itemImage: '', // Store the selected file here
+        itemImage: '', 
       });
 
     useEffect(() => {
@@ -68,7 +69,6 @@ function AdminMenu() {
             itemDescription: newItemData.itemDescription,
             itemPrice: newItemData.itemPrice,
             itemImage: newItemData.itemImage,
-            quantity:0,
           };
       
           await axios.post('http://localhost:3001/menu/add', newItem);
@@ -77,7 +77,6 @@ function AdminMenu() {
           const updatedItemsResponse = await axios.get('http://localhost:3001/menu/data');
           setItems(updatedItemsResponse.data);
       
-          // Clear the new item form
           setNewItemData({
             itemName: '',
             itemDescription: '',
@@ -90,20 +89,17 @@ function AdminMenu() {
       };
       const deleteItem = async (itemName) => {
         try {
-          // Use encodeURIComponent to handle special characters in the itemName
+        
           const encodedItemName = encodeURIComponent(itemName);
       
           await axios.delete(`http://localhost:3001/menu/delete/${encodedItemName}`);
       
-          // After deleting the item, fetch updated data
           const updatedItemsResponse = await axios.get('http://localhost:3001/menu/data');
           setItems(updatedItemsResponse.data);
         } catch (error) {
           console.error(error);
         }
       };
-      
-  
     return (
       <>
       {items.map((item) => (
@@ -111,6 +107,7 @@ function AdminMenu() {
         key={item.itemName}
         item={item}
         onDelete={() => deleteItem(item.itemName)}
+        
       />
       ))}
       <div>
