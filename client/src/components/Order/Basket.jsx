@@ -112,7 +112,7 @@ function Basket() {
                     <p className="textcolor">Total</p>
                     <p className="textcolor">Rs.{finalTotal}</p>
                   </div>
-                  <button id="payment-button" onClick={handleOrder}>Proceed to Payment</button>
+                  <button id="payment-button" onClick={handleOrder}><b>Proceed to Payment</b></button>
                 </div>
               </div>
             </div>

@@ -37,13 +37,13 @@ function Product ({itemProp,indexProp, cartProp, updateProp, quantityProp}){
     if (quantity > 0) {
         return(
             <div className="item">
-                <img src="/images/default.png" width="130px" height="106px"/>
-                <label>{name}</label>
-                <label>Rs.{price} each</label>
+                <img src="/images/default.png" width="50px" height="50px"/>
+                <b><label>{name}</label></b>
+                <b><label>Rs.{price} each</label></b>
                 <div className="counter">
                     <img name="minus" src="/images/Minus.png" className="counter-button" onClick={(e)=>handleQuantity(e)}/>
                     <div id="counter-number">
-                    <label class="counter-quantity">{quantity}</label>
+                    <b><label class="counter-quantity">{quantity}</label></b>
                     </div>
                     <img name="plus" src="/images/Plus.png" className="counter-button" onClick={(e)=>handleQuantity(e)}/>
                 </div>
