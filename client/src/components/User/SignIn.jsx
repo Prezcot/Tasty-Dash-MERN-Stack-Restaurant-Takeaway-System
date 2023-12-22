@@ -20,12 +20,6 @@ const Tabcol = styled.td`
   font-size: 3vh;
 `;
 
-//charith you can ignore these lines they are for the socket testing
-// const socket = io("http://localhost:3001/");
-// socket.on("connect", () => {
-//   console.log("Connected to the server via WebSocket!");
-// });
-
 const SignIn = () => {
   //you cant use export default here because you are assigning
   //an arrow function to it and you cant simultaneously export and assign.
@@ -126,7 +120,7 @@ const SignIn = () => {
               }
             })
             .catch((err) => setError(err.response.data.message));
-          sessionStorage.setItem("username", username);  
+          sessionStorage.setItem("username", username);
           if (currentlychked == true) {
             sessionStorage.setItem("checked", JSON.stringify(currentlychked));
             sessionStorage.setItem("password", password);
@@ -237,7 +231,12 @@ const SignIn = () => {
                 type="submit"
                 value="Sign In"
               ></input>
-              <p style={{ cursor: "pointer"}} onClick={() => changePage("SignUp")}><u>Create an account</u></p>
+              <p
+                style={{ cursor: "pointer" }}
+                onClick={() => changePage("SignUp")}
+              >
+                <u>Create an account</u>
+              </p>
             </center>
           </form>
         </div>
