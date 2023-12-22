@@ -119,7 +119,7 @@ button {
 
 
 
-/*Chamath's CSS*/
+/*Basket CSS*/
 
 .everything{
   height: 100vh;
@@ -271,4 +271,32 @@ body{
 #indi-detail{
   display: flex;
   justify-content: space-between;
+}
+
+
+
+
+/*Live Order CSS*/
+.orderinfocontainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.header{
+  color:white;
+  padding:20px;
+}
+
+.orderitems{
+  height: fit-content;
+  padding:20px;
+}
+
+
+.indi-order{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+
 }
