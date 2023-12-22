@@ -36,7 +36,7 @@ const AdminDashboard = () => {
   const displayProductItems = (items) => {
     let string = "";
     items.items.forEach((line) => {
-      let [productName, quantity] = line.split(",");
+      let [productName, unitPrice, quantity] = line.split(",");
       string += `${productName} : ${quantity}<br />`;
     });
     return string;
