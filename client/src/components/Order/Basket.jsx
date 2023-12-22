@@ -5,10 +5,9 @@ import "../App.css";
 import Menu from "../Menu/Menu";
 import NavBar from "../NavBar";
 import axios from "axios";
-
+import {useNavigate } from 'react-router-dom';
 function Basket() {
-  const [page, setPage] = useState("Basket");
-  
+  const nav = useNavigate();
   let instructionfromcust = "";
 
   // Thinals side
@@ -46,10 +45,6 @@ function Basket() {
 
     setFinalTotal(total);
   }, [cart]);
-  function backToMenu(){
-    setPage("Menu")
-    sessionStorage.setItem("page", "Menu");
-  }
 
 
   //sending order data to mongo
@@ -68,63 +63,57 @@ function Basket() {
     await axios.post('http://localhost:3001/basket/addorder', orderDetails);
   }
   
-  if (page == "Basket"){
-    return (
-      <>
-      <div className="everything">
-          <NavBar/>
-          <div className="header">
-            <h1 className="title">Your Basket</h1>
-            <div id="tomenu">
-              <img id="arrow" src="/images/Arrow.png" width="50px" height="15px" />
-              <button id="menu-button" onClick={backToMenu}>Back to Menu</button>
-            </div>
+  return (
+    <>
+    <div className="everything">
+        <NavBar/>
+        <div className="header">
+          <h1 className="title">Your Basket</h1>
+          <div id="tomenu">
+            <img id="arrow" src="/images/Arrow.png" width="50px" height="15px" />
+            <button id="menu-button" onClick={()=>nav("/menu")}>Back to Menu</button>
           </div>
-    
-          <div className="basketcontainer">
-            <div className="basket">
-              <div className="confirm">
-                <h2 className="textcolor">Confirm your order</h2>
-                {cart.map((item, index) => (
-                  <Product 
-                  itemProp={item} 
-                  indexProp={index}
-                  cartProp={cart} 
-                  quantityProp={quantityMap}
-                  updateProp={() => UpdateSummary()}
-                  
-                  />
-                ))}
-    
-                <div className="instruction">
-                  <h3 className="textcolor">Special Instructions for Preparation</h3>
-                  <textarea className="textarea" onChange={setInstructions}></textarea>
-                </div>
+        </div>
+  
+        <div className="basketcontainer">
+          <div className="basket">
+            <div className="confirm">
+              <h2 className="textcolor">Confirm your order</h2>
+              {cart.map((item, index) => (
+                <Product 
+                itemProp={item} 
+                indexProp={index}
+                cartProp={cart} 
+                quantityProp={quantityMap}
+                updateProp={() => UpdateSummary()}
+                
+                />
+              ))}
+  
+              <div className="instruction">
+                <h3 className="textcolor">Special Instructions for Preparation</h3>
+                <textarea className="textarea" onChange={setInstructions}></textarea>
               </div>
-    
-              <div className="summary">
-                <h2 className="textcolor">Order Summary</h2>
-                {cart.map((item, index) => (
-                  <SummaryItem itemProp2={item} indexProp2={index} cartProp2={cart}/>
-                ))}
-                <div className="finalize">
-                  <div id="indi-detail">
-                    <p className="textcolor">Total</p>
-                    <p className="textcolor">Rs.{finalTotal}</p>
-                  </div>
-                  <button id="payment-button" onClick={handleOrder}><b>Proceed to Payment</b></button>
+            </div>
+  
+            <div className="summary">
+              <h2 className="textcolor">Order Summary</h2>
+              {cart.map((item, index) => (
+                <SummaryItem itemProp2={item} indexProp2={index} cartProp2={cart}/>
+              ))}
+              <div className="finalize">
+                <div id="indi-detail">
+                  <p className="textcolor">Total</p>
+                  <p className="textcolor">Rs.{finalTotal}</p>
                 </div>
+                <button id="payment-button" onClick={handleOrder}><b>Proceed to Payment</b></button>
               </div>
             </div>
           </div>
         </div>
-      </>
-    );
-  }
-  if (page == "Menu"){
-    return <Menu></Menu>
-  }
-  
+      </div>
+    </>
+  );
 }
 
 

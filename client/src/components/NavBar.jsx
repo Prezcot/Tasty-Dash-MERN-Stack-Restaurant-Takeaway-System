@@ -1,7 +1,8 @@
 import Dashboard from "./User/Dashboard";
 import { useState } from "react";
-import UserNavBar from "./User/UserNavBar";
+import {useNavigate } from 'react-router-dom';
 function NavBar(props) {
+  const nav = useNavigate();
   return (
     <>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -71,7 +72,7 @@ function NavBar(props) {
             </ul>
             <img
               src="/images/usericon.png"
-              onClick={props.onDashboardClick}
+              onClick={()=>nav("/dashboard")}
               width="60px"
               height="50px"
             />

@@ -8,13 +8,13 @@ import "../App.css";
 import NavBar from "../NavBar";
 import Dashboard from "../User/Dashboard";
 import Basket from "../Order/Basket";
+import {useNavigate } from 'react-router-dom';
 function Menu() {
+  const nav = useNavigate();
   if(!sessionStorage.getItem("menuCart")){
     sessionStorage.setItem("menuCart","{}");
   }
-  const [page, setPage] = useState("Menu");
   const [items, setItems] = useState([]);
-  const [showDashboard, setShowDashboard] = useState(false);
   const [quantityMap, setQuantityMap] = useState(JSON.parse(sessionStorage.getItem("menuCart")));
   useEffect(() => {
     axios
@@ -46,36 +46,23 @@ const updateItems = (itemName, itemImage,action) => {
       return updatedMap;
     });
   };
-  function viewBasket(){
-    setPage("Basket");
-    sessionStorage.setItem("page", "Basket");
-  }
   
-  if (showDashboard) {
-    return <Dashboard></Dashboard>;
-  }
-  if (page == "Menu"){
-    return (
-      <>
-        <NavBar onDashboardClick={() => setShowDashboard(true)}></NavBar>
-        {items.map((item) => (
-          <Item
-            key={item.itemName}
-            item={item}
-            quantity={quantityMap[item.itemName] || 0}
-            onAddToCart={() => updateItems(item.itemName, item.itemImage,"add")}
-            onRemoveFromCart={() => updateItems(item.itemName, item.itemImage,"remove")}
-          />
-        ))}
-        <Cart items={items} quantityMap= {quantityMap}/>
-        <button onClick={viewBasket}>View My Basket</button>
-      </>
-    );
-  }
-  if (page == "Basket"){
-    return <Basket></Basket>
-  }
-  
-}
+  return (
+    <>
+      <NavBar></NavBar>
+      {items.map((item) => (
+        <Item
+          key={item.itemName}
+          item={item}
+          quantity={quantityMap[item.itemName] || 0}
+          onAddToCart={() => updateItems(item.itemName, item.itemImage,"add")}
+          onRemoveFromCart={() => updateItems(item.itemName, item.itemImage,"remove")}
+        />
+      ))}
+      <Cart items={items} quantityMap= {quantityMap}/>
+      <button onClick={()=>nav("/basket")}>View My Basket</button>
+    </>
+  );
+};  
 
 export default Menu;
