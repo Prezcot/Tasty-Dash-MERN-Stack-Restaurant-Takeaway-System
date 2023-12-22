@@ -8,6 +8,7 @@ import "../App.css";
 function AdminMenu() {
     const [items, setItems] = useState([]);
     const [editingItemId, setEditingItemId] = useState(null);
+    const fileInput = React.useRef();
     const [newItemData, setNewItemData] = useState({
         itemName: '',
         itemDescription: '',
@@ -62,7 +63,8 @@ function AdminMenu() {
       
     
       // Function to add a new item
-      const addNewItem = async () => {
+      const addNewItem = async (event) => {
+        event.preventDefault();
         try {
           const newItem = {
             itemName: newItemData.itemName,
@@ -83,6 +85,7 @@ function AdminMenu() {
             itemPrice: 0,
             itemImage: '',
           });
+          fileInput.current.value = '';
         } catch (error) {
           console.error(error);
         }
@@ -112,7 +115,7 @@ function AdminMenu() {
       ))}
       <div>
         <h2>Add New Item</h2>
-        <form encType="multipart/form-data">
+        <form onSubmit={addNewItem} >
           <label>
             Item Name:
             <input
@@ -145,10 +148,11 @@ function AdminMenu() {
             <input
               type="file"
               accept="image/*"
+              ref={fileInput}
               onChange={handleFileChange}
             />
           </label>
-          <button type="button" onClick={addNewItem}>
+          <button type="submit">
             Add Item
           </button>
         </form>
