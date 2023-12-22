@@ -8,6 +8,8 @@ const item = mongoose.model("orders", {
   email: String,
   items: Array,
   order_status: String,
+  instructions: String,
+  order_total: String,
 });
 
 //menu.js

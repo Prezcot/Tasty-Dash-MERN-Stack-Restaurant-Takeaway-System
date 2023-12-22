@@ -9,7 +9,7 @@ import axios from "axios";
 function Basket() {
   const [page, setPage] = useState("Basket");
   
-  let instruction = "";
+  let instructionfromcust = "";
 
   // Thinals side
   // let thinalcart = ["Pizza,600,1","Pebbles,400,3","Lava Cake,200,2"];
@@ -31,8 +31,8 @@ function Basket() {
 
 // To collect the instruction provided
   function setInstructions(e) {
-    instruction = e.target.value;
-    console.log("instruction received: "+instruction)
+    instructionfromcust = e.target.value;
+    console.log("instruction received: "+instructionfromcust)
   }
 
   let [finalTotal, setFinalTotal] = useState(0);
@@ -61,7 +61,8 @@ function Basket() {
       email: "chami@gmail.com",
       items: cart,
       order_status:"pending",
-      // instructions:instruction,
+      instructions:instructionfromcust,
+      order_total:finalTotal,
     };
 
     await axios.post('http://localhost:3001/basket/addorder', orderDetails);
