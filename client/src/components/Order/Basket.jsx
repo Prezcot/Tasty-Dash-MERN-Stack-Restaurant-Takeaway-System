@@ -4,6 +4,7 @@ import SummaryItem from "./SummaryItem";
 import "../App.css";
 import Menu from "../Menu/Menu";
 import NavBar from "../NavBar";
+import axios from "axios";
 
 function Basket() {
   const [page, setPage] = useState("Basket");
@@ -49,6 +50,22 @@ function Basket() {
     setPage("Menu")
     sessionStorage.setItem("page", "Menu");
   }
+
+
+  //sending order data to mongo
+  async function handleOrder(){
+    let orderDetails = {
+      username: sessionStorage.getItem("username"),
+      order_id: "5",
+      payment_id: "68464",
+      email: "chami@gmail.com",
+      items: cart,
+      order_status:"pending",
+      // instructions:instruction,
+    };
+
+    await axios.post('http://localhost:3001/basket/addorder', orderDetails);
+  }
   
   if (page == "Basket"){
     return (
@@ -93,7 +110,7 @@ function Basket() {
                   <p className="textcolor">Total</p>
                   <p className="textcolor">Rs.{finalTotal}</p>
                 </div>
-                <button id="payment-button">Proceed to Payment</button>
+                <button id="payment-button" onClick={handleOrder}>Proceed to Payment</button>
               </div>
             </div>
           </div>
