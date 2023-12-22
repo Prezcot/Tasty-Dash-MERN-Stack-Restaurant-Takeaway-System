@@ -71,47 +71,49 @@ function Basket() {
   if (page == "Basket"){
     return (
       <>
-        <NavBar/>
-        <div className="header">
-          <h1 className="title">Your Basket</h1>
-          <div id="tomenu">
-            <img id="arrow" src="/images/Arrow.png" width="50px" height="15px" />
-            <button id="menu-button" onClick={backToMenu}>Back to Menu</button>
-          </div>
-        </div>
-  
-        <div className="basketcontainer">
-          <div className="basket">
-            <div className="confirm">
-              <h2 className="textcolor">Confirm your order</h2>
-              {cart.map((item, index) => (
-                <Product 
-                itemProp={item} 
-                indexProp={index}
-                cartProp={cart} 
-                quantityProp={quantityMap}
-                updateProp={() => UpdateSummary()}
-                
-                />
-              ))}
-  
-              <div className="instruction">
-                <h3 className="textcolor">Special Instructions for Preparation</h3>
-                <textarea className="textarea" onChange={setInstructions}></textarea>
-              </div>
+      <div className="everything">
+          <NavBar/>
+          <div className="header">
+            <h1 className="title">Your Basket</h1>
+            <div id="tomenu">
+              <img id="arrow" src="/images/Arrow.png" width="50px" height="15px" />
+              <button id="menu-button" onClick={backToMenu}>Back to Menu</button>
             </div>
-  
-            <div className="summary">
-              <h2 className="textcolor">Order Summary</h2>
-              {cart.map((item, index) => (
-                <SummaryItem itemProp2={item} indexProp2={index} cartProp2={cart}/>
-              ))}
-              <div className="finalize">
-                <div id="indi-detail">
-                  <p className="textcolor">Total</p>
-                  <p className="textcolor">Rs.{finalTotal}</p>
+          </div>
+    
+          <div className="basketcontainer">
+            <div className="basket">
+              <div className="confirm">
+                <h2 className="textcolor">Confirm your order</h2>
+                {cart.map((item, index) => (
+                  <Product 
+                  itemProp={item} 
+                  indexProp={index}
+                  cartProp={cart} 
+                  quantityProp={quantityMap}
+                  updateProp={() => UpdateSummary()}
+                  
+                  />
+                ))}
+    
+                <div className="instruction">
+                  <h3 className="textcolor">Special Instructions for Preparation</h3>
+                  <textarea className="textarea" onChange={setInstructions}></textarea>
                 </div>
-                <button id="payment-button" onClick={handleOrder}>Proceed to Payment</button>
+              </div>
+    
+              <div className="summary">
+                <h2 className="textcolor">Order Summary</h2>
+                {cart.map((item, index) => (
+                  <SummaryItem itemProp2={item} indexProp2={index} cartProp2={cart}/>
+                ))}
+                <div className="finalize">
+                  <div id="indi-detail">
+                    <p className="textcolor">Total</p>
+                    <p className="textcolor">Rs.{finalTotal}</p>
+                  </div>
+                  <button id="payment-button" onClick={handleOrder}>Proceed to Payment</button>
+                </div>
               </div>
             </div>
           </div>

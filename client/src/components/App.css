@@ -120,6 +120,12 @@ button {
 
 
 /*Chamath's CSS*/
+
+.everything{
+  height: 100vh;
+  width: 100vw;
+  background-color: #000000;
+}
 .title{
   padding-left: 55px;
   color:#FFFFFF;
@@ -165,7 +171,6 @@ body{
   flex-direction: column;
   align-items: center;
   background-color: black;
-  height:100vh;
 }
 
 .basket {
