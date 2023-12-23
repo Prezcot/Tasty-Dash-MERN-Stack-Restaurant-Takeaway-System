@@ -50,17 +50,19 @@ const updateItems = (itemName, itemImage,action) => {
   return (
     <>
       <NavBar></NavBar>
-      {items.map((item) => (
-        <Item
-          key={item.itemName}
-          item={item}
-          quantity={quantityMap[item.itemName] || 0}
-          onAddToCart={() => updateItems(item.itemName, item.itemImage,"add")}
-          onRemoveFromCart={() => updateItems(item.itemName, item.itemImage,"remove")}
-        />
-      ))}
-      <Cart items={items} quantityMap= {quantityMap}/>
-      <button onClick={()=>nav("/basket")}>View My Basket</button>
+        <div className="menu-item-div">
+          {items.map((item) => (
+            <Item
+              key={item.itemName}
+              item={item}
+              quantity={quantityMap[item.itemName] || 0}
+              onAddToCart={() => updateItems(item.itemName, item.itemImage,"add")}
+              onRemoveFromCart={() => updateItems(item.itemName, item.itemImage,"remove")}
+            />
+          ))}
+        </div>
+        <Cart items={items} quantityMap= {quantityMap}/>
+        <button onClick={()=>nav("/basket")}>View My Basket</button>
     </>
   );
 };  

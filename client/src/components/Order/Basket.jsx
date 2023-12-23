@@ -49,7 +49,7 @@ function Basket() {
       username: sessionStorage.getItem("username"),
       order_id: "5",
       payment_id: "68464",
-      email: "chami@gmail.com",
+      email: sessionStorage.getItem("email"),
       items: cart,
       order_status: "Pending",
       instructions: instructionfromcust,

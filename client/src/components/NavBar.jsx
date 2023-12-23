@@ -8,7 +8,7 @@ function NavBar(props) {
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
-            Navbar
+            Restaurant_Name
           </a>
           <button
             class="navbar-toggler"
@@ -24,49 +24,18 @@ function NavBar(props) {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
+                <a style={{cursor:"pointer"}} class="nav-link active" aria-current="page">
                   Home
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Link
+              <li class="nav-item active">
+                <a style={{cursor:"pointer"}} class="nav-link active" href="/menu">
+                  Menu
                 </a>
               </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">
-                  Disabled
+              <li class="nav-item active">
+                <a style={{cursor:"pointer"}} class="nav-link active" href="/orders">
+                  Orders
                 </a>
               </li>
             </ul>

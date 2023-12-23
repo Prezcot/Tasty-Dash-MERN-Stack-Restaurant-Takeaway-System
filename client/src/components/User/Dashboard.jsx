@@ -105,7 +105,8 @@ function Dashboard() {
             <div style={{marginRight:"0.5vw"}}>
                 <button style={{marginLeft:"23vw",backgroundColor: "green",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={()=>{
                     nav("/signin")
-                    sessionStorage.removeItem("username")}}>Log Out</button>
+                    sessionStorage.removeItem("username")
+                    sessionStorage.removeItem("email")}}>Log Out</button>
                 <br></br>
                 {handleError()}
                 <form onSubmit={handleSubmit}>

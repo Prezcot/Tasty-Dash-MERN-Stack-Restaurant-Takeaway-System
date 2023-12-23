@@ -15,11 +15,10 @@ function Cart({ items, quantityMap}) {
   }, [formattedCart]);
   
   return (
-    <div className="cart">
+    <div className="cart" style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
       <div class="cart-icon">
         <img src="/images/carticon.png" alt="Shopping Cart"/>
         <span class="unique-items-count">{uniqueItemsCount}</span>
-        
       </div>
       <ul class="cart-items-list">
         {cartItems.map((item) => (

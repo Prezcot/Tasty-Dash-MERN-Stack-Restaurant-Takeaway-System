@@ -36,6 +36,12 @@
     transform: rotate(360deg);
   }
 }
+.menu-item-div
+{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 .menu-card {
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -65,7 +71,10 @@
 }
 .cart{
   display: contents;
-  border: 5px solid black;
+  position: fixed;
+  top: 2%;
+  right: 2%;
+  align-items: center;
 }
 
 button {
@@ -86,11 +95,7 @@ button {
   background-color: #DC3545;
 }
 .cart-icon {
-  position: fixed;
-  top: 2%;
-  right: 2%;
-  display: flex;
-  align-items: center;
+
 }
 
 .cart-icon img {

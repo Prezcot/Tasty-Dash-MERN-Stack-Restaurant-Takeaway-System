@@ -81,6 +81,7 @@ const SignIn = () => {
             .then((res) => {
               if (res.data.user == "User") {
                 sessionStorage.setItem("type","User");
+                sessionStorage.setItem("email",res.data.email);
                 nav("/menu");
               } else {
                 sessionStorage.setItem("type","Admin");
@@ -123,7 +124,7 @@ const SignIn = () => {
     >
       {/* just for testing please ignore */}
 
-      <button onClick={() => setShowAdminDashboard(true)}>
+      <button onClick={() => nav("/admindashboard")}>
         Just for testing - will go to the dashboard
       </button>
 

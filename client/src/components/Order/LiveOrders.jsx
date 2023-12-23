@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import NavBar from "../NavBar";
 function LiveOrders() {
   const [orderInfo, setOrderInfo] = useState([]);
 
@@ -21,6 +21,7 @@ function LiveOrders() {
   return (
     <>
       <div className="everything">
+        <NavBar></NavBar>
         <div className="ordermaincontainer">
           <div className="header">
             <h1>Your Orders</h1>

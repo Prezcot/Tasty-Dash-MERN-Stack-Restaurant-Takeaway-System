@@ -31,7 +31,7 @@ router.post("/signin",async (req,res,next)=>{ //This route handler handles all s
     {
         if (query[0].type=="User")
         {
-            res.status(200).json({message:"Account Registered",user:"User"});
+            res.status(200).json({message:"Account Registered",user:"User",email:query[0].email});
         }
         else{
             res.status(200).json({message:"Account Registered",user:"Admin"});
