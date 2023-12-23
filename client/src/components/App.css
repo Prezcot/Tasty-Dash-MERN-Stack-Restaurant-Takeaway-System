@@ -44,6 +44,8 @@
 
 .menu_everything{
   background-color: #007BFF;
+  
+  
 }
 
 .menu-header{
@@ -363,4 +365,57 @@ body{
   flex-direction: row;
   justify-content: space-between;
 
+}
+/*Admin Menu Page*/
+.item-form-container {
+  
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #555; /* Dark border color */
+  border-radius: 8px;
+  background-color: #333; /* Dark background color */
+  color: #fff; /* Text color */
+}
+
+.form-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.item-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #777; /* Darker border color */
+  border-radius: 4px;
+  background-color: #444; /* Darker background color */
+  color: #fff; /* Text color */
+}
+
+.form-button {
+  background-color: #2ecc71; /* Green button color */
+  color: #fff;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #27ae60; /* Darker green on hover */
 }
