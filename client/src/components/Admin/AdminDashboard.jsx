@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import axios from "axios";
 import { io } from "socket.io-client";
+import { Button } from "bootstrap";
 
 const AdminDashboard = () => {
   const [order_data, set_order_data] = useState([]);
@@ -121,7 +122,7 @@ const AdminDashboard = () => {
               <b>Order Total: {items.order_total}</b>
               <br />
               <span className="d-flex mt-3">
-                <button
+                {/* <button
                   type="button"
                   className="btn btn-success me-4 btn-lg"
                   onClick={() => updateOrderStatus(items._id, "Approved")}
@@ -134,14 +135,41 @@ const AdminDashboard = () => {
                   onClick={() => updateOrderStatus(items._id, "Declined")}
                 >
                   <i className="bi bi-x">Decline</i>
-                </button>
+                </button> 
                 <button
-                  type="button"
-                  className="btn btn-warning btn-lg"
-                  onClick={() => updateOrderStatus(items._id, "Collected")}
-                >
-                  <i>Order Collected</i>
-                </button>
+                    type="button"
+                    className="btn btn-warning btn-lg"
+                    onClick={() => updateOrderStatus(items._id, "Collected")}
+                  >
+                    <i>Order Collected</i>
+                  </button>*/}
+                {items.order_status === "Pending" && (
+                  <>
+                    <button
+                      type="button"
+                      className="btn btn-success me-4 btn-lg"
+                      onClick={() => updateOrderStatus(items._id, "Approved")}
+                    >
+                      <i className="bi bi-check">Approve</i>
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-danger me-4 btn-lg"
+                      onClick={() => updateOrderStatus(items._id, "Declined")}
+                    >
+                      <i className="bi bi-x">Decline</i>
+                    </button>
+                  </>
+                )}
+                {items.order_status === "Approved" && (
+                  <button
+                    type="button"
+                    className="btn btn-warning btn-lg"
+                    onClick={() => updateOrderStatus(items._id, "Collected")}
+                  >
+                    <i>Order Collected</i>
+                  </button>
+                )}
                 <h4
                   style={{
                     marginLeft: "50px",
