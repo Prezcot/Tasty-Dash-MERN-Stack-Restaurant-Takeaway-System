@@ -79,7 +79,7 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <h1
+      <div
         className="display-6 text-light"
         style={{
           paddingLeft: "9px",
@@ -90,7 +90,7 @@ const AdminDashboard = () => {
         }}
       >
         Pending Orders
-      </h1>
+      </div>
       <ul className="list-group">
         {sortedOrderData.map((items, index) => (
           <div key={index}>
@@ -116,13 +116,14 @@ const AdminDashboard = () => {
                 <b>{items.instructions}</b>
               </span>
               <br />
-              <hr style={{ margin: "10px 0" }} />
+              <hr style={{ margin: "10px" }} />
               Order List:
               <ol className="text-body-tertiary">
                 {parse(displayProductItems(items))}
               </ol>
               <b>Order Total: {items.order_total}</b>
               <br />
+              <hr style={{ margin: "10px" }} />
               <span className="d-flex mt-3">
                 {/* <button
                   type="button"
@@ -182,6 +183,7 @@ const AdminDashboard = () => {
                 </h4>
               </span>
             </li>
+            <div style={{ padding: "10px", backgroundColor: "" }} />
           </div>
         ))}
       </ul>
