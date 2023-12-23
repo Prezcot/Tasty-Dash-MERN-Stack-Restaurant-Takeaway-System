@@ -78,7 +78,16 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <h1 className="display-6" style={{ paddingTop: "60px" }}>
+      <h1
+        className="display-6 text-light"
+        style={{
+          paddingLeft: "9px",
+          paddingTop: "60px",
+          paddingBottom: "10px",
+          margin: "0px",
+          backgroundColor: "#666666",
+        }}
+      >
         Pending Orders
       </h1>
       <ul className="list-group">
@@ -106,7 +115,7 @@ const AdminDashboard = () => {
                 <b>{items.instructions}</b>
               </span>
               <br />
-              <div className="text-muted">
+              <div className="text-body-tertiary">
                 {parse(displayProductItems(items))}
               </div>
               <b>Order Total: {items.order_total}</b>
