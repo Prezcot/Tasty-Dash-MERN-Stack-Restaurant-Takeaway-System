@@ -48,7 +48,7 @@ function Basket() {
     let orderDetails = {
       username: sessionStorage.getItem("username"),
       order_id: "5",
-      payment_id: "68464",
+      payment_id: "pending",
       email: sessionStorage.getItem("email"),
       items: cart,
       order_status: "Pending",
