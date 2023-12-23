@@ -162,6 +162,7 @@ button {
   height: 100vh;
   /* width: 100vw; */
   background-color: #000000;
+  overflow-y: auto;
 }
 .title{
   padding-left: 55px;
@@ -327,7 +328,8 @@ body{
 .orderitems{
   height: fit-content;
   padding:20px;
-  background-color: #FFFFFF;
+  background-color:white;
+  border: 3px solid orange;
   margin: 20px;
   border-radius: 10px;
 }

@@ -16,7 +16,7 @@ function LiveOrders() {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  });
 
   return (
     <>
@@ -58,8 +58,15 @@ function LiveOrders() {
                   <b>
                     <label>Order Items</label>
                   </b>
-                  <br />
-                  <label>{orders.items}</label>
+                  <br/>
+                  {orders.items.map((item) => {
+                    let [name, price, quantity] = item.split(",")
+                    return(
+                        <>
+                        <label>{name} (x{quantity})</label>
+                        <br/>
+                        </>)             
+                    })}
                 </div>
 
                 <div>
