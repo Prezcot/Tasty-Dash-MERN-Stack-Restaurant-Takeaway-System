@@ -36,23 +36,45 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.menu-header{
+  margin-left:30px;
+  margin-top: 30px;
+}
 .menu-item-div
 {
   display:flex;
   flex-direction: row;
   flex-wrap: wrap;
+  width:fit-content;
+  justify-content: center;
 }
 .menu-card {
-  border: 1px solid #ddd;
+  border:2px solid gainsboro;
   border-radius: 8px;
   overflow: hidden;
-  width: 300px;
-  margin: 20px;
+  width: 19%;
+  padding: 10px;
+  margin:2.5%;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.menu-card-image{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
 }
 
 .menu-card img {
   width: 100%;
-  height: auto;
+  height: 100%;
+
 }
 
 .menu-info {
