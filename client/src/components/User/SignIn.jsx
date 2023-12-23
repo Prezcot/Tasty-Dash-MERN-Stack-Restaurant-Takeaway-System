@@ -7,7 +7,7 @@ import Menu from "../Menu/Menu";
 import Dashboard from "./Dashboard";
 import AdminNavBar from "../Admin/AdminNavBar";
 import Basket from "../Order/Basket";
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "socket.io-client";
 import { io } from "socket.io-client";
 
@@ -80,17 +80,17 @@ const SignIn = () => {
             .post("http://localhost:3001/users/signin", { username, password })
             .then((res) => {
               if (res.data.user == "User") {
-                sessionStorage.setItem("type","User");
-                sessionStorage.setItem("email",res.data.email);
+                sessionStorage.setItem("type", "User");
+                sessionStorage.setItem("email", res.data.email);
                 nav("/menu");
               } else {
-                sessionStorage.setItem("type","Admin");
-                nav("/adminnavbar");
+                sessionStorage.setItem("type", "Admin");
+                nav("/admin");
               }
             })
             .catch((err) => setError(err.response.data.message));
-          sessionStorage.setItem("rememberusername", username); 
-          sessionStorage.setItem("username", username);   
+          sessionStorage.setItem("rememberusername", username);
+          sessionStorage.setItem("username", username);
           if (currentlychked == true) {
             sessionStorage.setItem("checked", JSON.stringify(currentlychked));
             sessionStorage.setItem("password", password);
@@ -197,7 +197,9 @@ const SignIn = () => {
               type="submit"
               value="Sign In"
             ></input>
-            <p style={{ cursor: "pointer"}} onClick={() => nav("/signup")}><u>Create an account</u></p>
+            <p style={{ cursor: "pointer" }} onClick={() => nav("/signup")}>
+              <u>Create an account</u>
+            </p>
           </center>
         </form>
       </div>

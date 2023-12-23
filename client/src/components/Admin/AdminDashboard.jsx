@@ -81,13 +81,11 @@ const AdminDashboard = () => {
       <h1 className="display-6" style={{ paddingTop: "60px" }}>
         Pending Orders
       </h1>
-      <i className="fas fa-exclamation-circle"></i>
       <ul className="list-group">
-        {/* {order_data.map((items, index) => ( */}
         {sortedOrderData.map((items, index) => (
           <div key={index}>
             <li
-              className={`list-group-item fs-5 ${
+              className={`list-group-item fs-6 ${
                 items.order_status === "Approved"
                   ? "list-group-item-success"
                   : items.order_status === "Declined"
@@ -104,7 +102,9 @@ const AdminDashboard = () => {
               Contact: {items.email}
               <br />
               Additional Instructions:{" "}
-              <span className="text-info">{items.instructions}</span>
+              <span className="text-info">
+                <b>{items.instructions}</b>
+              </span>
               <br />
               <div className="text-muted">
                 {parse(displayProductItems(items))}

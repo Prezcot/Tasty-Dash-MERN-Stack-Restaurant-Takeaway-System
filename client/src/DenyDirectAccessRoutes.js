@@ -1,42 +1,35 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SignUp from "./components/User/SignUp";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import Menu from "./components/Menu/Menu";
 import Dashboard from "./components/User/Dashboard";
 import AdminNavBar from "./components/Admin/AdminNavBar";
 import Basket from "./components/Order/Basket";
-import AdminItem from './components/Admin/AdminItem';
-import AdminMenu from './components/Admin/AdminMenu';
-import LiveOrders from './components/Order/LiveOrders';
+import AdminItem from "./components/Admin/AdminItem";
+import AdminMenu from "./components/Admin/AdminMenu";
+import LiveOrders from "./components/Order/LiveOrders";
 
-function DenyDirectAccessRoutes()
-{
-    var isLoggedIn=false;
-    if (sessionStorage.getItem("username"))
-    {
-        isLoggedIn=true;
-    }
-    if (isLoggedIn)
-    {
-        return(
-            <Routes>
-                <Route path="/menu" element={<Menu/>}></Route>
-                <Route path="/adminnavbar" element={<AdminNavBar/>}></Route>
-                <Route path="/dashboard" element={<Dashboard/>}></Route>
-                <Route path="/basket" element={<Basket/>}></Route>
-                <Route path="/orders" element={<LiveOrders/>}></Route>
-                <Route path="/admindashboard" element={<AdminDashboard/>}></Route>
+function DenyDirectAccessRoutes() {
+  var isLoggedIn = false;
+  if (sessionStorage.getItem("username")) {
+    isLoggedIn = true;
+  }
+  if (isLoggedIn) {
+    return (
+      <Routes>
+        <Route path="/menu" element={<Menu />}></Route>
+        <Route path="/admin" element={<AdminNavBar />}></Route>
+        <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/basket" element={<Basket />}></Route>
+        <Route path="/orders" element={<LiveOrders />}></Route>
+        {/* <Route path="/admindashboard" element={<AdminDashboard/>}></Route>
                 <Route path="/adminitem" element={<AdminItem/>}></Route>
-                <Route path="/adminmenu" element={<AdminMenu/>}></Route>
-            </Routes>
-        )
-    }
-    else{
-        return(
-            <Navigate to="/signin" replace></Navigate>
-        )
-    }
-
+                <Route path="/adminmenu" element={<AdminMenu/>}></Route> */}
+      </Routes>
+    );
+  } else {
+    return <Navigate to="/signin" replace></Navigate>;
+  }
 }
 
 export default DenyDirectAccessRoutes;

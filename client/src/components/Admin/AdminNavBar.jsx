@@ -56,6 +56,11 @@ const AdminNavBar = () => {
                   Add New Menu Item
                 </a>
               </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/signin">
+                  Logout
+                </a>
+              </li>
             </ul>
           </div>
         </div>
