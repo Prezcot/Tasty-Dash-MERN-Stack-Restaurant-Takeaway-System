@@ -23,7 +23,9 @@ function Item({ item, quantity, onAddToCart, onRemoveFromCart }) {
 
   return (
     <div className="menu-card">
-      <img src={item.itemImage} alt={item.itemName} />
+      <div className="menu-card-image">
+      <img src={item.itemImage} alt={item.itemName}/>
+      </div>
       <div className="menu-info">
         <h3>{item.itemName}</h3>
         <p>{item.itemDescription}</p>

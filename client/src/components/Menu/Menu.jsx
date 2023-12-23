@@ -49,7 +49,11 @@ const updateItems = (itemName, itemImage,action) => {
   
   return (
     <>
+      <div className="menu-everything">
       <NavBar></NavBar>
+      <div className="menu-header">
+        <h1 align="center">Menu</h1>
+      </div>
         <div className="menu-item-div">
           {items.map((item) => (
             <Item
@@ -61,8 +65,10 @@ const updateItems = (itemName, itemImage,action) => {
             />
           ))}
         </div>
+        </div>
         <Cart items={items} quantityMap= {quantityMap}/>
         <button onClick={()=>nav("/basket")}>View My Basket</button>
+      
     </>
   );
 };  
