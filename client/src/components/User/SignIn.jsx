@@ -25,18 +25,17 @@ const SignIn = () => {
   //an arrow function to it and you cant simultaneously export and assign.
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [currentlychked, setChecked] = useState(null);
+  const [currentlychked, setChecked] = useState(false);
   const [error, setError] = useState(null);
-  const [showAdminDashboard, setShowAdminDashboard] = useState(false);
   const nav = useNavigate(); //this is used to navigate to a page on demand
 
   useEffect(() => {
-    if (!sessionStorage.getItem("checked")) {
-      sessionStorage.setItem("checked", "false");
+    if (!localStorage.getItem("checked")) {
+      localStorage.setItem("checked", "false");
       setChecked(false);
-    } else if (sessionStorage.getItem("checked") == "true") {
-      setUsername(sessionStorage.getItem("rememberusername"));
-      setPassword(sessionStorage.getItem("password"));
+    } else if (localStorage.getItem("checked") == "true") {
+      setUsername(localStorage.getItem("rememberusername"));
+      setPassword(localStorage.getItem("password"));
       setChecked(true);
     }
   }, []);
@@ -89,14 +88,15 @@ const SignIn = () => {
               }
             })
             .catch((err) => setError(err.response.data.message));
-          sessionStorage.setItem("rememberusername", username);
           sessionStorage.setItem("username", username);
           if (currentlychked == true) {
-            sessionStorage.setItem("checked", JSON.stringify(currentlychked));
-            sessionStorage.setItem("password", password);
+            localStorage.setItem("rememberusername", username);
+            localStorage.setItem("checked", JSON.stringify(currentlychked));
+            localStorage.setItem("password", password);
           } else {
-            sessionStorage.setItem("checked", JSON.stringify(currentlychked));
-            sessionStorage.removeItem("password");
+            localStorage.setItem("checked", JSON.stringify(currentlychked));
+            localStorage.removeItem("password");
+            localStorage.removeItem("rememberusername");
           }
         } else {
           setError("Please Enter Password Above 4 Characters");
