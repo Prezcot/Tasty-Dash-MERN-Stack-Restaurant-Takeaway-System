@@ -37,7 +37,7 @@ const AdminDashboard = () => {
     let string = "";
     items.items.forEach((line) => {
       let [productName, unitPrice, quantity] = line.split(",");
-      string += `${productName} : ${quantity}<br />`;
+      string += `<li>${productName} : ${quantity}</li>`;
     });
     return string;
   };
@@ -116,9 +116,11 @@ const AdminDashboard = () => {
                 <b>{items.instructions}</b>
               </span>
               <br />
-              <div className="text-body-tertiary">
+              <hr style={{ margin: "10px 0" }} />
+              Order List:
+              <ol className="text-body-tertiary">
                 {parse(displayProductItems(items))}
-              </div>
+              </ol>
               <b>Order Total: {items.order_total}</b>
               <br />
               <span className="d-flex mt-3">
