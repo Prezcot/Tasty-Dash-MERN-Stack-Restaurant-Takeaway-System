@@ -277,7 +277,7 @@ body{
 
 
 /*Live Order CSS*/
-.orderinfocontainer{
+.ordermaincontainer{
   display: flex;
   flex-direction: column;
 }
@@ -290,6 +290,9 @@ body{
 .orderitems{
   height: fit-content;
   padding:20px;
+  background-color: #FFFFFF;
+  margin: 20px;
+  border-radius: 10px;
 }
 
 
@@ -297,6 +300,5 @@ body{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: white;
 
 }

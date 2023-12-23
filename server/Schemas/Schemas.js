@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-//AdminDashboardData.js
+//Orders.js & AdminDashboardData.js
 const item = mongoose.model("orders", {
   username: String,
   order_id: String,

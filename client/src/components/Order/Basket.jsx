@@ -56,7 +56,7 @@ function Basket() {
       order_total: finalTotal,
     };
 
-    await axios.post("http://localhost:3001/basket/addorder", orderDetails);
+    await axios.post("http://localhost:3001/orders/addorder", orderDetails);
   }
   
   return (

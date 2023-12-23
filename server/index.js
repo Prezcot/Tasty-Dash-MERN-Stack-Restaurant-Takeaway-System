@@ -13,7 +13,7 @@ const User = require("./routes/User.js");
 const testingRouter = require("./routes/testing");
 const menuRouter = require("./routes/menu");
 const adminDashboardData = require("./routes/AdminDashboardData");
-const basketrouter = require("./routes/Basket.js");
+const orderRouter = require("./routes/Orders.js");
 
 const server = createServer(app);
 const io = new Server(server, {
@@ -43,7 +43,7 @@ app.use("/users", User);
 app.use("/menu", menuRouter);
 app.use("/testing", testingRouter);
 app.use("/admin_dashboard_data", adminDashboardData);
-app.use("/basket", basketrouter);
+app.use("/orders", orderRouter);
 
 io.on("connection", (socket) => {
   console.log("a user connected");

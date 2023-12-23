@@ -1,47 +1,76 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-function LiveOrders(){
-    return(
+function LiveOrders() {
+  const [orderInfo, setOrderInfo] = useState([]);
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:3001/orders/your_orders", {
+        user: sessionStorage.getItem("username"),
+      })
+      .then((response) => {
+        setOrderInfo(response.data);
+        console.log(orderInfo);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  return (
     <>
-    <div className="everything">
-        <div className="orderinfocontainer">
+      <div className="everything">
+        <div className="ordermaincontainer">
+          <div className="header">
+            <h1>Your Orders</h1>
+          </div>
 
-            <div className="header">
-            <h1>Your Live Orders</h1>
-            </div>
-
+          {orderInfo.map((orders) => (
             <div className="orderitems">
-                
-            <div className="indi-order">
-
+              <div className="indi-order">
                 <div>
-                <b><label>Order Status</label></b><br/>
-                <label>Pending</label>
+                  <b>
+                    <label>Order ID</label>
+                  </b>
+                  <br />
+                  <label>{orders.order_id}</label>
                 </div>
 
                 <div>
-                <b><label>Order ID</label></b><br/>
-                <label>5</label>
+                  <b>
+                    <label>Order Status</label>
+                  </b>
+                  <br />
+                  <label>{orders.order_status}</label>
                 </div>
 
                 <div>
-                <b><label>Order Total</label></b><br/>
-                <label>Rs. 6000</label>
+                  <b>
+                    <label>Order Total</label>
+                  </b>
+                  <br />
+                  <label>{orders.order_total}</label>
                 </div>
 
                 <div>
-                <b><label>Order Items</label></b><br/>
-                <label>Items</label>
+                  <b>
+                    <label>Order Items</label>
+                  </b>
+                  <br />
+                  <label>{orders.items}</label>
                 </div>
 
+                <div>
+                  <button>Cancel Order</button>
+                </div>
+              </div>
             </div>
-
-            </div>
+          ))}
         </div>
-    </div>
+      </div>
     </>
-
-    );
+  );
 }
 
 export default LiveOrders;
