@@ -64,7 +64,7 @@ const AdminDashboard = () => {
     const orderStatusOrder = {
       Pending: 0,
       Approved: 1,
-      "Order Collected": 2,
+      Collected: 2,
     };
     const orderStatusA = orderStatusOrder[a.order_status];
     const orderStatusB = orderStatusOrder[b.order_status];
@@ -90,7 +90,7 @@ const AdminDashboard = () => {
                   ? "list-group-item-success"
                   : items.order_status === "Declined"
                   ? "list-group-item-danger"
-                  : items.order_status === "Order Collected"
+                  : items.order_status === "Collected"
                   ? "list-group-item-dark"
                   : "list-group-item-warning"
               }`}
@@ -129,9 +129,7 @@ const AdminDashboard = () => {
                 <button
                   type="button"
                   className="btn btn-warning btn-lg"
-                  onClick={() =>
-                    updateOrderStatus(items._id, "Order Collected")
-                  }
+                  onClick={() => updateOrderStatus(items._id, "Collected")}
                 >
                   <i>Order Collected</i>
                 </button>
