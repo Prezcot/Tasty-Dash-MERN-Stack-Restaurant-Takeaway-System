@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import {useNavigate } from 'react-router-dom';
 function Cart({ items, quantityMap}) {
   const nav = useNavigate();
-  // Calculate the number of unique items brought
+  
   
   const cartItems = items.filter((item) => quantityMap[item.itemName] > 0);
   const uniqueItemsCount = cartItems.length;

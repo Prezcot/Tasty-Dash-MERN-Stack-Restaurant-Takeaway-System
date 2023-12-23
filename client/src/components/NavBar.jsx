@@ -11,7 +11,7 @@ function NavBar(props) {
   };
 
   const handleLogout = () => {
-    // Add logic for handling logout, e.g., redirecting to the login page
+    
     nav("/login");
   };
 
