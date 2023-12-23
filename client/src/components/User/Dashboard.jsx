@@ -90,7 +90,7 @@ function Dashboard() {
     }
   return (
     // <div style={{background:`url("/images/UserDashboardBackground.jpg")`,width:"100vw",height:"100vh",backgroundRepeat:"no-repeat"}}></div>
-    <div style={{background:`url("/images/UserDashboardBackground.png")`,width:"100vw",height:"100vh",backgroundRepeat:"no-repeat"}}>
+    <div style={{background:`url("/images/UserDashboardBackground.png")`,width: "100vw",height: "100vh",backgroundSize: "100vw 100vh",backgroundRepeat:"no-repeat"}}>
         <NavBar></NavBar>
         <div style={{display:"flex",flexDirection:"row",marginTop:"1vh",justifyContent:"space-between",color:"white"}}>
             <div>
