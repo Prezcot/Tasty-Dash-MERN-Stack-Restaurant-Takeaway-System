@@ -7,7 +7,7 @@ import Menu from "../Menu/Menu";
 import Dashboard from "./Dashboard";
 import AdminNavBar from "../Admin/AdminNavBar";
 import Basket from "../Order/Basket";
-
+import {useNavigate } from 'react-router-dom';
 import "socket.io-client";
 import { io } from "socket.io-client";
 
@@ -23,56 +23,24 @@ const Tabcol = styled.td`
 const SignIn = () => {
   //you cant use export default here because you are assigning
   //an arrow function to it and you cant simultaneously export and assign.
-  const [page, setPage] = useState("SignIn");
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [currentlychked, setChecked] = useState(null);
   const [error, setError] = useState(null);
   const [showAdminDashboard, setShowAdminDashboard] = useState(false);
-  useEffect(() => {
-    //this useEffect hook will only run by default if the page variable has changed thus avoiding
-    //the too many re-renders error.
-    if (sessionStorage.getItem("page") == "SignIn") {
-      setPage("SignIn");
-    } else if (sessionStorage.getItem("page") == "SignUp") {
-      setPage("SignUp");
-    } else if (sessionStorage.getItem("page") == "Menu") {
-      setPage("Menu");
-    } else if (sessionStorage.getItem("page") == "Admin") {
-      setPage("Admin");
-    } else if (sessionStorage.getItem("page") == "Dashboard") {
-      setPage("Dashboard");
-    } else if (sessionStorage.getItem("page") == "Basket") {
-      setPage("Basket");
-    }
-  });
+  const nav = useNavigate(); //this is used to navigate to a page on demand
 
   useEffect(() => {
     if (!sessionStorage.getItem("checked")) {
       sessionStorage.setItem("checked", "false");
       setChecked(false);
     } else if (sessionStorage.getItem("checked") == "true") {
-      setUsername(sessionStorage.getItem("username"));
+      setUsername(sessionStorage.getItem("rememberusername"));
       setPassword(sessionStorage.getItem("password"));
       setChecked(true);
     }
   }, []);
 
-  function changePage(newpage) {
-    if (newpage == "Menu") {
-      setPage("Menu");
-      sessionStorage.setItem("page", "Menu");
-    } else if (newpage == "SignIn") {
-      setPage("SignIn");
-      sessionStorage.setItem("page", "SignIn");
-    } else if (newpage == "SignUp") {
-      setPage("SignUp");
-      sessionStorage.setItem("page", "SignUp");
-    } else if (newpage == "Basket") {
-      setPage("Basket");
-      sessionStorage.setItem("page", "Basket");
-    }
-  }
   function handleError() {
     //also called a render method
     if (error) {
@@ -112,15 +80,16 @@ const SignIn = () => {
             .post("http://localhost:3001/users/signin", { username, password })
             .then((res) => {
               if (res.data.user == "User") {
-                sessionStorage.setItem("page", "Menu");
-                setPage("Menu");
+                sessionStorage.setItem("type","User");
+                nav("/menu");
               } else {
-                sessionStorage.setItem("page", "Admin");
-                setShowAdminDashboard(true);
+                sessionStorage.setItem("type","Admin");
+                nav("/adminnavbar");
               }
             })
             .catch((err) => setError(err.response.data.message));
-          sessionStorage.setItem("username", username);
+          sessionStorage.setItem("rememberusername", username); 
+          sessionStorage.setItem("username", username);   
           if (currentlychked == true) {
             sessionStorage.setItem("checked", JSON.stringify(currentlychked));
             sessionStorage.setItem("password", password);
@@ -138,126 +107,101 @@ const SignIn = () => {
       setError("Please Enter Valid Data");
     }
   }
-  if (showAdminDashboard) {
-    return <AdminNavBar />;
-  }
-  if (page == "SignIn") {
-    //use vh and vw for margins and padding and other attributes
-    return (
+  //use vh and vw for margins and padding and other attributes
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        backgroundImage: `url("/images/LoginBackground.jpg")`,
+        backgroundSize: "100vw 100vh",
+        backgroundRepeat: "no-repeat",
+        width: "100vw",
+        height: "100vh",
+      }}
+    >
+      {/* just for testing please ignore */}
+
+      <button onClick={() => setShowAdminDashboard(true)}>
+        Just for testing - will go to the dashboard
+      </button>
+
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          backgroundImage: `url("/images/LoginBackground.jpg")`,
-          backgroundSize: "100vw 100vh",
-          backgroundRepeat: "no-repeat",
-          width: "100vw",
-          height: "100vh",
+          marginTop: "5vh",
+          border: "0.4vh solid black",
+          boxShadow: "0px 0px 10px 3px white",
+          padding: "2vh",
+          borderRadius: "15px",
+          backgroundColor: "white",
+          opacity: "93%",
         }}
       >
-        {/* just for testing please ignore */}
-
-        <button onClick={() => setShowAdminDashboard(true)}>
-          Just for testing - will go to the dashboard
-        </button>
-
-        <div
-          style={{
-            marginTop: "5vh",
-            border: "0.4vh solid black",
-            boxShadow: "0px 0px 10px 3px white",
-            padding: "2vh",
-            borderRadius: "15px",
-            backgroundColor: "white",
-            opacity: "93%",
-          }}
-        >
+        <center>
+          <h1 style={{ color: "black" }}>Sign In</h1>
+        </center>
+        <br></br>
+        {handleError()}
+        {/* {() => changePage("Menu")} */}
+        <br></br>
+        <form onSubmit={handleSignIn}>
+          <table id="login">
+            <tr>
+              <Tabcol>Username: </Tabcol>
+              <td style={{ paddingBottom: "1vh", fontSize: "3vh" }}>
+                <UserInput
+                  type="text"
+                  value={username}
+                  placeholder="Username"
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <Tabcol>Password: </Tabcol>
+              <Tabcol>
+                <UserInput
+                  type="password"
+                  value={password}
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Tabcol>
+            </tr>
+            <tr>
+              <td>
+                <UserInput
+                  style={{ width: "2vw", height: "2vh" }}
+                  type="checkbox"
+                  checked={currentlychked}
+                  onChange={(e) => setChecked(e.target.checked)}
+                />
+                <p style={{ display: "inline", fontSize: "2vh" }}>
+                  Remember Me ?
+                </p>
+              </td>
+            </tr>
+          </table>
+          <br></br>
           <center>
-            <h1 style={{ color: "black" }}>Sign In</h1>
+            <input
+              style={{
+                width: "50%",
+                backgroundColor: "green",
+                color: "white",
+                borderRadius: "10px",
+                border: "0.1vh solid black",
+              }}
+              type="submit"
+              value="Sign In"
+            ></input>
+            <p style={{ cursor: "pointer"}} onClick={() => nav("/signup")}><u>Create an account</u></p>
           </center>
-          <br></br>
-          {handleError()}
-          {/* {() => changePage("Menu")} */}
-          <br></br>
-          <form onSubmit={handleSignIn}>
-            <table id="login">
-              <tr>
-                <Tabcol>Username: </Tabcol>
-                <td style={{ paddingBottom: "1vh", fontSize: "3vh" }}>
-                  <UserInput
-                    type="text"
-                    value={username}
-                    placeholder="Username"
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <Tabcol>Password: </Tabcol>
-                <Tabcol>
-                  <UserInput
-                    type="password"
-                    value={password}
-                    placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </Tabcol>
-              </tr>
-              <tr>
-                <td>
-                  <UserInput
-                    style={{ width: "2vw", height: "2vh" }}
-                    type="checkbox"
-                    checked={currentlychked}
-                    onChange={(e) => setChecked(e.target.checked)}
-                  />
-                  <p style={{ display: "inline", fontSize: "2vh" }}>
-                    Remember Me ?
-                  </p>
-                </td>
-              </tr>
-            </table>
-            <br></br>
-            <center>
-              <input
-                style={{
-                  width: "50%",
-                  backgroundColor: "green",
-                  color: "white",
-                  borderRadius: "10px",
-                  border: "0.1vh solid black",
-                }}
-                type="submit"
-                value="Sign In"
-              ></input>
-              <p
-                style={{ cursor: "pointer" }}
-                onClick={() => changePage("SignUp")}
-              >
-                <u>Create an account</u>
-              </p>
-            </center>
-          </form>
-        </div>
+        </form>
       </div>
-    );
-  }
-  if (page == "SignUp") {
-    return <SignUp />;
-  }
-  if (page == "Menu") {
-    return <Menu></Menu>;
-  }
-  if (page == "Admin") {
-    return <AdminNavBar></AdminNavBar>;
-  }
-  if (page == "Dashboard") {
-    return <Dashboard></Dashboard>;
-  }
-  if (page == "Basket") {
-    return <Basket></Basket>;
-  }
+    </div>
+  );
 };
 
 export default SignIn;

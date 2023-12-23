@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import UserNavBar from "./UserNavBar";
 import SignIn from "./SignIn";
 import NavBar from "../NavBar";
 import axios from "axios";
 import styled from "styled-components";
 import { Tab } from "bootstrap";
+import {useNavigate } from 'react-router-dom';
 const UserInput = styled.input`
   border: 1px solid grey;
   border-radius: 1vh;
@@ -21,7 +21,7 @@ function Dashboard() {
     const [confirmpassword,setConfirmPassword]=useState(null);
     const [error,setError]=useState(null);
     const username=sessionStorage.getItem("username");
-
+    const nav = useNavigate();
     useEffect(()=>{
         async function getUserInfo()
         {
@@ -30,14 +30,6 @@ function Dashboard() {
         }
         getUserInfo();
     },[]);
-    if (page)
-    {
-        sessionStorage.setItem("page","SignIn");
-        return <SignIn></SignIn>
-    }
-    else{
-        sessionStorage.setItem("page","Dashboard");
-    }
     function handleError() {
         //also called a render method
         if (error) {
@@ -94,7 +86,7 @@ function Dashboard() {
     async function handleDelete()
     {
         const username=sessionStorage.getItem("username");
-        await axios.put("http://localhost:3001/users/deleteaccount",{username}).then(()=>setPage(true)).catch((err)=>{console.log(err)});
+        await axios.put("http://localhost:3001/users/deleteaccount",{username}).then(()=>nav("/signin")).catch((err)=>{console.log(err)});
     }
   return (
     // <div style={{background:`url("/images/UserDashboardBackground.jpg")`,width:"100vw",height:"100vh",backgroundRepeat:"no-repeat"}}></div>
@@ -111,7 +103,9 @@ function Dashboard() {
                 <button style={{backgroundColor: "red",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={handleDelete}>Delete Account</button>
             </div>
             <div style={{marginRight:"0.5vw"}}>
-                <button style={{marginLeft:"23vw",backgroundColor: "green",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={()=>setPage("SignIn")}>Log Out</button>
+                <button style={{marginLeft:"23vw",backgroundColor: "green",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={()=>{
+                    nav("/signin")
+                    sessionStorage.removeItem("username")}}>Log Out</button>
                 <br></br>
                 {handleError()}
                 <form onSubmit={handleSubmit}>
