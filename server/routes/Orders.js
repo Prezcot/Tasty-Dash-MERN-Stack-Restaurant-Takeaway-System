@@ -17,10 +17,10 @@ router.post("/addorder", async (req, res) => {
 router.post("/your_orders", async(req,res) => {
   try{
     let user = req.body.user;
-    let notCollectedStatus = { $ne: "Collected" };
-    let condition1 = {username:user};
-    let condition2 = {order_status:notCollectedStatus};
-    let items= await item.find({ $and: [condition1, condition2] }).catch((err)=>res.status(400).json({message:err}));
+    // let notCollectedStatus = { $ne: "Collected" };
+    // let condition1 = {username:user};
+    // let condition2 = {order_status:notCollectedStatus};
+    let items= await item.find({ username:user }).catch((err)=>res.status(400).json({message:err}));
     res.json(items);
   } catch (error){
     console.error(error);

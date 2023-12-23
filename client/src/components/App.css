@@ -322,16 +322,39 @@ body{
 
 .header{
   color:white;
-  padding:20px;
+  padding-left:20px;
+  padding-top:20px;
 }
 
-.orderitems{
+.live_orders{
+  color:white;
+  padding-left:20px;
+  padding-top:20px;
+}
+
+.order_history{
+  color:white;
+  padding-left:20px;
+  padding-top:20px;
+}
+
+.live-order-items{
   height: fit-content;
   padding:20px;
   background-color:white;
   border: 3px solid orange;
   margin: 20px;
   border-radius: 10px;
+}
+
+.order-history-items{
+  height: fit-content;
+  padding:20px;
+  background-color:white;
+  border: 3px solid orange;
+  margin: 20px;
+  border-radius: 10px;
+  opacity: 70%;
 }
 
 

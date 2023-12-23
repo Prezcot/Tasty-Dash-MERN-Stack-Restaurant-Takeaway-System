@@ -8,7 +8,7 @@ function NavBar(props) {
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
-            Restaurant_Name
+            Tasty Dash
           </a>
           <button
             class="navbar-toggler"
