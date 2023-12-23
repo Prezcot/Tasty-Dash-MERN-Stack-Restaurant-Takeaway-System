@@ -32,15 +32,13 @@ function Item({ item, quantity, onAddToCart, onRemoveFromCart }) {
         <p>Price: Rs. {item.itemPrice.toFixed(2)}</p>
       </div>
       <div className="menu-actions">
-        <div className="quantity">
           <button className="remove-from-cart" onClick={handleRemoveFromCart}>
-            -
+          <b>&nbsp; - &nbsp;</b>
           </button>
-          <span className="quantity-in-cart">{localQuantity}</span>
+          <label className="quantity-in-cart">{localQuantity}</label>
           <button className="add-to-cart" onClick={handleAddToCart}>
-            +
+           <b>&nbsp; + &nbsp;</b>
           </button>
-        </div>
       </div>
     </div>
   );
