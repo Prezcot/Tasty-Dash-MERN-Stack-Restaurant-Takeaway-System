@@ -7,6 +7,7 @@ import AdminNavBar from "./components/Admin/AdminNavBar";
 import Basket from "./components/Order/Basket";
 import AdminItem from './components/Admin/AdminItem';
 import AdminMenu from './components/Admin/AdminMenu';
+import LiveOrders from './components/Order/LiveOrders';
 
 function DenyDirectAccessRoutes()
 {
@@ -23,6 +24,7 @@ function DenyDirectAccessRoutes()
                 <Route path="/adminnavbar" element={<AdminNavBar/>}></Route>
                 <Route path="/dashboard" element={<Dashboard/>}></Route>
                 <Route path="/basket" element={<Basket/>}></Route>
+                <Route path="/orders" element={<LiveOrders/>}></Route>
                 <Route path="/admindashboard" element={<AdminDashboard/>}></Route>
                 <Route path="/adminitem" element={<AdminItem/>}></Route>
                 <Route path="/adminmenu" element={<AdminMenu/>}></Route>
