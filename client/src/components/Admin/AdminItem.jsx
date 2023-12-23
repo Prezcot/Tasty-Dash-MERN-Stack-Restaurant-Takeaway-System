@@ -4,7 +4,8 @@ import axios from "axios";
 function AdminItem({ item, onDelete, onEdit}) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedPrice, setEditedPrice] = useState(item.itemPrice);
-
+  const [edittext, setEdittext] = useState("Edit");
+  
   const handlePriceChange = (e) => {
     setEditedPrice(e.target.value);
   };
@@ -18,9 +19,11 @@ function AdminItem({ item, onDelete, onEdit}) {
         itemImage: item.itemImage,
       });
       await axios.put(`http://localhost:3001/menu/edit/${setNewItemData.itemName}`, setNewItemData);
+      setEdittext("Edit");
       setIsEditing(false);
     } else {
       // Enter edit mode
+      setEdittext("Apply");
       setIsEditing(true);
     }
   };
@@ -43,7 +46,7 @@ function AdminItem({ item, onDelete, onEdit}) {
         </div>
         <div className="menu-actions">
           <div className="quantity">
-            <button className="remove-from-cart" onClick={handleEditClick}>Edit</button>
+            <button className="remove-from-cart" onClick={handleEditClick}>{edittext}</button>
           </div>
           <button className="add-to-cart" onClick={onDelete}>Delete</button>
         </div>
