@@ -9,6 +9,7 @@ if (process.env.NODE_ENV !== 'test') {
 }
 import axios from "axios";
 import { io } from "socket.io-client";
+import { Button } from "bootstrap";
 
 const AdminDashboard = () => {
   const [order_data, set_order_data] = useState([]);
@@ -40,7 +41,7 @@ const AdminDashboard = () => {
     let string = "";
     items.items.forEach((line) => {
       let [productName, unitPrice, quantity] = line.split(",");
-      string += `${productName} : ${quantity}<br />`;
+      string += `<li>${productName} : ${quantity}</li>`;
     });
     return string;
   };
@@ -68,7 +69,7 @@ const AdminDashboard = () => {
     const orderStatusOrder = {
       Pending: 0,
       Approved: 1,
-      "Order Collected": 2,
+      Collected: 2,
     };
     const orderStatusA = orderStatusOrder[a.order_status];
     const orderStatusB = orderStatusOrder[b.order_status];
@@ -82,9 +83,18 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <h1 className="display-6" style={{ paddingTop: "60px" }}>
+      <div
+        className="display-6 text-light"
+        style={{
+          paddingLeft: "9px",
+          paddingTop: "60px",
+          paddingBottom: "10px",
+          margin: "0px",
+          backgroundColor: "#666666",
+        }}
+      >
         Pending Orders
-      </h1>
+      </div>
       <ul className="list-group">
         {sortedOrderData.map((items, index) => (
           <div key={index}>
@@ -94,7 +104,7 @@ const AdminDashboard = () => {
                   ? "list-group-item-success"
                   : items.order_status === "Declined"
                   ? "list-group-item-danger"
-                  : items.order_status === "Order Collected"
+                  : items.order_status === "Collected"
                   ? "list-group-item-dark"
                   : "list-group-item-warning"
               }`}
@@ -110,13 +120,16 @@ const AdminDashboard = () => {
                 <b>{items.instructions}</b>
               </span>
               <br />
-              <div className="text-muted">
+              <hr style={{ margin: "10px" }} />
+              Order List:
+              <ol className="text-body-tertiary">
                 {parse(displayProductItems(items))}
-              </div>
+              </ol>
               <b>Order Total: {items.order_total}</b>
               <br />
+              <hr style={{ margin: "10px" }} />
               <span className="d-flex mt-3">
-                <button
+                {/* <button
                   type="button"
                   className="btn btn-success me-4 btn-lg"
                   onClick={() => updateOrderStatus(items._id, "Approved")}
@@ -129,16 +142,41 @@ const AdminDashboard = () => {
                   onClick={() => updateOrderStatus(items._id, "Declined")}
                 >
                   <i className="bi bi-x">Decline</i>
-                </button>
+                </button> 
                 <button
-                  type="button"
-                  className="btn btn-warning btn-lg"
-                  onClick={() =>
-                    updateOrderStatus(items._id, "Order Collected")
-                  }
-                >
-                  <i>Order Collected</i>
-                </button>
+                    type="button"
+                    className="btn btn-warning btn-lg"
+                    onClick={() => updateOrderStatus(items._id, "Collected")}
+                  >
+                    <i>Order Collected</i>
+                  </button>*/}
+                {items.order_status === "Pending" && (
+                  <>
+                    <button
+                      type="button"
+                      className="btn btn-success me-4 btn-lg"
+                      onClick={() => updateOrderStatus(items._id, "Approved")}
+                    >
+                      <i className="bi bi-check">Approve</i>
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-danger me-4 btn-lg"
+                      onClick={() => updateOrderStatus(items._id, "Declined")}
+                    >
+                      <i className="bi bi-x">Decline</i>
+                    </button>
+                  </>
+                )}
+                {items.order_status === "Approved" && (
+                  <button
+                    type="button"
+                    className="btn btn-warning btn-lg"
+                    onClick={() => updateOrderStatus(items._id, "Collected")}
+                  >
+                    <i>Order Collected</i>
+                  </button>
+                )}
                 <h4
                   style={{
                     marginLeft: "50px",
@@ -149,6 +187,7 @@ const AdminDashboard = () => {
                 </h4>
               </span>
             </li>
+            <div style={{ padding: "10px", backgroundColor: "" }} />
           </div>
         ))}
       </ul>

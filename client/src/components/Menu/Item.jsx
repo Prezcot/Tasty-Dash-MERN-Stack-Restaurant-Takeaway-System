@@ -1,23 +1,23 @@
-// Item.jsx
+
 import React, { useEffect, useState } from 'react';
 
 function Item({ item, quantity, onAddToCart, onRemoveFromCart }) {
   const [localQuantity, setLocalQuantity] = useState();
 
   useEffect(() => {
-    // Update local state when the quantity prop changes
+    
     setLocalQuantity(quantity);
   }, [quantity]);
 
   const handleAddToCart = () => {
     setLocalQuantity((prevQuantity) => prevQuantity + 1);
-    onAddToCart(); // Notify the parent component about the add action
+    onAddToCart(); 
   };
 
   const handleRemoveFromCart = () => {
     if (localQuantity > 0) {
       setLocalQuantity((prevQuantity) => prevQuantity - 1);
-      onRemoveFromCart(); // Notify the parent component about the remove action
+      onRemoveFromCart(); 
     }
   };
 

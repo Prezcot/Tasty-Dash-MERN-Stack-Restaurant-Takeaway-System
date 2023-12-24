@@ -105,6 +105,77 @@ function AdminMenu() {
       };
     return (
       <>
+      <div className="menu-everything" style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        backgroundImage: `url("/images/MenuBackground2.jpg")`,
+        backgroundSize:"cover",
+        }}>
+      
+      <div className="item-form-container"style={{
+        marginTop: "4%"
+        }}>
+      <h2 className="form-title">Add New Item</h2>
+      <form onSubmit={addNewItem} className="item-form">
+        <div className="form-group">
+          <label htmlFor="itemName" className="form-label">
+            Item Name:
+          </label>
+          <input
+            type="text"
+            name="itemName"
+            value={newItemData.itemName}
+            onChange={handleInputChange}
+            className="form-input"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="itemDescription" className="form-label">
+            Item Description:
+          </label>
+          <textarea
+            name="itemDescription"
+            value={newItemData.itemDescription}
+            onChange={handleInputChange}
+            className="form-input"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="itemPrice" className="form-label">
+            Item Price:
+          </label>
+          <input
+            type="number"
+            step="0.01"
+            name="itemPrice"
+            value={newItemData.itemPrice}
+            onChange={handleInputChange}
+            className="form-input"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="itemImage" className="form-label">
+            Item Image:
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInput}
+            onChange={handleFileChange}
+            className="form-input"
+          />
+        </div>
+
+        <button type="submit" className="form-button">
+          Add Item
+        </button>
+      </form>
+    </div>
+      <div className="menu-item-div">
       {items.map((item) => (
         <AdminItem
         key={item.itemName}
@@ -112,50 +183,8 @@ function AdminMenu() {
         onDelete={() => deleteItem(item.itemName)}
         
       />
-      ))}
-      <div>
-        <h2>Add New Item</h2>
-        <form onSubmit={addNewItem} >
-          <label>
-            Item Name:
-            <input
-              type="text"
-              name="itemName"
-              value={newItemData.itemName}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Item Description:
-            <textarea
-              name="itemDescription"
-              value={newItemData.itemDescription}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Item Price:
-            <input
-              type="number"
-              step="0.01"  // Allow decimal values
-              name="itemPrice"
-              value={newItemData.itemPrice}
-              onChange={handleInputChange}
-              />
-          </label>
-          <label>
-            Item Image:
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInput}
-              onChange={handleFileChange}
-            />
-          </label>
-          <button type="submit">
-            Add Item
-          </button>
-        </form>
+      ))}</div>
+      
       </div>
       </>
     );

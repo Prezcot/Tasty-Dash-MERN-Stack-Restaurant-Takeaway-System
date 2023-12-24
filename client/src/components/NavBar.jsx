@@ -1,17 +1,29 @@
 import Dashboard from "./User/Dashboard";
 import { useState } from "react";
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 function NavBar(props) {
   const nav = useNavigate();
+  const [page, setPage] = useState("home");
+
+  const switchPage = (newPage) => {
+    setPage(newPage);
+  };
+
+  const handleLogout = () => {
+    
+    nav("/login");
+  };
+
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            Restaurant_Name
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">
+            Tasty Dash
           </a>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -19,32 +31,49 @@ function NavBar(props) {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a style={{cursor:"pointer"}} class="nav-link active" aria-current="page">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className={`nav-item ${page === "home" ? "active" : ""}`}>
+                <a
+                  style={{ cursor: "pointer" }}
+                  className="nav-link"
+                  onClick={() => switchPage("home")}
+                >
                   Home
                 </a>
               </li>
-              <li class="nav-item active">
-                <a style={{cursor:"pointer"}} class="nav-link active" href="/menu">
+              <li className={`nav-item ${page === "menu" ? "active" : ""}`}>
+                <a
+                  style={{ cursor: "pointer" }}
+                  className="nav-link"
+                  onClick={() => switchPage("menu")}
+                  href="/menu"
+                >
                   Menu
                 </a>
               </li>
-              <li class="nav-item active">
-                <a style={{cursor:"pointer"}} class="nav-link active" href="/orders">
+              <li className={`nav-item ${page === "orders" ? "active" : ""}`}>
+                <a
+                  style={{ cursor: "pointer" }}
+                  className="nav-link"
+                  onClick={() => switchPage("orders")}
+                  href="/orders"
+                >
                   Orders
                 </a>
               </li>
             </ul>
             <img
               src="/images/usericon.png"
-              onClick={()=>nav("/dashboard")}
+              onClick={() => nav("/dashboard")}
               width="60px"
               height="50px"
             />
+            <button className="btn btn-outline-light" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         </div>
       </nav>
