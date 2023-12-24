@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import SignIn from "../SignIn";
+import SignIn from "../User/SignIn";
 import {assert} from "chai";
 import { BrowserRouter } from "react-router-dom";
 describe("Testing SignIn component", () => {
