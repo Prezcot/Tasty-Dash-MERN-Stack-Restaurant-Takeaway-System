@@ -20,6 +20,7 @@ const Menu = mongoose.model(
     itemDescription: String,
     itemPrice: Number,
     itemImage: String,
+    itemType: String,
   }),
   "menu"
 );

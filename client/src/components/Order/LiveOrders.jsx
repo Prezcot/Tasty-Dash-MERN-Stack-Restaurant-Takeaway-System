@@ -3,8 +3,28 @@ import axios from "axios";
 import NavBar from "../NavBar";
 
 function LiveOrders() {
-  const [orderInfo, setOrderInfo] = useState([]);
+  let [orderInfo, setOrderInfo] = useState([]);
+  let [cancelConfirmation, setCancelConfirmation] = useState(null);
+  
 
+  function handleCancelOrder (orderId) {
+    setCancelConfirmation(orderId);
+  };
+
+  async function handleYes(orderId) {
+    await axios.delete(`http://localhost:3001/orders/cancel_order/${orderId}`)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  };
+
+  function handleNo () {
+    setCancelConfirmation(null);
+  }
   useEffect(() => {
     axios
       .post("http://localhost:3001/orders/your_orders", {
@@ -35,6 +55,15 @@ function LiveOrders() {
           {orderInfo.map((orders) => (
             orders.order_status !== "Collected" && (
               <div className="live-order-items">
+            {cancelConfirmation === orders.order_id ? (
+              <div className="cancel-confirmation" style={{display:"flex", flexDirection:"column",alignItems:"center"}}>
+                <p>Are you sure you want to cancel this order?</p>
+                <div>
+                  <button onClick={() => handleYes(orders.order_id)} style={{marginRight:"10px", backgroundColor:"red"}}>Yes</button>
+                  <button onClick={handleNo} style={{marginLeft:"10px",backgroundColor:"lightgray", color:"black"}}>No</button>
+                </div>
+              </div>
+            ) : (
                 <div className="indi-order" style={{alignItems:"center"}}>
                   <div>
                     <b>
@@ -76,9 +105,10 @@ function LiveOrders() {
                     })}
                   </div>
                   <div>
-                    <button style={{backgroundColor:"red"}}> Cancel Order</button>
+                    <button style={{backgroundColor:"red"}}  onClick={() => handleCancelOrder(orders.order_id)}> Cancel Order</button>
                   </div>
                 </div>
+            )}
               </div>
             )
           ))}

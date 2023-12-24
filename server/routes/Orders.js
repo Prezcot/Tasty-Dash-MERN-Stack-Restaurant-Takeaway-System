@@ -28,4 +28,27 @@ router.post("/your_orders", async(req,res) => {
   }
 });
 
+
+router.delete('/cancel_order/:orderId', async (req, res) => {
+  let cancel_id = req.params.orderId;
+
+  try {
+    console.log(`Deleting order with id: ${cancel_id}`);
+
+    // Use Mongoose to find and delete the document based on item name
+    let deletedItem = await item.findOneAndDelete({ order_id: cancel_id });
+
+    if (!deletedItem) {
+      console.log('Item not found');
+      return res.status(404).json({ error: 'Item not found' });
+    }
+
+    console.log('Item deleted successfully');
+    return res.json({ message: 'Item deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting item:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 module.exports=router;

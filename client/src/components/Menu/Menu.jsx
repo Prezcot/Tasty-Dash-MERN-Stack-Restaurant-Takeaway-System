@@ -48,15 +48,25 @@ const updateItems = (itemName, itemImage,action) => {
   };
   
   return (
-  <>
+    <div className="menu-everything" style={{
+      display: "flex",
+      flexDirection: "column",
+      }}>
+      <style>
+        {`
+          body {
+            margin: 0;
+            padding: 0;
+            background-image: url("/images/MenuBackground2.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+          }
+        `}
+      </style>
+        
       <NavBar></NavBar>
-      <div className="menu-everything" style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundImage: `url("/images/MenuBackground2.jpg")`,
-        backgroundSize:"cover",
-        }}>
+      
       <div className="menu-header">
         <h1 align="center">Menu</h1>
       </div>
@@ -73,7 +83,7 @@ const updateItems = (itemName, itemImage,action) => {
         </div>
         <Cart items={items} quantityMap= {quantityMap}/>
     </div>
-  </>
+  
   );
 };  
 

@@ -10,7 +10,7 @@ app.use(express.json({ limit: "10mb" }));
 require("dotenv").config();
 
 const User = require("./routes/User.js");
-const menuRouter = require("./routes/Menu");
+const menuRouter = require("./routes/Menu.js");
 const adminDashboardData = require("./routes/AdminDashboardData");
 const orderRouter = require("./routes/Orders.js");
 

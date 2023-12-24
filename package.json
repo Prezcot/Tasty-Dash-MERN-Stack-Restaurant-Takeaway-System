@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd ./server && npm i && npm test && cd .. && cd ./client && npm i && npm test",
     "server": "cd ./server && npm i && npm start",
     "client": "cd ./client && npm i && npm start"
   }

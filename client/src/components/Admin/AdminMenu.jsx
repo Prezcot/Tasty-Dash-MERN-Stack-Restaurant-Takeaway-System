@@ -14,6 +14,7 @@ function AdminMenu() {
         itemDescription: '',
         itemPrice: 0,
         itemImage: '', 
+        itemType:'',
       });
 
     useEffect(() => {
@@ -71,6 +72,7 @@ function AdminMenu() {
             itemDescription: newItemData.itemDescription,
             itemPrice: newItemData.itemPrice,
             itemImage: newItemData.itemImage,
+            itemType : newItemData.itemType,
           };
       
           await axios.post('http://localhost:3001/menu/add', newItem);
@@ -84,6 +86,7 @@ function AdminMenu() {
             itemDescription: '',
             itemPrice: 0,
             itemImage: '',
+            itemType: '',
           });
           fileInput.current.value = '';
         } catch (error) {
@@ -106,12 +109,21 @@ function AdminMenu() {
     return (
       <>
       <div className="menu-everything" style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundImage: `url("/images/MenuBackground2.jpg")`,
-        backgroundSize:"cover",
-        }}>
+      display: "flex",
+      flexDirection: "column",
+      }}>
+      <style>
+        {`
+          body {
+            margin: 0;
+            padding: 0;
+            background-image: url("/images/MenuBackground2.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+          }
+        `}
+      </style>
       
       <div className="item-form-container"style={{
         marginTop: "4%"
@@ -130,7 +142,22 @@ function AdminMenu() {
             className="form-input"
           />
         </div>
-
+        <div className="form-group">
+            <label htmlFor="itemType" className="form-label">
+              Item Type:
+            </label>
+            <select
+              name="itemType"
+              value={newItemData.itemType}
+              onChange={handleInputChange}
+              className="form-input"
+            >
+              <option value="">Select Item Type</option>
+              <option value="starter">Starter</option>
+              <option value="mainCourse">Main Course</option>
+              <option value="dessert">Dessert</option>
+            </select>
+          </div>
         <div className="form-group">
           <label htmlFor="itemDescription" className="form-label">
             Item Description:
