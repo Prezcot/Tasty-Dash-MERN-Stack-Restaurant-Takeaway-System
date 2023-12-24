@@ -1,6 +1,6 @@
 const { JSDOM } = require('jsdom');
 
-const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+const jsdom = new JSDOM('<!doctype html><html><body></body></html>', { url: "http://localhost/3000" });
 const { window } = jsdom;
 
 function copyProps(src, target) {
@@ -15,5 +15,6 @@ global.document = window.document;
 global.navigator = {
   userAgent: 'node.js',
 };
+global.localStorage = window.localStorage;
 
 copyProps(window, global);

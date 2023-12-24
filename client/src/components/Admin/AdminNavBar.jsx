@@ -1,10 +1,14 @@
 import { useState } from "react";
 import AdminDashboard from "./AdminDashboard";
 import AdminMenu from "./AdminMenu";
-import "bootstrap/dist/js/bootstrap.bundle.min.js.map";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "jquery/dist/jquery.min.js";
-import "jquery/dist/jquery.min.map";
+if (process.env.NODE_ENV !== 'test') {
+  import("bootstrap/dist/css/bootstrap.min.css");
+  import("bootstrap/dist/js/bootstrap.bundle.min.js");
+}
+// import "bootstrap/dist/js/bootstrap.bundle.min.js.map";
+// import "bootstrap/dist/js/bootstrap.bundle.min.js";
+// import "jquery/dist/jquery.min.js";
+// import "jquery/dist/jquery.min.map";
 
 const AdminNavBar = () => {
   const [page, set_page] = useState("admin_dashboard");

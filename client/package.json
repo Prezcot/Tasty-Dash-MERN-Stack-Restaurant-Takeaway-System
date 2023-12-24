@@ -24,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha --require @babel/register --require ./setup.js 'src/components/User/Tests/SignIn.test.js'",
+    "test": "SET NODE_ENV=test&& mocha --exclude node_modules --require ignore-styles --require @babel/register --require ./setup.js src/components/User/Tests/SignIn.test.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -46,12 +46,16 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.23.6",
+    "@babel/plugin-transform-modules-commonjs": "^7.23.3",
     "@babel/preset-env": "^7.23.6",
     "@babel/preset-react": "^7.23.3",
     "@babel/register": "^7.22.15",
     "@testing-library/react": "^14.1.2",
     "@types/bootstrap": "^5.2.10",
-    "babel-plugin-transform-require-ignore": "^0.1.1",
-    "jsdom": "^23.0.1"
+    "ignore-styles": "^5.0.1",
+    "install": "^0.13.0",
+    "jsdom": "^23.0.1",
+    "npm": "^10.2.5"
   }
 }
