@@ -64,13 +64,17 @@ function NavBar(props) {
                   Orders
                 </a>
               </li>
+              <li className={`nav-item ${page === "orders" ? "active" : ""}`}>
+                <a
+                  style={{ cursor: "pointer" }}
+                  className="nav-link"
+                  onClick={() => nav("/dashboard")}
+                  href="/dashboard"
+                >
+                  Dashboard
+                </a>
+              </li>
             </ul>
-            <img
-              src="/images/usericon.png"
-              onClick={() => nav("/dashboard")}
-              width="60px"
-              height="50px"
-            />
             <button className="btn btn-outline-light" onClick={handleLogout}>
               Logout
             </button>
