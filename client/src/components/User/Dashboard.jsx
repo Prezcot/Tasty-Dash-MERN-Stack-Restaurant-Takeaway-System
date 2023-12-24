@@ -20,6 +20,7 @@ function Dashboard() {
     const [newpassword,setNewPassword]=useState(null);
     const [confirmpassword,setConfirmPassword]=useState(null);
     const [error,setError]=useState(null);
+    const [alertmsg,setAlertMsg]=useState(false);
     const username=sessionStorage.getItem("username");
     const nav = useNavigate();
     useEffect(()=>{
@@ -83,25 +84,51 @@ function Dashboard() {
             setError("Please Enter Valid Data");
         }
     }
+    function handleAlert()
+    {
+      setAlertMsg(true);
+    }
     async function handleDelete()
     {
-        const username=sessionStorage.getItem("username");
-        await axios.put("http://localhost:3001/users/deleteaccount",{username}).then(()=>nav("/signin")).catch((err)=>{console.log(err)});
+      const username=sessionStorage.getItem("username");
+      await axios.put("http://localhost:3001/users/deleteaccount",{username}).then(()=>nav("/signin")).catch((err)=>{console.log(err)});
     }
   return (
     // <div style={{background:`url("/images/UserDashboardBackground.jpg")`,width:"100vw",height:"100vh",backgroundRepeat:"no-repeat"}}></div>
-    <div style={{background:`url("/images/UserDashboardBackground.png")`,width: "100vw",height: "100vh",flexDirection:"row",backgroundSize: "100vw 100vh",backgroundRepeat:"no-repeat"}}>
+    <div style={{backgroundColor:"black",width: "100vw",height: "100vh",flexDirection:"row"}}>
         <NavBar></NavBar>
-        <div style={{display:"flex",flexDirection:"row",marginTop:"1vh",justifyContent:"space-evenly",color:"white",alignItems:"center"}}>
-            <div>
-                <h1>Dashboard</h1>
-                <p style={{fontSize:"2vw",display:"inline"}}>Welcome, {userinfo.username}</p>
-                <br></br><br></br>
-                <p style={{fontSize:"1.5vw"}}>Username: {userinfo.username}</p>
-                <p style={{fontSize:"1.5vw"}}>Email: {userinfo.email}</p>
-                <p style={{fontSize:"1.5vw"}}>Phone Number: {userinfo.phonenumber}</p>
-                <button style={{backgroundColor: "red",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={handleDelete}>Delete Account</button>
-            </div>
+        <div style={{display:"flex",flexDirection:"row",marginTop:"1vh",justifyContent:"space-evenly",color:"white",alignItems:"center",marginTop: "5vh",
+          border: "0.4vh solid black",
+          boxShadow: "0px 0px 10px 3px white",
+          padding: "2vh",
+          borderRadius: "15px",
+          backgroundColor: "white",
+          color: "black",
+          marginRight:"5vw",
+          marginLeft:"5vw"}}>
+            { !alertmsg ?
+              (<div style={{flex:1}}>
+                  <h1>Dashboard</h1>
+                  <p style={{fontSize:"2vw",display:"inline"}}>Welcome, {userinfo.username}</p>
+                  <br></br><br></br>
+                  <p style={{fontSize:"1.5vw"}}>Username: {userinfo.username}</p>
+                  <p style={{fontSize:"1.5vw"}}>Email: {userinfo.email}</p>
+                  <p style={{fontSize:"1.5vw"}}>Phone Number: {userinfo.phonenumber}</p>
+                  <button style={{backgroundColor: "red",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={handleAlert}>Delete Account</button>
+              </div>) : (<div style={{flex:1, justifyContent:"center",display:"flex",flexDirection:"column",justifyContent:"center"}}>
+                      <div style={{display:"flex",justifyContent:"center",flexDirection:"column",alignItems:"center"}}>
+                        <h4>Are you sure ?</h4>
+                        <div style={{display:"flex",flexDirection:"row",justifyContent:"space-evenly"}}>
+                          <div style={{marginLeft:"-5vh"}}>
+                            <button style={{marginLeft:"2vw",backgroundColor: "red",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={handleDelete}>Yes</button>
+                          </div>
+                          <div style={{marginLeft:"2vh"}}>
+                            <button style={{backgroundColor: "green",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={()=>setAlertMsg(false)}>No</button>
+                          </div>
+                        </div>
+                      </div>
+                  </div>)
+            }
             <div>
                 <div style={{display:"flex",flexDirection:"row",justifyContent:"flex-end"}}>
                   <button style={{backgroundColor: "green",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={()=>{
