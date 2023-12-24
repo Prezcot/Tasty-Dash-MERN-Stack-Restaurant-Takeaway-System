@@ -24,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "SET NODE_ENV=test&& mocha --exclude node_modules --require ignore-styles --require @babel/register --require ./setup.js src/components/User/Tests/SignIn.test.js",
+    "test": "SET NODE_ENV=test&& mocha --exclude node_modules --require ignore-styles --require @babel/register --require ./setup.js src/components/**/**/*.test.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
