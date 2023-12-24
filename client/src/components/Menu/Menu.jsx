@@ -48,41 +48,79 @@ const updateItems = (itemName, itemImage,action) => {
   };
   
   return (
-    <div className="menu-everything" style={{
-      display: "flex",
-      flexDirection: "column",
-      }}>
-      <style>
-        {`
-          body {
-            margin: 0;
-            padding: 0;
-            background-image: url("/images/MenuBackground2.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-          }
-        `}
-      </style>
-        
-      <NavBar></NavBar>
-      
-      <div className="menu-header">
-        <h1 align="center">Menu</h1>
-      </div>
-        <div className="menu-item-div">
-          {items.map((item) => (
-            <Item
-              key={item.itemName}
-              item={item}
-              quantity={quantityMap[item.itemName] || 0}
-              onAddToCart={() => updateItems(item.itemName, item.itemImage,"add")}
-              onRemoveFromCart={() => updateItems(item.itemName, item.itemImage,"remove")}
-            />
-          ))}
-        </div>
-        <Cart items={items} quantityMap= {quantityMap}/>
-    </div>
+<div className="menu-everything" style={{
+  display: "flex",
+  flexDirection: "column",
+}}>
+  <style>
+    {`
+      body {
+        margin: 0;
+        padding: 0;
+        background-image: url("/images/MenuBackground2.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+      h1, h2 {
+        color: white;
+      }
+    `}
+  </style>
+
+  <NavBar></NavBar>
+
+  <div className="menu-header">
+    <h1 align="center">Menu</h1>
+  </div>
+
+  {/* Separate items based on their types */}
+  <h2>Starters</h2>
+  <br></br>
+  <div className="menu-item-div">
+    
+    {items.filter(item => item.itemType === 'starter').map(item => (
+      <Item
+        key={item.itemName}
+        item={item}
+        quantity={quantityMap[item.itemName] || 0}
+        onAddToCart={() => updateItems(item.itemName, item.itemImage, "add")}
+        onRemoveFromCart={() => updateItems(item.itemName, item.itemImage, "remove")}
+      />
+    ))}
+  </div>
+  <h2>Main Courses</h2>
+  <br></br>
+  <div className="menu-item-div">
+    
+    {items.filter(item => item.itemType === 'mainCourse').map(item => (
+      <Item
+        key={item.itemName}
+        item={item}
+        quantity={quantityMap[item.itemName] || 0}
+        onAddToCart={() => updateItems(item.itemName, item.itemImage, "add")}
+        onRemoveFromCart={() => updateItems(item.itemName, item.itemImage, "remove")}
+      />
+    ))}
+  </div>
+  <h2>Desserts</h2>
+  <br></br>
+  <div className="menu-item-div">
+    
+    {items.filter(item => item.itemType === 'dessert').map(item => (
+      <Item
+        key={item.itemName}
+        item={item}
+        quantity={quantityMap[item.itemName] || 0}
+        onAddToCart={() => updateItems(item.itemName, item.itemImage, "add")}
+        onRemoveFromCart={() => updateItems(item.itemName, item.itemImage, "remove")}
+      />
+    ))}
+  </div>
+
+  <Cart items={items} quantityMap={quantityMap} />
+</div>
+
   
   );
 };  
