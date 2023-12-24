@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 const {item,Menu,users}=require("../Schemas/Schemas");
+// let order_id_count=0;
 
 router.post("/addorder", async (req, res) => {
     try {
