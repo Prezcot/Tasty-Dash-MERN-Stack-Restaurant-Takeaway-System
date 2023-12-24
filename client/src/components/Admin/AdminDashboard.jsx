@@ -67,6 +67,7 @@ const AdminDashboard = () => {
       Pending: 0,
       Approved: 1,
       Collected: 2,
+      Declined: 3,
     };
     const orderStatusA = orderStatusOrder[a.order_status];
     const orderStatusB = orderStatusOrder[b.order_status];
