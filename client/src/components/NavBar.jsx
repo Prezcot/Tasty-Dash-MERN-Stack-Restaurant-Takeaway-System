@@ -12,7 +12,7 @@ function NavBar(props) {
 
   const handleLogout = () => {
     
-    nav("/login");
+    nav("/signin");
   };
 
   return (
