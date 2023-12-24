@@ -90,9 +90,9 @@ function Dashboard() {
     }
   return (
     // <div style={{background:`url("/images/UserDashboardBackground.jpg")`,width:"100vw",height:"100vh",backgroundRepeat:"no-repeat"}}></div>
-    <div style={{background:`url("/images/UserDashboardBackground.png")`,width: "100vw",height: "100vh",backgroundSize: "100vw 100vh",backgroundRepeat:"no-repeat"}}>
+    <div style={{background:`url("/images/UserDashboardBackground.png")`,width: "100vw",height: "100vh",flexDirection:"row",backgroundSize: "100vw 100vh",backgroundRepeat:"no-repeat"}}>
         <NavBar></NavBar>
-        <div style={{display:"flex",flexDirection:"row",marginTop:"1vh",justifyContent:"space-between",color:"white"}}>
+        <div style={{display:"flex",flexDirection:"row",marginTop:"1vh",justifyContent:"space-evenly",color:"white",alignItems:"center"}}>
             <div>
                 <h1>Dashboard</h1>
                 <p style={{fontSize:"2vw",display:"inline"}}>Welcome, {userinfo.username}</p>
@@ -102,12 +102,14 @@ function Dashboard() {
                 <p style={{fontSize:"1.5vw"}}>Phone Number: {userinfo.phonenumber}</p>
                 <button style={{backgroundColor: "red",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={handleDelete}>Delete Account</button>
             </div>
-            <div style={{marginRight:"0.5vw"}}>
-                <button style={{marginLeft:"23vw",backgroundColor: "green",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={()=>{
-                    nav("/signin")
-                    sessionStorage.removeItem("username")
-                    sessionStorage.removeItem("email")}}>Log Out</button>
-                <br></br>
+            <div>
+                <div style={{display:"flex",flexDirection:"row",justifyContent:"flex-end"}}>
+                  <button style={{backgroundColor: "green",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={()=>{
+                      nav("/signin")
+                      sessionStorage.removeItem("username")
+                      sessionStorage.removeItem("email")}}>Log Out</button>
+                  <br></br>
+                </div>
                 {handleError()}
                 <form onSubmit={handleSubmit}>
                     <table>
