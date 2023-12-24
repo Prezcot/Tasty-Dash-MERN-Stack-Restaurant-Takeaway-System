@@ -3,10 +3,7 @@ import AdminNavBar from "./AdminNavBar";
 import parse from "html-react-parser";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
-if (process.env.NODE_ENV !== 'test') {
-  require("bootstrap/dist/css/bootstrap.min.css");
-  require("bootstrap/dist/js/bootstrap.bundle.min.js");
-}
+import "../../BootstrapImports.js";
 import axios from "axios";
 import { io } from "socket.io-client";
 import { Button } from "bootstrap";

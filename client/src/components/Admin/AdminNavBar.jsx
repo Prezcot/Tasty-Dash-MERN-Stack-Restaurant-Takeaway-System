@@ -1,10 +1,9 @@
 import { useState } from "react";
 import AdminDashboard from "./AdminDashboard";
 import AdminMenu from "./AdminMenu";
-if (process.env.NODE_ENV !== 'test') {
-  require("bootstrap/dist/css/bootstrap.min.css");
-  require("bootstrap/dist/js/bootstrap.bundle.min.js");
-}
+
+import "../../BootstrapImports.js";
+
 // import "bootstrap/dist/js/bootstrap.bundle.min.js.map";
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 // import "jquery/dist/jquery.min.js";
