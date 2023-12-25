@@ -24,17 +24,7 @@ describe("UNIT TEST - SIGN IN COMPONENT", () => {
         fireEvent.click(getAllByText("Sign In")[1]);
         expect(getByText("Please Enter Password Above 4 Characters")).toBeInTheDocument();
         });
-    it("User's Password Must Be Above 4 Characters",()=>{
-        var {getAllByText,getByText,getByPlaceholderText}=render(<BrowserRouter>
-            <SignIn/>
-            </BrowserRouter>);
-        fireEvent.change(getByPlaceholderText('Username'), { target: { value: 'user' } });
-        fireEvent.change(getByPlaceholderText('Password'), { target: { value: 'User' } });
-        fireEvent.click(getAllByText("Sign In")[1]);
-        expect(getByText("Please Enter Password Above 4 Characters")).toBeInTheDocument();
-        });    
 });
-
 
 describe("INTEGRATION TEST - SIGN IN COMPONENT",()=>{
     it("Axios Post Request And Response Is Functioning",async()=>{
@@ -49,3 +39,8 @@ describe("INTEGRATION TEST - SIGN IN COMPONENT",()=>{
         await expect(axios.post).toHaveBeenCalledWith("http://localhost:3001/users/signin",{"username":"user","password":"User12,"});
     });
 });
+
+// describe("SYSTEM TEST - USER SIGNING IN",()=>{
+//     it("User Is Able To Sign In",async()=>{
+
+// })
