@@ -13,9 +13,17 @@ const item = mongoose.model("orders", {
 });
 
 //Orders.js
-const order_identification = mongoose.model("order_id", {
-  orderID:Number,
-});
+// const order_identification = mongoose.model("order_id", {
+//   orderID:Number,
+// });
+
+const order_identification = mongoose.model(
+  "order_identification",
+  new mongoose.Schema({
+    orderID:Number,
+  }),
+  "order_ids"
+);
 
 //menu.js
 const Menu = mongoose.model(

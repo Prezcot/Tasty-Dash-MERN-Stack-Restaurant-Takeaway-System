@@ -8,16 +8,15 @@ import axios from "axios";
 import {useNavigate } from 'react-router-dom';
 function Basket() {
 
-const [latest_order_id,setLOID] = useState(0);
-const [actual_latest_order_id,setALOID] = useState(0);
-
+  let [latest_order_id,setLOID] = useState();
   useEffect(() => {
     axios
       .get("http://localhost:3001/orders/get_order_id")
       .then((response) => {
-        setLOID(response.data);
-        setALOID(actual_latest_order_id+1);
-        console.log(latest_order_id);
+        console.log("this is the axios response"+response)
+        setLOID(latest_order_id=response.data);
+        console.log("order_id from mongo:"+response.data);
+        console.log("setter value:"+latest_order_id);
       })
       .catch((error) => {
         console.error(error);
@@ -63,9 +62,11 @@ const [actual_latest_order_id,setALOID] = useState(0);
 
   //sending order data to mongo
   async function handleOrder() {
+
+    let temp = latest_order_id+1;
     let orderDetails = {
       username: sessionStorage.getItem("username"),
-      order_id: actual_latest_order_id,
+      order_id: temp,
       payment_id: "PAYMENT PENDING!",
       email: sessionStorage.getItem("email"),
       items: cart,
@@ -76,9 +77,9 @@ const [actual_latest_order_id,setALOID] = useState(0);
 
     await axios.post("http://localhost:3001/orders/addorder", orderDetails);
 
-    // let document_id = '65895ddc5ccfcbcd31403d1a';
-    // await axios.put(`http://localhost:3001/orders/update_order_id/${document_id}`, actual_latest_order_id);
-    // sessionStorage.setItem("order_id", JSON.stringify(orderDetails.order_id))
+    let document_id = '6589770129060833d3f653b1';
+    await axios.put(`http://localhost:3001/orders/update_order_id/${document_id}`, {temp});
+    sessionStorage.setItem("order_id", JSON.stringify(orderDetails.order_id))
   }
   
   return (
