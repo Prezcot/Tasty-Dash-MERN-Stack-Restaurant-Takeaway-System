@@ -242,7 +242,8 @@ button {
   
 }
 .confirm, .summary {
-  background-color: #242424;
+  background-color: black;
+  border:3px solid #d9d9d9;
   padding: 20px;
 }
 .confirm {
@@ -253,7 +254,6 @@ button {
   padding:20px;
   padding-top: 10px; /*Not sure about this or the one above*/
   position:relative;
-  background-color:#242424;
   height:fit-content;
 }
 .summary {
@@ -262,7 +262,7 @@ button {
   padding:10px;
   padding-top: 20px; /*Not sure about this or the one above*/
   height:65vh;
-  position: relative; /* Add this line */
+  position: relative; 
 }
 .item{
   background-color: white;
@@ -305,14 +305,14 @@ button {
   position: absolute; /* Add this line */
   bottom: 0%; /* Add this line */
   width: 95%; /* Add this line */
-  background-color: #242424;
+  background-color: #000000;
   padding: 10px;
 }
 
 .instruction{
   bottom: 0%; /* Add this line */
   width: 100%; /* Add this line */
-  background-color:#242424;
+  background-color:#000000;
   margin-top:20px;
 }
 

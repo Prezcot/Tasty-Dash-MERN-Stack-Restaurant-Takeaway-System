@@ -80,14 +80,14 @@ function Basket() {
           <h1 className="title">Your Basket</h1>
           <div id="tomenu">
             <img id="arrow" src="/images/Arrow.png" width="50px" height="15px" />
-            <button id="menu-button" onClick={()=>nav("/menu")}>Back to Menu</button>
+            <button id="menu-button" onClick={()=>nav("/menu")} style={{backgroundColor:"#121212", borderRadius:"10px", border:"solid 3px #d9d9d9"}}>Back to Menu</button>
           </div>
         </div>
   
         <div className="basketcontainer">
           <div className="basket">
             <div className="confirm">
-              <h2 className="textcolor">Confirm your order</h2>
+              <h3 className="textcolor">Confirm your order</h3>
               {cart.map((item, index) => (
                 <Product 
                 itemProp={item} 
