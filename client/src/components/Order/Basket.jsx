@@ -7,6 +7,23 @@ import NavBar from "../NavBar";
 import axios from "axios";
 import {useNavigate } from 'react-router-dom';
 function Basket() {
+
+  let [latest_order_id,setLOID] = useState();
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/orders/get_order_id")
+      .then((response) => {
+        console.log("this is the axios response"+response)
+        setLOID(latest_order_id=response.data);
+        console.log("order_id from mongo:"+response.data);
+        console.log("setter value:"+latest_order_id);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+
   const nav = useNavigate();
   let instructionfromcust = "";
 
@@ -45,9 +62,11 @@ function Basket() {
 
   //sending order data to mongo
   async function handleOrder() {
+
+    let temp = latest_order_id+1;
     let orderDetails = {
       username: sessionStorage.getItem("username"),
-      order_id: "10",
+      order_id: temp,
       payment_id: "PAYMENT PENDING!",
       email: sessionStorage.getItem("email"),
       items: cart,
@@ -57,24 +76,41 @@ function Basket() {
     };
 
     await axios.post("http://localhost:3001/orders/addorder", orderDetails);
+
+    let document_id = '6589770129060833d3f653b1';
+    await axios.put(`http://localhost:3001/orders/update_order_id/${document_id}`, {temp});
+    sessionStorage.setItem("order_id", JSON.stringify(orderDetails.order_id))
   }
   
   return (
     <>
     <div className="everything">
+    <style>
+    {`
+      body {
+        margin: 0;
+        padding: 0;
+        background-image: url("/images/MenuBackground.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+      
+    `}
+  </style>
         <NavBar/>
         <div className="header">
           <h1 className="title">Your Basket</h1>
           <div id="tomenu">
             <img id="arrow" src="/images/Arrow.png" width="50px" height="15px" />
-            <button id="menu-button" onClick={()=>nav("/menu")}>Back to Menu</button>
+            <button id="menu-button" onClick={()=>nav("/menu")} style={{backgroundColor:"#121212", borderRadius:"10px", border:"solid 3px #d9d9d9"}}>Back to Menu</button>
           </div>
         </div>
   
         <div className="basketcontainer">
           <div className="basket">
             <div className="confirm">
-              <h2 className="textcolor">Confirm your order</h2>
+              <h3 className="textcolor">Confirm your order</h3>
               {cart.map((item, index) => (
                 <Product 
                 itemProp={item} 

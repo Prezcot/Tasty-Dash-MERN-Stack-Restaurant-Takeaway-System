@@ -42,6 +42,19 @@ function LiveOrders() {
   return (
     <>
       <div className="everything">
+      <style>
+    {`
+      body {
+        margin: 0;
+        padding: 0;
+        background-image: url("/images/MenuBackground.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+      
+    `}
+  </style>
         <NavBar />
         <div className="ordermaincontainer">
 

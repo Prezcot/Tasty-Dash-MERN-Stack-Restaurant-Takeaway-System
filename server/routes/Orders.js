@@ -1,7 +1,18 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
-const {item,Menu,users}=require("../Schemas/Schemas");
+const {item,order_identification,Menu,users}=require("../Schemas/Schemas");
 // let order_id_count=0;
+
+router.get('/get_order_id', async (req, res) => {
+  try{
+      let response = await order_identification.find({_id:"6589770129060833d3f653b1"});
+      console.log(response[0].orderID);
+      res.status(200).json(response[0].orderID);
+  } catch (error){
+      console.error(error);
+      res.status(500).json({ message:"Server is throwing a fit ryt now!" })
+  }
+});
 
 router.post("/addorder", async (req, res) => {
     try {
@@ -11,6 +22,19 @@ router.post("/addorder", async (req, res) => {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Failed to add order to the database" });
+    }
+  });
+
+
+  router.put("/update_order_id/:document_id", async (req, res) => {
+    const document_id = decodeURIComponent(req.params.document_id);
+    const {updatedID} = req.body; /*OR const updatedID = req.body.temp;*/ 
+    try {
+      await order_identification.updateOne({ _id:document_id }, {orderID:updatedID});
+      res.status(200).send("Item updated successfully");
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
     }
   });
 
