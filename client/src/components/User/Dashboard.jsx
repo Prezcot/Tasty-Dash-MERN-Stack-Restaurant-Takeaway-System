@@ -95,7 +95,7 @@ function Dashboard() {
     }
   return (
     // <div style={{background:`url("/images/UserDashboardBackground.jpg")`,width:"100vw",height:"100vh",backgroundRepeat:"no-repeat"}}></div>
-    <div style={{backgroundColor:"black",width: "100vw",height: "100vh",flexDirection:"row"}}>
+    <div style={{background:`url("/images/MenuBackground.jpg")`,backgroundRepeat:"no-repeat",width: "100vw",height: "100vh",flexDirection:"row",backgroundSize:"cover"}}>
         <NavBar></NavBar>
         <div style={{display:"flex",flexDirection:"row",marginTop:"1vh",justifyContent:"space-evenly",color:"white",alignItems:"center",marginTop: "5vh",
           border: "0.4vh solid black",
@@ -103,9 +103,9 @@ function Dashboard() {
           padding: "2vh",
           borderRadius: "15px",
           backgroundColor: "white",
-          color: "black",
+          color: "white",
           marginRight:"5vw",
-          marginLeft:"5vw"}}>
+          marginLeft:"5vw",backgroundColor:"#32383f"}}>
             { !alertmsg ?
               (<div style={{flex:1}}>
                   <h1>Dashboard</h1>
