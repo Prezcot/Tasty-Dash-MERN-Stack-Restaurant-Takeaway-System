@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import AdminNavBar from "../Admin/AdminNavBar";
 import AdminDashboard from "../Admin/AdminDashboard";
+global.XMLHttpRequest = undefined;
 global.setImmediate = require('setimmediate');
 test("whether AdminNavBar renders properly", () => {
   render(<AdminNavBar />);
