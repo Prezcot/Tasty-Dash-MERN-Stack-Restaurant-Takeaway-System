@@ -12,15 +12,14 @@ const AdminDashboard = () => {
   const [order_data, set_order_data] = useState([]);
 
   var grabData = async () => {
-    await axios
-      .get("http://localhost:3001/admin_dashboard_data/receive/order_data")
-      .then((res) => {
-        set_order_data(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await axios.get(
+        "http://localhost:3001/admin_dashboard_data/receive/order_data"
+      );
+      set_order_data(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {

@@ -9,9 +9,15 @@ jest.mock("axios");
 
 window.setImmediate = window.setTimeout;
 
-test("whether AdminNavBar renders properly", () => {
+test("Whether AdminNavBar renders properly", () => {
   render(<AdminNavBar />);
   const title = screen.getByText(/admin dashboard/i);
+  expect(title).toBeInTheDocument();
+});
+
+test("Whether AdminDashboardrenders properly", () => {
+  render(<AdminDashboard />);
+  const title = screen.getByText(/pending orders/i);
   expect(title).toBeInTheDocument();
 });
 
