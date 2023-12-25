@@ -5,7 +5,6 @@ import SignIn from "../User/SignIn";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import '@testing-library/jest-dom';
-global.setImmediate = require('setimmediate');
 jest.mock("axios");
 // describe("UNIT TEST - DASHBOARD COMPONENT", () => {
 //     it("Dashboard Component Is Successfully Rendering", () => {

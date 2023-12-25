@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import { render, screen, waitFor, act } from "@testing-library/react";
 import AdminNavBar from "../Admin/AdminNavBar";
 import AdminDashboard from "../Admin/AdminDashboard";
+<<<<<<< HEAD
 import axios from "axios";
 import grabData from "../Admin/AdminDashboard";
 // global.XMLHttpRequest = undefined;
@@ -13,6 +14,8 @@ jest.mock("axios");
 
 window.setImmediate = window.setTimeout;
 
+=======
+>>>>>>> c1c7fcd9830412741edd558be88669ff18ee66dc
 test("whether AdminNavBar renders properly", () => {
   render(<AdminNavBar />);
   const title = screen.getByText(/admin dashboard/i);
