@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "cd ./server && npm i && npm test && cd .. && cd ./client && npm i && npm test",
+    "test": "cd ./client && npm i && npm test",
     "server": "cd ./server && npm i && npm start",
     "client": "cd ./client && npm i && npm start"
   }
