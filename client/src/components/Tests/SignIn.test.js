@@ -22,6 +22,5 @@ describe("Testing If Axios Call Is Successful",()=>{
         axios.post.mockResolvedValue({data});
         const response=await handleSignIn();
         expect(response).toEqual(expectedresult);
-
     });
 });
