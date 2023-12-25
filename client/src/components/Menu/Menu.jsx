@@ -57,7 +57,7 @@ const updateItems = (itemName, itemImage,action) => {
       body {
         margin: 0;
         padding: 0;
-        background-image: url("/images/MenuBackground2.jpg");
+        background-image: url("/images/MenuBackground.jpg");
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -68,7 +68,7 @@ const updateItems = (itemName, itemImage,action) => {
     `}
   </style>
 
-  <NavBar></NavBar>
+  <NavBar style={{postion:"fixed"}}></NavBar>
 
   <div className="menu-header">
     <h1 align="center">Menu</h1>
