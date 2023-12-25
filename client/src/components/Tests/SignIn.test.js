@@ -17,10 +17,15 @@ describe("Testing If SignIn.jsx Component Renders", () => {
 
 describe("Testing If Axios Call Is Successful",()=>{
     it("Testing Axios Post Request",async()=>{
-        const data={username:"user",password:"User12,"};
-        const expectedresult={message:"Account Registered",user:"User"};
-        axios.post.mockResolvedValue({data});
-        const response=await handleSignIn();
-        expect(response).toEqual(expectedresult);
+        var {getAllByText,getByPlaceholderText}=render(<BrowserRouter>
+            <SignIn/>
+        </BrowserRouter>);
+        const expectedresult = { data: { message: "Account Registered", user: "User" } };
+        axios.post.mockResolvedValue(expectedresult);
+        fireEvent.change(getByPlaceholderText('Username'), { target: { value: 'user' } });
+        fireEvent.change(getByPlaceholderText('Password'), { target: { value: 'User12,' } });
+        fireEvent.click(getAllByText("Sign In")[1]);
+        await waitFor(() => expect(axios.post).toHaveBeenCalled);
+        expect(axios.post).toHaveBeenCalledWith("http://localhost:3001/users/signin",{"username":"user","password":"User12,"});
     });
 });
