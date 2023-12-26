@@ -10,7 +10,7 @@ router.get('/get_order_id', async (req, res) => {
       res.status(200).json(response[0].orderID);
   } catch (error){
       console.error(error);
-      res.status(500).json({ message:"Server is throwing a fit ryt now!" })
+      res.status(500).json({ message:"Internal Server Error" })
   }
 });
 

@@ -8,7 +8,7 @@ import axios from "axios";
 import {useNavigate } from 'react-router-dom';
 function Basket() {
 
-  let [latest_order_id,setLOID] = useState();
+  let [latest_order_id,setLOID] = useState(0);
   useEffect(() => {
     axios
       .get("http://localhost:3001/orders/get_order_id")
