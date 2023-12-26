@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../NavBar";
+import { io } from "socket.io-client";
 
 function LiveOrders() {
   let [orderInfo, setOrderInfo] = useState([]);
@@ -25,7 +26,8 @@ function LiveOrders() {
   function handleNo () {
     setCancelConfirmation(null);
   }
-  useEffect(() => {
+
+  function fetchOrders() {
     axios
       .post("http://localhost:3001/orders/your_orders", {
         user: sessionStorage.getItem("username"),
@@ -37,7 +39,18 @@ function LiveOrders() {
       .catch((error) => {
         console.error(error);
       });
-  }); 
+  }
+  
+  useEffect(() => {
+      fetchOrders();
+      const socket = io("http://localhost:3001");
+      socket.on("order_status_update", () => {
+        fetchOrders();
+      });
+      return () => {
+        socket.disconnect();
+      };
+  },[]); 
 
   return (
     <>
