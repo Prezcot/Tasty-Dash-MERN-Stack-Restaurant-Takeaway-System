@@ -26,7 +26,7 @@ describe("UNIT TEST - SIGN IN COMPONENT", () => {
         });
 });
 
-describe("INTEGRATION TEST - SIGN IN COMPONENT",()=>{
+describe("SYSTEM TEST - SIGN IN COMPONENT",()=>{
     it("Axios Post Request And Response Is Functioning",async()=>{
         var {getAllByText,getByPlaceholderText}=render(<BrowserRouter>
             <SignIn/>
@@ -40,7 +40,4 @@ describe("INTEGRATION TEST - SIGN IN COMPONENT",()=>{
     });
 });
 
-// describe("SYSTEM TEST - USER SIGNING IN",()=>{
-//     it("User Is Able To Sign In",async()=>{
-
-// })
+//an integration test can be for example seeing if clicking a button takes the user to another page

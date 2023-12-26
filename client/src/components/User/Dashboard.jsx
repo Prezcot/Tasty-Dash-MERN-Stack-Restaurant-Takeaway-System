@@ -27,7 +27,11 @@ function Dashboard() {
         async function getUserInfo()
         {
             //you have to use req.params to send over data/variables to the server when dealing with get requests as data cant be sent in the body
-            await axios.get(`http://localhost:3001/users/userinfo/${username}`).then((res)=>setUserInfo(res.data)).catch((err)=>console.log(err));
+            try{
+              await axios.get(`http://localhost:3001/users/userinfo/${username}`).then((res)=>setUserInfo(res.data)).catch((err)=>console.log(err));
+            }catch{
+              console.log("error");
+            }
         }
         getUserInfo();
     },[]);
@@ -69,9 +73,12 @@ function Dashboard() {
             if (currentpassword.length>=5 || newpassword.length>=5)
             {
                 if(confirmpassword==newpassword)
-                {
+                { try{
                     await axios.put("http://localhost:3001/users/checkpassword",{username,currentpassword,newpassword}).then((res)=>setError(res.data.message)).catch((err)=>setError(err.response.data.message));
-                }
+                  }catch{
+                    console.log("error");
+                    }
+                } 
                 else{
                     setError("Passwords Not Matching");
                 }
