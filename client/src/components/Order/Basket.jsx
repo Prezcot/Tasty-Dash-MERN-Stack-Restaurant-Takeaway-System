@@ -62,8 +62,9 @@ function Basket() {
 
   //sending order data to mongo
   async function handleOrder() {
-
     let temp = latest_order_id+1;
+    console.log("temp varaible is:"+temp);
+
     let orderDetails = {
       username: sessionStorage.getItem("username"),
       order_id: temp,

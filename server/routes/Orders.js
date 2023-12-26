@@ -28,7 +28,7 @@ router.post("/addorder", async (req, res) => {
 
   router.put("/update_order_id/:document_id", async (req, res) => {
     const document_id = decodeURIComponent(req.params.document_id);
-    const {updatedID} = req.body; /*OR const updatedID = req.body.temp;*/ 
+    const updatedID = req.body.temp; /*OR const updatedID = req.body.temp;*/ 
     try {
       await order_identification.updateOne({ _id:document_id }, {orderID:updatedID});
       res.status(200).send("Item updated successfully");
