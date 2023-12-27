@@ -2,11 +2,21 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../NavBar";
 import { io } from "socket.io-client";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function LiveOrders() {
   let [orderInfo, setOrderInfo] = useState([]);
   let [cancelConfirmation, setCancelConfirmation] = useState(null);
   
+
+  async function notify() {
+    toast.success("Your Order Status Has Been Updated!", {
+      position: toast.POSITION.TOP_CENTER,
+      onClose: () => {
+      },
+    });
+  }
 
   function handleCancelOrder (orderId) {
     setCancelConfirmation(orderId);
@@ -41,6 +51,7 @@ function LiveOrders() {
       const socket = io("http://localhost:3001");
       socket.on("order_status_update", () => {
         fetchOrders();
+        notify();
       });
       return () => {
         socket.disconnect();
@@ -189,6 +200,7 @@ function LiveOrders() {
           ))}   
         </div>
       </div>
+      <ToastContainer/>
     </>
   );
 }
