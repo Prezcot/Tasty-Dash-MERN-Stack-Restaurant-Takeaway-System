@@ -27,7 +27,7 @@ describe("UNIT TEST - SIGN IN COMPONENT", () => {
         });
 });
 
-describe("SYSTEM TEST - SIGN IN COMPONENT",()=>{
+describe("INTEGRATION TEST - SIGN IN COMPONENT",()=>{
     it("User Is Able To Sign In",async()=>{
         var {getAllByText,getByPlaceholderText}=render(<BrowserRouter>
             <SignIn/>

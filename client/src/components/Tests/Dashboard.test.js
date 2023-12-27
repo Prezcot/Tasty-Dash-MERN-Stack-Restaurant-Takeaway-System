@@ -17,7 +17,7 @@ describe("UNIT TEST - DASHBOARD COMPONENT", () => {
     });
 });
 
-describe("SYSTEM TEST - DASHBOARD COMPONENT",()=>{
+describe("INTEGRATION TEST - DASHBOARD COMPONENT",()=>{
     it("User Is Able To Change Their Password",async()=>{
         var {getAllByText,getByText,getByPlaceholderText}=render(<BrowserRouter>
             <Dashboard/>
