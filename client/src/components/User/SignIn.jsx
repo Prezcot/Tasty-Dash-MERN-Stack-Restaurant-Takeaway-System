@@ -72,6 +72,7 @@ const SignIn = () => {
   }
   async function handleSignIn(event) {
     event.preventDefault();
+    sessionStorage.setItem("username", username);
     if (username && password) {
       if (username.length >= 3 && username.length <= 12) {
         if (password.length >= 5) {
@@ -92,7 +93,6 @@ const SignIn = () => {
             }catch{
               console.log("error");
             }
-          sessionStorage.setItem("username", username);
           if (currentlychked == true) {
             localStorage.setItem("rememberusername", username);
             localStorage.setItem("checked", JSON.stringify(currentlychked));
