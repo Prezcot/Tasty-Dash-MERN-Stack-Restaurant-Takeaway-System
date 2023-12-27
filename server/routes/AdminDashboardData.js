@@ -3,15 +3,16 @@ const router = require("express").Router();
 const { item, Menu, users } = require("../Schemas/Schemas");
 
 router.get("/", (req, res) => {
-  res.send("Permission Denied");
+  res.send("Hello");
 });
 
 router.get("/receive/order_data", async (req, res) => {
   try {
+    req = req;
     let data = await item.find();
     res.json(data);
   } catch (err) {
-    console.log("Admin Dashboard data wasn't sent");
+    res.status(500);
   }
 });
 
@@ -25,7 +26,7 @@ router.put("/set_order_status", async (req, res) => {
     });
     res.json("Data changed Successfully");
   } catch (err) {
-    console.log(err);
+    res.status(500);
   }
 });
 

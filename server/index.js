@@ -14,6 +14,8 @@ const menuRouter = require("./routes/Menu.js");
 const adminDashboardData = require("./routes/AdminDashboardData");
 const orderRouter = require("./routes/Orders.js");
 
+const uri = process.env.ATLAS_URI;
+
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
@@ -21,8 +23,6 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
-
-const uri = process.env.ATLAS_URI;
 
 async function run() {
   try {
@@ -34,7 +34,7 @@ async function run() {
 }
 run();
 
-app.get("/", (req, res) => {
+app.get("/test", (req, res) => {
   res.send("Hello there!!!");
 });
 
