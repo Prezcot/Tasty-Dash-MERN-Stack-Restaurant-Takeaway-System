@@ -441,3 +441,37 @@ button {
 .form-button:hover {
   background-color: #27ae60; 
 }
+
+/*Payment*/
+
+
+
+
+h1 {
+  color:white;
+}
+
+
+h2 {
+  color: white;
+}
+
+
+.pay-button {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  border-radius: .5rem;
+  height: 60px;
+  width: 150px;
+  background-color: blue;
+}
+
+
+
+
+

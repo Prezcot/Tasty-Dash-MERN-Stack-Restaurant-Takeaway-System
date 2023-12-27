@@ -39,7 +39,7 @@ function Product ({itemProp,indexProp, cartProp, updateProp, quantityProp}){
             <div className="item">
                 <img src="/images/default.png" width="50px" height="50px"/>
                 <b><label>{name}</label></b>
-                <b><label>Rs.{price} each</label></b>
+                <b><label>${price} each</label></b>
                 <div className="counter">
                     <img name="minus" src="/images/Minus.png" className="counter-button" onClick={(e)=>handleQuantity(e)}/>
                     <div id="counter-number">
@@ -50,6 +50,7 @@ function Product ({itemProp,indexProp, cartProp, updateProp, quantityProp}){
             </div>
         );
     } else {
+        
         return null;
     }
 }

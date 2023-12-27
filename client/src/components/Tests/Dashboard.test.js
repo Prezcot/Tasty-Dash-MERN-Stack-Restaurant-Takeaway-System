@@ -22,7 +22,6 @@ describe("SYSTEM TEST - DASHBOARD COMPONENT",()=>{
         var {getAllByText,getByText,getByPlaceholderText}=render(<BrowserRouter>
             <Dashboard/>
             </BrowserRouter>);
-        const expectedresult = {data: {message:"Password Successfully Changed"}};
         fireEvent.change(getByPlaceholderText('Current Password'), { target: { value: 'User12,' } });
         fireEvent.change(getByPlaceholderText('New Password'), { target: { value: 'Newpassword12,' } });
         fireEvent.change(getByPlaceholderText('Confirm Password'), { target: { value: 'Newpassword12,' } });
@@ -32,3 +31,4 @@ describe("SYSTEM TEST - DASHBOARD COMPONENT",()=>{
         //expect(getByText("Password Successfully Changed")).toBeInTheDocument();
         });
     });
+

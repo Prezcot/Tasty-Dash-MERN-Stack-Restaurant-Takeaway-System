@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../NavBar";
+import { io } from "socket.io-client";
 
 function LiveOrders() {
   let [orderInfo, setOrderInfo] = useState([]);
@@ -12,32 +13,39 @@ function LiveOrders() {
   };
 
   async function handleYes(orderId) {
-    await axios.delete(`http://localhost:3001/orders/cancel_order/${orderId}`)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
+    try{
+      let orderResponse = await axios.delete(`http://localhost:3001/orders/cancel_order/${orderId}`)
+      console.log(orderResponse);
+    } catch(error){
       console.error(error);
-    });
-
+    }
+    window.location.reload();
   };
 
   function handleNo () {
     setCancelConfirmation(null);
   }
+
+  async function fetchOrders() {
+    try{
+      let response = await axios.post("http://localhost:3001/orders/your_orders", {user: sessionStorage.getItem("username"),})
+      setOrderInfo(response.data);
+      console.log(orderInfo);
+    } catch (error){
+      console.error(error);
+    }
+  }
+  
   useEffect(() => {
-    axios
-      .post("http://localhost:3001/orders/your_orders", {
-        user: sessionStorage.getItem("username"),
-      })
-      .then((response) => {
-        setOrderInfo(response.data);
-        console.log(orderInfo);
-      })
-      .catch((error) => {
-        console.error(error);
+      fetchOrders();
+      const socket = io("http://localhost:3001");
+      socket.on("order_status_update", () => {
+        fetchOrders();
       });
-  }); 
+      return () => {
+        socket.disconnect();
+      };
+  },[]); 
 
   return (
     <>

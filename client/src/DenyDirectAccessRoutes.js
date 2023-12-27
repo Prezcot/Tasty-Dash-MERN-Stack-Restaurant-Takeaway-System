@@ -5,6 +5,7 @@ import Menu from "./components/Menu/Menu";
 import Dashboard from "./components/User/Dashboard";
 import AdminNavBar from "./components/Admin/AdminNavBar";
 import Basket from "./components/Order/Basket";
+import Payment from "./components/Payment/Payment";
 import AdminItem from "./components/Admin/AdminItem";
 import AdminMenu from "./components/Admin/AdminMenu";
 import LiveOrders from "./components/Order/LiveOrders";
@@ -21,6 +22,7 @@ function DenyDirectAccessRoutes() {
         <Route path="/admin" element={<AdminNavBar />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/basket" element={<Basket />}></Route>
+        <Route path="/payment" element={<Payment />}></Route>
         <Route path="/orders" element={<LiveOrders />}></Route>
         {/* <Route path="/admindashboard" element={<AdminDashboard/>}></Route>
                 <Route path="/adminitem" element={<AdminItem/>}></Route>

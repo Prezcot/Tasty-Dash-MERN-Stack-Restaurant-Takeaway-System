@@ -29,7 +29,7 @@ function Item({ item, quantity, onAddToCart, onRemoveFromCart }) {
       <div className="menu-info">
         <h3>{item.itemName}</h3>
         <p>{item.itemDescription}</p>
-        <p>Price: Rs. {item.itemPrice.toFixed(2)}</p>
+        <p>Price: $ {item.itemPrice.toFixed(2)}</p>
       </div>
       <div className="menu-actions">
           <button className="remove-from-cart" onClick={handleRemoveFromCart}>

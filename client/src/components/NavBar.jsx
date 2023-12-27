@@ -12,6 +12,7 @@ function NavBar(props) {
 
   const handleLogout = () => {
     sessionStorage.setItem("menuCart","{}");
+    sessionStorage.removeItem("order_id");
     nav("/signin");
   };
 
