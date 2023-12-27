@@ -1,0 +1,51 @@
+body {
+  background-image: url('./Background.jpg'); 
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+
+h1 {
+  color:white;
+}
+
+
+h2 {
+  color: white;
+}
+
+
+.pay-button {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  border-radius: .5rem;
+  height: 60px;
+  width: 150px;
+  background-color: blue;
+}
+
+.header {
+  font-size: 30px;
+}
+.skills {
+  margin-top: 50px;
+  width: 500px;
+  height: 700px;
+  border: 1px solid black;
+}
+
+.aboutMe {
+  margin-top: 50px;
+}
+
+.projects {
+  color: red;
+}
