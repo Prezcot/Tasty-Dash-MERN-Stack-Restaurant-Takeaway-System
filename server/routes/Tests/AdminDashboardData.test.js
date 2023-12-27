@@ -1,6 +1,18 @@
 const request = require("supertest");
 const express = require("express");
 const adminDashboardData = require("../AdminDashboardData");
+const { item } = require("../../Schemas/Schemas");
+const { default: mongoose } = require("mongoose");
+require("dotenv").config();
+
+beforeAll(async () => {
+  const uri = process.env.ATLAS_URI;
+  await mongoose.connect(uri);
+});
+
+afterAll(async () => {
+  await mongoose.connection.close();
+});
 
 const app = express();
 app.use(express.json());
@@ -19,8 +31,21 @@ test("The root endpoint returns a 200 status", async () => {
 });
 
 test("The receive/order_data endpoint returns an array", async () => {
+  const newOrder = new item({
+    username: "testUser",
+    order_id: "testOrder",
+    payment_id: "testPayment",
+    email: "testEmail",
+    items: [],
+    order_status: "testStatus",
+    instructions: "testInstructions",
+    order_total: "testTotal",
+  });
+
+  await newOrder.save();
+
   const response = await request(app).get(
     "/admin_dashboard_data/receive/order_data"
   );
   expect(response.body).toEqual(expect.any(Array));
-}, 10000);
+});
