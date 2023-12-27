@@ -8,7 +8,6 @@ router.get("/", (req, res) => {
 
 router.get("/receive/order_data", async (req, res) => {
   try {
-    req = req;
     let data = await item.find();
     res.json(data);
   } catch (err) {
