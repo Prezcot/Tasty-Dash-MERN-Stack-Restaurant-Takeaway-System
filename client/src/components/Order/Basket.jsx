@@ -8,22 +8,7 @@ import axios from "axios";
 import {useNavigate } from 'react-router-dom';
 function Basket() {
 
-  let [latest_order_id,setLOID] = useState(0);
-  useEffect(() => {
-    let fetchData = async () => {
-      try {
-        let response = await axios.get("http://localhost:3001/orders/get_order_id");
-        console.log("this is the axios response"+response);
-        setLOID(latest_order_id=response.data);
-        console.log("order_id from mongo:"+response.data);
-        console.log("setter value:"+latest_order_id);
-      } catch (error) {
-        console.error(error);
-      }
-    };
   
-    fetchData();
-  }, []);
 
 
   const nav = useNavigate();
@@ -67,28 +52,8 @@ function Basket() {
   //sending order data to mongo
   async function handleOrder() {
     if(finalTotal>0){
-      if(!sessionStorage.getItem("order_id")){
-        let temp = latest_order_id+1;
-        console.log("temp varaible is:"+temp);
-        let orderDetails = {
-          username: sessionStorage.getItem("username"),
-          order_id: temp,
-          payment_id: "PAYMENT PENDING!",
-          email: sessionStorage.getItem("email"),
-          items: cart,
-          order_status: "Pending",
-          instructions: instructionfromcust,
-          order_total: finalTotal,
-        };
-    
-      await axios.post("http://localhost:3001/orders/addorder", orderDetails);
+      sessionStorage.setItem("customer_instruction", instructionfromcust);
       
-      let document_id = '6589770129060833d3f653b1';
-      await axios.put(`http://localhost:3001/orders/update_order_id/${document_id}`, {temp});
-      
-      sessionStorage.setItem("order_id", JSON.stringify(orderDetails.order_id));
-      
-      }
       nav("/payment");
     }
   }
