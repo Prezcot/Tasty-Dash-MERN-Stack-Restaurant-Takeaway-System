@@ -10,17 +10,19 @@ function Basket() {
 
   let [latest_order_id,setLOID] = useState(0);
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/orders/get_order_id")
-      .then((response) => {
-        console.log("this is the axios response"+response)
+    let fetchData = async () => {
+      try {
+        let response = await axios.get("http://localhost:3001/orders/get_order_id");
+        console.log("this is the axios response"+response);
         setLOID(latest_order_id=response.data);
         console.log("order_id from mongo:"+response.data);
         console.log("setter value:"+latest_order_id);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-      });
+      }
+    };
+  
+    fetchData();
   }, []);
 
 
