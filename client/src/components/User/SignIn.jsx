@@ -75,19 +75,23 @@ const SignIn = () => {
     if (username && password) {
       if (username.length >= 3 && username.length <= 12) {
         if (password.length >= 5) {
-          await axios
-            .post("http://localhost:3001/users/signin", { username, password })
-            .then((res) => {
-              if (res.data.user == "User") {
-                sessionStorage.setItem("type", "User");
-                sessionStorage.setItem("email", res.data.email);
-                nav("/menu");
-              } else {
-                sessionStorage.setItem("type", "Admin");
-                nav("/admin");
-              }
-            })
-            .catch((err) => setError(err.response.data.message));
+          try{
+            await axios
+              .post("http://localhost:3001/users/signin", { username, password })
+              .then((res) => {
+                if (res.data.user == "User") {
+                  sessionStorage.setItem("type", "User");
+                  sessionStorage.setItem("email", res.data.email);
+                  nav("/menu");
+                } else {
+                  sessionStorage.setItem("type", "Admin");
+                  nav("/admin");
+                }
+              })
+              .catch((err) => setError(err.response.data.message));
+            }catch{
+              console.log("error");
+            }
           sessionStorage.setItem("username", username);
           if (currentlychked == true) {
             localStorage.setItem("rememberusername", username);

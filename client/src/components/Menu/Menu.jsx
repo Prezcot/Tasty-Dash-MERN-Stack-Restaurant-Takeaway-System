@@ -17,15 +17,19 @@ function Menu() {
   const [items, setItems] = useState([]);
   const [quantityMap, setQuantityMap] = useState(JSON.parse(sessionStorage.getItem("menuCart")));
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/menu/data")
-      .then((response) => {
-        const data = response.data;
-        setItems(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    try{
+      axios
+        .get("http://localhost:3001/menu/data")
+        .then((response) => {
+          const data = response.data;
+          setItems(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      }catch{
+        console.log("error");
+      }
   }, []);
 
 
