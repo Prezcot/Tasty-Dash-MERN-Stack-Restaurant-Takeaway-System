@@ -41,7 +41,7 @@ function AdminItem({ item, onDelete, onEdit}) {
               onChange={handlePriceChange}
             />
           ) : (
-            `Price: Rs. ${editedPrice}`
+            `Price: $ ${editedPrice}`
           )}</p>
         </div>
         <div className="menu-actions">

@@ -3,7 +3,7 @@ import React from "react";
 function SummaryItem ({itemProp2, indexProp2, cartProp2}){
 
     let [name2, price2, qty2] = itemProp2.split(",");
-    let totalPrice = parseInt(price2)*parseInt(qty2);
+    let totalPrice = (parseFloat(price2)*parseInt(qty2)).toFixed(2);
 
     if(qty2>0)
     {

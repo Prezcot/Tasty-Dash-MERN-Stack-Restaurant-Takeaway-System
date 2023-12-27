@@ -50,16 +50,16 @@ function Basket() {
     console.log("instruction received: " + instructionfromcust);
   }
 
-  let [finalTotal, setFinalTotal] = useState(0);
+  let [finalTotal, setFinalTotal] = useState(0.0);
 
   useEffect(() => {
     // Calculate the total when cart changes
     let total = cart.reduce((acc, item) => {
       let [name, price, quantity] = item.split(",");
-      return acc + parseInt(price * quantity);
+      return acc +  parseFloat((price * quantity).toFixed(2));
     }, 0);
 
-    setFinalTotal(total);
+    setFinalTotal(total.toFixed(2));
   }, [cart]);
 
   //sending order data to mongo
@@ -139,7 +139,7 @@ function Basket() {
               <div className="finalize">
                 <div id="indi-detail">
                   <p className="textcolor">Total</p>
-                  <p className="textcolor">Rs.{finalTotal}</p>
+                  <p className="textcolor">${finalTotal}</p>
                 </div>
                 <button id="payment-button" onClick={handleOrder}><b>Proceed to Payment</b></button>
               </div>
