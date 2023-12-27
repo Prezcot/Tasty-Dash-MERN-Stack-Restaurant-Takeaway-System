@@ -50,6 +50,7 @@ function Product ({itemProp,indexProp, cartProp, updateProp, quantityProp}){
             </div>
         );
     } else {
+        
         return null;
     }
 }

@@ -56,7 +56,9 @@ function Basket() {
     // Calculate the total when cart changes
     let total = cart.reduce((acc, item) => {
       let [name, price, quantity] = item.split(",");
-      return acc +  parseFloat((price * quantity).toFixed(2));
+      let latest_total = acc +  parseFloat((price * quantity).toFixed(2))
+      sessionStorage.setItem("total", latest_total);
+      return latest_total;
     }, 0);
 
     setFinalTotal(total.toFixed(2));
@@ -64,25 +66,31 @@ function Basket() {
 
   //sending order data to mongo
   async function handleOrder() {
-    let temp = latest_order_id+1;
-    console.log("temp varaible is:"+temp);
-
-    let orderDetails = {
-      username: sessionStorage.getItem("username"),
-      order_id: temp,
-      payment_id: "PAYMENT PENDING!",
-      email: sessionStorage.getItem("email"),
-      items: cart,
-      order_status: "Pending",
-      instructions: instructionfromcust,
-      order_total: finalTotal,
-    };
-
-    await axios.post("http://localhost:3001/orders/addorder", orderDetails);
-
-    let document_id = '6589770129060833d3f653b1';
-    await axios.put(`http://localhost:3001/orders/update_order_id/${document_id}`, {temp});
-    sessionStorage.setItem("order_id", JSON.stringify(orderDetails.order_id))
+    if(finalTotal>0){
+      if(!sessionStorage.getItem("order_id")){
+        let temp = latest_order_id+1;
+        console.log("temp varaible is:"+temp);
+        let orderDetails = {
+          username: sessionStorage.getItem("username"),
+          order_id: temp,
+          payment_id: "PAYMENT PENDING!",
+          email: sessionStorage.getItem("email"),
+          items: cart,
+          order_status: "Pending",
+          instructions: instructionfromcust,
+          order_total: finalTotal,
+        };
+    
+      await axios.post("http://localhost:3001/orders/addorder", orderDetails);
+      
+      let document_id = '6589770129060833d3f653b1';
+      await axios.put(`http://localhost:3001/orders/update_order_id/${document_id}`, {temp});
+      
+      sessionStorage.setItem("order_id", JSON.stringify(orderDetails.order_id));
+      
+      }
+      nav("/payment");
+    }
   }
   
   return (
