@@ -6,7 +6,6 @@ import { io } from "socket.io-client";
 function LiveOrders() {
   let [orderInfo, setOrderInfo] = useState([]);
   let [cancelConfirmation, setCancelConfirmation] = useState(null);
-  
 
   function handleCancelOrder (orderId) {
     setCancelConfirmation(orderId);
@@ -41,6 +40,7 @@ function LiveOrders() {
       const socket = io("http://localhost:3001");
       socket.on("order_status_update", () => {
         fetchOrders();
+        
       });
       return () => {
         socket.disconnect();
@@ -189,6 +189,7 @@ function LiveOrders() {
           ))}   
         </div>
       </div>
+      
     </>
   );
 }
