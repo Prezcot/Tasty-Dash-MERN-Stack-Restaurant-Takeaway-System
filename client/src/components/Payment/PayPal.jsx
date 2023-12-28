@@ -18,7 +18,7 @@ export default function Paypal() {
       closeOnClick: true,
       pauseOnHover: true,
       onClose: () => {
-        nav("/menu");
+        nav("/orders");
       },
       draggable: true,
       progress: undefined,
