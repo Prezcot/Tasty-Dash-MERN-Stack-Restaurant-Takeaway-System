@@ -46,8 +46,10 @@ app.use("/orders", orderRouter);
 io.on("connection", (socket) => {
   console.log("a user connected");
 
-  socket.on("order_status_update", () => {
+  socket.on("order_status_update", (data) => {
+    order_id = data.order_id;
     io.emit("order_status_update");
+    console.log(order_id);
   });
 
   socket.on("disconnect", () => {
