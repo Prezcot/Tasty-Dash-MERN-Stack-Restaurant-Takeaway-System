@@ -52,6 +52,12 @@ function Basket() {
   //sending order data to mongo
   async function handleOrder() {
     if(finalTotal>0){
+
+      let finalcart = cart.filter((item) => {
+        const [, , quantity] = item.split(",");
+        return parseInt(quantity) > 0;});
+      sessionStorage.setItem("cart", JSON.stringify(finalcart))
+
       sessionStorage.setItem("customer_instruction", instructionfromcust);
       
       nav("/payment");
