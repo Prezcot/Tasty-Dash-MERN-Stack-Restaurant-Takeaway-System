@@ -98,7 +98,9 @@ function Dashboard() {
     async function handleDelete()
     {
       const username=sessionStorage.getItem("username");
-      await axios.delete(`http://localhost:3001/users/deleteaccount/${username}`).then(()=>nav("/signin")).catch((err)=>{console.log(err)});
+      await axios.delete(`http://localhost:3001/users/deleteaccount/${username}`).then((res)=>{
+      sessionStorage.setItem("AlertMsg",res.data.message);  
+      nav("/signin")}).catch((err)=>{sessionStorage.setItem("AlertMsg",err.response.data.message)});
     }
   return (
     // <div style={{background:`url("/images/UserDashboardBackground.jpg")`,width:"100vw",height:"100vh",backgroundRepeat:"no-repeat"}}></div>

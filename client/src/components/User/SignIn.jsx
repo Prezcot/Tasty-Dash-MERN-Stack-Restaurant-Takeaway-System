@@ -40,39 +40,76 @@ const SignIn = () => {
     }
   }, []);
 
+  useEffect(()=>{
+    if (sessionStorage.getItem("AlertMsg"))
+    {
+      setError(sessionStorage.getItem("AlertMsg"));
+    }
+  },[])
   function handleError() {
     //also called a render method
     if (error) {
-      return (
-        <center>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              border: "0.5vh solid red",
-              borderRadius: "3vh",
-              paddingTop: "2vh",
-              paddingLeft: "2vh",
-              paddingRight: "2vh",
-            }}
-          >
-            <p
+      if (!sessionStorage.getItem("AlertMsg"))
+      {
+        return (
+          <center>
+            <div
               style={{
-                textAlign: "center",
-                fontWeight: "bold",
-                color: "red",
+                display: "inline-flex",
+                alignItems: "center",
+                border: "0.5vh solid red",
+                borderRadius: "3vh",
+                paddingTop: "2vh",
+                paddingLeft: "2vh",
+                paddingRight: "2vh",
               }}
             >
-              {error}
-            </p>
-          </div>
-        </center>
-      );
+              <p
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  color: "red",
+                }}
+              >
+                {error}
+              </p>
+            </div>
+          </center>
+        );
+      }
+      else{
+        return(
+          <center>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                border: "0.5vh solid green",
+                borderRadius: "3vh",
+                paddingTop: "2vh",
+                paddingLeft: "2vh",
+                paddingRight: "2vh",
+              }}
+            >
+              <p
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  color: "green",
+                }}
+              >
+                {error}
+              </p>
+            </div>
+          </center>
+        )
+      }
     }
   }
   async function handleSignIn(event) {
     event.preventDefault();
     sessionStorage.setItem("username", username);
+    sessionStorage.removeItem("AlertMsg");
     if (username && password) {
       if (username.length >= 3 && username.length <= 12) {
         if (password.length >= 5) {

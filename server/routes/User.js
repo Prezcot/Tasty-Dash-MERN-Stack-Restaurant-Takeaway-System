@@ -109,7 +109,7 @@ router.put("/checkpassword",async(req,res,next)=>{
 });
 
 router.delete("/deleteaccount/:username",async(req,res,next)=>{
-    var {username}=req.params.username;
+    var username=req.params.username;
     try{
         var query=await users.deleteOne({username:username});
         if (query)
@@ -117,7 +117,7 @@ router.delete("/deleteaccount/:username",async(req,res,next)=>{
             res.status(200).json({message:"Successfully Deleted Account"});  
         }
         else{
-            res.status(400).json({message:"Successfully Deleted Account"});
+            res.status(400).json({message:"Account Deletion Was Unsuccessful"});
         }
     }catch(err){
         res.status(400).json({message:err});
