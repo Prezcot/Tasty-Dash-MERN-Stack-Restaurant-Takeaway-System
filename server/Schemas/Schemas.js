@@ -6,6 +6,7 @@ const item = mongoose.model("orders", {
   order_id: String,
   payment_id: String,
   email: String,
+  paypal_email: String,
   items: Array,
   order_status: String,
   instructions: String,

@@ -6,22 +6,35 @@ import DenyDirectAccessRoutes from "./DenyDirectAccessRoutes";
 import { io } from "socket.io-client";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {useNavigate } from 'react-router-dom';
 
 function App() {
-  async function notify() {
-    if(sessionStorage.getItem("type")=="User"){
-      toast.success("Your Order Status Has Been Updated!", {
-        position: toast.POSITION.TOP_CENTER,
-        onClose: () => {
-        },
-      });
+  const nav = useNavigate();
+  
+  async function notify(username) {
+    if(sessionStorage.getItem("username")==username){
+      toast.info("Your Order Status Has Been Updated!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        onClick: function() { 
+          nav("/orders");
+      }
+        });
     }
     
   }
   useEffect(() => {
     const socket = io("http://localhost:3001");
-    socket.on("order_status_update", () => {
-      notify();
+    socket.on("order_status_update", function(data) {
+      let value1 = data.username
+      console.log("this from app.js "+ value1);
+      notify(value1);
     });
     return () => {
       socket.disconnect();

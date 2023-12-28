@@ -42,7 +42,7 @@ const AdminDashboard = () => {
     return string;
   };
 
-  const updateOrderStatus = async (order_id, new_status) => {
+  const updateOrderStatus = async (order_id, new_status, username) => {
     console.log(order_id);
 
     await axios
@@ -54,6 +54,7 @@ const AdminDashboard = () => {
         console.log(res);
         const socket = io("http://localhost:3001");
         socket.emit("order_status_update", { username: username });
+        console.log(username);
         grabData();
       })
       .catch((err) => {
@@ -129,21 +130,21 @@ const AdminDashboard = () => {
                 <button
                   type="button"
                   className="btn btn-success me-4 btn-lg"
-                  onClick={() => updateOrderStatus(items._id, "Approved")}
+                  onClick={() => updateOrderStatus(items._id, "Approved",items.username)}
                 >
                   <i className="bi bi-check">Approve</i>
                 </button>
                 <button
                   type="button"
                   className="btn btn-danger me-4 btn-lg"
-                  onClick={() => updateOrderStatus(items._id, "Declined")}
+                  onClick={() => updateOrderStatus(items._id, "Declined",items.username)}
                 >
                   <i className="bi bi-x">Decline</i>
                 </button>
                 <button
                   type="button"
                   className="btn btn-warning btn-lg"
-                  onClick={() => updateOrderStatus(items._id, "Collected")}
+                  onClick={() => updateOrderStatus(items._id, "Collected",items.username)}
                 >
                   <i>Order Collected</i>
                 </button>

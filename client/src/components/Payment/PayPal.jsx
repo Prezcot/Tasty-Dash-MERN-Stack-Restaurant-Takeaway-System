@@ -10,15 +10,33 @@ export default function Paypal() {
   let [latest_order_id,setLOID] = useState(0);
   
   
-  async function notify() {
+  async function notifySuccess() {
     toast.success("Your order has been placed", {
-      position: toast.POSITION.TOP_CENTER,
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
       onClose: () => {
         nav("/menu");
       },
-    });
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
   }
-  
+  async function notifyFailure() {
+    toast.error("order failed successfully", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
+  }
   useEffect(() => {
     window.paypal
       .Buttons({
@@ -49,6 +67,7 @@ export default function Paypal() {
             order_id: temp,
             payment_id: order.id,
             email: sessionStorage.getItem("email"),
+            paypal_email: order.payer.email_address,
             items: JSON.parse(sessionStorage.getItem("cart")),
             order_status: "Pending",
             instructions: sessionStorage.getItem("customer_instruction"),
@@ -57,19 +76,20 @@ export default function Paypal() {
     
         await axios.post("http://localhost:3001/orders/addorder", orderDetails);
         
-        let document_id = '6589770129060833d3f653b1';
+        let document_id = '6589770129060833d3f653b1';/*this document does not change and is singular in the mongodb collection*/
         await axios.put(`http://localhost:3001/orders/update_order_id/${document_id}`, {temp});
-      
+
         sessionStorage.removeItem("menuCart");
         sessionStorage.removeItem("cart");
         sessionStorage.removeItem("order_id");
         sessionStorage.removeItem("total");
         
-        notify();
+        notifySuccess();
         
         
         },
         onError: (err) => {console.log(err);
+          notifyFailure();
         },
       })
       .render(paypal.current);
