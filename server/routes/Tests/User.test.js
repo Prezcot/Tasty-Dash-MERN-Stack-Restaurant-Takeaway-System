@@ -31,12 +31,8 @@ jest.mock('bcrypt', () => ({
 }));
 describe("INTEGRATION TEST - User Route",()=>{
   it("Successfully Adds New Users To Database",async()=>{
-    const res=await request(app).post("/users/signup",{username:"george",email:"george@gmail.com",phonenumber:"5438922345",password:"George123,"})
-    console.log(res.body);
+    const res=await request(app).post("/users/signup").send({username:"jacob",email:"george@outlook.com",phonenumber:"5438922345",password:"George123,"});
     expect(res.status).toBe(200);
     expect(res.body).toEqual({message:"Successful Register"});
-    //const user=new users({username:"George",type:"User",email:"george@gmail.com",phonenumber:"5438922345",password:"George123,"});
-    //await user.save();
-
   });
 });

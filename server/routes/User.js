@@ -56,9 +56,7 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
     var {username,email,phonenumber,password} = req.body;
     var type="User";
     try{
-        console.log("hi");
         password= await bcrypt.hash(password,10);
-        console.log("hi");
         var finduser=await users.find({username:username}).catch((err)=>console.log(err));
         var findphonenumber=await users.find({phonenumber:phonenumber}).catch((err)=>console.log(err));
         var findemail=await users.find({email:email}).catch((err)=>console.log(err));
@@ -67,7 +65,6 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
             res.status(400).json({message:"Account Already Exists"});
         }
         else{
-            console.log("fheahfahfah");
             const User=new users({username,type,email,phonenumber,password});
             await User.save().then(()=>res.status(200).json({message:"Successful Register"})).catch((err)=>res.status(400).json({message:err}));
             //the anonymous function inside .then promise handler would have a parameter that is related to the outer function which is User.save
