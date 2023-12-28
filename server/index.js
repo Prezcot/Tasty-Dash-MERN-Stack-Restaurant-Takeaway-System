@@ -48,8 +48,8 @@ io.on("connection", (socket) => {
 
   socket.on("order_status_update", (data) => {
     order_id = data.order_id;
-    io.emit("order_status_update");
-    console.log(order_id);
+    io.emit("order_status_update", { order_id: order_id });
+    console.log("From Socket: " + order_id);
   });
 
   socket.on("disconnect", () => {
