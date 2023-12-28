@@ -6,6 +6,9 @@ import Menu from "../Menu/Menu";
 import NavBar from "../NavBar";
 import axios from "axios";
 import {useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Basket() {
 
   
@@ -61,6 +64,11 @@ function Basket() {
       sessionStorage.setItem("customer_instruction", instructionfromcust);
       
       nav("/payment");
+      
+    } else {
+      toast.warning("Basket is empty", {
+        position: toast.POSITION.TOP_CENTER,
+      })
     }
   }
   
@@ -126,6 +134,7 @@ function Basket() {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </>
   );
 }
