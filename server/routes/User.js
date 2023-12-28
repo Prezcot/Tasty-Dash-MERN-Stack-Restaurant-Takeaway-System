@@ -108,8 +108,8 @@ router.put("/checkpassword",async(req,res,next)=>{
     }
 });
 
-router.put("/deleteaccount",async(req,res,next)=>{
-    var {username}=req.body;
+router.delete("/deleteaccount/:username",async(req,res,next)=>{
+    var {username}=req.params.username;
     try{
         var query=await users.deleteOne({username:username});
         if (query)
