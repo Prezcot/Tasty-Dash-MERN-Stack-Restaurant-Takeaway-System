@@ -47,9 +47,9 @@ io.on("connection", (socket) => {
   console.log("a user connected");
 
   socket.on("order_status_update", (data) => {
-    order_id = data.order_id;
-    io.emit("order_status_update", { order_id: order_id });
-    console.log("From Socket: " + order_id);
+    username = data.username;
+    io.emit("order_status_update", { username: username });
+    console.log("From Socket: " + username);
   });
 
   socket.on("disconnect", () => {

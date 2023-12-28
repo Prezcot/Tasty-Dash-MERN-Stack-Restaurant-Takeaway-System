@@ -53,7 +53,7 @@ const AdminDashboard = () => {
       .then((res) => {
         console.log(res);
         const socket = io("http://localhost:3001");
-        socket.emit("order_status_update", { order_id: order_id });
+        socket.emit("order_status_update", { username: username });
         grabData();
       })
       .catch((err) => {
