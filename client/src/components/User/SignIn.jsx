@@ -76,9 +76,12 @@ const SignIn = () => {
     if (username && password) {
       if (username.length >= 3 && username.length <= 12) {
         if (password.length >= 5) {
-          try{
+          try {
             await axios
-              .post("http://localhost:3001/users/signin", { username, password })
+              .post("http://localhost:3001/users/signin", {
+                username,
+                password,
+              })
               .then((res) => {
                 if (res.data.user == "User") {
                   sessionStorage.setItem("type", "User");
@@ -90,9 +93,9 @@ const SignIn = () => {
                 }
               })
               .catch((err) => setError(err.response.data.message));
-            }catch{
-              console.log("error");
-            }
+          } catch {
+            console.log("error");
+          }
           if (currentlychked == true) {
             localStorage.setItem("rememberusername", username);
             localStorage.setItem("checked", JSON.stringify(currentlychked));
@@ -126,12 +129,6 @@ const SignIn = () => {
         height: "100vh",
       }}
     >
-      {/* just for testing please ignore */}
-
-      <button onClick={() => nav("/admindashboard")}>
-        Just for testing - will go to the dashboard
-      </button>
-
       <div
         style={{
           marginTop: "5vh",

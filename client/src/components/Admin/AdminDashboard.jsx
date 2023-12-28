@@ -53,7 +53,7 @@ const AdminDashboard = () => {
       .then((res) => {
         console.log(res);
         const socket = io("http://localhost:3001");
-        socket.emit("order_status_update");
+        socket.emit("order_status_update", { username: username });
         grabData();
       })
       .catch((err) => {
@@ -126,7 +126,7 @@ const AdminDashboard = () => {
               <br />
               <hr style={{ margin: "10px" }} />
               <span className="d-flex mt-3">
-                {/* <button
+                <button
                   type="button"
                   className="btn btn-success me-4 btn-lg"
                   onClick={() => updateOrderStatus(items._id, "Approved")}
@@ -139,15 +139,15 @@ const AdminDashboard = () => {
                   onClick={() => updateOrderStatus(items._id, "Declined")}
                 >
                   <i className="bi bi-x">Decline</i>
-                </button> 
+                </button>
                 <button
-                    type="button"
-                    className="btn btn-warning btn-lg"
-                    onClick={() => updateOrderStatus(items._id, "Collected")}
-                  >
-                    <i>Order Collected</i>
-                  </button>*/}
-                {items.order_status === "Pending" && (
+                  type="button"
+                  className="btn btn-warning btn-lg"
+                  onClick={() => updateOrderStatus(items._id, "Collected")}
+                >
+                  <i>Order Collected</i>
+                </button>
+                {/* {items.order_status === "Pending" && (
                   <>
                     <button
                       type="button"
@@ -173,7 +173,7 @@ const AdminDashboard = () => {
                   >
                     <i>Order Collected</i>
                   </button>
-                )}
+                )} */}
                 <h4
                   style={{
                     marginLeft: "50px",

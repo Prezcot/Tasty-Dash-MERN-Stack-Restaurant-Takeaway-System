@@ -46,8 +46,10 @@ app.use("/orders", orderRouter);
 io.on("connection", (socket) => {
   console.log("a user connected");
 
-  socket.on("order_status_update", () => {
-    io.emit("order_status_update");
+  socket.on("order_status_update", (data) => {
+    username = data.username;
+    io.emit("order_status_update", { username: username });
+    console.log("From Socket: " + username);
   });
 
   socket.on("disconnect", () => {
