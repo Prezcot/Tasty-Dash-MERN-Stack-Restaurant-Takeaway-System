@@ -57,8 +57,8 @@ const SignIn = () => {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                border: "0.5vh solid red",
-                borderRadius: "3vh",
+                border: "0.1vh solid red",
+                borderRadius: "1vh",
                 paddingTop: "2vh",
                 paddingLeft: "2vh",
                 paddingRight: "2vh",
@@ -67,7 +67,7 @@ const SignIn = () => {
               <p
                 style={{
                   textAlign: "center",
-                  fontWeight: "bold",
+                  fontWeight: "normal",
                   color: "red",
                 }}
               >
@@ -84,8 +84,8 @@ const SignIn = () => {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                border: "0.5vh solid green",
-                borderRadius: "3vh",
+                border: "0.1vh solid green",
+                borderRadius: "1vh",
                 paddingTop: "2vh",
                 paddingLeft: "2vh",
                 paddingRight: "2vh",
@@ -94,7 +94,7 @@ const SignIn = () => {
               <p
                 style={{
                   textAlign: "center",
-                  fontWeight: "bold",
+                  fontWeight: "normal",
                   color: "green",
                 }}
               >

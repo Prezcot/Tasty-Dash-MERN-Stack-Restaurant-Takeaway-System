@@ -44,8 +44,8 @@ function Dashboard() {
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  border: "0.5vh solid red",
-                  borderRadius: "3vh",
+                  border: "0.1vh solid red",
+                  borderRadius: "1vh",
                   paddingTop: "2vh",
                   paddingLeft: "2vh",
                   paddingRight: "2vh",
@@ -54,7 +54,7 @@ function Dashboard() {
                 <p
                   style={{
                     textAlign: "center",
-                    fontWeight: "bold",
+                    fontWeight: "normal",
                     color: "red",
                   }}
                 >
@@ -139,13 +139,6 @@ function Dashboard() {
                   </div>)
             }
             <div>
-                <div style={{display:"flex",flexDirection:"row",justifyContent:"flex-end"}}>
-                  <button style={{backgroundColor: "green",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={()=>{
-                      nav("/signin")
-                      sessionStorage.removeItem("username")
-                      sessionStorage.removeItem("email")}}>Log Out</button>
-                  <br></br>
-                </div>
                 {handleError()}
                 <form onSubmit={handleSubmit}>
                     <table>
