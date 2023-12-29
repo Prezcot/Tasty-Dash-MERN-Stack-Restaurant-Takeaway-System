@@ -72,7 +72,7 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
         }
     }catch(err){
         console.log("fheahfahfah");
-        res.status(400).json({message:"bad"});
+        res.status(400).json({message:err});
     }
 });
 
@@ -101,7 +101,7 @@ router.put("/checkpassword",async(req,res,next)=>{
             }
         }
         else{
-            res.status(400);
+            res.status(400).json({message:"Fatal Error"});
         }
     }catch(err){
         res.status(400).json({message:err});
