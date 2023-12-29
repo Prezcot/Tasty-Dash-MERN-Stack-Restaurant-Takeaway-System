@@ -13,6 +13,8 @@ function NavBar(props) {
   const handleLogout = () => {
     sessionStorage.setItem("menuCart","{}");
     sessionStorage.removeItem("order_id");
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("email");
     nav("/signin");
   };
 
