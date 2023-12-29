@@ -7,22 +7,6 @@ function Payment (){
 
     const [checkout, setCheckOut] = useState(false);
 
-    // Chamaths side
-
-  // let orderId = 8;
-  // sessionStorage.setItem("order_id",JSON.stringify(orderId));
-
-  // let username = 8;
-  // sessionStorage.setItem("username",JSON.stringify(username));
-
-  // let thinalcart = ["Pizza,600,1","Pebbles,400,3","Lava Cake,200,2"];
-  // sessionStorage.setItem("cart",JSON.stringify(thinalcart));
-
-
-  // let total_amount = 10;
-  // sessionStorage.setItem("total_amount",JSON.stringify(total_amount));
-
-
 let OrderId = sessionStorage.getItem('order_id');
 let Username = sessionStorage.getItem('username');
 let Cart = sessionStorage.getItem('cart');
@@ -31,8 +15,8 @@ let Total_amount = sessionStorage.getItem('total');
 
   return (
   <>
+  <div className="everything">
   <NavBar></NavBar>
-  <div>
     <style>
     {`
       body {
@@ -47,35 +31,32 @@ let Total_amount = sessionStorage.getItem('total');
       }
     `}
     </style>
-  <h1>Checkout</h1><br/>
-
-  <h2>Order Id:</h2>
-  <label>{OrderId}</label>
-
-  <h2>Username:</h2>
-  <label>{Username}</label>
-
-  <h2>Items:</h2>
-  <label>{Cart}</label>
-
-  <h2>Total Amount:</h2>
-  <label>{Total_amount}</label>
-
+  <h1 style={{marginTop:"3%", marginLeft:"10%"}}>Checkout</h1><br/>
   
-  <div className="pay-button">
-  {checkout ? (
-    <Paypal />
-  ) : (
-    <button   
-      style={{ backgroundColor: 'green', color: 'white' }}
-      onClick={() => {
-        setCheckOut(true);
-      }}
-    >
-      Payment
-    </button>
+  <div className="payment-detail-button-container">
 
-  )  }
+  <div style={{display:"flex", flexDirection:"column",justifyContent:"space-around", height:"50vh"}}>
+  <div>
+      <h2>Username:</h2>
+      <h5 style={{ fontWeight: 'normal' }}>{Username}</h5>
+    </div>
+
+    <div>
+      <h2>Items:</h2>
+      <h5 style={{ fontWeight: 'normal' }}>{Cart}</h5>
+    </div>
+
+    <div>
+      <h2>Total Amount:</h2>
+      <h5 style={{ fontWeight: 'normal' }}>${Total_amount}</h5>
+    </div>
+
+  </div>
+
+
+  <div className="pay-button">
+    <Paypal />
+  </div>  
 </div>
 </div>
   </>
