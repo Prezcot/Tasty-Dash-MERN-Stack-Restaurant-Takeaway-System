@@ -3,6 +3,7 @@ import { render, fireEvent, waitFor,getAllByText,getByText } from "@testing-libr
 import Menu from "../Menu/Menu";
 import Basket from "../Order/Basket";
 import Product from "../Order/Product";
+import Payment from "../Payment/Payment";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import '@testing-library/jest-dom/extend-expect';
@@ -152,8 +153,9 @@ describe("UNIT TEST - BASKET COMPONENT", () => {
         const totalElement = getByTestId("order-total-test");
         expect(totalElement.textContent).toBe("$29.93");
       });
-      
-      
+
+});
+
 describe("INTEGRATION TEST - BASKET COMPONENT", () => {
 
     it("'Back to Menu' button takes users back to Menu page", () => {
@@ -182,12 +184,14 @@ describe("INTEGRATION TEST - BASKET COMPONENT", () => {
         </BrowserRouter>);
         const backToMenuButton = getByTestId("back-to-menu-test");
         fireEvent.click(backToMenuButton);
-        var {getAllByText,queryByText,getByPlaceholderText}=render(<BrowserRouter>
-        <Menu/>
+        var {getByText,queryByText,getByPlaceholderText}=render(
+        <BrowserRouter>
+          <Menu/>
         </BrowserRouter>);
-        var elementsinmenu=getAllByText("Menu");
-        expect(elementsinmenu.length).toBeGreaterThan(0);
+        var elementsinmenu=getByText("Starters");
+        expect(elementsinmenu).toBeInTheDocument();
 
-        });
-});
+    });
+
+    
 });
