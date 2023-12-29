@@ -38,7 +38,7 @@ function LiveOrders() {
   useEffect(() => {
       fetchOrders();
       const socket = io("http://localhost:3001");
-      socket.on("order_status_update", () => {
+      socket.on("order_status_update", (username) => {
         fetchOrders();
         
       });
