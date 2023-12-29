@@ -96,7 +96,6 @@ const updateItems = (itemName, itemImage,action) => {
   <h2>Main Courses</h2>
   <br></br>
   <div className="menu-item-div">
-    
     {items.filter(item => item.itemType === 'mainCourse').map(item => (
       <Item
         key={item.itemName}
@@ -110,7 +109,6 @@ const updateItems = (itemName, itemImage,action) => {
   <h2>Desserts</h2>
   <br></br>
   <div className="menu-item-div">
-    
     {items.filter(item => item.itemType === 'dessert').map(item => (
       <Item
         key={item.itemName}
@@ -122,7 +120,7 @@ const updateItems = (itemName, itemImage,action) => {
     ))}
   </div>
 
-  <Cart items={items} quantityMap={quantityMap} />
+  <Cart items={items} quantityMap={quantityMap}  data-testid="cart-icon"/>
 </div>
 
   

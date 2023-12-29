@@ -43,7 +43,7 @@ function Cart({ items, quantityMap}) {
             
           </div>
           <button onClick={() => nav("/basket")} style={{ color: "white" }}>
-              View My Basket
+              <b>View My Basket</b>
               </button>
           </div>
         )}
