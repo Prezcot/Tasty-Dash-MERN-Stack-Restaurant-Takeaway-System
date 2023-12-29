@@ -3,15 +3,22 @@ const express = require("express");
 const adminDashboardData = require("../AdminDashboardData");
 const { item } = require("../../Schemas/Schemas");
 const { default: mongoose } = require("mongoose");
+const { MongoMemoryServer } = require('mongodb-memory-server');
 require("dotenv").config();
 
+// beforeAll(async () => {
+//   const uri = process.env.ATLAS_URI;
+//   await mongoose.connect(uri);
+// });
+
+// afterAll(async () => {
+//   await mongoose.connection.close();
+// });
 beforeAll(async () => {
   const uri = process.env.ATLAS_URI;
-  await mongoose.connect(uri);
-});
-
-afterAll(async () => {
-  await mongoose.connection.close();
+  mongoServer = await MongoMemoryServer.create();
+  const mongoUri = mongoServer.getUri();
+  await mongoose.connect(mongoUri);
 });
 
 const app = express();

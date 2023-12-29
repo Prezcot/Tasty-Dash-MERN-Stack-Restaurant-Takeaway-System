@@ -71,7 +71,6 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
             //which is the response from User.save() basically.
         }
     }catch(err){
-        console.log("fheahfahfah");
         res.status(400).json({message:err});
     }
 });

@@ -3,27 +3,32 @@ const express = require("express");
 const User = require("../User");
 const {users} = require("../../Schemas/Schemas");
 const {default: mongoose} = require("mongoose");
-const supertest = require("supertest");
+const { MongoMemoryServer } = require('mongodb-memory-server');
 require("dotenv").config();
 
-jest.mock('bcrypt', () => ({
-  hash: jest.fn(() => Promise.resolve('hashedPassword')),
-  compare: jest.fn(() => Promise.resolve(true))
-}));
 
+// jest.mock('bcrypt', () => ({
+//   hash: jest.fn(() => Promise.resolve('hashedPassword')),
+//   compare: jest.fn(() => Promise.resolve(true))
+// }));
 
 beforeAll(async () => {
   const uri = process.env.ATLAS_URI;
-  await mongoose.connect(uri);
+  mongoServer = await MongoMemoryServer.create();
+  const mongoUri = mongoServer.getUri();
+  await mongoose.connect(mongoUri);
+  const user=new users({username:"user",type:"User",email:"user@gmail.com",phonenumber:"0985674328",password:"User12,"});
+  user.save();
+  app=express();
+  app.use(express.json());
+  app.use("/users",User);
 });
 
 afterAll(async () => {
   await mongoose.connection.close();
+  await mongoServer.stop();
 });
 
-app=express();
-app.use(express.json());
-app.use("/users",User);
 
 describe("INTEGRATION TEST - User Route",()=>{
     it("Successfully Responds To Requests",async()=>{
@@ -45,6 +50,6 @@ describe("INTEGRATION TEST - User Route",()=>{
 describe("INTEGRATION TEST - User Route",()=>{
   it("Successfully Adds New Users To Database",async()=>{
     const res=await request(app).post("/users/signup").send({username:"jacob",email:"george@outlook.com",phonenumber:"5438922345",password:"George123,"});
-    expect(res.body).toEqual({message:"Account Already Exists"});
+    expect(res.body).toEqual({message:"Successful Register"});
   });
 });
