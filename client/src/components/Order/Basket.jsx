@@ -100,7 +100,7 @@ function Basket() {
           <h1 className="title">Your Basket</h1>
           <div id="tomenu">
             <img id="arrow" src="/images/Arrow.png" width="50px" height="15px" />
-            <button id="menu-button" onClick={()=>nav("/menu")} style={{backgroundColor:"#121212", borderRadius:"10px", border:"solid 3px #d9d9d9"}}>Back to Menu</button>
+            <button id="menu-button" data-testid="back-to-menu-test" onClick={()=>nav("/menu")} style={{backgroundColor:"#121212", borderRadius:"10px", border:"solid 3px #d9d9d9"}}>Back to Menu</button>
           </div>
         </div>
   
@@ -121,7 +121,7 @@ function Basket() {
   
               <div className="instruction">
                 <h3 className="textcolor">Special Instructions for Preparation</h3>
-                <textarea className="textarea" onChange={setInstructions}></textarea>
+                <textarea className="textarea" data-testid="spe-ins-test-comp" onChange={setInstructions}></textarea>
               </div>
             </div>
   
@@ -133,9 +133,9 @@ function Basket() {
               <div className="finalize">
                 <div id="indi-detail">
                   <p className="textcolor">Total</p>
-                  <p className="textcolor">${finalTotal}</p>
+                  <p className="textcolor" data-testid="order-total-test">${finalTotal}</p>
                 </div>
-                <button id="payment-button" onClick={handleOrder}><b>Proceed to Payment</b></button>
+                <button id="payment-button" data-testid="payment-button-test" onClick={handleOrder}><b>Proceed to Payment</b></button>
               </div>
             </div>
           </div>

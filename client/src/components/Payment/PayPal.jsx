@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Paypal() {
+function Paypal() {
   const paypal = useRef();
   const nav = useNavigate();
   let [latest_order_id,setLOID] = useState(0);
@@ -103,3 +103,5 @@ export default function Paypal() {
     </div>
   );
 }
+
+export default Paypal;

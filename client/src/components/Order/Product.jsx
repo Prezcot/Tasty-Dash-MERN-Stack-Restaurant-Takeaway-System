@@ -41,11 +41,11 @@ function Product ({itemProp,indexProp, cartProp, updateProp, quantityProp}){
                 <b><label>{name}</label></b>
                 <b><label>${price} each</label></b>
                 <div className="counter">
-                    <img name="minus" src="/images/Minus.png" className="counter-button" onClick={(e)=>handleQuantity(e)}/>
+                    <img name="minus" data-testid="minus-button" src="/images/Minus.png" className="counter-button" onClick={(e)=>handleQuantity(e)}/>
                     <div id="counter-number">
                     <b><label class="counter-quantity">{quantity}</label></b>
                     </div>
-                    <img name="plus" src="/images/Plus.png" className="counter-button" onClick={(e)=>handleQuantity(e)}/>
+                    <img name="plus" data-testid="plus-button" src="/images/Plus.png" className="counter-button" onClick={(e)=>handleQuantity(e)}/>
                 </div>
             </div>
         );
