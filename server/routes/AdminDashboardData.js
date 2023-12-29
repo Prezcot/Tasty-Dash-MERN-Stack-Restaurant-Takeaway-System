@@ -1,6 +1,6 @@
 const { default: mongoose } = require("mongoose");
 const router = require("express").Router();
-const { item, Menu, users } = require("../Schemas/Schemas");
+const { item, Menu, users, refunds } = require("../Schemas/Schemas");
 
 router.get("/", (req, res) => {
   res.send("Hello");
@@ -14,18 +14,45 @@ router.get("/receive/order_data", async (req, res) => {
     res.status(500);
   }
 });
+router.get("/receive/refund_data", async (req, res) => {
+  try {
+    let data = await refunds.find();
+    res.json(data);
+  } catch (err) {
+    res.status(500);
+  }
+});
 
 router.put("/set_order_status", async (req, res) => {
-  order_id = req.body.order_id;
+  object_id = req.body.object_id;
   order_status = req.body.order_status;
-  console.log(order_id, " ", order_status);
+  console.log(object_id, " ", order_status);
   try {
-    await item.findByIdAndUpdate(order_id, {
+    await item.findByIdAndUpdate(object_id, {
       order_status: order_status,
     });
     res.json("Data changed Successfully");
   } catch (err) {
     res.status(500);
+  }
+});
+
+router.post("/move_to_refund", async (req, res) => {
+  try {
+    res.json("Promise fullfillment");
+    let object_id = req.body.object_id;
+    const data_to_move = await item.findOneAndDelete(object_id);
+    if (data_to_move) {
+      data_to_move.order_status = "Refund Needed";
+      const new_data = new refunds(data_to_move.toObject());
+      await new_data.save();
+
+      console.log("Data moved successfully!");
+    } else {
+      console.log("Data not found.");
+    }
+  } catch (error) {
+    console.error("Error moving data:", error);
   }
 });
 

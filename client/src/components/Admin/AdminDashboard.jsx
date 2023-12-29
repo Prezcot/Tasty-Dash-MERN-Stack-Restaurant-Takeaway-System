@@ -6,7 +6,6 @@ import parse from "html-react-parser";
 import "../../BootstrapImports.js";
 import axios from "axios";
 import { io } from "socket.io-client";
-import { Button } from "bootstrap";
 
 const AdminDashboard = () => {
   const [order_data, set_order_data] = useState([]);
@@ -42,24 +41,37 @@ const AdminDashboard = () => {
     return string;
   };
 
-  const updateOrderStatus = async (order_id, new_status, username) => {
-    console.log(order_id);
-
-    await axios
-      .put("http://localhost:3001/admin_dashboard_data/set_order_status", {
-        order_id: order_id,
-        order_status: new_status,
-      })
-      .then((res) => {
-        console.log(res);
+  const updateOrderStatus = async (object_id, new_status, username) => {
+    console.log("updated order status function");
+    if (new_status != "Declined") {
+      await axios
+        .put("http://localhost:3001/admin_dashboard_data/set_order_status", {
+          object_id: object_id,
+          order_status: new_status,
+        })
+        .then((res) => {
+          const socket = io("http://localhost:3001");
+          socket.emit("order_status_update", { username: username });
+          grabData();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      console.log("inside else");
+      try {
+        console.log(object_id);
+        await axios.post(
+          "http://localhost:3001/admin_dashboard_data/move_to_refund",
+          { object_id: object_id }
+        );
         const socket = io("http://localhost:3001");
         socket.emit("order_status_update", { username: username });
-        console.log(username);
         grabData();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   const sortedOrderData = [...order_data].sort((a, b) => {
@@ -130,21 +142,27 @@ const AdminDashboard = () => {
                 <button
                   type="button"
                   className="btn btn-success me-4 btn-lg"
-                  onClick={() => updateOrderStatus(items._id, "Approved",items.username)}
+                  onClick={() =>
+                    updateOrderStatus(items._id, "Approved", items.username)
+                  }
                 >
                   <i className="bi bi-check">Approve</i>
                 </button>
                 <button
                   type="button"
                   className="btn btn-danger me-4 btn-lg"
-                  onClick={() => updateOrderStatus(items._id, "Declined",items.username)}
+                  onClick={() =>
+                    updateOrderStatus(items._id, "Declined", items.username)
+                  }
                 >
                   <i className="bi bi-x">Decline</i>
                 </button>
                 <button
                   type="button"
                   className="btn btn-warning btn-lg"
-                  onClick={() => updateOrderStatus(items._id, "Collected",items.username)}
+                  onClick={() =>
+                    updateOrderStatus(items._id, "Collected", items.username)
+                  }
                 >
                   <i>Order Collected</i>
                 </button>

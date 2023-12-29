@@ -13,6 +13,18 @@ const item = mongoose.model("orders", {
   order_total: String,
 });
 
+const refunds = mongoose.model("refunds", {
+  username: String,
+  order_id: String,
+  payment_id: String,
+  email: String,
+  paypal_email: String,
+  items: Array,
+  order_status: String,
+  instructions: String,
+  order_total: String,
+});
+
 //Orders.js
 // const order_identification = mongoose.model("order_id", {
 //   orderID:Number,
@@ -21,7 +33,7 @@ const item = mongoose.model("orders", {
 const order_identification = mongoose.model(
   "order_identification",
   new mongoose.Schema({
-    orderID:Number,
+    orderID: Number,
   }),
   "order_ids"
 );
@@ -49,4 +61,4 @@ const UserSchema = new mongoose.Schema({
 });
 const users = mongoose.model("users", UserSchema); // you can now use this to create other users
 
-module.exports = { item, order_identification, Menu, users };
+module.exports = { item, order_identification, Menu, users, refunds };
