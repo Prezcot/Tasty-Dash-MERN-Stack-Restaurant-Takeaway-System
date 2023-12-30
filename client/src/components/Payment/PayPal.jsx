@@ -26,7 +26,7 @@ function Paypal() {
       });
   }
   async function notifyFailure() {
-    toast.error("order failed successfully", {
+    toast.error("order failed", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,

@@ -57,12 +57,13 @@ function LiveOrders() {
             orders.order_status !== "Collected" && (
               <div className="live-order-items">
                 <div className="indi-order" style={{alignItems:"center"}}>
+
                   <div>
                     <b>
                       <label>Order ID</label>
                     </b>
                     <br />
-                    <label data-testid="rendered-order-id-test">{orders.order_id}</label>
+                    <label style={{color:"orange"}} data-testid="rendered-order-id-test">{orders.order_id}</label>
                   </div>
 
                   <div>
@@ -70,7 +71,7 @@ function LiveOrders() {
                       <label>Order Status</label>
                     </b>
                     <br />
-                    <label data-testid="live-order-item">{orders.order_status}</label>
+                    <label style={{color:"orange"}} data-testid="live-order-item">{orders.order_status}</label>
                   </div>
 
                   <div>
@@ -78,7 +79,7 @@ function LiveOrders() {
                       <label>Order Total</label>
                     </b>
                     <br />
-                    <label>{orders.order_total}</label>
+                    <label style={{color:"orange"}}>${orders.order_total}</label>
                   </div>
 
                   <div>
@@ -90,7 +91,7 @@ function LiveOrders() {
                       let [name, price, quantity] = item.split(",");
                       return (
                         <>
-                          <label>{name} (x{quantity})</label>
+                          <label style={{color:"orange"}}>{name} (x{quantity})</label>
                           <br />
                         </>
                       );
@@ -129,7 +130,7 @@ function LiveOrders() {
                       <label>Order Total</label>
                     </b>
                     <br />
-                    <label>{orders.order_total}</label>
+                    <label>${orders.order_total}</label>
                   </div>
 
                   <div>

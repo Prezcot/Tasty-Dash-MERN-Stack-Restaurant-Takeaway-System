@@ -44,7 +44,7 @@ function Basket() {
     let total = cart.reduce((acc, item) => {
       let [name, price, quantity] = item.split(",");
       let latest_total = acc +  parseFloat((price * quantity).toFixed(2))
-      sessionStorage.setItem("total", latest_total);
+      sessionStorage.setItem("total", latest_total.toFixed(2));
       return latest_total;
     }, 0);
 

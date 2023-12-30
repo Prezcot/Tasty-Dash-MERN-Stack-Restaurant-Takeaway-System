@@ -344,41 +344,41 @@ button {
 
 .header{
   color:white;
-  padding-left:20px;
-  padding-top:20px;
+  padding-left:1%;
+  padding-top:2%;
 }
 
 .live_orders{
   color:white;
-  padding-left:20px;
-  padding-top:20px;
+  padding-left:1%;
+  padding-top:1%;
 }
 
 .order_history{
   color:white;
-  padding-left:20px;
-  padding-top:20px;
+  padding-left:1%;
+  padding-top:1%;
 }
 
 .live-order-items{
   height: fit-content;
-  padding:20px;
+  padding:1.5%;
   color: white;
   background-color: #32383f;
   border: 3px solid orange;
-  margin: 20px;
+  margin: 2%;
   border-radius: 10px;
 }
 
 .order-history-items{
   height: fit-content;
-  padding:20px;
+  padding:1.5%;
   color: white;
   background-color: #32383f;
   border: 3px solid orange;
-  margin: 20px;
+  margin: 2%;
   border-radius: 10px;
-  opacity: 70%;
+  opacity: 40%;
 }
 
 
@@ -388,6 +388,10 @@ button {
   justify-content: space-between;
 
 }
+
+
+
+
 /*Admin Menu Page*/
 .item-form-container {
   
