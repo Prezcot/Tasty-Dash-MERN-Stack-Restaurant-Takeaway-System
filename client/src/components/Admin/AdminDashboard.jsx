@@ -74,6 +74,23 @@ const AdminDashboard = () => {
     }
   };
 
+  // const sortedOrderData = [...order_data].sort((a, b) => {
+  //   const orderStatusOrder = {
+  //     Pending: 0,
+  //     Approved: 1,
+  //     Collected: 2,
+  //     Declined: 3,
+  //   };
+  //   const orderStatusA = orderStatusOrder[a.order_status];
+  //   const orderStatusB = orderStatusOrder[b.order_status];
+
+  //   if (orderStatusA < orderStatusB) {
+  //     return -1;
+  //   } else if (orderStatusA > orderStatusB) {
+  //     return 1;
+  //   } else return 0;
+  // });
+
   const sortedOrderData = [...order_data].sort((a, b) => {
     const orderStatusOrder = {
       Pending: 0,
@@ -84,11 +101,14 @@ const AdminDashboard = () => {
     const orderStatusA = orderStatusOrder[a.order_status];
     const orderStatusB = orderStatusOrder[b.order_status];
 
-    if (orderStatusA < orderStatusB) {
-      return -1;
-    } else if (orderStatusA > orderStatusB) {
-      return 1;
-    } else return 0;
+    if (orderStatusA !== orderStatusB) {
+      return orderStatusA - orderStatusB; // Sort by order status
+    } else if (a.order_status === "Pending") {
+      // If both are 'Pending', sort by order_id in descending order
+      return b.order_id - a.order_id;
+    } else {
+      return 0; // Keep the order unchanged for other statuses
+    }
   });
 
   return (
