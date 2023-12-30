@@ -23,13 +23,11 @@ function Item({ item, quantity, onAddToCart, onRemoveFromCart }) {
 
   return (
     <div className="menu-card">
-      <div className="menu-card-image">
       <img src={item.itemImage} alt={item.itemName}/>
-      </div>
       <div className="menu-info">
-        <h3>{item.itemName}</h3>
+        <h3 align='center' style={{fontWeight:'600'}}>{item.itemName}</h3>
         <p>{item.itemDescription}</p>
-        <p>Price: $ {item.itemPrice.toFixed(2)}</p>
+        <p align='center' style={{fontSize:'130%', fontWeight:'bold'}}>$ {item.itemPrice.toFixed(2)}</p>
       </div>
       <div className="menu-actions">
           <button className="remove-from-cart" onClick={handleRemoveFromCart} data-testid="minus">

@@ -31,9 +31,9 @@ function AdminItem({ item, onDelete, onEdit}) {
       <div className="menu-card">
         <img src={item.itemImage} alt={item.itemName} />
         <div className="menu-info">
-          <h3>{item.itemName}</h3>
-          <p>{item.itemDescription}</p>
-          <p>{isEditing ? (
+          <h3 align='center' style={{fontWeight:'600'}}>{item.itemName}</h3>
+          <p align='center'>{item.itemDescription}</p>
+          <p align='center' style={{fontSize:'130%', fontWeight:'bold'}}>{isEditing ? (
             <input
               type="number"
               step="0.01"
@@ -41,14 +41,14 @@ function AdminItem({ item, onDelete, onEdit}) {
               onChange={handlePriceChange}
             />
           ) : (
-            `Price: $ ${editedPrice}`
+            `$ ${editedPrice}`
           )}</p>
         </div>
         <div className="menu-actions">
           <div className="quantity">
-            <button className="remove-from-cart" onClick={handleEditClick}>{edittext}</button>
+            <button className="edit-button" onClick={handleEditClick}>{edittext}</button>
           </div>
-          <button className="add-to-cart" onClick={onDelete}>Delete</button>
+          <button className="delete-button" onClick={onDelete}>Delete</button>
         </div>
       </div>
     );

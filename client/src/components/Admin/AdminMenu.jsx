@@ -213,7 +213,7 @@ function AdminMenu() {
       </form>
     </div>
   <h2>Starters</h2>
-  <br></br>
+  
 <div className="menu-item-div">
   
   {items.filter((item) => item.itemType === 'starter').map((item) => (
@@ -225,7 +225,7 @@ function AdminMenu() {
   ))}
 </div>
 <h2>Main Courses</h2>
-  <br></br>
+  
 <div className="menu-item-div">
   
   {items.filter((item) => item.itemType === 'mainCourse').map((item) => (
@@ -237,7 +237,7 @@ function AdminMenu() {
   ))}
 </div>
 <h2>Desserts</h2>
-<br></br>
+
 <div className="menu-item-div">
  
   
