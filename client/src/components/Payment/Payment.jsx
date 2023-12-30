@@ -38,7 +38,7 @@ let CustomerIns = sessionStorage.getItem('customer_instruction');
   <div style={{display:"flex", flexDirection:"column",justifyContent:"space-around", height:"50vh",borderRight:"3px solid orange", padding:"10%", paddingLeft:"3%", paddingRight:"17%"}}>
   <div>
       <h3>Username</h3>
-      <h6 style={{ fontWeight: 'normal' }}>{Username}</h6>
+      <h6 data-testid="payment-username-test" style={{ fontWeight: 'normal' }}>{Username}</h6>
     </div>
 
     <div>
@@ -46,18 +46,18 @@ let CustomerIns = sessionStorage.getItem('customer_instruction');
       {Cart.map((item, index) => {
       let [name, price, quantity] = item.split(",");
       return (
-      <h6 style={{ fontWeight: 'normal' }}>{name} (x{quantity})</h6>
+      <h6 data-testid="payment-items-test" style={{ fontWeight: 'normal' }}>{name} (x{quantity})</h6>
       )})}
     </div>
 
     <div>
       <h3>Special Instructions</h3>
-      <h6 style={{ fontWeight: 'normal' }}>{CustomerIns}</h6>
+      <h6 data-testid="payment-instruction-test" style={{ fontWeight: 'normal' }}>{CustomerIns}</h6>
     </div>
 
     <div>
       <h3>Total Amount</h3>
-      <h6 style={{ fontWeight: 'normal' }}>${Total_amount}</h6>
+      <h6 data-testid="payment-total-test" style={{ fontWeight: 'normal' }}>${Total_amount}</h6>
     </div>
 
   </div>

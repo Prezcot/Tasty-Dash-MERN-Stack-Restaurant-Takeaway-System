@@ -5,25 +5,6 @@ import { io } from "socket.io-client";
 
 function LiveOrders() {
   let [orderInfo, setOrderInfo] = useState([]);
-  let [cancelConfirmation, setCancelConfirmation] = useState(null);
-
-  function handleCancelOrder (orderId) {
-    setCancelConfirmation(orderId);
-  };
-
-  async function handleYes(orderId) {
-    try{
-      let orderResponse = await axios.delete(`http://localhost:3001/orders/cancel_order/${orderId}`)
-      console.log(orderResponse);
-    } catch(error){
-      console.error(error);
-    }
-    window.location.reload();
-  };
-
-  function handleNo () {
-    setCancelConfirmation(null);
-  }
 
   async function fetchOrders() {
     try{
@@ -40,7 +21,6 @@ function LiveOrders() {
       const socket = io("http://localhost:3001");
       socket.on("order_status_update", (username) => {
         fetchOrders();
-        
       });
       return () => {
         socket.disconnect();
@@ -76,22 +56,13 @@ function LiveOrders() {
           {orderInfo.map((orders) => (
             orders.order_status !== "Collected" && (
               <div className="live-order-items">
-            {cancelConfirmation === orders.order_id ? (
-              <div className="cancel-confirmation" style={{display:"flex", flexDirection:"column",alignItems:"center"}}>
-                <p>Are you sure you want to cancel this order?</p>
-                <div>
-                  <button onClick={() => handleYes(orders.order_id)} style={{marginRight:"10px", backgroundColor:"red"}}>Yes</button>
-                  <button onClick={handleNo} style={{marginLeft:"10px",backgroundColor:"lightgray", color:"black"}}>No</button>
-                </div>
-              </div>
-            ) : (
                 <div className="indi-order" style={{alignItems:"center"}}>
                   <div>
                     <b>
                       <label>Order ID</label>
                     </b>
                     <br />
-                    <label>{orders.order_id}</label>
+                    <label data-testid="rendered-order-id-test">{orders.order_id}</label>
                   </div>
 
                   <div>
@@ -99,7 +70,7 @@ function LiveOrders() {
                       <label>Order Status</label>
                     </b>
                     <br />
-                    <label>{orders.order_status}</label>
+                    <label data-testid="live-order-item">{orders.order_status}</label>
                   </div>
 
                   <div>
@@ -125,11 +96,7 @@ function LiveOrders() {
                       );
                     })}
                   </div>
-                  <div>
-                    <button style={{backgroundColor:"red"}}  onClick={() => handleCancelOrder(orders.order_id)}> Cancel Order</button>
-                  </div>
                 </div>
-            )}
               </div>
             )
           ))}
@@ -154,7 +121,7 @@ function LiveOrders() {
                       <label>Order Status</label>
                     </b>
                     <br />
-                    <label>{orders.order_status}</label>
+                    <label data-testid="order-history-item">{orders.order_status}</label>
                   </div>
 
                   <div>
@@ -179,9 +146,6 @@ function LiveOrders() {
                         </>
                       );
                     })}
-                  </div>
-                  <div>
-                    <button style={{color:"black"}}>Cancel Order</button>
                   </div>
                 </div>
               </div>
