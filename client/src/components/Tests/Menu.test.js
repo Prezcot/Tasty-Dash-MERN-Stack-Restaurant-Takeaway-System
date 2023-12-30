@@ -172,13 +172,11 @@ describe("INTEGRATION TEST - MENU COMPONENT",()=>{
             </BrowserRouter>);
         
         await waitFor(() => {
-          // Check if the items are rendered based on the sample data
           expect(getByText("Cheese Pizza")).toBeInTheDocument();
           expect(getByText("Chocolate Cake")).toBeInTheDocument();
           expect(getByText("Garlic Bread")).toBeInTheDocument();
         });
     
-        // Check if the axios get method was called with the correct URL
         expect(axios.get).toHaveBeenCalledWith("http://localhost:3001/menu/data");
       });
 });

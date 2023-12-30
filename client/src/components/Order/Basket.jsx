@@ -11,11 +11,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Basket() {
 
-  
-
-
   const nav = useNavigate();
-  let instructionfromcust = "";
+  let [instructionfromcust, setInstructionFromCust] = useState(sessionStorage.getItem("customer_instruction") || "");
 
   // Thinals side
   // let thinalcart = ["Pizza,600,1","Pebbles,400,3","Lava Cake,200,2"];
@@ -34,7 +31,9 @@ function Basket() {
 
   // To collect the instruction provided
   function setInstructions(e) {
-    instructionfromcust = e.target.value;
+    let existingInstruction = sessionStorage.getItem("customer_instruction");
+    let defaultValue = existingInstruction ? existingInstruction : "";
+    setInstructionFromCust(e.target.value);
     console.log("instruction received: " + instructionfromcust);
   }
 
@@ -45,7 +44,7 @@ function Basket() {
     let total = cart.reduce((acc, item) => {
       let [name, price, quantity] = item.split(",");
       let latest_total = acc +  parseFloat((price * quantity).toFixed(2))
-      sessionStorage.setItem("total", latest_total);
+      sessionStorage.setItem("total", latest_total.toFixed(2));
       return latest_total;
     }, 0);
 
@@ -121,7 +120,7 @@ function Basket() {
   
               <div className="instruction">
                 <h3 className="textcolor">Special Instructions for Preparation</h3>
-                <textarea className="textarea" data-testid="spe-ins-test-comp" onChange={setInstructions}></textarea>
+                <textarea value ={instructionfromcust} className="textarea" data-testid="spe-ins-test-comp" onChange={setInstructions}></textarea>
               </div>
             </div>
   

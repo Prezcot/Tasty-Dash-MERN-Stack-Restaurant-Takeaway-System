@@ -194,4 +194,51 @@ describe("INTEGRATION TEST - BASKET COMPONENT", () => {
     });
 
     
+
+    it('Clicking "Proceed to Payment" should navigate to Payment component', () => {
+        // Mock the useNavigate function
+        const mockNavigate = jest.fn();
+
+        const getItemMock = jest.fn((key) => {
+            switch (key) {
+            case 'cart':
+                return JSON.stringify(["Pizza,5.99,2", "Nasi Goreng,3.99,3", "Lava Cake,2.99,2"]);
+            case 'menuCart':
+                return JSON.stringify({ "Pizza": 2, "Nasi Goreng": 3, "Lava Cake": 2 });
+            default:
+                return null;
+            }
+        });
+        
+        const setItemMock = jest.fn();
+        
+        jest.spyOn(global, 'sessionStorage', 'get').mockReturnValue({
+            getItem: getItemMock,
+            setItem: setItemMock,
+        });
+        // Render the Basket component inside MemoryRouter
+        var {getByTestId} =render(
+            <BrowserRouter>
+                <Basket/>
+            </BrowserRouter>);
+    
+        // Mock the useNavigate hook to return the mockNavigate function
+        jest.mock('react-router-dom', () => ({
+          ...jest.requireActual('react-router-dom'),
+          useNavigate: () => mockNavigate,
+        }));
+    
+        // Find the "Proceed to Payment" button and click it
+        fireEvent.click(getByTestId('payment-button-test'));
+        
+        var {getByText} =render(
+            <BrowserRouter>
+                <Payment renderPayPal={false}/>
+            </BrowserRouter>);
+    
+        // Check if the navigate function was called with the correct path
+        var headinginpayment=getByText("Checkout");
+        expect(headinginpayment).toBeInTheDocument();
+
+      });
 });

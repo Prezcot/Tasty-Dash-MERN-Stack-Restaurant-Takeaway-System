@@ -22,7 +22,7 @@ function DenyDirectAccessRoutes() {
         <Route path="/admin" element={<AdminNavBar />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/basket" element={<Basket />}></Route>
-        <Route path="/payment" element={<Payment />}></Route>
+        <Route path="/payment" element={<Payment renderPayPal = {true} />}></Route>
         <Route path="/orders" element={<LiveOrders />}></Route>
       </Routes>
     );

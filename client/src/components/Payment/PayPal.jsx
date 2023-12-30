@@ -26,7 +26,7 @@ function Paypal() {
       });
   }
   async function notifyFailure() {
-    toast.error("order failed successfully", {
+    toast.error("order failed", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -83,6 +83,7 @@ function Paypal() {
         sessionStorage.removeItem("cart");
         sessionStorage.removeItem("order_id");
         sessionStorage.removeItem("total");
+        sessionStorage.removeItem("customer_instruction");
         
         notifySuccess();
         

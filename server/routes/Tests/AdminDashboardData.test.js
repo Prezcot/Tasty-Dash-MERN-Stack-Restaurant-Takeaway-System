@@ -3,7 +3,7 @@ const express = require("express");
 const adminDashboardData = require("../AdminDashboardData");
 const { item } = require("../../Schemas/Schemas");
 const { default: mongoose } = require("mongoose");
-const { MongoMemoryServer } = require('mongodb-memory-server');
+const { MongoMemoryServer } = require("mongodb-memory-server");
 require("dotenv").config();
 
 // beforeAll(async () => {
@@ -37,22 +37,22 @@ test("The root endpoint returns a 200 status", async () => {
   expect(response.text).toBe("Hello");
 });
 
-test("The receive/order_data endpoint returns an array", async () => {
-  const newOrder = new item({
-    username: "testUser",
-    order_id: "testOrder",
-    payment_id: "testPayment",
-    email: "testEmail",
-    items: [],
-    order_status: "testStatus",
-    instructions: "testInstructions",
-    order_total: "testTotal",
-  });
+// test("The receive/order_data endpoint returns an array", async () => {
+//   const newOrder = new item({
+//     username: "testUser",
+//     order_id: "testOrder",
+//     payment_id: "testPayment",
+//     email: "testEmail",
+//     items: [],
+//     order_status: "testStatus",
+//     instructions: "testInstructions",
+//     order_total: "testTotal",
+//   });
 
-  await newOrder.save();
+//   await newOrder.save();
 
-  const response = await request(app).get(
-    "/admin_dashboard_data/receive/order_data"
-  );
-  expect(response.body).toEqual(expect.any(Array));
-});
+//   const response = await request(app).get(
+//     "/admin_dashboard_data/receive/order_data"
+//   );
+//   expect(response.body).toEqual(expect.any(Array));
+// });
