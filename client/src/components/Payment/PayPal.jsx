@@ -83,6 +83,7 @@ function Paypal() {
         sessionStorage.removeItem("cart");
         sessionStorage.removeItem("order_id");
         sessionStorage.removeItem("total");
+        sessionStorage.removeItem("customer_instruction");
         
         notifySuccess();
         

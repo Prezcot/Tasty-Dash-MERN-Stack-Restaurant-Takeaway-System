@@ -3,14 +3,14 @@ import Paypal from "./PayPal";
 import "../App.css";
 import NavBar from "../NavBar";
 
-function Payment (){
+function Payment ({ renderPayPal = true }){
 
-    const [checkout, setCheckOut] = useState(false);
+const [checkout, setCheckOut] = useState(false);
 
-let OrderId = sessionStorage.getItem('order_id');
 let Username = sessionStorage.getItem('username');
-let Cart = sessionStorage.getItem('cart');
+let Cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 let Total_amount = sessionStorage.getItem('total');
+let CustomerIns = sessionStorage.getItem('customer_instruction');
 
 
   return (
@@ -31,31 +31,40 @@ let Total_amount = sessionStorage.getItem('total');
       }
     `}
     </style>
-  <h1 style={{marginTop:"3%", marginLeft:"10%"}}>Checkout</h1><br/>
+  <h1 style={{marginTop:"3%", marginLeft:"10%", color:"#FFF"}}>Checkout</h1><br/>
   
-  <div className="payment-detail-button-container">
+  <div className="payment-detail-button-container" style={{marginBottom:"10%"}}>
 
-  <div style={{display:"flex", flexDirection:"column",justifyContent:"space-around", height:"50vh"}}>
+  <div style={{display:"flex", flexDirection:"column",justifyContent:"space-around", height:"50vh",borderRight:"3px solid orange", padding:"10%", paddingLeft:"3%", paddingRight:"17%"}}>
   <div>
-      <h2>Username:</h2>
-      <h5 style={{ fontWeight: 'normal' }}>{Username}</h5>
+      <h3>Username</h3>
+      <h6 style={{ fontWeight: 'normal' }}>{Username}</h6>
     </div>
 
     <div>
-      <h2>Items:</h2>
-      <h5 style={{ fontWeight: 'normal' }}>{Cart}</h5>
+      <h3>Items Ordered</h3>
+      {Cart.map((item, index) => {
+      let [name, price, quantity] = item.split(",");
+      return (
+      <h6 style={{ fontWeight: 'normal' }}>{name} (x{quantity})</h6>
+      )})}
     </div>
 
     <div>
-      <h2>Total Amount:</h2>
-      <h5 style={{ fontWeight: 'normal' }}>${Total_amount}</h5>
+      <h3>Special Instructions</h3>
+      <h6 style={{ fontWeight: 'normal' }}>{CustomerIns}</h6>
+    </div>
+
+    <div>
+      <h3>Total Amount</h3>
+      <h6 style={{ fontWeight: 'normal' }}>${Total_amount}</h6>
     </div>
 
   </div>
 
 
   <div className="pay-button">
-    <Paypal />
+  {renderPayPal && <Paypal />}
   </div>  
 </div>
 </div>

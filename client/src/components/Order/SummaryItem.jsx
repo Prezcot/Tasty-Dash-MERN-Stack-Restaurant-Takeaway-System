@@ -15,7 +15,7 @@ function SummaryItem ({itemProp2, indexProp2, cartProp2}){
                 </div>
 
                 <div>
-                <p className="textcolor">{totalPrice}</p>
+                <p className="textcolor">${totalPrice}</p>
                 </div>
             </div>
         </div>

@@ -483,6 +483,11 @@ h2 {
   width: 150px;
   border-radius:20px;
   margin:7%;
+  height:auto;
+}
+
+.payment-detail-button-container h6{
+  color:orange;
 }
 
 
