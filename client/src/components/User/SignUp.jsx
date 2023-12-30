@@ -31,7 +31,7 @@ function SignUp()
             return(
                 <center>
                     <div style={{"display":"inline-flex","align-items":"center","border":"0.1vh solid red","border-radius":"1vh","padding-top":"2vh","padding-left":"2vh","padding-right":"2vh"}}>
-                        <p style={{"text-align":"center","font-weight":"normal","color":"red"}}>{error}</p>
+                        <p style={{"text-align":"center","font-weight":"normal ","color":"red"}}>{error}</p>
                     </div>
                 </center>
             )
@@ -65,6 +65,8 @@ function SignUp()
             {
                 await axios.post("http://localhost:3001/users/signup",{username,email,phonenumber,password}).then(()=>{
                     sessionStorage.setItem("username", username)
+                    sessionStorage.setItem("type", "User");
+                    sessionStorage.setItem("email", email);
                     nav("/menu")}).catch((err)=>setError(err.response.data.message));
             }
             else if (!checkForSpecialChar(password))
