@@ -33,9 +33,6 @@ afterAll(async () => {
 describe("INTEGRATION TEST - User Route",()=>{
     it("Successfully Responds To Requests",async()=>{
         const username="user";
-        // app.get(`/users/userinfo/${username}`,(req,res,next)=>{
-        //     res.json({username:"user",email:"eageag"});
-        // });
         const res=await request(app).get(`/users/userinfo/${username}`);
         expect(res.status).toBe(200);
         expect(res.body).toEqual(expect.any(Object));
