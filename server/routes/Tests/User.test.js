@@ -13,7 +13,6 @@ require("dotenv").config();
 // }));
 
 beforeAll(async () => {
-  const uri = process.env.ATLAS_URI;
   mongoServer = await MongoMemoryServer.create();
   const mongoUri = mongoServer.getUri();
   await mongoose.connect(mongoUri);
@@ -37,16 +36,17 @@ describe("INTEGRATION TEST - User Route",()=>{
         expect(res.status).toBe(200);
         expect(res.body).toEqual(expect.any(Object));
     });
+
+
     it("User Is Able To Successfully Change Password",async()=>{
       const res=await request(app).put("/users/checkpassword").send({username:"user",currentpassword:"User12,",newpassword:"Newpassword12,"});
       //console.log(res.body.message);
       expect(res.status).toBe(400);
     })
-});
 
-describe("INTEGRATION TEST - User Route",()=>{
-  it("Successfully Adds New Users To Database",async()=>{
-    const res=await request(app).post("/users/signup").send({username:"jacob",email:"george@outlook.com",phonenumber:"5438922345",password:"George123,"});
-    expect(res.body).toEqual({message:"Successful Register"});
-  });
+
+    it("Successfully Adds New Users To Database",async()=>{
+      const res=await request(app).post("/users/signup").send({username:"jacob",email:"george@outlook.com",phonenumber:"5438922345",password:"George123,"});
+      expect(res.body).toEqual({message:"Successful Register"});
+    });
 });

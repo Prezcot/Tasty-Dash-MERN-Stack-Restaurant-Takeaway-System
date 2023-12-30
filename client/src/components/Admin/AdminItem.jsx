@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import axios from "axios";
 function AdminItem({ item, onDelete, onEdit}) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedPrice, setEditedPrice] = useState(item.itemPrice);
-  const [edittext, setEdittext] = useState("Edit");
+  const [editedPrice, setEditedPrice] = useState(item.itemPrice.toFixed(2));
+  const [edittext, setEdittext] = useState("/images/Edit.png");
   
   const handlePriceChange = (e) => {
     setEditedPrice(e.target.value);
@@ -19,11 +19,11 @@ function AdminItem({ item, onDelete, onEdit}) {
         itemImage: item.itemImage,
       });
       await axios.put(`http://localhost:3001/menu/edit/${setNewItemData.itemName}`, setNewItemData);
-      setEdittext("Edit");
+      setEdittext("/images/Edit.png");
       setIsEditing(false);
     } else {
       // Enter edit mode
-      setEdittext("Apply");
+      setEdittext("/images/Apply.png");
       setIsEditing(true);
     }
   };
@@ -46,9 +46,9 @@ function AdminItem({ item, onDelete, onEdit}) {
         </div>
         <div className="menu-actions">
           <div className="quantity">
-            <button className="edit-button" onClick={handleEditClick}>{edittext}</button>
+            <img src={edittext} className="edit-button" onClick={handleEditClick} style={{height:"45px",width:"80px"}}/>
           </div>
-          <button className="delete-button" onClick={onDelete}>Delete</button>
+          <img src="/images/Delete.png" className="delete-button" onClick={onDelete} style={{height:"45px",width:"80px"}}/>
         </div>
       </div>
     );
