@@ -7,6 +7,8 @@ import LiveOrders from "../Order/LiveOrders";
 
 jest.mock("axios");
 
+window.setImmediate = window.setTimeout;
+
 describe("UNIT TEST - LIVE ORDERS COMPONENT", () => {
 
     it('Renders Live Orders Component Successfully', () => {
