@@ -121,6 +121,8 @@ const AdminDashboard = () => {
             >
               Name: {items.username}
               <br />
+              Order ID: {items.order_id}
+              <br />
               Email: {items.email}
               <br />
               Contact: {items.email}
