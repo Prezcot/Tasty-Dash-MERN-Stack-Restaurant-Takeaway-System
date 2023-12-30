@@ -17,16 +17,20 @@ function AdminMenu() {
         itemType:'',
       });
 
-    useEffect(() => {
-        axios
-          .get("http://localhost:3001/menu/data")
-          .then((response) => {
-            const data = response.data;
-            setItems(data);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+      useEffect(() => {
+        try{
+          axios
+            .get("http://localhost:3001/menu/data")
+            .then((response) => {
+              const data = response.data;
+              setItems(data);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+          }catch{
+            console.log("error");
+          }
       }, []);
     
 
@@ -140,6 +144,7 @@ function AdminMenu() {
           <input
             type="text"
             name="itemName"
+            data-testid= "item-name-input"
             value={newItemData.itemName}
             onChange={handleInputChange}
             className="form-input"
@@ -151,6 +156,7 @@ function AdminMenu() {
             </label>
             <select
               name="itemType"
+              data-testid= "item-type-select"
               value={newItemData.itemType}
               onChange={handleInputChange}
               className="form-input"
@@ -167,6 +173,7 @@ function AdminMenu() {
           </label>
           <textarea
             name="itemDescription"
+            data-testid= "item-description-input"
             value={newItemData.itemDescription}
             onChange={handleInputChange}
             className="form-input"
@@ -181,6 +188,7 @@ function AdminMenu() {
             type="number"
             step="0.01"
             name="itemPrice"
+            data-testid= "item-price-input"
             value={newItemData.itemPrice}
             onChange={handleInputChange}
             className="form-input"
@@ -194,15 +202,14 @@ function AdminMenu() {
           <input
             type="file"
             accept="image/*"
+            data-testid= "item-image-input"
             ref={fileInput}
             onChange={handleFileChange}
             className="form-input"
           />
         </div>
 
-        <button type="submit" className="form-button">
-          Add Item
-        </button>
+        <button type="submit" className="form-button"  data-testid= "add-item-button">Add To Menu</button>
       </form>
     </div>
   <h2>Starters</h2>
