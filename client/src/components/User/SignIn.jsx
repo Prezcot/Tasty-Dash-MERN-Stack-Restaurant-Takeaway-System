@@ -154,94 +154,104 @@ const SignIn = () => {
   }
   //use vh and vw for margins and padding and other attributes
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundImage: `url("/images/LoginBackground.jpg")`,
-        backgroundSize: "100vw 100vh",
-        backgroundRepeat: "no-repeat",
-        width: "100vw",
-        height: "100vh",
-      }}
-    >
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      backgroundImage: `url("/images/LoginBackground.jpg")`,
+      backgroundSize: "100vw 100vh",
+      backgroundRepeat: "no-repeat",
+      width: "100vw",
+      height: "100vh"}}>
+      <div>
+        <button onClick={()=>nav("/home")} style={{float:"left",marginTop:"1vh",marginLeft:"1vh",backgroundColor: "grey",color: "white",borderRadius: "0.5vh",border: "0.1vh solid black"}}>Back To Home</button>
+      </div>
       <div
         style={{
-          marginTop: "5vh",
-          border: "0.4vh solid black",
-          boxShadow: "0px 0px 10px 3px white",
-          padding: "2vh",
-          borderRadius: "15px",
-          backgroundColor: "white",
-          opacity: "93%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100vw",
+          height: "100vh",
         }}
       >
-        <center>
-          <h1 style={{ color: "black" }}>Sign In</h1>
-        </center>
-        <br></br>
-        {handleError()}
-        {/* {() => changePage("Menu")} */}
-        <br></br>
-        <form onSubmit={handleSignIn}>
-          <table id="login">
-            <tr>
-              <Tabcol>Username: </Tabcol>
-              <td style={{ paddingBottom: "1vh", fontSize: "3vh" }}>
-                <UserInput
-                  type="text"
-                  value={username}
-                  placeholder="Username"
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </td>
-            </tr>
-            <tr>
-              <Tabcol>Password: </Tabcol>
-              <Tabcol>
-                <UserInput
-                  type="password"
-                  value={password}
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </Tabcol>
-            </tr>
-            <tr>
-              <td>
-                <UserInput
-                  style={{ width: "2vw", height: "2vh" }}
-                  type="checkbox"
-                  checked={currentlychked}
-                  onChange={(e) => setChecked(e.target.checked)}
-                />
-                <p style={{ display: "inline", fontSize: "2vh" }}>
-                  Remember Me ?
-                </p>
-              </td>
-            </tr>
-          </table>
-          <br></br>
+        <div
+          style={{
+            marginTop: "5vh",
+            border: "0.4vh solid black",
+            boxShadow: "0px 0px 10px 3px white",
+            padding: "2vh",
+            borderRadius: "15px",
+            backgroundColor: "white",
+            opacity: "93%",
+          }}
+        >
           <center>
-            <input
-              style={{
-                width: "50%",
-                backgroundColor: "green",
-                color: "white",
-                borderRadius: "10px",
-                border: "0.1vh solid black",
-              }}
-              type="submit"
-              value="Sign In"
-            ></input>
-            <p style={{ cursor: "pointer" }} onClick={() => nav("/signup")}>
-              <u>Create an account</u>
-            </p>
+            <h1 style={{ color: "black" }}>Sign In</h1>
           </center>
-        </form>
+          <br></br>
+          {handleError()}
+          {/* {() => changePage("Menu")} */}
+          <br></br>
+          <form onSubmit={handleSignIn}>
+            <table id="login">
+              <tr>
+                <Tabcol>Username: </Tabcol>
+                <td style={{ paddingBottom: "1vh", fontSize: "3vh" }}>
+                  <UserInput
+                    type="text"
+                    value={username}
+                    placeholder="Username"
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <Tabcol>Password: </Tabcol>
+                <Tabcol>
+                  <UserInput
+                    type="password"
+                    value={password}
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Tabcol>
+              </tr>
+              <tr>
+                <td>
+                  <UserInput
+                    style={{ width: "2vw", height: "2vh" }}
+                    type="checkbox"
+                    checked={currentlychked}
+                    onChange={(e) => setChecked(e.target.checked)}
+                  />
+                  <p style={{ display: "inline", fontSize: "2vh" }}>
+                    Remember Me ?
+                  </p>
+                </td>
+              </tr>
+            </table>
+            <br></br>
+            <center>
+              <input
+                style={{
+                  width: "50%",
+                  backgroundColor: "green",
+                  color: "white",
+                  borderRadius: "10px",
+                  border: "0.1vh solid black",
+                }}
+                type="submit"
+                value="Sign In"
+              ></input>
+              <p style={{ cursor: "pointer" }} onClick={() => nav("/signup")}>
+                <u style={{display:"block"}}>Create an account</u>
+              </p>
+            </center>
+          </form>
+        </div>
       </div>
-    </div>
+      </div>
   );
 };
 
