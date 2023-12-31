@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 function Home(){
     const nav=useNavigate();
     return(
-        <>
+        <div style={{display:"flex",flexDirection:"column",height:"100vh",width:"100vw"}}>
             <nav class="py-3 navbar navbar-expand-lg fixed-top auto-hiding-navbar">
                 <div class="container">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand">
                         <img src="/images/logo.jpg" class="logo" height="50px" /> Tasty Dash
                     </a>
                     <button
@@ -22,15 +22,15 @@ function Home(){
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto">
+                    <ul style={{cursor:"pointer"}} class="navbar-nav ms-auto">
                         <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href={nav("/home")}>Home</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link">About Us</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link">Contact</a>
                         </li>
                     </ul>
                     </div>
@@ -55,8 +55,35 @@ function Home(){
                     <div class="row"></div>
                 </div>
             </section>
-            <div class="foot">Footer content</div>
-        </>
+            <div class="foot">
+                <div style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
+                    <div>
+                        <h4>Opening Hours</h4>
+                        <p>
+                        Monday - Friday<br />
+                        9:00 AM - 11:00 PM
+                        </p>
+                    </div>
+                    <div>
+                        <h4>Address</h4>
+                        <p>
+                        123, Galle Road,<br />
+                        Colombo 03
+                        </p>
+                    </div>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>
+                        +94 11 123 4567<br />
+                        +94 11 123 4567
+                        </p>
+                    </div>
+                    <div>
+                        <h4>Email</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 
