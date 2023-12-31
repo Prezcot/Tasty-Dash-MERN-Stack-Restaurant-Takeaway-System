@@ -8,7 +8,7 @@ function Home(){
             <nav class="py-3 navbar navbar-expand-lg fixed-top auto-hiding-navbar">
                 <div class="container">
                     <a class="navbar-brand" href="#">
-                        <img src="/images/logo.jpeg" class="logo" height="50px" /> Tasty Dash
+                        <img src="/images/logo.jpg" class="logo" height="50px" /> Tasty Dash
                     </a>
                     <button
                     class="navbar-toggler"
@@ -55,6 +55,7 @@ function Home(){
                     <div class="row"></div>
                 </div>
             </section>
+            <div class="foot">Footer content</div>
         </>
     );
 }

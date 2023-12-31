@@ -521,6 +521,15 @@ h2 {
 
 /*Home Page*/
 
+.foot { 
+  position: absolute; 
+  background-color: #000000;
+  width:"100vw";
+  bottom: 0; 
+  left: 0; 
+  z-index: 10;
+}
+
 .logo {
   border-radius: 10px;
 }
@@ -533,7 +542,7 @@ nav {
   max-height: 50px;
 }
 
-.navbar-brand {
+.navbar-brand  {
   font-size: 24px;
   text-transform: uppercase;
   font-weight: 800;
