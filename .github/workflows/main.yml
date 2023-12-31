@@ -13,7 +13,7 @@ jobs:
           cd client
           npm i
           npm test
-          cd ..
+      - run: |
           cd server
           npm i
           npm test
