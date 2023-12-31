@@ -7,8 +7,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-    - run: cd client
-    - run: npm install
-    - run: npm test 
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: cd client
+      - run: npm i
+      - run: npm test
+      - run: cd ..
+      - run: cd server
+      - run: npm i
+      - run: npm test
