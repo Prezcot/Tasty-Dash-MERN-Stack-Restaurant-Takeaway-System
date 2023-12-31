@@ -18,7 +18,7 @@ beforeAll(async () => {
   const mongoUri = mongoServer.getUri();
   await mongoose.connect(mongoUri);
   const user=new users({username:"user",type:"User",email:"user@gmail.com",phonenumber:"0985674328",password:"User12,"});
-  user.save();
+  await user.save();
   app=express();
   app.use(express.json());
   app.use("/users",User);

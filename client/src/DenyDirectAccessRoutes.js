@@ -27,7 +27,7 @@ function DenyDirectAccessRoutes() {
       </Routes>
     );
   } else {
-    return <Navigate to="/signin" replace></Navigate>;
+    return <Navigate to="/home" replace></Navigate>;
   }
 }
 
