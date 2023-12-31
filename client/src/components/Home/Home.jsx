@@ -44,7 +44,7 @@ function Home(){
                             <p>
                             Tasty Dash is a multi-cultural restaurant sponsored by the ICC bringing in a wide range of meals that you can choose from by the finest 3-star michelin awarded chefs in Sri Lanka.
                             </p>
-                            <button type="button" class="btn btn-dark btn-lg">
+                            <button type="button" class="btn btn-dark btn-lg ordernow" onClick={()=>nav("/signin")}>
                             Order Now
                             </button>
                         </div>

@@ -525,11 +525,6 @@ h2 {
   border-radius: 10px;
 }
 
-body {
-  display: block;
-  overflow-x: hidden;
-}
-
 nav {
   background-color: #f85606;
 }
@@ -569,7 +564,7 @@ section p {
   font-weight: 300;
 }
 
-button {
+.ordernow{
   max-width: 50%;
   border-radius: 50px !important;
 }
