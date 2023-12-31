@@ -7,6 +7,7 @@ import { io } from "socket.io-client";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {useNavigate } from 'react-router-dom';
+import Home from "./components/Home/Home";
 
 function App() {
   const nav = useNavigate();
@@ -43,6 +44,7 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/home" element={<Home/>}></Route>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />}></Route>
         <Route
