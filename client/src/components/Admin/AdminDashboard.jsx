@@ -107,20 +107,18 @@ const AdminDashboard = () => {
   return (
     <>
       <div
-        className="display-6 text-light"
+        className="display-6 text-light d-flex justify-content-between align-items-center"
         style={{
           paddingLeft: "9px",
           paddingTop: "60px",
-          paddingBottom: "10px",
-          margin: "0px",
+          paddingBottom: "5px",
           backgroundColor: "#666666",
         }}
       >
         Pending Orders
-        <span style={{ marginLeft: "60vw" }}>
+        <span style={{ paddingTop: "10px", paddingRight: "5px" }}>
           <input
             value={search_query}
-            class=""
             style={{
               borderRadius: "10px",
             }}
