@@ -117,7 +117,7 @@ const AdminDashboard = () => {
         }}
       >
         Pending Orders
-        <span style={{ marginLeft: "60vw" }}>
+        <span style={{ float: "right", marginRight: "10px" }}>
           <input
             value={search_query}
             class=""
