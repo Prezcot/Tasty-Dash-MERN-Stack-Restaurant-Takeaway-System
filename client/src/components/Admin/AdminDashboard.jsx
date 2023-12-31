@@ -74,7 +74,21 @@ const AdminDashboard = () => {
 
   const updateOrderStatus = async (object_id, new_status, username) => {
     console.log("updated order status function");
+    // await axios
+    //   .put("http://localhost:3001/admin_dashboard_data/set_order_status", {
+    //     object_id: object_id,
+    //     order_status: new_status,
+    //   })
+    //   .then((res) => {
+    //     const socket = io("http://localhost:3001");
+    //     socket.emit("order_status_update", { username: username });
+    //     grabData();
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
     if (new_status != "Declined") {
+      console.log("Object ID: ", object_id);
       await axios
         .put("http://localhost:3001/admin_dashboard_data/set_order_status", {
           object_id: object_id,
@@ -89,6 +103,7 @@ const AdminDashboard = () => {
           console.error(err);
         });
     } else {
+      console.log("Object ID of Declined: ", object_id);
       try {
         console.log(object_id);
         await axios.post(

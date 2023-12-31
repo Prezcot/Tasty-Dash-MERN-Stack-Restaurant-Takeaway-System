@@ -40,8 +40,10 @@ router.put("/set_order_status", async (req, res) => {
 router.post("/move_to_refund", async (req, res) => {
   try {
     res.json("Promise fullfillment");
-    let object_id = req.body.object_id;
-    const data_to_move = await item.findOneAndDelete(object_id);
+    const object_id = req.body.object_id;
+    console.log("Server AdminDashboard: ", object_id);
+    const data_to_move = await item.findByIdAndDelete(object_id);
+    console.log(data_to_move);
     if (data_to_move) {
       data_to_move.order_status = "Refund Needed";
       const new_data = new refunds(data_to_move.toObject());
