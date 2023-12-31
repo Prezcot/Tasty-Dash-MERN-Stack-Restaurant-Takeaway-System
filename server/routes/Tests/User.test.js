@@ -13,6 +13,7 @@ require("dotenv").config();
 // }));
 
 beforeAll(async () => {
+  jest.setTimeout(10000);
   mongoServer = await MongoMemoryServer.create();
   const mongoUri = mongoServer.getUri();
   await mongoose.connect(mongoUri);

@@ -1,7 +1,7 @@
 // AdminItem.jsx
 import React, { useState } from "react";
 import axios from "axios";
-function AdminItem({ item, onDelete, onEdit}) {
+function AdminItem({ item, onDelete}) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedPrice, setEditedPrice] = useState(item.itemPrice.toFixed(2));
   const [edittext, setEdittext] = useState("/images/Edit.png");
@@ -28,7 +28,7 @@ function AdminItem({ item, onDelete, onEdit}) {
     }
   };
     return (
-      <div className="menu-card">
+      <div className="menu-card" data-testid="menu-item">
         <img src={item.itemImage} alt={item.itemName} />
         <div className="menu-info">
           <h3 align='center' style={{fontWeight:'600'}}>{item.itemName}</h3>
@@ -46,9 +46,9 @@ function AdminItem({ item, onDelete, onEdit}) {
         </div>
         <div className="menu-actions">
           <div className="quantity">
-            <img src={edittext} className="edit-button" onClick={handleEditClick} style={{height:"45px",width:"80px"}}/>
+            <img src={edittext} className="edit-button" data-testid="change-price" onClick={handleEditClick} style={{height:"45px",width:"80px"}}/>
           </div>
-          <img src="/images/Delete.png" className="delete-button" onClick={onDelete} style={{height:"45px",width:"80px"}}/>
+          <img src="/images/Delete.png" className="delete-button" data-testid="delete-item" onClick={onDelete} style={{height:"45px",width:"80px"}}/>
         </div>
       </div>
     );

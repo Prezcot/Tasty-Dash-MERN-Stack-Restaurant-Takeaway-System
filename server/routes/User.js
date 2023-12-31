@@ -4,7 +4,7 @@ let bcrypt=require("bcrypt");
 const mongoose = require('mongoose');
 require("dotenv").config();
 const uri = process.env.ATLAS_URI;
-const {item,Menu,users}=require("../Schemas/Schemas");
+const {item,users}=require("../Schemas/Schemas");
 
 router.get("/userinfo/:username",async (req,res,next)=>
 {

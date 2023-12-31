@@ -71,7 +71,7 @@ function LiveOrders() {
                       <label>Order Status</label>
                     </b>
                     <br />
-                    <label style={{color:"orange"}} data-testid="live-order-item">{orders.order_status}</label>
+                    <label style={{color:"red"}} data-testid="live-order-item">{orders.order_status}</label>
                   </div>
 
                   <div>
@@ -79,7 +79,7 @@ function LiveOrders() {
                       <label>Order Total</label>
                     </b>
                     <br />
-                    <label style={{color:"orange"}}>${orders.order_total}</label>
+                    <label style={{color:"white"}}>${orders.order_total}</label>
                   </div>
 
                   <div>
@@ -91,7 +91,7 @@ function LiveOrders() {
                       let [name, price, quantity] = item.split(",");
                       return (
                         <>
-                          <label style={{color:"orange"}}>{name} (x{quantity})</label>
+                          <label style={{color:"white"}}>- {name} (x{quantity})</label>
                           <br />
                         </>
                       );

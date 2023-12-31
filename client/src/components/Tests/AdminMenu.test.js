@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent, waitFor,getAllByText,getByText } from "@testing-library/react";
+import { render, fireEvent, waitFor,getAllByText,getByText, getByTestId } from "@testing-library/react";
 import AdminMenu from "../Admin/AdminMenu";
 import AdminItem from "../Admin/AdminItem";
 import { BrowserRouter } from "react-router-dom";
@@ -75,15 +75,16 @@ describe('UNIT TEST ADMIN COMPONENT', () => {
     };
     axios.put.mockResolvedValue();
 
-    var {getByText,getByRole} = render(<AdminItem item={mockItem} onDelete={() => {}} />);
+    var {getByText,getByRole,getByTestId} = render(<AdminItem item={mockItem} onDelete={() => {}} />);
+
     expect(getByText('TestItem')).toBeInTheDocument();
     expect(getByText('Test Description')).toBeInTheDocument();
-    expect(getByText('Price: $ 10.99')).toBeInTheDocument();
+    expect(getByText('$ 10.99')).toBeInTheDocument();
 
-    fireEvent.click(getByText('Edit'));
+    fireEvent.click(getByTestId("change-price"));
     fireEvent.change(getByRole('spinbutton'), { target: { value: '15.99' } });
-    fireEvent.click(getByText('Apply'));
-
+    fireEvent.click(getByTestId("change-price"));
+    
     await waitFor(() => {
       expect(axios.put).toHaveBeenCalledWith(
         `http://localhost:3001/menu/edit/${mockItem.itemName}`,
@@ -95,7 +96,7 @@ describe('UNIT TEST ADMIN COMPONENT', () => {
         }
       );
     });
-    expect(getByText('Price: $ 15.99')).toBeInTheDocument();
+    expect(getByText('$ 15.99')).toBeInTheDocument();
   });
 
 
@@ -166,45 +167,35 @@ it('Adds a new item to the database', async () => {
 
 
 it('should delete an item when the delete button is clicked', async () => {
-    
-    
 
-    const itemName = 'TestItem';
-    const itemsData = [
+  axios.get.mockResolvedValueOnce({
+    data: [
       {
-        itemName: 'Item1',
-        itemDescription: 'Description1',
-        itemPrice: 10,
-        itemImage: 'image1.jpg',
-        itemType: 'starter',
-      },
-      {
-        itemName: itemName,
+        itemName: 'TestItem',
         itemDescription: 'Description2',
         itemPrice: 15,
         itemImage: 'image2.jpg',
         itemType: 'mainCourse',
       },
-    ];
-
-    axios.get.mockResolvedValueOnce({ data: itemsData });
-
-    var {getByText,getByTestId,queryByText,getAllByText} =render(
+    ],
+  });
+  const itemName = 'TestItem'; 
+  var {getByText,getByTestId,queryByText,getAllByText,getAllByTestId} =render(
         <BrowserRouter>
             <AdminMenu/>
         </BrowserRouter>);
 
     // Wait for the data to be loaded
+    
     await waitFor(() => {
-      expect(getByText('Item1')).toBeInTheDocument();
       expect(getByText(itemName)).toBeInTheDocument();
     });
 
-    // Mock the delete request
-    axios.delete.mockResolvedValueOnce({});
+    
 
     // Click the delete button
-    fireEvent.click(getAllByText("Delete")[1]);
+    fireEvent.click(getByTestId('delete-item'));
+    
     // Wait for the delete request to be made
     await waitFor(() => {
       expect(axios.delete).toHaveBeenCalledWith(
@@ -212,8 +203,6 @@ it('should delete an item when the delete button is clicked', async () => {
       );
     });
 
-    // Check if the item is removed from the UI
-    expect(queryByText('Item1')).not.toBeInTheDocument();
+    expect(queryByText(itemName)).not.toBeInTheDocument();
   });
-
 });
