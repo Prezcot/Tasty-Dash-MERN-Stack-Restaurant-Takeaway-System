@@ -522,12 +522,13 @@ h2 {
 /*Home Page*/
 
 .foot { 
-  position: absolute; 
   background-color: #000000;
   width:"100vw";
-  bottom: 0; 
-  left: 0; 
-  z-index: 10;
+  height:"100vh";
+  display:"flex";
+  flex: 1;
+  justify-content: "center";
+  align-items: "center";
 }
 
 .logo {
@@ -557,7 +558,7 @@ nav {
 }
 
 section {
-  padding-top: 35vh;
+  padding-top: 30vh;
 }
 
 section h1 {
