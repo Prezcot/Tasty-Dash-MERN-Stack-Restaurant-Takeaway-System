@@ -342,9 +342,9 @@
 }
 
 #payment-button {
-  display: block; /* Add this line */
-  margin: auto; /* Add this line */
-  margin-bottom: 20px; /* Add this line */
+  display: block; 
+  margin: auto; 
+  margin-bottom: 20px; 
   border-radius: 30px;
   height:fit-content;
   width: inherit;
