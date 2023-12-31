@@ -74,6 +74,16 @@ const AdminDashboard = () => {
 
   const updateOrderStatus = async (object_id, new_status, username) => {
     console.log("updated order status function");
+    toast.info("The Order Status Has Been Updated!", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
     // await axios
     //   .put("http://localhost:3001/admin_dashboard_data/set_order_status", {
     //     object_id: object_id,
