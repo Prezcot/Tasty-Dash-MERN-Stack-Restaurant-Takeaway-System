@@ -1,10 +1,10 @@
 // AdminItem.jsx
 import React, { useState } from "react";
 import axios from "axios";
-function AdminItem({ item, onDelete, onEdit}) {
+function AdminItem({ item, onDelete}) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedPrice, setEditedPrice] = useState(item.itemPrice);
-  const [edittext, setEdittext] = useState("Edit");
+  const [editedPrice, setEditedPrice] = useState(item.itemPrice.toFixed(2));
+  const [edittext, setEdittext] = useState("/images/Edit.png");
   
   const handlePriceChange = (e) => {
     setEditedPrice(e.target.value);
@@ -19,21 +19,21 @@ function AdminItem({ item, onDelete, onEdit}) {
         itemImage: item.itemImage,
       });
       await axios.put(`http://localhost:3001/menu/edit/${setNewItemData.itemName}`, setNewItemData);
-      setEdittext("Edit");
+      setEdittext("/images/Edit.png");
       setIsEditing(false);
     } else {
       // Enter edit mode
-      setEdittext("Apply");
+      setEdittext("/images/Apply.png");
       setIsEditing(true);
     }
   };
     return (
-      <div className="menu-card">
+      <div className="menu-card" data-testid="menu-item">
         <img src={item.itemImage} alt={item.itemName} />
         <div className="menu-info">
-          <h3>{item.itemName}</h3>
-          <p>{item.itemDescription}</p>
-          <p>{isEditing ? (
+          <h3 align='center' style={{fontWeight:'600'}}>{item.itemName}</h3>
+          <p align='center'>{item.itemDescription}</p>
+          <p align='center' style={{fontSize:'130%', fontWeight:'bold'}}>{isEditing ? (
             <input
               type="number"
               step="0.01"
@@ -41,14 +41,14 @@ function AdminItem({ item, onDelete, onEdit}) {
               onChange={handlePriceChange}
             />
           ) : (
-            `Price: $ ${editedPrice}`
+            `$ ${editedPrice}`
           )}</p>
         </div>
         <div className="menu-actions">
           <div className="quantity">
-            <button className="remove-from-cart" onClick={handleEditClick}>{edittext}</button>
+            <img src={edittext} className="edit-button" data-testid="change-price" onClick={handleEditClick} style={{height:"45px",width:"80px"}}/>
           </div>
-          <button className="add-to-cart" onClick={onDelete}>Delete</button>
+          <img src="/images/Delete.png" className="delete-button" data-testid="delete-item" onClick={onDelete} style={{height:"45px",width:"80px"}}/>
         </div>
       </div>
     );

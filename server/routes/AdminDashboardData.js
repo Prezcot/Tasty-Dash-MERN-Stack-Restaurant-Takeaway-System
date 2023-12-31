@@ -1,6 +1,6 @@
 const { default: mongoose } = require("mongoose");
 const router = require("express").Router();
-const { item, Menu, users, refunds } = require("../Schemas/Schemas");
+const { item, users, refunds } = require("../Schemas/Schemas");
 
 router.get("/", (req, res) => {
   res.send("Hello");

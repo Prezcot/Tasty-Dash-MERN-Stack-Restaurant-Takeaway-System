@@ -80,7 +80,7 @@ const updateItems = (itemName, itemImage,action) => {
 
   {/* Separate items based on their types */}
   <h2>Starters</h2>
-  <br></br>
+  
   <div className="menu-item-div">
     
     {items.filter(item => item.itemType === 'starter').map(item => (

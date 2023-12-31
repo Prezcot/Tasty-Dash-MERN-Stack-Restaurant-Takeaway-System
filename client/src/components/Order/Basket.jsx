@@ -11,6 +11,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Basket() {
 
+  // let[itemsPresent, setItemsPresent] = useState(sessionStorage.getItem("present"));
+
   const nav = useNavigate();
   let [instructionfromcust, setInstructionFromCust] = useState(sessionStorage.getItem("customer_instruction") || "");
 
@@ -107,16 +109,21 @@ function Basket() {
           <div className="basket">
             <div className="confirm">
               <h3 className="textcolor">Confirm your order</h3>
-              {cart.map((item, index) => (
-                <Product 
-                itemProp={item} 
-                indexProp={index}
-                cartProp={cart} 
-                quantityProp={quantityMap}
-                updateProp={() => UpdateSummary()}
-                
-                />
-              ))}
+              {cart.length > 0 ? (
+                cart.map((item, index) => (
+                  <Product 
+                  itemProp={item} 
+                  indexProp={index}
+                  cartProp={cart} 
+                  quantityProp={quantityMap}
+                  updateProp={() => UpdateSummary()}
+                  
+                  />
+                ))
+                ) : (
+                  <label style={{color:"orange"}}>No products in your basket.</label>
+                )}
+              
   
               <div className="instruction">
                 <h3 className="textcolor">Special Instructions for Preparation</h3>

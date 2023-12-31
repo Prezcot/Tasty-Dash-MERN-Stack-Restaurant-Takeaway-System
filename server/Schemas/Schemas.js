@@ -39,8 +39,8 @@ const order_identification = mongoose.model(
 );
 
 //menu.js
-const Menu = mongoose.model(
-  "Menu",
+const Menuitem = mongoose.model(
+  "Menuitem",
   new mongoose.Schema({
     itemName: String,
     itemDescription: String,
@@ -61,4 +61,4 @@ const UserSchema = new mongoose.Schema({
 });
 const users = mongoose.model("users", UserSchema); // you can now use this to create other users
 
-module.exports = { item, order_identification, Menu, users, refunds };
+module.exports = { item, order_identification, Menuitem, users, refunds };
