@@ -9,13 +9,19 @@ import NavBar from "../NavBar";
 import Dashboard from "../User/Dashboard";
 import Basket from "../Order/Basket";
 import {useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 function Menu() {
   const nav = useNavigate();
   if(!sessionStorage.getItem("menuCart")){
     sessionStorage.setItem("menuCart","{}");
   }
   const [items, setItems] = useState([]);
+  const [hasToastAppeared, setHasToastAppeared] = useState(false);
   const [quantityMap, setQuantityMap] = useState(JSON.parse(sessionStorage.getItem("menuCart")));
+  
   useEffect(() => {
     try{
       axios
@@ -46,16 +52,37 @@ const updateItems = (itemName, itemImage,action) => {
         const updatedMap = newQuantity === 0
         ? Object.fromEntries(Object.entries(prevMap).filter(([key]) => key !== itemName))
         : { ...prevMap, [itemName]: newQuantity };
-  
+      showBasket();
       return updatedMap;
     });
   };
   
-  return (
+function showBasket(){
+  if (!hasToastAppeared) {
+    toast.info('View your basket here   ➜', {
+      className: 'toast-position',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    });
+
+    // Set the state to true once the toast has appeared
+    setHasToastAppeared(true);
+  }
+  };
+
+return (
 <div className="menu-everything" style={{
   display: "flex",
   flexDirection: "column",
 }}>
+  
+ 
+  
   <style>
     {`
       body {
@@ -73,7 +100,7 @@ const updateItems = (itemName, itemImage,action) => {
   </style>
 
   <NavBar style={{postion:"fixed"}}></NavBar>
-
+  <ToastContainer />
   <div className="menu-header">
     <h1 align="center">Menu</h1>
   </div>
