@@ -42,7 +42,7 @@ function Home(){
                         <div class="col">
                             <h1>Taste<br />Redefined</h1>
                             <p>
-                            Tasty Dash is a multi-cultural restaurant sponsored by the ICC bringing in a wide range of meals that you can choose from by the finest 3-star michelin awarded chefs in Sri Lanka.
+                            Tasty Dash, a standout in the world of takeaway dining, is a multi-cultural restaurant proudly sponsored by the ICC. We specialize in a wide range of takeaway meals, expertly crafted by our team of 3-star Michelin awarded chefs from Sri Lanka.
                             </p>
                             <button type="button" class="btn btn-dark btn-lg ordernow" onClick={()=>{sessionStorage.setItem("AlertMsg","Please Sign In/Create An Account To Order")
                             nav("/signin")}}>
