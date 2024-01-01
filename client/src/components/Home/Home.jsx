@@ -1,6 +1,6 @@
 import react from "react";
 import { useNavigate } from "react-router-dom";
-
+import "../../BootstrapImports.js";
 function Home(){
     const nav=useNavigate();
     return(
@@ -24,13 +24,13 @@ function Home(){
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul style={{cursor:"pointer"}} class="navbar-nav ms-auto">
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href={nav("/home")}>Home</a>
+                            <a class="nav-link active" aria-current="page" onClick={()=>{nav("/home")}}>Home</a>         
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link">About Us</a>
+                            <a class="nav-link">About Us</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link">Contact</a>
+                            <a class="nav-link">Contact</a>
                         </li>
                     </ul>
                     </div>
@@ -44,7 +44,8 @@ function Home(){
                             <p>
                             Tasty Dash is a multi-cultural restaurant sponsored by the ICC bringing in a wide range of meals that you can choose from by the finest 3-star michelin awarded chefs in Sri Lanka.
                             </p>
-                            <button type="button" class="btn btn-dark btn-lg ordernow" onClick={()=>nav("/signin")}>
+                            <button type="button" class="btn btn-dark btn-lg ordernow" onClick={()=>{sessionStorage.setItem("AlertMsg","Please Sign In/Create An Account To Order")
+                            nav("/signin")}}>
                             Order Now
                             </button>
                         </div>

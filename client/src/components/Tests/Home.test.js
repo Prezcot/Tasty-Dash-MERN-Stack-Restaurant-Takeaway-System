@@ -15,7 +15,9 @@ describe("UNIT TEST - HOME COMPONENT",()=>{
         const {getAllByText}=render(<BrowserRouter>
             <Home/>
             </BrowserRouter>);
-        const elementsinhome=getAllByText("Tasty Dash")[0];
         userEvent.click(getAllByText("Order Now")[0]);
+        render(<BrowserRouter>
+            <SignIn/>
+            </BrowserRouter>);
     })
 });
