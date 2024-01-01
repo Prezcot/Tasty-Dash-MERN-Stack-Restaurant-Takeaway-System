@@ -37,7 +37,9 @@ function Product ({itemProp,indexProp, cartProp, updateProp, quantityProp}){
     if (quantity > 0) {
         return(
             <div className="item">
-                <img src="/images/default.png" width="50px" height="50px"/>
+                <div style={{border:"3px solid black", padding:"1%", borderRadius:"10px"}}>
+                <img src="/images/default.png" width="40px" height="40px" id="item-image"/>
+                </div>
                 <b><label>{name}</label></b>
                 <b><label>${price} each</label></b>
                 <div className="counter">
