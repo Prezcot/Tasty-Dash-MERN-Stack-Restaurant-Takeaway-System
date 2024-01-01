@@ -121,7 +121,7 @@ function Basket() {
                   />
                 ))
                 ) : (
-                  <label style={{color:"orange"}}>No products in your basket.</label>
+                  <label style={{color:"#F85606"}}>No products in your basket.</label>
                 )}
               
   

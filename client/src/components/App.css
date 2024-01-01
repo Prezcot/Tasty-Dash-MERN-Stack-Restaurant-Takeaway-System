@@ -520,6 +520,10 @@ h2 {
   color:orange;
 }
 
+
+
+
+
 /*Home Page*/
 
 .foot { 
@@ -538,10 +542,12 @@ h2 {
 
 nav {
   background-color: #f85606;
+  border-bottom: 5px solid black;
 }
 
 .navbar-brand img {
   max-height: 50px;
+  border: 3px solid black;
 }
 
 .navbar-brand  {
@@ -559,7 +565,7 @@ nav {
 }
 
 section {
-  padding-top: 30vh;
+  padding-top: 20vh;
 }
 
 section h1 {
@@ -568,11 +574,13 @@ section h1 {
   color: "";
   text-align: left;
   margin-bottom: 20px;
+  color:white;
 }
 
 section p {
   font-size: 30px;
-  font-weight: 300;
+  font-weight: 400;
+  color:white;
 }
 
 .ordernow{
@@ -594,7 +602,7 @@ section p {
   left: 0;
   width: 100%; /* Adjust this value to control the gradient width */
   height: 100%;
-  background: linear-gradient(to left, rgba(255, 255, 255, 0), #e27b48);
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), #000000);
   z-index: 1; /* Ensure the gradient is behind the content */
 }
 

@@ -12,7 +12,7 @@ jest.mock("axios");
 
 describe("UNIT TEST - PAYMENT COMPONENT", () => {
 
-    it('Renders Basket component', () => {
+    it('Renders Checkout component', () => {
         var {getByText} =render(
             <BrowserRouter>
                 <Payment renderPayPal={false}/>
@@ -37,8 +37,6 @@ describe("INTEGRATION TEST - PAYMENT COMPONENT", () => {
                 return JSON.stringify(["Pizza,5.99,2"]);
             case 'menuCart':
                 return JSON.stringify({ "Pizza": 2});
-            case 'username':
-                return "dummy_username";
             case 'customer_instruction':
                 return "I have an allergy to nuts";
             case 'total':
@@ -74,7 +72,6 @@ describe("INTEGRATION TEST - PAYMENT COMPONENT", () => {
                 <Payment renderPayPal={false}/>
             </BrowserRouter>);
 
-        expect(getByTestId("payment-username-test")).toHaveTextContent("dummy_username");
         expect(getByTestId("payment-items-test")).toHaveTextContent("Pizza (x2)");
         expect(getByTestId("payment-instruction-test")).toHaveTextContent("I have an allergy to nuts");
         expect(getByTestId("payment-total-test")).toHaveTextContent("11.98");

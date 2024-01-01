@@ -8,7 +8,7 @@ function Home(){
             <nav class="py-3 navbar navbar-expand-lg fixed-top auto-hiding-navbar">
                 <div class="container">
                     <a class="navbar-brand">
-                        <img src="/images/logo.jpg" class="logo" height="50px" /> Tasty Dash
+                        <img src="/images/logo.jpg" class="logo" height="50px" /> <label style={{color:"white"}}>Tasty Dash</label>
                     </a>
                     <button
                     class="navbar-toggler"
@@ -40,9 +40,9 @@ function Home(){
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <h1>Taste<br />Redefined</h1>
+                            <h1 style={{fontWeight:"bolder"}}>Taste<br />Redefined</h1>
                             <p>
-                            Tasty Dash, a standout in the world of takeaway dining, is a multi-cultural restaurant proudly sponsored by the ICC. We specialize in a wide range of takeaway meals, expertly crafted by our team of 3-star Michelin awarded chefs from Sri Lanka.
+                            Tasty Dash is a multi-cultural restaurant bringing in a wide range of meals that you can choose from by the finest 3-star michelin awarded chefs in Sri Lanka.
                             </p>
                             <button type="button" class="btn btn-dark btn-lg ordernow" onClick={()=>{sessionStorage.setItem("AlertMsg","Please Sign In/Create An Account To Order")
                             nav("/signin")}}>
@@ -56,7 +56,7 @@ function Home(){
                     <div class="row"></div>
                 </div>
             </section>
-            <div class="foot">
+            <div class="foot" style={{borderTop:"5px solid #F85606"}}>
                 <div style={{paddingTop:"2vh",marginLeft:"15vw",marginRight:"15vw",display:"flex",flexDirection:"row",justifyContent:"space-between",color:"white"}}>
                     <div>
                         <h4>Opening Hours</h4>
