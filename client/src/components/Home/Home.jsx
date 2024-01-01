@@ -56,7 +56,7 @@ function Home(){
                 </div>
             </section>
             <div class="foot">
-                <div style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
+                <div style={{display:"flex",flexDirection:"row",justifyContent:"space-between",color:"white"}}>
                     <div>
                         <h4>Opening Hours</h4>
                         <p>
@@ -77,9 +77,6 @@ function Home(){
                         +94 11 123 4567<br />
                         +94 11 123 4567
                         </p>
-                    </div>
-                    <div>
-                        <h4>Email</h4>
                     </div>
                 </div>
             </div>
