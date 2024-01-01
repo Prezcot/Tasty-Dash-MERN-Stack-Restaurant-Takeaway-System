@@ -42,6 +42,7 @@ function NavBar(props) {
                 <a
                   style={{ cursor: "pointer" }}
                   className="nav-link"
+                  href="/home"
                   onClick={() => switchPage("home")}
                 >
                   Home
