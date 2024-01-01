@@ -36,28 +36,28 @@ let CustomerIns = sessionStorage.getItem('customer_instruction');
   <div className="payment-detail-button-container" style={{marginBottom:"10%"}}>
 
   <div style={{display:"flex", flexDirection:"column",justifyContent:"space-around", height:"50vh",borderRight:"3px solid orange", padding:"10%", paddingLeft:"3%", paddingRight:"17%"}}>
-  <div>
-      <h3>Username</h3>
+  {/* <div>
+      <h3>Username:</h3>
       <h6 data-testid="payment-username-test" style={{ fontWeight: 'normal' }}>{Username}</h6>
-    </div>
+    </div> */}
 
     <div>
       <h3>Items Ordered</h3>
       {Cart.map((item, index) => {
       let [name, price, quantity] = item.split(",");
       return (
-      <h6 data-testid="payment-items-test" style={{ fontWeight: 'normal' }}>{name} (x{quantity})</h6>
+      <h6 data-testid="payment-items-test" style={{ fontWeight: 'normal' }}>- {name} (x{quantity})</h6>
       )})}
-    </div>
+    </div><br/>
 
     <div>
       <h3>Special Instructions</h3>
-      <h6 data-testid="payment-instruction-test" style={{ fontWeight: 'normal' }}>{CustomerIns}</h6>
-    </div>
+      <h6 data-testid="payment-instruction-test" style={{ fontWeight: 'normal' }}> "{CustomerIns}"</h6>
+    </div><br/>
 
     <div>
       <h3>Total Amount</h3>
-      <h6 data-testid="payment-total-test" style={{ fontWeight: 'normal' }}>${Total_amount}</h6>
+      <h5 data-testid="payment-total-test" style={{ fontWeight: 'normal', color:"orange"}}> ${Total_amount}</h5>
     </div>
 
   </div>
