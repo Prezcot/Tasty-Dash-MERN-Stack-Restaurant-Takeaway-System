@@ -151,7 +151,7 @@ function SignUp()
                     </table>
                     <br></br>
                     <center>
-                        <input style={{width:"50%",backgroundColor:"green","color":"white",borderRadius:"10px",border:"0.1vh solid black"}} type="submit" value="Sign Up"></input>
+                        <input style={{width:"50%",backgroundColor:"black","color":"white",borderRadius:"10px",border:"0.1vh solid black"}} type="submit" value="Sign Up"></input>
                         <p>Already a member ? <b style={{cursor:"pointer"}} onClick={()=>nav("/signin")}>Sign In</b></p>
                     </center>
                 </form>

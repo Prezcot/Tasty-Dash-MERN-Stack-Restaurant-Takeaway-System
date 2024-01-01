@@ -164,7 +164,7 @@ const SignIn = () => {
       width: "100vw",
       height: "100vh"}}>
       <div>
-        <button onClick={()=>nav("/home")} style={{float:"left",marginTop:"1vh",marginLeft:"1vh",backgroundColor: "grey",color: "white",borderRadius: "0.5vh",border: "0.1vh solid black"}}>Back To Home</button>
+        <button onClick={()=>nav("/home")} style={{float:"left",marginTop:"1vh",marginLeft:"1vh",backgroundColor: "black",color: "white",borderRadius: "1vh",border: "0.1vh solid black",fontSize:"2vh"}}>Back To Home</button>
       </div>
       <div
         style={{
@@ -236,7 +236,7 @@ const SignIn = () => {
               <input
                 style={{
                   width: "50%",
-                  backgroundColor: "green",
+                  backgroundColor: "black",
                   color: "white",
                   borderRadius: "10px",
                   border: "0.1vh solid black",

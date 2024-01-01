@@ -123,7 +123,7 @@ function Dashboard() {
                   <p style={{fontSize:"1.5vw"}}>Username: {userinfo.username}</p>
                   <p style={{fontSize:"1.5vw"}}>Email: {userinfo.email}</p>
                   <p style={{fontSize:"1.5vw"}}>Phone Number: {userinfo.phonenumber}</p>
-                  <button style={{backgroundColor: "red",color: "white",borderRadius: "10px",border: "0.1vh solid black"}} onClick={handleAlert}>Delete Account</button>
+                  <button style={{backgroundColor: "red",color: "white",borderRadius: "0.5vh",border: "0.1vh solid black",fontSize:"2vh"}} onClick={handleAlert}>Delete Account</button>
               </div>) : (<div style={{flex:1, justifyContent:"center",display:"flex",flexDirection:"column",justifyContent:"center"}}>
                       <div style={{display:"flex",justifyContent:"center",flexDirection:"column",alignItems:"center"}}>
                         <h4>Are you sure ?</h4>
@@ -167,7 +167,7 @@ function Dashboard() {
                             </Tabcol>
                         </tr>
                             <Tabcol>
-                                <input style={{width: "100%",backgroundColor: "green",color: "white",borderRadius: "10px",border: "0.1vh solid black",}} type="submit" value="Change Password"></input>
+                                <input style={{fontSize:"2vh",backgroundColor: "green",color: "white",borderRadius: "0.5vh",border: "0.1vh solid black",}} type="submit" value="Change Password"></input>
                             </Tabcol>
                     </table>
                 </form>

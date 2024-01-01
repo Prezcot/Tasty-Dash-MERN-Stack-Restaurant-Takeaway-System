@@ -56,7 +56,7 @@ function Home(){
                 </div>
             </section>
             <div class="foot">
-                <div style={{marginLeft:"15vw",marginRight:"15vw",display:"flex",flexDirection:"row",justifyContent:"space-between",color:"white"}}>
+                <div style={{paddingTop:"2vh",marginLeft:"15vw",marginRight:"15vw",display:"flex",flexDirection:"row",justifyContent:"space-between",color:"white"}}>
                     <div>
                         <h4>Opening Hours</h4>
                         <p>

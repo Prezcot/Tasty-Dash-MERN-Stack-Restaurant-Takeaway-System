@@ -22,7 +22,7 @@ function NavBar(props) {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand">
             Tasty Dash
           </a>
           <button
