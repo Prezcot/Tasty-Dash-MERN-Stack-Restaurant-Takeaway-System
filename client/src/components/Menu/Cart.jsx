@@ -27,7 +27,7 @@ function Cart({ items, quantityMap}) {
         
         style={{position:"fixed"}}
       >
-        <img src="/images/carticon.png" alt="Shopping Cart" />
+        <img src="/images/Cart.png" alt="Shopping Cart" />
         <label className="unique-items-count">{uniqueItemsCount}</label>
         </div>
         {/* Show the list underneath the icon */}

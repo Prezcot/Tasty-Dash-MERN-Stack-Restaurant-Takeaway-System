@@ -13,7 +13,7 @@ function Paypal() {
   async function notifySuccess() {
     toast.success("Your order has been placed", {
       position: "top-center",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -28,7 +28,7 @@ function Paypal() {
   async function notifyFailure() {
     toast.error("order failed", {
       position: "top-center",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
