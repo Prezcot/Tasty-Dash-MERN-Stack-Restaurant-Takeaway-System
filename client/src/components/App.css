@@ -63,6 +63,8 @@
   justify-content: left; 
 }
 
+
+
 .menu-card img {
   object-fit: cover;
   background-position: center;
@@ -129,22 +131,7 @@
   font-weight: bolder;
   background-color: #DC3545; */
 }
-.edit-button{
-  /* border-radius: 8%;
-  width: 150%;
-  font-weight: bolder;
-  color:white;
-  background-color: #DC3545;
-  padding:5%; */
-}
-.delete-button{
-  /* border-radius: 8%;
-  width: 30%;
-  font-weight: bolder;
-  color:white;
-  background-color: #28A745;
-  padding:2%; */
-}
+
 .cart{
   display: contents;
   position: fixed;
@@ -200,6 +187,14 @@
   width: 100%;
   border-radius: 5px;
   background-color: #F85606;
+  color: white;
+  border: 0px;
+}
+.toast-position {
+  position: absolute;
+  top: 50px;
+  right: 30%;
+  font-size: larger;
 }
 
 

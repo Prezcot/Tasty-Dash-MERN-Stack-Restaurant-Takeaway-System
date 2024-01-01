@@ -4,8 +4,7 @@ import {useNavigate } from 'react-router-dom';
 
 function Cart({ items, quantityMap}) {
   const nav = useNavigate();
-  
-  
+
   const cartItems = items.filter((item) => quantityMap[item.itemName] > 0);
   const uniqueItemsCount = cartItems.length;
   const [isHovered, setIsHovered] = useState(false);
@@ -17,16 +16,13 @@ function Cart({ items, quantityMap}) {
   
   return (
     <>
+    
     <div className="cart" style={{display:"flex",justifyContent:"space-between"}}
         
         >
       <div className ='cart-hover' onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}>
-      <div
-        className="cart-icon"
-        
-        style={{position:"fixed"}}
-      >
+      <div className="cart-icon" style={{position:"fixed"}} title="Hover to view and proceed to basket">
         <img src="/images/Cart.png" alt="Shopping Cart" />
         <label className="unique-items-count">{uniqueItemsCount}</label>
         </div>
@@ -43,9 +39,9 @@ function Cart({ items, quantityMap}) {
             ))}
             
           </div>
-          <button onClick={() => nav("/basket")} style={{ color: "white" }}>
+          <button onClick={() => nav("/basket")} >
               <b>View My Basket</b>
-              </button>
+          </button>
           </div>
         )}
         </div>
