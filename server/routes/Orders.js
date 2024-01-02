@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
-const {item,order_identification,users}=require("../Schemas/Schemas");
+const {item,order_identification,users,collected_orders}=require("../Schemas/Schemas");
 // let order_id_count=0;
 
 router.get('/get_order_id', async (req, res) => {
@@ -45,8 +45,17 @@ router.post("/your_orders", async(req,res) => {
     // let notCollectedStatus = { $ne: "Collected" };
     // let condition1 = {username:user};
     // let condition2 = {order_status:notCollectedStatus};
-    let items= await item.find({ username:user }).catch((err)=>res.status(400).json({message:err}));
-    res.status(200).json(items);
+
+    let liveOrderItems= await item.find({ username:user }).catch((err)=>res.status(400).json({message:err}));
+    let orderHistoryItems= await collected_orders.find({ username:user }).catch((err)=>res.status(400).json({message:err}));
+
+
+    const allData = {
+      liveOrderItems: liveOrderItems,
+      orderHistoryItems: orderHistoryItems
+    };
+
+    res.status(200).json(allData);
   } catch (error){
     console.error(error);
     res.status(500).json({ message:"Internal Server Error" })
