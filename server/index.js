@@ -47,9 +47,10 @@ io.on("connection", (socket) => {
   console.log("a user connected");
 
   socket.on("order_status_update", (data) => {
-    username = data.username;
-    io.emit("order_status_update", { username: username });
-    console.log("From Socket: " + username);
+    const username = data.username; 
+    const status = data.status;
+    io.emit("order_status_update", { username: username, status: status });
+    console.log("From Socket: " + username + status);
   });
 
   socket.on("disconnect", () => {

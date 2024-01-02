@@ -4,13 +4,15 @@ import NavBar from "../NavBar";
 import { io } from "socket.io-client";
 
 function LiveOrders() {
-  let [orderInfo, setOrderInfo] = useState([]);
+  let [liveOrderInfo, setLiveOrderInfo] = useState([]);
+  let [orderHistoryInfo, setOrderHistoryInfo] = useState([]);
 
   async function fetchOrders() {
     try{
       let response = await axios.post("http://localhost:3001/orders/your_orders", {user: sessionStorage.getItem("username"),})
-      setOrderInfo(response.data);
-      console.log(orderInfo);
+      setLiveOrderInfo(response.data.liveOrderItems);
+      setOrderHistoryInfo(response.data.orderHistoryItems)
+
     } catch (error){
       console.error(error);
     }
@@ -53,8 +55,8 @@ function LiveOrders() {
           <div className="live_orders">
             <h3>Live Orders</h3>
           </div>
-          {orderInfo.map((orders) => (
-            orders.order_status !== "Collected" && (
+          {liveOrderInfo.length > 0 ? (
+          liveOrderInfo.map((orders) => (
               <div className="live-order-items">
                 <div className="indi-order" style={{alignItems:"center"}}>
 
@@ -63,7 +65,7 @@ function LiveOrders() {
                       <label>Order ID</label>
                     </b>
                     <br />
-                    <label style={{color:"orange"}} data-testid="rendered-order-id-test">{orders.order_id}</label>
+                    <label style={{color:"white"}} data-testid="rendered-live-order-id-test">{orders.order_id}</label>
                   </div>
 
                   <div>
@@ -71,7 +73,7 @@ function LiveOrders() {
                       <label>Order Status</label>
                     </b>
                     <br />
-                    <label style={{color:"red"}} data-testid="live-order-item">{orders.order_status}</label>
+                    <label style={{color:"orange"}} data-testid="live-order-item">{orders.order_status}</label>
                   </div>
 
                   <div>
@@ -99,14 +101,17 @@ function LiveOrders() {
                   </div>
                 </div>
               </div>
-            )
-          ))}
+          ))
+          ) : (
+            <label style={{color:"#F85606", paddingLeft:"1%"}}>No live orders to display.</label>
+            )}
+
 
             <div className="order_history">
             <h3>Order History</h3>
             </div>
-            {orderInfo.map((orders) => (
-            orders.order_status === "Collected" && (
+            {orderHistoryInfo.length > 0 ? (
+            orderHistoryInfo.map((orders) => (
               <div className="order-history-items">
                 <div className="indi-order" style={{alignItems:"center"}}>
                   <div>
@@ -114,7 +119,7 @@ function LiveOrders() {
                       <label>Order ID</label>
                     </b>
                     <br />
-                    <label>{orders.order_id}</label>
+                    <label data-testid="rendered-order-history-id-test">{orders.order_id}</label>
                   </div>
 
                   <div>
@@ -150,8 +155,10 @@ function LiveOrders() {
                   </div>
                 </div>
               </div>
-            )
-          ))}   
+          ))
+          ) : (
+            <label style={{color:"#F85606", paddingLeft:"1%"}}>No past orders to display.</label>
+          )}
         </div>
       </div>
       

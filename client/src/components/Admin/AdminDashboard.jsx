@@ -7,7 +7,6 @@ import { io } from "socket.io-client";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const AdminDashboard = () => {
   const [order_data, set_order_data] = useState([]);
   const [search_query, set_search_query] = useState("");
@@ -79,43 +78,16 @@ const AdminDashboard = () => {
     console.log("updated order status function");
     toast.info("The Order Status Has Been Updated!", {
       position: "top-center",
-      autoClose: 1000,
+      autoClose: 500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
       theme: "dark",
-      });
-    // await axios
-    //   .put("http://localhost:3001/admin_dashboard_data/set_order_status", {
-    //     object_id: object_id,
-    //     order_status: new_status,
-    //   })
-    //   .then((res) => {
-    //     const socket = io("http://localhost:3001");
-    //     socket.emit("order_status_update", { username: username });
-    //     grabData();
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
-    if (new_status != "Declined") {
-      console.log("Object ID: ", object_id);
-      await axios
-        .put("http://localhost:3001/admin_dashboard_data/set_order_status", {
-          object_id: object_id,
-          order_status: new_status,
-        })
-        .then((res) => {
-          const socket = io("http://localhost:3001");
-          socket.emit("order_status_update", { username: username });
-          grabData();
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    } else {
+    });
+
+    if (new_status === "Declined") {
       console.log("Object ID of Declined: ", object_id);
       try {
         console.log(object_id);
@@ -124,11 +96,49 @@ const AdminDashboard = () => {
           { object_id: object_id }
         );
         const socket = io("http://localhost:3001");
-        socket.emit("order_status_update", { username: username });
+        socket.emit("order_status_update", {
+          username: username,
+          status: new_status,
+        });
         grabData();
       } catch (err) {
         console.log(err);
       }
+    } else if (new_status === "Collected") {
+      console.log("Object ID of Collected: ", object_id);
+      try {
+        console.log(object_id);
+        await axios.post(
+          "http://localhost:3001/admin_dashboard_data/move_to_collected_orders",
+          { object_id: object_id }
+        );
+        const socket = io("http://localhost:3001");
+        socket.emit("order_status_update", {
+          username: username,
+          status: new_status,
+        });
+        grabData();
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      console.log("Object ID: ", object_id);
+      await axios
+        .put("http://localhost:3001/admin_dashboard_data/set_order_status", {
+          object_id: object_id,
+          order_status: new_status,
+        })
+        .then((res) => {
+          const socket = io("http://localhost:3001");
+          socket.emit("order_status_update", {
+            username: username,
+            status: new_status,
+          });
+          grabData();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   };
 
@@ -138,13 +148,13 @@ const AdminDashboard = () => {
         className="display-6 text-light d-flex justify-content-between align-items-center"
         style={{
           paddingLeft: "9px",
-          paddingTop: "60px",
+          paddingTop: "70px",
           paddingBottom: "5px",
           backgroundColor: "#666666",
         }}
       >
         Pending Orders
-        <span style={{ paddingTop: "10px", paddingRight: "5px" }}>
+        <span style={{ paddingTop: "5px", paddingRight: "5px" }}>
           <input
             value={search_query}
             style={{
@@ -165,10 +175,6 @@ const AdminDashboard = () => {
               className={`list-group-item fs-6 ${
                 items.order_status === "Approved"
                   ? "list-group-item-success"
-                  : items.order_status === "Declined"
-                  ? "list-group-item-danger"
-                  : items.order_status === "Collected"
-                  ? "list-group-item-dark"
                   : "list-group-item-warning"
               }`}
             >

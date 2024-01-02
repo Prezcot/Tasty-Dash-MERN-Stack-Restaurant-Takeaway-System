@@ -4,7 +4,7 @@
 # If you need more help, visit the Dockerfile reference guide at
 # https://docs.docker.com/engine/reference/builder/
 
-FROM node:latest
+FROM node:20.10.0
 
 # Set working directory
 WORKDIR /usr/src/app

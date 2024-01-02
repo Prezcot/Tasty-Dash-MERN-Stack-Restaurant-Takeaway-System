@@ -12,11 +12,11 @@ import Home from "./components/Home/Home";
 function App() {
   const nav = useNavigate();
   
-  async function notify(username) {
-    if(sessionStorage.getItem("username")==username){
+  async function notify(data) {
+    if((sessionStorage.getItem("username")==data.username) && (data.status !== 'Pending')){
       toast.info("Your Order Status Has Been Updated!", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -33,9 +33,8 @@ function App() {
   useEffect(() => {
     const socket = io("http://localhost:3001");
     socket.on("order_status_update", function(data) {
-      let value1 = data.username
-      console.log("this from app.js "+ value1);
-      notify(value1);
+      console.log(''+data.status);
+      notify(data);
     });
     return () => {
       socket.disconnect();

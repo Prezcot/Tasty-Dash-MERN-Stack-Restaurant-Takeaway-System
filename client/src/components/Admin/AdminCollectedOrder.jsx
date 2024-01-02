@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 import AdminNavBar from "./AdminNavBar";
-import parse from "html-react-parser";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "../../BootstrapImports.js";
 import axios from "axios";
 
-const AdminOrderRefund = () => {
+const AdminCollectedOrder = () => {
   const [data, set_data] = useState([]);
 
   var grabData = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3001/admin_dashboard_data/receive/refund_data"
+        "http://localhost:3001/admin_dashboard_data//receive/order_collected_data"
       );
       set_data(res.data);
     } catch (err) {
@@ -36,12 +35,12 @@ const AdminOrderRefund = () => {
           backgroundColor: "#666666",
         }}
       >
-        Refunds Necessary
+        Collected Orders
       </div>
       <ul className="list-group">
         {data.map((items, index) => (
           <div key={index}>
-            <li className="list-group-item fs-6 list-group-item-danger">
+            <li className="list-group-item fs-6 list-group-item-info">
               <b>Name: {items.username}</b>
               <br />
               <b>Paypal Email: {items.paypal_email}</b>
@@ -66,4 +65,4 @@ const AdminOrderRefund = () => {
   );
 };
 
-export default AdminOrderRefund;
+export default AdminCollectedOrder;

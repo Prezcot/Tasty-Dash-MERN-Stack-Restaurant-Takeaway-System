@@ -237,7 +237,7 @@ describe("INTEGRATION TEST - BASKET COMPONENT", () => {
             </BrowserRouter>);
     
         // Check if the navigate function was called with the correct path
-        var headinginpayment=getByText("Checkout");
+        var headinginpayment=getByText("Confirm Details and Checkout");
         expect(headinginpayment).toBeInTheDocument();
 
       });
