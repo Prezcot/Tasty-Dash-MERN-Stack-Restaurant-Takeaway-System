@@ -11,6 +11,7 @@ let Username = sessionStorage.getItem('username');
 let Cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 let Total_amount = sessionStorage.getItem('total');
 let CustomerIns = sessionStorage.getItem('customer_instruction');
+let CusEmail = sessionStorage.getItem('email');
 
 
   return (
@@ -31,15 +32,16 @@ let CustomerIns = sessionStorage.getItem('customer_instruction');
       }
     `}
     </style>
-  <h1 style={{marginTop:"3%", marginLeft:"10%", color:"#FFF"}}>Checkout</h1><br/>
+  <h1 style={{marginTop:"3%", marginLeft:"10%", color:"#FFF"}}>Confirm Details and Checkout</h1><br/>
   
   <div className="payment-detail-button-container" style={{marginBottom:"10%"}}>
 
-  <div style={{display:"flex", flexDirection:"column",justifyContent:"space-around", height:"50vh",borderRight:"3px solid orange", padding:"10%", paddingLeft:"3%", paddingRight:"17%"}}>
+  <div style={{display:"flex", flexDirection:"column",justifyContent:"space-around", height:"50vh",borderRight:"7px solid orange", padding:"10%", paddingLeft:"3%", paddingRight:"17%"}}>
+  
   {/* <div>
-      <h3>Username:</h3>
-      <h6 data-testid="payment-username-test" style={{ fontWeight: 'normal' }}>{Username}</h6>
-    </div> */}
+      <h3>Email</h3>
+      <h6 data-testid="payment-username-test" style={{ fontWeight: 'normal' }}>{CusEmail}</h6>
+    </div><br/> */}
 
     <div>
       <h3>Items Ordered</h3>
