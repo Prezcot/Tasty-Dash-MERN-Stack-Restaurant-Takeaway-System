@@ -108,7 +108,7 @@ const AdminDashboard = () => {
           { object_id: object_id }
         );
         const socket = io("http://localhost:3001");
-        socket.emit("order_status_update", { username: username });
+        socket.emit("order_status_update", { username: username ,status: new_status});
         grabData();
       } catch (err) {
         console.log(err);
@@ -122,7 +122,7 @@ const AdminDashboard = () => {
           { object_id: object_id }
         );
         const socket = io("http://localhost:3001");
-        socket.emit("order_status_update", { username: username });
+        socket.emit("order_status_update", { username: username, status: new_status});
         grabData();
       } catch (err) {
         console.log(err);
@@ -136,7 +136,7 @@ const AdminDashboard = () => {
         })
         .then((res) => {
           const socket = io("http://localhost:3001");
-          socket.emit("order_status_update", { username: username });
+          socket.emit("order_status_update", { username: username, status: new_status });
           grabData();
         })
         .catch((err) => {

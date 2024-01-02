@@ -60,7 +60,7 @@ const updateItems = (itemName, itemImage,action) => {
 function showBasket(){
   if (!hasToastAppeared) {
     toast.info('View your basket here   ➜', {
-      className: 'toast-position',
+      className : 'toast-position',
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -70,16 +70,19 @@ function showBasket(){
       theme: 'dark',
     });
 
-    // Set the state to true once the toast has appeared
+    
     setHasToastAppeared(true);
   }
   };
 
 return (
-<div className="menu-everything" style={{
-  display: "flex",
-  flexDirection: "column",
-}}>
+  <>
+  <NavBar style={{postion:"fixed"}}></NavBar>
+  <div className="menu-everything" style={{
+    display: "flex",
+    flexDirection: "column",
+    
+  }}>
   
  
   
@@ -99,8 +102,8 @@ return (
     `}
   </style>
 
-  <NavBar style={{postion:"fixed"}}></NavBar>
-  <ToastContainer />
+  
+  
   <div className="menu-header">
     <h1 align="center">Menu</h1>
   </div>
@@ -146,10 +149,11 @@ return (
       />
     ))}
   </div>
-
+  
   <Cart items={items} quantityMap={quantityMap}  data-testid="cart-icon"/>
 </div>
 
+</>
   
   );
 };  

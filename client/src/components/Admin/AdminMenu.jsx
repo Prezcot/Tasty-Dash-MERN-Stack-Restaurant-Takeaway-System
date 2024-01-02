@@ -115,6 +115,7 @@ function AdminMenu() {
       <div className="menu-everything" style={{
       display: "flex",
       flexDirection: "column",
+      marginTop: '5%'
       }}>
       <style>
         {`
@@ -131,32 +132,36 @@ function AdminMenu() {
           }
         `}
       </style>
-      
-      <div className="item-form-container"style={{
-        marginTop: "4%"
-        }}>
-      <h2 className="form-title">Add New Item</h2>
-      <form onSubmit={addNewItem} className="item-form">
-        <div className="form-group">
-          <label htmlFor="itemName" className="form-label">
-            Item Name:
-          </label>
-          <input
-            type="text"
-            name="itemName"
-            data-testid= "item-name-input"
-            value={newItemData.itemName}
-            onChange={handleInputChange}
-            className="form-input"
-          />
-        </div>
-        <div className="form-group">
-            <label htmlFor="itemType" className="form-label">
-              Item Type:
-            </label>
+  
+      <h2 className="form-title" align = 'center'>Add New Item</h2>
+  <div className="item-form-container" style={{
+      display: "flex",
+      flexDirection: "column",
+    
+      }}>
+    
+  <form onSubmit={addNewItem} className="item-form">
+    <table>
+      <tbody>
+        <tr className="add-item-field">
+          <td className="form-label">Item Name:</td>
+          <td>
+            <input
+              type="text"
+              name="itemName"
+              data-testid="item-name-input"
+              value={newItemData.itemName}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          </td>
+        </tr>
+        <tr className="add-item-field">
+          <td className="form-label">Item Type:</td>
+          <td>
             <select
               name="itemType"
-              data-testid= "item-type-select"
+              data-testid="item-type-select"
               value={newItemData.itemType}
               onChange={handleInputChange}
               className="form-input"
@@ -166,52 +171,54 @@ function AdminMenu() {
               <option value="mainCourse">Main Course</option>
               <option value="dessert">Dessert</option>
             </select>
-          </div>
-        <div className="form-group">
-          <label htmlFor="itemDescription" className="form-label">
-            Item Description:
-          </label>
-          <textarea
-            name="itemDescription"
-            data-testid= "item-description-input"
-            value={newItemData.itemDescription}
-            onChange={handleInputChange}
-            className="form-input"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="itemPrice" className="form-label">
-            Item Price:
-          </label>
-          <input
-            type="number"
-            step="0.01"
-            name="itemPrice"
-            data-testid= "item-price-input"
-            value={newItemData.itemPrice}
-            onChange={handleInputChange}
-            className="form-input"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="itemImage" className="form-label">
-            Item Image:
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            data-testid= "item-image-input"
-            ref={fileInput}
-            onChange={handleFileChange}
-            className="form-input"
-          />
-        </div>
-
-        <button type="submit" className="form-button"  data-testid= "add-item-button">Add To Menu</button>
-      </form>
-    </div>
+          </td>
+        </tr>
+        <tr className="add-item-field">
+          <td className="form-label">Item Description:</td>
+          <td>
+            <textarea
+              name="itemDescription"
+              data-testid="item-description-input"
+              value={newItemData.itemDescription}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          </td>
+        </tr>
+        <tr className="add-item-field">
+          <td className="form-label">Item Price:</td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              name="itemPrice"
+              data-testid="item-price-input"
+              value={newItemData.itemPrice}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          </td>
+        </tr>
+        <tr className="add-item-field">
+          <td className="form-label">Item Image:</td>
+          <td>
+            <input
+              type="file"
+              accept="image/*"
+              data-testid="item-image-input"
+              ref={fileInput}
+              onChange={handleFileChange}
+              className="form-input"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit" className="form-button" data-testid="add-item-button">
+      Add To Menu
+    </button>
+  </form>
+</div>
   <h2>Starters</h2>
   
 <div className="menu-item-div">

@@ -81,7 +81,7 @@ function Paypal() {
         await axios.put(`http://localhost:3001/orders/update_order_id/${document_id}`, {temp});
 
         const socket = io("http://localhost:3001");
-        socket.emit("order_status_update", { username: orderDetails.username });
+        socket.emit("order_status_update", { username: orderDetails.username, status: orderDetails.order_status });
 
         sessionStorage.removeItem("menuCart");
         sessionStorage.removeItem("cart");
