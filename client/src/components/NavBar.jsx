@@ -21,7 +21,7 @@ function NavBar(props) {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark top fixed-top">
         <div className="container-fluid">
           <a className="navbar-brand">
             Tasty Dash
@@ -39,16 +39,6 @@ function NavBar(props) {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className={`nav-item ${page === "home" ? "active" : ""}`}>
-                <a
-                  style={{ cursor: "pointer" }}
-                  className="nav-link"
-                  href="/home"
-                  onClick={() => switchPage("home")}
-                >
-                  Home
-                </a>
-              </li>
               <li className={`nav-item ${page === "menu" ? "active" : ""}`}>
                 <a
                   style={{ cursor: "pointer" }}

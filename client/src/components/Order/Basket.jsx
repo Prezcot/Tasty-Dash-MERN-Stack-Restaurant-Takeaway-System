@@ -68,7 +68,7 @@ function Basket() {
       
     } else {
       toast.warning("Basket is empty", {
-        position: "bottom-center",
+        position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -82,7 +82,7 @@ function Basket() {
   
   return (
     <>
-    <div className="everything">
+    <div className="everything" style={{paddingTop: '4%'}}>
     <style>
     {`
       body {

@@ -81,7 +81,8 @@ return (
   <div className="menu-everything" style={{
     display: "flex",
     flexDirection: "column",
-    
+    paddingTop: '4%',
+    marginTop: '0%'
   }}>
   
  
