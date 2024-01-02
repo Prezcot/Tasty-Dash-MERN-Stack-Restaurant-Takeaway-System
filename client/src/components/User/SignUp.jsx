@@ -66,6 +66,7 @@ function SignUp()
                 await axios.post("http://localhost:3001/users/signup",{username,email,phonenumber,password}).then(()=>{
                     sessionStorage.setItem("username", username)
                     sessionStorage.setItem("type", "User");
+                    sessionStorage.setItem("allow","true");
                     sessionStorage.setItem("email", email);
                     nav("/menu")}).catch((err)=>setError(err.response.data.message));
             }

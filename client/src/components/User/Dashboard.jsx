@@ -99,7 +99,8 @@ function Dashboard() {
     {
       const username=sessionStorage.getItem("username");
       await axios.delete(`http://localhost:3001/users/deleteaccount/${username}`).then((res)=>{
-      sessionStorage.setItem("AlertMsg",res.data.message);  
+      sessionStorage.setItem("AlertMsg",res.data.message); 
+      sessionStorage.removeItem("allow"); 
       nav("/signin")}).catch((err)=>{sessionStorage.setItem("AlertMsg",err.response.data.message)});
     }
   return (

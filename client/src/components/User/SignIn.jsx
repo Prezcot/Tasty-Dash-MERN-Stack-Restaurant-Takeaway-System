@@ -123,10 +123,12 @@ const SignIn = () => {
                 if (res.data.user == "User") {
                   sessionStorage.setItem("type", "User");
                   sessionStorage.setItem("email", res.data.email);
+                  sessionStorage.setItem("allow","true");
                   nav("/menu");
                 } else {
                   sessionStorage.setItem("type", "Admin");
                   nav("/admin");
+                  sessionStorage.setItem("allow","true");
                 }
               })
               .catch((err) => setError(err.response.data.message));

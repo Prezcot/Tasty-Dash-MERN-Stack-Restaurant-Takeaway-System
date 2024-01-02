@@ -15,6 +15,7 @@ function NavBar(props) {
     sessionStorage.removeItem("order_id");
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("email");
+    sessionStorage.removeItem("allow");
     nav("/signin");
   };
 
