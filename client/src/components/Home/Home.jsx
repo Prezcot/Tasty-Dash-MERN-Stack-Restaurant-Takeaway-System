@@ -27,10 +27,10 @@ function Home(){
                             <a class="nav-link active" aria-current="page" onClick={()=>{nav("/home")}}>Home</a>         
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">About Us</a>
+                            <a class="nav-link" onClick={()=>{nav("/signin")}}>Log in</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">Contact</a>
+                            <a class="nav-link" onClick={()=>{nav("/signup")}}>Sign up!</a>
                         </li>
                     </ul>
                     </div>

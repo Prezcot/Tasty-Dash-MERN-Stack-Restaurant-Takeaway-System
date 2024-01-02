@@ -3,6 +3,7 @@ import {useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { io } from "socket.io-client";
 
 function Paypal() {
   const paypal = useRef();
@@ -78,6 +79,9 @@ function Paypal() {
         
         let document_id = '6589770129060833d3f653b1';/*this document does not change and is singular in the mongodb collection*/
         await axios.put(`http://localhost:3001/orders/update_order_id/${document_id}`, {temp});
+
+        const socket = io("http://localhost:3001");
+        socket.emit("order_status_update", { username: orderDetails.username });
 
         sessionStorage.removeItem("menuCart");
         sessionStorage.removeItem("cart");
