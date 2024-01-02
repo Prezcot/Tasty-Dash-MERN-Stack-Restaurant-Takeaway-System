@@ -14,10 +14,9 @@ This website allows two different types of users **Customers** and **Administrat
 
 ### Docker:
 
-- Change the directory to the root directory of the folder and run a docker-compose up --build
+- Change the directory to the root directory of the folder and run a `docker-compose up --build`
 
 ### Windows:
 
-- Open Two different terminal windows in the root directory of the folder
-- One on run the command _npm run client_
-- On the other run the command _npm run server_
+- Open Two different terminal windows in the root directory of the folder.
+- Run the commands `npm run client` and `npm run server` on each respectively.
