@@ -30,7 +30,7 @@ const AdminNavBar = () => {
               <li className="nav-item">
                 <a
                   className={`nav-link ${
-                    page === "admin_dashboard" ? "active" : ""
+                    page === "admin_dashboard" ? "active" : "opacity-50"
                   }`}
                   aria-current="page"
                   onClick={() => set_page("admin_dashboard")}
@@ -42,7 +42,7 @@ const AdminNavBar = () => {
               <li className="nav-item">
                 <a
                   className={`nav-link ${
-                    page === "admin_order_refund" ? "active" : ""
+                    page === "admin_order_refund" ? "active" : "opacity-50"
                   }`}
                   onClick={() => set_page("admin_order_refund")}
                   style={{ cursor: "pointer" }}
@@ -53,7 +53,7 @@ const AdminNavBar = () => {
               <li className="nav-item">
                 <a
                   className={`nav-link ${
-                    page === "admin_collected_order" ? "active" : ""
+                    page === "admin_collected_order" ? "active" : "opacity-50"
                   }`}
                   onClick={() => set_page("admin_collected_order")}
                   style={{ cursor: "pointer" }}
@@ -64,7 +64,7 @@ const AdminNavBar = () => {
               <li className="nav-item">
                 <a
                   className={`nav-link ${
-                    page === "admin_add_menu_items" ? "active" : ""
+                    page === "admin_add_menu_items" ? "active" : "opacity-50"
                   }`}
                   onClick={() => set_page("admin_add_menu_items")}
                   style={{ cursor: "pointer" }}
