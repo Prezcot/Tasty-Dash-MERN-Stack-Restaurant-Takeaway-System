@@ -1,6 +1,11 @@
 const { default: mongoose } = require("mongoose");
 const router = require("express").Router();
-const { item, users, refunds } = require("../Schemas/Schemas");
+const {
+  item,
+  users,
+  refunds,
+  collected_orders,
+} = require("../Schemas/Schemas");
 
 router.get("/", (req, res) => {
   res.send("Hello");
@@ -17,6 +22,14 @@ router.get("/receive/order_data", async (req, res) => {
 router.get("/receive/refund_data", async (req, res) => {
   try {
     let data = await refunds.find();
+    res.json(data);
+  } catch (err) {
+    res.status(500);
+  }
+});
+router.get("/receive/order_collected_data", async (req, res) => {
+  try {
+    let data = await collected_orders.find();
     res.json(data);
   } catch (err) {
     res.status(500);
@@ -47,6 +60,26 @@ router.post("/move_to_refund", async (req, res) => {
     if (data_to_move) {
       data_to_move.order_status = "Refund Needed";
       const new_data = new refunds(data_to_move.toObject());
+      await new_data.save();
+
+      console.log("Data moved successfully!");
+    } else {
+      console.log("Data not found.");
+    }
+  } catch (error) {
+    console.error("Error moving data:", error);
+  }
+});
+router.post("/move_to_collected_orders", async (req, res) => {
+  try {
+    res.json("Promise fullfillment");
+    const object_id = req.body.object_id;
+    console.log("Server AdminDashboard: ", object_id);
+    const data_to_move = await item.findByIdAndDelete(object_id);
+    console.log(data_to_move);
+    if (data_to_move) {
+      data_to_move.order_status = "Order Has Been Collected";
+      const new_data = new collected_orders(data_to_move.toObject());
       await new_data.save();
 
       console.log("Data moved successfully!");

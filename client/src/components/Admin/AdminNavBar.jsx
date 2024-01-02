@@ -2,23 +2,13 @@ import { useState } from "react";
 import AdminDashboard from "./AdminDashboard";
 import AdminMenu from "./AdminMenu";
 import AdminOrderRefund from "./AdminOrderRefund";
+import AdminCollectedOrder from "./AdminCollectedOrder";
 
 import "../../BootstrapImports.js";
 
-// import "bootstrap/dist/js/bootstrap.bundle.min.js.map";
-// import "bootstrap/dist/js/bootstrap.bundle.min.js";
-// import "jquery/dist/jquery.min.js";
-// import "jquery/dist/jquery.min.map";
-
 const AdminNavBar = () => {
   const [page, set_page] = useState("admin_dashboard");
-
-  // const switch_page = (page) => {
-  //   console.log("page was switched");
-  //   if (page === "admin_dashboard") set_page("admin_dashboard");
-  //   else if (page === "admin_add_menu_items") set_page("admin_add_menu_items");
-  // };
-
+  console.log(page);
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark top fixed-top">
@@ -52,23 +42,34 @@ const AdminNavBar = () => {
               <li className="nav-item">
                 <a
                   className={`nav-link ${
-                    page === "admin_add_menu_items" ? "active" : ""
-                  }`}
-                  onClick={() => set_page("admin_add_menu_items")}
-                  style={{ cursor: "pointer" }}
-                >
-                  Add New Menu Item
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className={`nav-link ${
                     page === "admin_order_refund" ? "active" : ""
                   }`}
                   onClick={() => set_page("admin_order_refund")}
                   style={{ cursor: "pointer" }}
                 >
                   Refunded Items
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className={`nav-link ${
+                    page === "admin_collected_order" ? "active" : ""
+                  }`}
+                  onClick={() => set_page("admin_collected_order")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Collected Orders
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className={`nav-link ${
+                    page === "admin_add_menu_items" ? "active" : ""
+                  }`}
+                  onClick={() => set_page("admin_add_menu_items")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Add New Menu Item
                 </a>
               </li>
             </ul>
@@ -85,6 +86,7 @@ const AdminNavBar = () => {
       {page === "admin_dashboard" && <AdminDashboard />}
       {page === "admin_add_menu_items" && <AdminMenu />}
       {page === "admin_order_refund" && <AdminOrderRefund />}
+      {page === "admin_collected_order" && <AdminCollectedOrder />}
     </>
   );
 };
