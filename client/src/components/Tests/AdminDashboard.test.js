@@ -59,16 +59,16 @@ describe("ADMIN DASHBOARD BUTTONS CHECK", () => {
 
     const { queryByTestId } = render(<AdminDashboard />);
 
-    const approveButtonBeforeFetch = queryByTestId("Approve");
-    expect(approveButtonBeforeFetch).not.toBeInTheDocument();
+    const approve_button_before_fetch = queryByTestId("Approve");
+    expect(approve_button_before_fetch).not.toBeInTheDocument();
 
-    let approveButton;
+    let approve_button;
     await waitFor(() => {
-      approveButton = queryByTestId("Approve");
-      expect(approveButton).toBeInTheDocument();
+      approve_button = queryByTestId("Approve");
+      expect(approve_button).toBeInTheDocument();
     });
 
-    fireEvent.click(approveButton);
+    fireEvent.click(approve_button);
 
     expect(axios.put).toHaveBeenCalledWith(
       "http://localhost:3001/admin_dashboard_data/set_order_status",
@@ -82,16 +82,16 @@ describe("ADMIN DASHBOARD BUTTONS CHECK", () => {
 
     const { queryByTestId } = render(<AdminDashboard />);
 
-    const approveButtonBeforeFetch = queryByTestId("Collected");
-    expect(approveButtonBeforeFetch).not.toBeInTheDocument();
+    const collected_button_before_fetch = queryByTestId("Collected");
+    expect(collected_button_before_fetch).not.toBeInTheDocument();
 
-    let approveButton;
+    let collected_button;
     await waitFor(() => {
-      approveButton = queryByTestId("Collected");
-      expect(approveButton).toBeInTheDocument();
+      collected_button = queryByTestId("Collected");
+      expect(collected_button).toBeInTheDocument();
     });
 
-    fireEvent.click(approveButton);
+    fireEvent.click(collected_button);
 
     expect(axios.put).toHaveBeenCalledWith(
       "http://localhost:3001/admin_dashboard_data/set_order_status",
