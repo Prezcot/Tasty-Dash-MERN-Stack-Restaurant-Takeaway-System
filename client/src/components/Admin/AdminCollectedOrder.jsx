@@ -11,7 +11,7 @@ const AdminCollectedOrder = () => {
   var grabData = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3001/admin_dashboard_data//receive/order_collected_data"
+        "http://localhost:3001/admin_dashboard_data/receive/order_collected_data"
       );
       set_data(res.data);
     } catch (err) {

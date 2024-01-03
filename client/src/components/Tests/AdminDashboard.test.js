@@ -11,6 +11,7 @@ import AdminDashboard from "../Admin/AdminDashboard";
 import axios from "axios";
 import grabData from "../Admin/AdminDashboard";
 import AdminOrderRefund from "../Admin/AdminOrderRefund";
+import AdminCollectedOrder from "../Admin/AdminCollectedOrder";
 
 jest.mock("axios");
 
@@ -31,6 +32,11 @@ describe("ADMINDASHBOARD - COMPONENTS RENDER", () => {
   test("Whether AdminOrderRefund renders properly", () => {
     render(<AdminOrderRefund />);
     const title = screen.getByText(/refunds necessary/i);
+    expect(title).toBeInTheDocument();
+  });
+  test("Whether AdminCollectedOrders renders properly", () => {
+    render(<AdminCollectedOrder />);
+    const title = screen.getByText(/collected orders/i);
     expect(title).toBeInTheDocument();
   });
 });
@@ -76,29 +82,6 @@ describe("ADMIN DASHBOARD BUTTONS CHECK", () => {
     );
   });
 
-  test("triggers updateOrderStatus function with correct arguments on Order Collected button click", async () => {
-    axios.get.mockResolvedValueOnce({ data: mockOrderGet });
-    axios.put.mockResolvedValueOnce({ data: mockOrderPut });
-
-    const { queryByTestId } = render(<AdminDashboard />);
-
-    const collected_button_before_fetch = queryByTestId("Collected");
-    expect(collected_button_before_fetch).not.toBeInTheDocument();
-
-    let collected_button;
-    await waitFor(() => {
-      collected_button = queryByTestId("Collected");
-      expect(collected_button).toBeInTheDocument();
-    });
-
-    fireEvent.click(collected_button);
-
-    expect(axios.put).toHaveBeenCalledWith(
-      "http://localhost:3001/admin_dashboard_data/set_order_status",
-      { object_id: mockOrderGet[0]._id, order_status: "Collected" }
-    );
-  });
-
   test("triggers move_to_refund when Decline button is clicked", async () => {
     axios.get.mockResolvedValueOnce({ data: mockOrderGet });
 
@@ -114,6 +97,24 @@ describe("ADMIN DASHBOARD BUTTONS CHECK", () => {
 
     expect(axios.post).toHaveBeenCalledWith(
       "http://localhost:3001/admin_dashboard_data/move_to_refund",
+      { object_id: mockOrderGet[0]._id }
+    );
+  });
+  test("triggers move_to_order_collected when Decline button is clicked", async () => {
+    axios.get.mockResolvedValueOnce({ data: mockOrderGet });
+
+    const { queryByTestId } = render(<AdminDashboard />);
+
+    await waitFor(() => {
+      const declineButton = queryByTestId("Collected");
+      expect(declineButton).toBeInTheDocument();
+    });
+
+    const declineButton = queryByTestId("Collected");
+    fireEvent.click(declineButton);
+
+    expect(axios.post).toHaveBeenCalledWith(
+      "http://localhost:3001/admin_dashboard_data/move_to_collected_orders",
       { object_id: mockOrderGet[0]._id }
     );
   });
