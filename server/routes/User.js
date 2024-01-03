@@ -38,9 +38,7 @@ router.get("/userinfo/:username",async (req,res,next)=>
     var username=req.params.username;
     const authHeader=req.headers.authorization;
     var verified=true;
-    console.log("ITS WORKIN");
     if(!authHeader) {
-        console.log("this is one error1");
         verified=false;
         res.status(400).json({message:'Authorization header missing'});
     }
@@ -48,7 +46,6 @@ router.get("/userinfo/:username",async (req,res,next)=>
     jwt.verify(token, 'r+43kcgH@9u309gXemm#COPv:BNV.;-I`p283$(?{X|b=5R&', (err, user) => {
         req.user = user;
     });
-    console.log("ITS WORKIN");
     username=req.user.username;
     try{
         var query=await users.find({username:username});
