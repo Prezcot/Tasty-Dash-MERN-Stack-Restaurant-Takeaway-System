@@ -121,14 +121,13 @@ const SignIn = () => {
               })
               .then((res) => {
                 if (res.data.user == "User") {
-                  sessionStorage.setItem("type", "User");
+                  sessionStorage.setItem("token", res.data.token);
                   sessionStorage.setItem("email", res.data.email);
-                  sessionStorage.setItem("allow","true");
                   nav("/menu");
                 } else {
-                  sessionStorage.setItem("type", "Admin");
+                  sessionStorage.setItem("token", res.data.token);
                   nav("/admin");
-                  sessionStorage.setItem("allow","true");
+                  //sessionStorage.setItem("r+43kcgH@9u309gXemm#C\WOPv:BNV.;-I`p283$(?{X|b=5R&", "verified");
                 }
               })
               .catch((err) => setError(err.response.data.message));

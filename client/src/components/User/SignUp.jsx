@@ -63,11 +63,10 @@ function SignUp()
             //setPassword(bcrypt.hash(password,10));
             if (checkForLowerCase(password) && checkForUpperCase(password) && checkForSpecialChar(password) && username.length>=3 && validator.isEmail(email) && !isNaN(phonenumber) && phonenumber.length==10 && password.length>=5 && cnfrmpassword==password)
             {
-                await axios.post("http://localhost:3001/users/signup",{username,email,phonenumber,password}).then(()=>{
+                await axios.post("http://localhost:3001/users/signup",{username,email,phonenumber,password}).then((res)=>{
                     sessionStorage.setItem("username", username)
-                    sessionStorage.setItem("type", "User");
-                    sessionStorage.setItem("allow","true");
                     sessionStorage.setItem("email", email);
+                    sessionStorage.setItem("token",res.data.token)
                     nav("/menu")}).catch((err)=>setError(err.response.data.message));
             }
             else if (!checkForSpecialChar(password))

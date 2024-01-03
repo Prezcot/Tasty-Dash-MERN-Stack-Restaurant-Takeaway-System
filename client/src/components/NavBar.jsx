@@ -16,6 +16,7 @@ function NavBar(props) {
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("email");
     sessionStorage.removeItem("allow");
+    sessionStorage.removeItem("token");
     nav("/signin");
   };
 

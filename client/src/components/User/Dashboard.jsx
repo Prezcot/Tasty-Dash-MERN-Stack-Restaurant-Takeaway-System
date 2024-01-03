@@ -22,13 +22,14 @@ function Dashboard() {
     const [error,setError]=useState(null);
     const [alertmsg,setAlertMsg]=useState(false);
     const username=sessionStorage.getItem("username");
+    const token=sessionStorage.getItem("token");
     const nav = useNavigate();
     useEffect(()=>{
         async function getUserInfo()
         {
             //you have to use req.params to send over data/variables to the server when dealing with get requests as data cant be sent in the body
             try{
-              await axios.get(`http://localhost:3001/users/userinfo/${username}`).then((res)=>setUserInfo(res.data)).catch((err)=>console.log(err));
+              await axios.get(`http://localhost:3001/users/userinfo/${username}`,{ headers: { Authorization: `Bearer ${token}` }}).then((res)=>setUserInfo(res.data)).catch((err)=>console.log(err));
             }catch{
               console.log("error");
             }
