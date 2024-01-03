@@ -9,6 +9,7 @@ import axios from "axios";
 import '@testing-library/jest-dom';
 
 jest.mock("axios");
+window.setImmediate = window.setTimeout;
 
 describe("UNIT TEST - MENU COMPONENT", () => {
     it("Menu Component Is Successfully Rendering", () => {

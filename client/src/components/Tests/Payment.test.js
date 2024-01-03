@@ -9,6 +9,7 @@ import axios from "axios";
 import '@testing-library/jest-dom/extend-expect';
 
 jest.mock("axios");
+window.setImmediate = window.setTimeout;
 
 describe("UNIT TEST - PAYMENT COMPONENT", () => {
 

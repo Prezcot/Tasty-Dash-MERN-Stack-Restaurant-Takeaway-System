@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 
+window.setImmediate = window.setTimeout;
 describe("UNIT TEST - NAVBAR COMPONENT", () => {
     it("Navbar Component Is Successfully Rendering",()=>{
         const {getAllByText}=render(<BrowserRouter>

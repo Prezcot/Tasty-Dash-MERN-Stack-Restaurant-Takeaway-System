@@ -7,6 +7,7 @@ import axios from "axios";
 import '@testing-library/jest-dom';
 import SignUp from "../User/SignUp";
 jest.mock("axios");
+window.setImmediate = window.setTimeout;
 describe("UNIT TEST - SIGN UP COMPONENT", () => {
     it("Sign Up Component Is Successfully Rendering",()=>{
         var {getAllByText}=render(<BrowserRouter>
