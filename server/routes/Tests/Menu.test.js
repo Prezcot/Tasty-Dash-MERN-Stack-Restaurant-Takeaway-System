@@ -88,6 +88,7 @@ describe("Menu Route Test", () => {
     const deletedItem = await Menuitem.findOne({ itemName: newItem.itemName });
     expect(deletedItem).toBeNull();
   });
+
   it("should update a menu item", async () => {
     // Create a menu item to be updated
     const newItem = {
@@ -96,6 +97,7 @@ describe("Menu Route Test", () => {
       itemPrice: 20.99,
       itemImage: "update_image.jpg",
       itemType: "UpdateType",
+      itemAvailability: 'in-stock',
     };
 
     await Menuitem.create(newItem);
@@ -106,6 +108,7 @@ describe("Menu Route Test", () => {
       itemPrice: 25.99,
       itemImage: "updated_image.jpg",
       itemType: "UpdatedType",
+      itemAvailability: 'in-stock',
     };
 
     const response = await request(app)

@@ -77,6 +77,7 @@ function AdminMenu() {
             itemPrice: newItemData.itemPrice,
             itemImage: newItemData.itemImage,
             itemType : newItemData.itemType,
+            itemAvailability:'in-stock',
           };
       
           await axios.post('http://localhost:3001/menu/add', newItem);
@@ -91,6 +92,7 @@ function AdminMenu() {
             itemPrice: 0,
             itemImage: '',
             itemType: '',
+            itemAvailability:'',
           });
           fileInput.current.value = '';
         } catch (error) {

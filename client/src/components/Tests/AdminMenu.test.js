@@ -17,6 +17,8 @@ describe('UNIT TEST ADMIN COMPONENT', () => {
         itemPrice: 9.99,
         itemImage: '/images/starter1.jpg',
         itemType: 'starter',
+        itemAvailability: 'in-stock',
+
       },
       {
         itemName: 'MainCourse1',
@@ -24,6 +26,7 @@ describe('UNIT TEST ADMIN COMPONENT', () => {
         itemPrice: 19.99,
         itemImage: '/images/mainCourse1.jpg',
         itemType: 'mainCourse',
+        itemAvailability: 'in-stock',
       },
       {
         itemName: 'Dessert1',
@@ -31,6 +34,7 @@ describe('UNIT TEST ADMIN COMPONENT', () => {
         itemPrice: 7.99,
         itemImage: '/images/dessert1.jpg',
         itemType: 'dessert',
+        itemAvailability: 'in-stock',
       },
     ];
 
@@ -72,6 +76,8 @@ describe('UNIT TEST ADMIN COMPONENT', () => {
       itemDescription: 'Test Description',
       itemPrice: 10.99,
       itemImage: '/images/test.jpg',
+      itemAvailability: 'in-stock',
+      
     };
     axios.put.mockResolvedValue();
 
@@ -93,6 +99,7 @@ describe('UNIT TEST ADMIN COMPONENT', () => {
           itemDescription: mockItem.itemDescription,
           itemPrice: '15.99', 
           itemImage: mockItem.itemImage,
+          itemAvailability: 'in-stock',
         }
       );
     });
@@ -176,6 +183,7 @@ it('should delete an item when the delete button is clicked', async () => {
         itemPrice: 15,
         itemImage: 'image2.jpg',
         itemType: 'mainCourse',
+        itemAvailability: 'in-stock',
       },
     ],
   });
@@ -205,4 +213,52 @@ it('should delete an item when the delete button is clicked', async () => {
 
     expect(queryByText(itemName)).not.toBeInTheDocument();
   });
+  
+  
+  it('Edit item stock from in-stock to out-of-stock', async () => {
+    const mockItem = {
+      itemName: 'TestItem',
+      itemDescription: 'Test Description',
+      itemPrice: 10.99,
+      itemImage: '/images/test.png',
+      itemAvailability: 'in-stock',
+    };
+    
+    
+    const mockOnDelete = jest.fn();
+    
+    axios.put.mockResolvedValueOnce({ data: {} });
+  
+    
+    var {getByText,getByRole,getByTestId,getByLabelText} = render(<AdminItem item={mockItem} onDelete={() => {}} />);
+  
+    
+    fireEvent.click(getByTestId('change-price'));
+  
+    
+    const outOfStockRadioButton = getByLabelText('Out-of-Stock');
+    fireEvent.click(outOfStockRadioButton);
+  
+
+    fireEvent.click(getByTestId('change-price'));
+  
+    
+    await waitFor(() => {
+      expect(axios.put).toHaveBeenCalledWith(
+        `http://localhost:3001/menu/edit/${mockItem.itemName}`,
+        {
+          itemName: mockItem.itemName,
+          itemDescription: mockItem.itemDescription,
+          itemPrice: mockItem.itemPrice.toFixed(2),
+          itemImage: mockItem.itemImage,
+          itemAvailability: 'out-of-stock',
+        }
+      );
+    });
+  
+  });
 });
+
+
+
+

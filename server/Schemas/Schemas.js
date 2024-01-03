@@ -59,6 +59,7 @@ const Menuitem = mongoose.model(
     itemPrice: Number,
     itemImage: String,
     itemType: String,
+    itemAvailability: String,
   }),
   "menu"
 );

@@ -36,12 +36,17 @@ function Item({ item, quantity, onAddToCart, onRemoveFromCart }) {
       <div>
         <p align='center' style={{fontSize:'130%', fontWeight:'bold'}}>$ {item.itemPrice.toFixed(2)}</p>
       </div>
-      <div className="menu-actions">
-          <img src="/images/Menu-Minus.png" className="remove-from-cart" onClick={handleRemoveFromCart} data-testid="minus" style={{height:"40px",width:"70px"}}/>
+      {item.itemAvailability === "in-stock" ? (
+        <div className="menu-actions">
+          <img src="/images/Menu-Minus.png" className="remove-from-cart" onClick={handleRemoveFromCart} data-testid="minus" style={{ height: "40px", width: "70px" }} />
           <label className="quantity-in-cart" data-testid="my-quantity">{localQuantity}</label>
-          <img src="/images/Menu-Add.png" className="add-to-cart" onClick={handleAddToCart} data-testid="add" style={{height:"40px",width:"70px"}}/>
-
-      </div>
+          <img src="/images/Menu-Add.png" className="add-to-cart" onClick={handleAddToCart} data-testid="add" style={{ height: "40px", width: "70px" }} />
+        </div>
+      ) : (
+        <div style={{ color: "#df2120", textAlign: "center", marginTop: "10px", fontSize: "20px"}}>
+          <b>Item is out of stock!</b>
+        </div>
+      )}
     </div>
   );
 }
