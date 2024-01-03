@@ -127,7 +127,6 @@ const SignIn = () => {
                 } else {
                   sessionStorage.setItem("token", res.data.token);
                   nav("/admin");
-                  //sessionStorage.setItem("r+43kcgH@9u309gXemm#C\WOPv:BNV.;-I`p283$(?{X|b=5R&", "verified");
                 }
               })
               .catch((err) => setError(err.response.data.message));
