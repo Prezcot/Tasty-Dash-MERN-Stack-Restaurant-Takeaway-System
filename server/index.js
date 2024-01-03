@@ -56,6 +56,9 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
+  socket.on("product changes", () => {
+    io.emit("product changes");
+  });
 });
 
 server.listen(port, () => {

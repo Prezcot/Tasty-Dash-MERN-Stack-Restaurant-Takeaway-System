@@ -8,6 +8,7 @@ import "../App.css";
 import NavBar from "../NavBar";
 import Dashboard from "../User/Dashboard";
 import Basket from "../Order/Basket";
+import { io } from "socket.io-client";
 import {useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,8 +22,8 @@ function Menu() {
   const [items, setItems] = useState([]);
   const [hasToastAppeared, setHasToastAppeared] = useState(false);
   const [quantityMap, setQuantityMap] = useState(JSON.parse(sessionStorage.getItem("menuCart")));
-  
-  useEffect(() => {
+
+  var grabitems = async () => {
     try{
       axios
         .get("http://localhost:3001/menu/data")
@@ -36,6 +37,17 @@ function Menu() {
       }catch{
         console.log("error");
       }
+  };
+  
+  useEffect(() => {
+    grabitems();
+    const socket = io("http://localhost:3001");
+    socket.on("product changes", () => {
+      grabitems();
+    });
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
 

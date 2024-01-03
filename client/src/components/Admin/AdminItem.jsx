@@ -1,6 +1,7 @@
 // AdminItem.jsx
 import React, { useState } from "react";
 import axios from "axios";
+import { io } from "socket.io-client";
 
 
 function AdminItem({ item, onDelete }) {
@@ -17,7 +18,7 @@ function AdminItem({ item, onDelete }) {
 
     setStockStatus(e.target.value);
   };
-
+  
   const handleEditClick = async () => {
     if (isEditing) {
       let setNewItemData = {
@@ -30,6 +31,8 @@ function AdminItem({ item, onDelete }) {
       await axios.put(`http://localhost:3001/menu/edit/${setNewItemData.itemName}`, setNewItemData);
       setEdittext("/images/Edit.png");
       setIsEditing(false);
+      const socket = io("http://localhost:3001");
+      socket.emit("product changes");
     } else {
       // Enter edit mode
       setEdittext("/images/Apply.png");
