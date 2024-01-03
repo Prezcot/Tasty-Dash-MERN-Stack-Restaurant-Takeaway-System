@@ -35,27 +35,23 @@ router.get("/authentication",async (req,res,next)=>{ //This route handler handle
 
 router.get("/userinfo/:username",async (req,res,next)=>
 {
-    const username=req.params.username;
+    var username=req.params.username;
     const authHeader=req.headers.authorization;
+    var verified=true;
     console.log("ITS WORKIN");
+    if(!authHeader) {
+        console.log("this is one error1");
+        verified=false;
+        res.status(400).json({message:'Authorization header missing'});
+    }
+    const token=authHeader.split(" ")[1];
+    jwt.verify(token, 'r+43kcgH@9u309gXemm#COPv:BNV.;-I`p283$(?{X|b=5R&', (err, user) => {
+        req.user = user;
+    });
+    console.log("ITS WORKIN");
+    username=req.user.username;
     try{
-        if(!authHeader) {
-            res.status(400).json({message:'Authorization header missing'});
-                return;
-        }
-        const token=authHeader.split(" ")[1];
-        jwt.verify(token, 'r+43kcgH@9u309gXemm#COPv:BNV.;-I`p283$(?{X|b=5R&', (err, user) => {
-            if (err) {
-                res.status(400).json({message:'Invalid token'});
-            return;
-            }
-            if (user.username!=username)
-            {
-                res.status(400).json({message:'Invalid Action'});
-                return;
-            }});
-        console.log("ITS WORKIN");
-        var query=await users.find({username:username}).catch((err)=>res.status(400).json({message:err}));
+        var query=await users.find({username:username});
         if (query.length>0)
         {
             res.status(200).json({username:query[0].username,email:query[0].email,phonenumber:query[0].phonenumber});

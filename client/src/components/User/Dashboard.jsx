@@ -29,7 +29,8 @@ function Dashboard() {
         {
             //you have to use req.params to send over data/variables to the server when dealing with get requests as data cant be sent in the body
             try{
-              await axios.get(`http://localhost:3001/users/userinfo/${username}`,{ headers: { Authorization: `Bearer ${token}` }}).then((res)=>setUserInfo(res.data)).catch((err)=>console.log(err));
+              await axios.get(`http://localhost:3001/users/userinfo/${username}`,{ headers: { Authorization: `Bearer ${token}` }}).then((res)=>{sessionStorage.setItem("username",res.data.username)
+              setUserInfo(res.data)}).catch((err)=>console.log(err));
             }catch{
               console.log("error");
             }
@@ -101,7 +102,7 @@ function Dashboard() {
       const username=sessionStorage.getItem("username");
       await axios.delete(`http://localhost:3001/users/deleteaccount/${username}`).then((res)=>{
       sessionStorage.setItem("AlertMsg",res.data.message); 
-      sessionStorage.removeItem("allow"); 
+      sessionStorage.removeItem("token"); 
       nav("/signin")}).catch((err)=>{sessionStorage.setItem("AlertMsg",err.response.data.message)});
     }
   return (
