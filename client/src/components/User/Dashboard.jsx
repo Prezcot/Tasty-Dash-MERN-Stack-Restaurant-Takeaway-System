@@ -107,7 +107,7 @@ function Dashboard() {
     }
   return (
     // <div style={{background:`url("/images/UserDashboardBackground.jpg")`,width:"100vw",height:"100vh",backgroundRepeat:"no-repeat"}}></div>
-    <div style={{background:`url("/images/MenuBackground.jpg")`,backgroundRepeat:"no-repeat",width: "100vw",height: "100vh",flexDirection:"row",backgroundSize:"cover"}}>
+    <div style={{background:`url("/images/MenuBackground.jpg")`,backgroundRepeat:"no-repeat",width: "100vw",height: "100vh",flexDirection:"row",backgroundSize:"cover", paddingTop: '5%'}}>
         <NavBar></NavBar>
         <div style={{display:"flex",flexDirection:"row",marginTop:"1vh",justifyContent:"space-evenly",color:"white",alignItems:"center",marginTop: "5vh",
           border: "0.4vh solid black",

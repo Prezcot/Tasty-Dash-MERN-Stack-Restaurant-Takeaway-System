@@ -16,7 +16,7 @@ let CusEmail = sessionStorage.getItem('email');
 
   return (
   <>
-  <div className="everything">
+  <div className="everything" style={{paddingTop: '4%'}}>
   <NavBar></NavBar>
     <style>
     {`

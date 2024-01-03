@@ -31,7 +31,7 @@ function LiveOrders() {
 
   return (
     <>
-      <div className="everything">
+      <div className="everything" style={{paddingTop: '3%'}}>
       <style>
     {`
       body {

@@ -14,19 +14,37 @@ function App() {
   
   async function notify(data) {
     if((sessionStorage.getItem("username")==data.username) && (data.status !== 'Pending')){
-      toast.info("Your Order Status Has Been Updated!", {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        onClick: function() { 
-          nav("/orders");
+      if(data.status == "Approved"){
+        
+          toast.success("Your Order Has Been Approved!", {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            onClick: function() { 
+              nav("/orders");
+          }
+            });
+      } else if(data.status == "Declined"){
+        toast.error("Your Order Has Been Declined!", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          onClick: function() { 
+            nav("/orders");
+        }
+          });
       }
-        });
+      
     }
     
   }
