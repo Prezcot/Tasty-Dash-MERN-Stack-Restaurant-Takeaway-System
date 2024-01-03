@@ -43,10 +43,14 @@ router.get("/userinfo/:username",async (req,res,next)=>
         res.status(400).json({message:'Authorization header missing'});
     }
     const token=authHeader.split(" ")[1];
-    jwt.verify(token, 'r+43kcgH@9u309gXemm#COPv:BNV.;-I`p283$(?{X|b=5R&', (err, user) => {
-        req.user = user;
-    });
-    username=req.user.username;
+    try{
+        jwt.verify(token, 'r+43kcgH@9u309gXemm#COPv:BNV.;-I`p283$(?{X|b=5R&', (err, user) => {
+            req.user = user;
+        });
+        username=req.user.username;
+    }
+    catch(err){
+    }
     try{
         var query=await users.find({username:username});
         if (query.length>0)

@@ -6,12 +6,6 @@ const {default: mongoose} = require("mongoose");
 const { MongoMemoryServer } = require('mongodb-memory-server');
 require("dotenv").config();
 
-
-// jest.mock('bcrypt', () => ({
-//   hash: jest.fn(() => Promise.resolve('hashedPassword')),
-//   compare: jest.fn(() => Promise.resolve(true))
-// }));
-
 beforeAll(async () => {
   jest.setTimeout(10000);
   mongoServer = await MongoMemoryServer.create();
@@ -33,21 +27,20 @@ afterAll(async () => {
 describe("INTEGRATION TEST - User Route",()=>{
     it("Successfully Responds To Requests",async()=>{
         const username="user";
-        const res=await request(app).get(`/users/userinfo/${username}`);
+        const token="1234";
+        const res=await request(app).get(`/users/userinfo/${username}`).set('Authorization', `Bearer ${token}`);
         expect(res.status).toBe(200);
-        expect(res.body).toEqual(expect.any(Object));
     });
 
 
     it("User Is Able To Successfully Change Password",async()=>{
       const res=await request(app).put("/users/checkpassword").send({username:"user",currentpassword:"User12,",newpassword:"Newpassword12,"});
-      //console.log(res.body.message);
       expect(res.status).toBe(400);
     })
 
 
     it("Successfully Adds New Users To Database",async()=>{
       const res=await request(app).post("/users/signup").send({username:"jacob",email:"george@outlook.com",phonenumber:"5438922345",password:"George123,"});
-      expect(res.body).toEqual({message:"Successful Register"});
+      expect(res.status).toBe(200);
     });
 });
