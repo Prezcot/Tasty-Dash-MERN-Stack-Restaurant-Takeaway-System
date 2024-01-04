@@ -43,6 +43,9 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
         const sampleData = {
             liveOrderItems: [
               {
+                __v: 0,
+                _id: "65915ebd62be743115175d94",
+                username: 'dummy_user',
                 order_id: '100',
                 payment_id: '0SV99753NP730560E',
                 email: 'dummy@gmail.com',
@@ -71,7 +74,7 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
       });
 
 
-      it('Gets order history data from "collected_orders" collection in MongoDB and renders items properly', async () => {
+      it('Gets order history data from "collected_orders" and "refunds" collections in MongoDB and renders items properly', async () => {
         jest.spyOn(global, 'sessionStorage', 'get').mockReturnValue({
           getItem: jest.fn((key) => {
             switch (key) {
@@ -88,6 +91,22 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
             liveOrderItems: [],
             orderHistoryItems: [
                 {
+                    __v: 0,
+                    _id: "6593f234cd4a4307d0f1d1cb",
+                    username: 'dummy_user',
+                    order_id: '98',
+                    payment_id: '0SH79786NP730565H',
+                    email: 'dummy2@gmail.com',
+                    paypal_email: 'sb-qrzuv28891158@personal.example.com',
+                    items: ['Spring rolls,1,1'],
+                    order_status: 'Refund Needed',
+                    instructions: 'dummy instruction2',
+                    order_total: '70.00',
+                },
+                {
+                    __v: 0,
+                    _id: "65941714a276e08e8b93aa78",
+                    username: 'dummy_user',
                     order_id: '99',
                     payment_id: '0SV99753NP730560E',
                     email: 'dummy@gmail.com',
@@ -96,12 +115,13 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
                     order_status: 'Order Has Been Collected',
                     instructions: 'dummy instruction',
                     order_total: '59.99',
-                  },
+                },
+                
             ],
           };
 
         axios.post.mockResolvedValueOnce({ data: sampleData });
-        var {getByTestId} =render(
+        var {getAllByTestId} =render(
             <BrowserRouter>
                 <LiveOrders/>
             </BrowserRouter>);
@@ -110,8 +130,11 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
             user: 'dummy_username',
           });
         });
-        expect(getByTestId("rendered-order-history-id-test")).toHaveTextContent("99");
-        expect(getByTestId("order-history-item")).toHaveTextContent("Order Has Been Collected");
+        expect(getAllByTestId("rendered-order-history-id-test")[0]).toHaveTextContent("99");
+        expect(getAllByTestId("order-history-item")[0]).toHaveTextContent("Order Has Been Collected");
+
+        expect(getAllByTestId("rendered-order-history-id-test")[1]).toHaveTextContent("98");
+        expect(getAllByTestId("order-history-item")[1]).toHaveTextContent("Refund Needed");
       });
 
 
@@ -131,18 +154,37 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
     const sampleData = {
         liveOrderItems: [
             {
-                order_id: '100',
-                payment_id: '0SV99753NP730560E',
-                email: 'dummy@gmail.com',
+              __v: 0,
+              _id: "65915ebd62be743115175d94",
+              username: 'dummy_user',
+              order_id: '100',
+              payment_id: '0SV99753NP730560E',
+              email: 'dummy@gmail.com',
+              paypal_email: 'sb-qrzuv28891158@personal.example.com',
+              items: ['Spring rolls,1,1'],
+              order_status: 'Pending',
+              instructions: 'dummy instruction',
+              order_total: '59.99',
+            },
+          ],
+          orderHistoryItems: [
+            {
+                __v: 0,
+                _id: "6593f234cd4a4307d0f1d1cb",
+                username: 'dummy_user',
+                order_id: '98',
+                payment_id: '0SH79786NP730565H',
+                email: 'dummy2@gmail.com',
                 paypal_email: 'sb-qrzuv28891158@personal.example.com',
                 items: ['Spring rolls,1,1'],
-                order_status: 'Pending',
-                instructions: 'dummy instruction',
-                order_total: '59.99',
-              },
-        ],
-        orderHistoryItems: [
+                order_status: 'Refund Needed',
+                instructions: 'dummy instruction2',
+                order_total: '70.00',
+            },
             {
+                __v: 0,
+                _id: "65941714a276e08e8b93aa78",
+                username: 'dummy_user',
                 order_id: '99',
                 payment_id: '0SV99753NP730560E',
                 email: 'dummy@gmail.com',
@@ -151,12 +193,13 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
                 order_status: 'Order Has Been Collected',
                 instructions: 'dummy instruction',
                 order_total: '59.99',
-              },
+            },
+            
         ],
       };
 
     axios.post.mockResolvedValue({ data: sampleData });
-    var {getByTestId} =render(
+    var {getByTestId, getAllByTestId} =render(
         <BrowserRouter>
             <LiveOrders/>
         </BrowserRouter>);
@@ -166,6 +209,7 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
         });
     });
     expect(getByTestId("live-order-item")).toBeInTheDocument();
-    expect(getByTestId("order-history-item")).toBeInTheDocument();
+    expect(getAllByTestId("order-history-item")[0]).toBeInTheDocument();
+    expect(getAllByTestId("order-history-item")[1]).toBeInTheDocument();
     });
 });

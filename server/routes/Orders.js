@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
-const {item,order_identification,users,collected_orders}=require("../Schemas/Schemas");
+const {item,order_identification,users,collected_orders,refunds,}=require("../Schemas/Schemas");
 // let order_id_count=0;
 
 router.get('/get_order_id', async (req, res) => {
@@ -47,7 +47,12 @@ router.post("/your_orders", async(req,res) => {
     // let condition2 = {order_status:notCollectedStatus};
 
     let liveOrderItems= await item.find({ username:user }).catch((err)=>res.status(400).json({message:err}));
-    let orderHistoryItems= await collected_orders.find({ username:user }).catch((err)=>res.status(400).json({message:err}));
+
+    let refunded_orders = await refunds.find({ username:user }).catch((err)=>res.status(400).json({message:err}));
+    let completed_orders = await collected_orders.find({ username:user }).catch((err)=>res.status(400).json({message:err}));
+
+    let orderHistoryItems = [...refunded_orders, ...completed_orders];
+    
 
 
     const allData = {
