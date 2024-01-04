@@ -4,18 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 function NavBar(props) {
   const nav = useNavigate();
-  const [page, setPage] = useState("home");
-
-  const switchPage = (newPage) => {
-    setPage(newPage);
-  };
 
   const handleLogout = () => {
     sessionStorage.setItem("menuCart","{}");
     sessionStorage.removeItem("order_id");
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("email");
-    sessionStorage.removeItem("allow");
     sessionStorage.removeItem("token");
     nav("/signin");
   };
@@ -44,7 +38,6 @@ function NavBar(props) {
                 <a
                   style={{ cursor: "pointer" }}
                   className="nav-link"
-                  onClick={() => switchPage("menu")}
                   href="/menu"
                 >
                   Menu
@@ -54,7 +47,6 @@ function NavBar(props) {
                 <a
                   style={{ cursor: "pointer" }}
                   className="nav-link"
-                  onClick={() => switchPage("orders")}
                   href="/orders"
                 >
                   Orders
@@ -64,7 +56,6 @@ function NavBar(props) {
                 <a
                   style={{ cursor: "pointer" }}
                   className="nav-link"
-                  onClick={() => nav("/dashboard")}
                   href="/dashboard"
                 >
                   Dashboard

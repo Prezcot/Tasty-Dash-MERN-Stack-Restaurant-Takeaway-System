@@ -8,12 +8,12 @@ const {item,users}=require("../Schemas/Schemas");
 const jwt = require('jsonwebtoken');
 
 router.get("/authentication",async (req,res,next)=>{ //This route handler handles all security requests
-    const authHeader=req.headers.authorization;
-    if(!authHeader) {
+    const auth_header=req.headers.authorization;
+    if(!auth_header) {
     res.status(400).json({message:'Authorization header missing'});
         return;
     }
-    const token=authHeader.split(" ")[1];
+    const token=auth_header.split(" ")[1];
     jwt.verify(token, 'r+43kcgH@9u309gXemm#COPv:BNV.;-I`p283$(?{X|b=5R&', (err, user) => {
         if (err) {
           res.status(400).json({message:'Invalid token'});
@@ -36,13 +36,13 @@ router.get("/authentication",async (req,res,next)=>{ //This route handler handle
 router.get("/userinfo/:username",async (req,res,next)=>
 {
     var username=req.params.username;
-    const authHeader=req.headers.authorization;
+    const auth_header=req.headers.authorization;
     var verified=true;
-    if(!authHeader) {
+    if(!auth_header) {
         verified=false;
         res.status(400).json({message:'Authorization header missing'});
     }
-    const token=authHeader.split(" ")[1];
+    const token=auth_header.split(" ")[1];
     try{
         jwt.verify(token, 'r+43kcgH@9u309gXemm#COPv:BNV.;-I`p283$(?{X|b=5R&', (err, user) => {
             req.user = user;
