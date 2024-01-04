@@ -41,6 +41,10 @@ function Menu() {
   
   useEffect(() => {
     grabitems();
+    
+  }, []);
+
+  useEffect(() => {
     const socket = io("http://localhost:3001");
     socket.on("product changes", () => {
       grabitems();
@@ -49,6 +53,7 @@ function Menu() {
       socket.disconnect();
     };
   }, []);
+
 
 
 
