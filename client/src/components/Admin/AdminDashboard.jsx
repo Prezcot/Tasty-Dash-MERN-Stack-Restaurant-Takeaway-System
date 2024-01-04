@@ -8,17 +8,17 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AdminDashboard = () => {
-  const [order_data, set_order_data] = useState([]);
-  const [search_query, set_search_query] = useState("");
-  const [filtered_order_data, set_filtered_order_data] = useState([]);
+  const [order_data, setOrderData] = useState([]);
+  const [search_query, setSearchQuery] = useState("");
+  const [filtered_order_data, setFilteredOrderData] = useState([]);
 
   var grabData = async () => {
     try {
       const res = await axios.get(
         "http://localhost:3001/admin_dashboard_data/receive/order_data"
       );
-      set_order_data(res.data);
-      set_filtered_order_data(res.data);
+      setOrderData(res.data);
+      setFilteredOrderData(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -55,7 +55,7 @@ const AdminDashboard = () => {
   }, []);
 
   useEffect(() => {
-    set_filtered_order_data(
+    setFilteredOrderData(
       order_data.filter(
         (item) =>
           item.username.toLowerCase().includes(search_query.toLowerCase()) ||
@@ -163,7 +163,7 @@ const AdminDashboard = () => {
             type="search"
             placeholder="Search Order"
             onChange={(e) => {
-              set_search_query(e.target.value);
+              setSearchQuery(e.target.value);
             }}
           />
         </span>

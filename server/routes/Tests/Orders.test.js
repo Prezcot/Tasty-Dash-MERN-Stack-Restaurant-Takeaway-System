@@ -1,7 +1,7 @@
 const request = require("supertest");
 const express = require("express");
 const orderRouter = require("../Orders");
-const {item, order_identification, collected_orders} = require("../../Schemas/Schemas");
+const {item, order_identification, collected_orders, refunds} = require("../../Schemas/Schemas");
 const {default: mongoose} = require("mongoose");
 const { MongoMemoryServer } = require('mongodb-memory-server');
 require("dotenv").config();
@@ -41,6 +41,23 @@ beforeAll(async () => {
         order_total: '59.99',
     });
     history_order.save();
+
+    const history_order2 = new refunds({
+        __v: 0,
+        _id: "6593f234cd4a4307d0f1d1cb",
+        username: 'dummy_user',
+        order_id: '98',
+        payment_id: '0SH79786NP730565H',
+        email: 'dummy2@gmail.com',
+        paypal_email: 'sb-qrzuv28891158@personal.example.com',
+        items: ['Spring rolls,1,1'],
+        order_status: 'Refund Needed',
+        instructions: 'dummy instruction2',
+        order_total: '70.00',
+    });
+    history_order2.save();
+
+
 
     const orderID = new order_identification({
         _id:"6589770129060833d3f653b1",
@@ -111,20 +128,34 @@ beforeAll(async () => {
             order_total: '59.99',
             }
         ],
-        orderHistoryItems: [
+            orderHistoryItems: [
             {
                 __v: 0,
-                _id: "65941714a276e08e8b93aa78",
+                _id: "6593f234cd4a4307d0f1d1cb",
                 username: 'dummy_user',
-                order_id: '99',
-                payment_id: '0SV99753NP730560E',
-                email: 'dummy@gmail.com',
+                order_id: '98',
+                payment_id: '0SH79786NP730565H',
+                email: 'dummy2@gmail.com',
                 paypal_email: 'sb-qrzuv28891158@personal.example.com',
                 items: ['Spring rolls,1,1'],
-                order_status: 'Order Has Been Collected',
-                instructions: 'dummy instruction',
-                order_total: '59.99',
-            }
+                order_status: 'Refund Needed',
+                instructions: 'dummy instruction2',
+                order_total: '70.00',
+            },
+            {
+            __v: 0,
+            _id: "65941714a276e08e8b93aa78",
+            username: 'dummy_user',
+            order_id: '99',
+            payment_id: '0SV99753NP730560E',
+            email: 'dummy@gmail.com',
+            paypal_email: 'sb-qrzuv28891158@personal.example.com',
+            items: ['Spring rolls,1,1'],
+            order_status: 'Order Has Been Collected',
+            instructions: 'dummy instruction',
+            order_total: '59.99',
+            },
+
         ] 
         };
         expect(res.body).toEqual(expectedData);

@@ -111,7 +111,7 @@ function LiveOrders() {
             <h3>Order History</h3>
             </div>
             {orderHistoryInfo.length > 0 ? (
-            orderHistoryInfo.map((orders) => (
+            orderHistoryInfo.slice().sort((x, y) => y.order_id.localeCompare(x.order_id)).map((orders) => (
               <div className="order-history-items">
                 <div className="indi-order" style={{alignItems:"center"}}>
                   <div>
