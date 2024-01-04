@@ -14,8 +14,8 @@ describe("UNIT TEST - SIGN IN COMPONENT", () => {
             <BrowserRouter>
                 <SignIn/>
             </BrowserRouter>);
-        const elementswithsignin=getAllByText("Sign In");
-        expect(elementswithsignin.length).toBeGreaterThan(0);
+        const elements_with_signin=getAllByText("Sign In");
+        expect(elements_with_signin.length).toBeGreaterThan(0);
     });
     it("User's Password Must Be Above 4 Characters",()=>{
         var {getAllByText,getByText,getByPlaceholderText}=render(<BrowserRouter>
@@ -24,7 +24,7 @@ describe("UNIT TEST - SIGN IN COMPONENT", () => {
         fireEvent.change(getByPlaceholderText('Username'), { target: { value: 'user' } });
         fireEvent.change(getByPlaceholderText('Password'), { target: { value: 'User' } });
         fireEvent.click(getAllByText("Sign In")[1]);
-        expect(getByText("Please Enter Password Above 4 Characters")).toBeInTheDocument();
+        expect(getByText("Please Enter A Password Above 4 Characters")).toBeInTheDocument();
         });
 });
 
@@ -33,8 +33,8 @@ describe("INTEGRATION TEST - SIGN IN COMPONENT",()=>{
         var {getAllByText,getByPlaceholderText}=render(<BrowserRouter>
             <SignIn/>
         </BrowserRouter>);
-        const expectedresult = { data: { message: "Account Registered", user: "User" } };
-        axios.post.mockResolvedValue(expectedresult);
+        const expected_result = { data: { message: "Account Registered", user: "User" } };
+        axios.post.mockResolvedValue(expected_result);
         fireEvent.change(getByPlaceholderText('Username'), { target: { value: 'user' } });
         fireEvent.change(getByPlaceholderText('Password'), { target: { value: 'User12,' } });
         fireEvent.click(getAllByText("Sign In")[1]);
@@ -47,8 +47,8 @@ describe("INTEGRATION TEST - SIGN IN COMPONENT",()=>{
         var {getAllByText,queryByText,getByPlaceholderText}=render(<BrowserRouter>
             <SignIn/>
         </BrowserRouter>);
-        const expectedresult = { data: { message: "Account Registered", user: "User" } };
-        axios.post.mockResolvedValue(expectedresult);
+        const expected_result = { data: { message: "Account Registered", user: "User" } };
+        axios.post.mockResolvedValue(expected_result);
         fireEvent.change(getByPlaceholderText('Username'), { target: { value: 'user' } });
         fireEvent.change(getByPlaceholderText('Password'), { target: { value: 'User12,' } });
         fireEvent.click(getAllByText("Sign In")[1]);
@@ -56,8 +56,8 @@ describe("INTEGRATION TEST - SIGN IN COMPONENT",()=>{
         var {getAllByText,queryByText,getByPlaceholderText}=render(<BrowserRouter>
             <Menu/>
         </BrowserRouter>);
-        var elementsinmenu=getAllByText("Menu");
-        expect(elementsinmenu.length).toBeGreaterThan(0);
+        var elements_in_menu=getAllByText("Menu");
+        expect(elements_in_menu.length).toBeGreaterThan(0);
     });
 });
 //an integration test can be for example seeing if clicking a button takes the user to another page

@@ -13,8 +13,8 @@ describe("UNIT TEST - SIGN UP COMPONENT", () => {
         var {getAllByText}=render(<BrowserRouter>
             <SignUp/>
         </BrowserRouter>);
-        const elementsinsignup=getAllByText("Sign Up");
-        expect(elementsinsignup.length).toBeGreaterThan(0);
+        const elements_in_signup=getAllByText("Sign Up");
+        expect(elements_in_signup.length).toBeGreaterThan(0);
     })
 });
 

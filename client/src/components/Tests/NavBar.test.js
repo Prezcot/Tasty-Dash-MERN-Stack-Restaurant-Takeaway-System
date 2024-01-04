@@ -13,12 +13,12 @@ describe("UNIT TEST - NAVBAR COMPONENT", () => {
         const {getAllByText}=render(<BrowserRouter>
             <NavBar/>
         </BrowserRouter>);
-        const checkformenu=getAllByText("Menu");
-        const checkfororders=getAllByText("Orders");
-        const checkfordashboard=getAllByText("Dashboard");
-        expect(checkformenu.length).toBeGreaterThan(0);
-        expect(checkfororders.length).toBeGreaterThan(0);
-        expect(checkfordashboard.length).toBeGreaterThan(0);
+        const check_for_menu=getAllByText("Menu");
+        const check_for_orders=getAllByText("Orders");
+        const check_for_dashboard=getAllByText("Dashboard");
+        expect(check_for_menu.length).toBeGreaterThan(0);
+        expect(check_for_orders.length).toBeGreaterThan(0);
+        expect(check_for_dashboard.length).toBeGreaterThan(0);
     });
 });
 
@@ -27,9 +27,9 @@ describe("INTEGRATION TEST - NAVBAR COMPONENT", () => {
         const {getAllByText}=render(<BrowserRouter>
             <NavBar/>
         </BrowserRouter>);
-        const checkformenu=getAllByText("Menu")[0];
-        userEvent.click(checkformenu);
-        const renderingmenu=render(<BrowserRouter>
+        const check_for_menu=getAllByText("Menu")[0];
+        userEvent.click(check_for_menu);
+        const rendering_menu=render(<BrowserRouter>
             <Menu/>
             </BrowserRouter>);
     });
@@ -37,9 +37,9 @@ describe("INTEGRATION TEST - NAVBAR COMPONENT", () => {
         const {getAllByText}=render(<BrowserRouter>
             <NavBar/>
         </BrowserRouter>);
-        const checkformenu=getAllByText("Orders")[0];
-        userEvent.click(checkformenu);
-        const renderingorders=render(<BrowserRouter>
+        const check_for_menu=getAllByText("Orders")[0];
+        userEvent.click(check_for_menu);
+        const rendering_orders=render(<BrowserRouter>
             <Menu/>
             </BrowserRouter>);
     });
@@ -47,9 +47,9 @@ describe("INTEGRATION TEST - NAVBAR COMPONENT", () => {
         const {getAllByText}=render(<BrowserRouter>
             <NavBar/>
         </BrowserRouter>);
-        const checkformenu=getAllByText("Dashboard")[0];
-        userEvent.click(checkformenu);
-        const renderingdashboard=render(<BrowserRouter>
+        const check_for_menu=getAllByText("Dashboard")[0];
+        userEvent.click(check_for_menu);
+        const rendering_dashboard=render(<BrowserRouter>
             <Menu/>
             </BrowserRouter>);
     });

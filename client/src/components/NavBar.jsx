@@ -4,7 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 function NavBar(props) {
   const nav = useNavigate();
+  const [page, setPage] = useState("home");
 
+  const switch_page = (new_page) => {
+    setPage(new_page);
+  };
   const handleLogout = () => {
     sessionStorage.setItem("menuCart","{}");
     sessionStorage.removeItem("order_id");
@@ -38,6 +42,7 @@ function NavBar(props) {
                 <a
                   style={{ cursor: "pointer" }}
                   className="nav-link"
+                  onClick={() => switch_page("menu")}
                   href="/menu"
                 >
                   Menu
@@ -47,6 +52,7 @@ function NavBar(props) {
                 <a
                   style={{ cursor: "pointer" }}
                   className="nav-link"
+                  onClick={() => switch_page("orders")}
                   href="/orders"
                 >
                   Orders
