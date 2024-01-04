@@ -21,7 +21,6 @@ beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const mongoUri = mongoServer.getUri();
   await mongoose.connect(mongoUri);
-  console.log("yesyes");
   const newOrder = new item({
     _id: id,
     username: "testUser",
@@ -34,7 +33,6 @@ beforeAll(async () => {
     order_total: "testTotal",
   });
   await newOrder.save();
-  console.log("yesyes");
   app = express();
   app.use(express.json());
   app.use("/admin_dashboard_data", adminDashboardData);
@@ -44,11 +42,6 @@ afterAll(async () => {
   await mongoServer.stop();
 });
 
-describe("sanity test", () => {
-  test("1 should equal 1", () => {
-    expect(1).toBe(1);
-  });
-});
 
 test("The root endpoint returns a 200 status", async () => {
   const response = await request(app).get("/admin_dashboard_data");
@@ -62,14 +55,24 @@ test("The refund data endpoint is ready", async () => {
 test("The order collected data endpoint is ready", async () => {
   const response = await request(app).get("/admin_dashboard_data/receive/order_collected_data");
   expect(response.status).toBe(200);
+  expect(response.body).toEqual(expect.any(Array));
 });
 test("The set order status endpoint is ready", async () => {
   const response = await request(app).put("/admin_dashboard_data/set_order_status").send({object_id:id,order_status:"testStatus"});
-  expect(response.status).toBe(200);//how would we know the objectid
+  expect(response.status).toBe(200);
 });
 test("The receive/order_data endpoint returns an array", async () => {
   const response = await request(app).get(
     "/admin_dashboard_data/receive/order_data"
   );
   expect(response.body).toEqual(expect.any(Array));
+});
+
+test("The move to refund endpoint is ready", async () => {
+  const response = await request(app).post("/admin_dashboard_data/move_to_refund").send({object_id:id});
+  expect(response.status).toBe(200);
+});
+test("The move to collected orders endpoint is ready", async () => {
+  const response = await request(app).post("/admin_dashboard_data/move_to_collected_orders").send({object_id:id});
+  expect(response.status).toBe(200);
 });
