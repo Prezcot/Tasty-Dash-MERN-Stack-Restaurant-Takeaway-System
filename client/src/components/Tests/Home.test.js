@@ -11,6 +11,9 @@ describe("UNIT TEST - HOME COMPONENT",()=>{
             </BrowserRouter>);
         const elementsinhome=getAllByText("Tasty Dash")[0];
     });
+    
+});
+describe("INTEGRATION TEST - HOME COMPONENT",()=>{
     it("Sign In Page Is Rendering Once Order Now Button Is Clicked",()=>{
         const {getAllByText}=render(<BrowserRouter>
             <Home/>
