@@ -7,7 +7,7 @@ import AdminCollectedOrder from "./AdminCollectedOrder";
 import "../../BootstrapImports.js";
 
 const AdminNavBar = () => {
-  const [page, set_page] = useState("admin_dashboard");
+  const [page, setPage] = useState("admin_dashboard");
   console.log(page);
   return (
     <>
@@ -33,7 +33,7 @@ const AdminNavBar = () => {
                     page === "admin_dashboard" ? "active" : "opacity-50"
                   }`}
                   aria-current="page"
-                  onClick={() => set_page("admin_dashboard")}
+                  onClick={() => setPage("admin_dashboard")}
                   style={{ cursor: "pointer" }}
                 >
                   Pending Orders
@@ -44,7 +44,7 @@ const AdminNavBar = () => {
                   className={`nav-link ${
                     page === "admin_order_refund" ? "active" : "opacity-50"
                   }`}
-                  onClick={() => set_page("admin_order_refund")}
+                  onClick={() => setPage("admin_order_refund")}
                   style={{ cursor: "pointer" }}
                 >
                   Refunded Items
@@ -55,7 +55,7 @@ const AdminNavBar = () => {
                   className={`nav-link ${
                     page === "admin_collected_order" ? "active" : "opacity-50"
                   }`}
-                  onClick={() => set_page("admin_collected_order")}
+                  onClick={() => setPage("admin_collected_order")}
                   style={{ cursor: "pointer" }}
                 >
                   Collected Orders
@@ -66,7 +66,7 @@ const AdminNavBar = () => {
                   className={`nav-link ${
                     page === "admin_add_menu_items" ? "active" : "opacity-50"
                   }`}
-                  onClick={() => set_page("admin_add_menu_items")}
+                  onClick={() => setPage("admin_add_menu_items")}
                   style={{ cursor: "pointer" }}
                 >
                   Add New Menu Item

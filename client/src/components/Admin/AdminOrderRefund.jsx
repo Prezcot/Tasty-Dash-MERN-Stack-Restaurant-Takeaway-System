@@ -7,14 +7,14 @@ import "../../BootstrapImports.js";
 import axios from "axios";
 
 const AdminOrderRefund = () => {
-  const [data, set_data] = useState([]);
+  const [data, setData] = useState([]);
 
   var grabData = async () => {
     try {
       const res = await axios.get(
         "http://localhost:3001/admin_dashboard_data/receive/refund_data"
       );
-      set_data(res.data);
+      setData(res.data);
     } catch (err) {
       console.log(err);
     }
