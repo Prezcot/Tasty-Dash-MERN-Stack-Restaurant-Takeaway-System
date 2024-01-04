@@ -22,7 +22,7 @@ router.get("/receive/order_data", async (req, res) => {
 router.get("/receive/refund_data", async (req, res) => {
   try {
     let data = await refunds.find();
-    res.json(data);
+    res.status(200).json(data);
   } catch (err) {
     res.status(500);
   }
@@ -30,7 +30,7 @@ router.get("/receive/refund_data", async (req, res) => {
 router.get("/receive/order_collected_data", async (req, res) => {
   try {
     let data = await collected_orders.find();
-    res.json(data);
+    res.status(200).json(data);
   } catch (err) {
     res.status(500);
   }
@@ -39,12 +39,14 @@ router.get("/receive/order_collected_data", async (req, res) => {
 router.put("/set_order_status", async (req, res) => {
   object_id = req.body.object_id;
   order_status = req.body.order_status;
+  console.log("hihiih");
   console.log(object_id, " ", order_status);
   try {
     await item.findByIdAndUpdate(object_id, {
       order_status: order_status,
     });
-    res.json("Data changed Successfully");
+    console.log("hihiih");
+    res.status(200).json("Data changed Successfully");
   } catch (err) {
     res.status(500);
   }
