@@ -143,10 +143,10 @@ const SignIn = () => {
             localStorage.removeItem("remember_username");
           }
         } else {
-          setError("Please Enter Password Above 4 Characters");
+          setError("Please Enter A Password Above 4 Characters");
         }
       } else {
-        setError("Please Enter Username Between 3 And 12 Characters");
+        setError("Please Enter A Username Between 3 And 12 Characters");
       }
     } else {
       setError("Please Enter Valid Data");

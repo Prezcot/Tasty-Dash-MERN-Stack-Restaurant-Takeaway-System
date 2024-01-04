@@ -114,9 +114,17 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
         var finduser=await users.find({username:username}).catch((err)=>console.log(err));
         var findphonenumber=await users.find({phonenumber:phonenumber}).catch((err)=>console.log(err));
         var findemail=await users.find({email:email}).catch((err)=>console.log(err));
-        if (finduser.length>0 || findphonenumber.length>0 || findemail.length>0)
+        if (finduser.length>0)
         {
-            res.status(400).json({message:"Account Already Exists"});
+            res.status(400).json({message:"Username Already Taken"});
+        }
+        else if(findphonenumber.length>0)
+        {
+            res.status(400).json({message:"Phone Number Already Taken"});
+        }
+        else if(findemail.length>0)
+        {
+            res.status(400).json({message:"Email Already Taken"});    
         }
         else{
             const User=new users({username,type,email,phonenumber,password});

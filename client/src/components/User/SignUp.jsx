@@ -59,7 +59,7 @@ function SignUp()
             setUsername(username.toLowerCase().trim());
             setPassword(password.trim());
     
-            if (checkForLowerCase(password) && checkForUpperCase(password) && checkForSpecialChar(password) && username.length>=3 && validator.isEmail(email) && !isNaN(phone_number) && phone_number.length==10 && password.length>=5 && cnfrm_password==password)
+            if (checkForLowerCase(password) && checkForUpperCase(password) && checkForSpecialChar(password) && username.length>=4 && username.length<=12 && validator.isEmail(email) && !isNaN(phone_number) && phone_number.length==10 && password.length>=5 && cnfrm_password==password)
             {
                 await axios.post("http://localhost:3001/users/signup",{username,email,phone_number,password}).then((res)=>{
                     sessionStorage.setItem("username", username)
@@ -79,9 +79,9 @@ function SignUp()
             {
                 setError("Password Must Contain A Upper Case Character");
             }
-            else if (!username.length>=3)
+            else if (username.length<4 || username.length>12)
             {
-                setError("Please Enter Username Between 3 And 12 Characters");
+                setError("Please Enter A Username Between 4-12 Characters");
             }
             else if (isNaN(phone_number))
             {
@@ -97,11 +97,11 @@ function SignUp()
             }
             else if (phone_number.length!=10)
             {
-                setError("Please Enter Phone Number With 10 Digits");
+                setError("Please Enter A Phone Number With 10 Digits");
             }
             else if(password.length<5)
             {
-                setError("Please Enter Password Above 4 Characters")
+                setError("Please Enter A Password Above 4 Characters")
             }
             else{
                 setError("Please Enter Valid Data");
@@ -128,7 +128,7 @@ function SignUp()
                     <table id="signup" >
                         <tr>
                             <TabCol>Username: </TabCol> 
-                            <td style={{paddingBottom:"1vh",fontSize:"3vh"}}><UserInput type="text" placeholder="Username" onChange={(e)=>setUsername(e.target.value)}/></td>
+                            <td style={{paddingBottom:"2vh",fontSize:"3vh"}}><UserInput type="text" placeholder="Username" onChange={(e)=>setUsername(e.target.value)}/></td>
                         </tr>
                         <tr>
                             <TabCol>Email: </TabCol>
