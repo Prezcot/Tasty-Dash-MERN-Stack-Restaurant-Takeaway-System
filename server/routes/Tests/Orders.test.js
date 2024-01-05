@@ -9,8 +9,8 @@ require("dotenv").config();
 beforeAll(async () => {
     jest.setTimeout(10000);
     mongoServer = await MongoMemoryServer.create();
-    const mongoUri = mongoServer.getUri();
-    await mongoose.connect(mongoUri);
+    const mongo_uri = mongoServer.getUri();
+    await mongoose.connect(mongo_uri);
 
     const live_order = new item({
         __v: 0,
@@ -104,16 +104,16 @@ beforeAll(async () => {
 
     it("Successfully updates mongo db with new order id",async()=>{
         const document_id = "6589770129060833d3f653b1";
-        const updatedID = "106"
-        const res=await request(app).put(`/orders/update_order_id/${document_id}`).send({ _id:document_id }, {orderID:updatedID});
+        const updated_id = "106"
+        const res=await request(app).put(`/orders/update_order_id/${document_id}`).send({ _id:document_id }, {orderID:updated_id});
         expect (res.text).toBe("Item updated successfully");
     })
 
 
     it("Successfully brings down data of a user from Mongo DB",async()=>{
         const res=await request(app).post("/orders/your_orders").send({user:"dummy_user"});
-        expectedData ={
-            liveOrderItems :[
+        expected_data ={
+            live_order_items :[
             {
             __v: 0,
             _id: "65915ebd62be743115175d94",
@@ -128,7 +128,7 @@ beforeAll(async () => {
             order_total: '59.99',
             }
         ],
-            orderHistoryItems: [
+            order_history_items: [
             {
                 __v: 0,
                 _id: "6593f234cd4a4307d0f1d1cb",
@@ -158,7 +158,7 @@ beforeAll(async () => {
 
         ] 
         };
-        expect(res.body).toEqual(expectedData);
+        expect(res.body).toEqual(expected_data);
         expect(res.status).toEqual(200);
       });
 });

@@ -63,7 +63,7 @@ function Paypal() {
           setLOID(latest_order_id=response.data);
           let temp = latest_order_id+1;
           console.log("temp varaible is:"+temp);
-          let orderDetails = {
+          let order_details = {
             username: sessionStorage.getItem("username"),
             order_id: temp,
             payment_id: order.id,
@@ -75,15 +75,15 @@ function Paypal() {
             order_total: sessionStorage.getItem("total"),
           };
     
-        await axios.post("http://localhost:3001/orders/addorder", orderDetails);
+        await axios.post("http://localhost:3001/orders/addorder", order_details);
         
         let document_id = '6589770129060833d3f653b1';/*this document does not change and is singular in the mongodb collection*/
         await axios.put(`http://localhost:3001/orders/update_order_id/${document_id}`, {temp});
 
         const socket = io("http://localhost:3001");
-        socket.emit("order_status_update", { username: orderDetails.username, status: orderDetails.order_status });
+        socket.emit("order_status_update", { username: order_details.username, status: order_details.order_status });
 
-        sessionStorage.removeItem("menuCart");
+        sessionStorage.removeItem("menu_cart");
         sessionStorage.removeItem("cart");
         sessionStorage.removeItem("order_id");
         sessionStorage.removeItem("total");

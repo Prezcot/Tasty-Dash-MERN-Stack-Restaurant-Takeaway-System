@@ -10,7 +10,7 @@ function NavBar(props) {
     setPage(new_page);
   };
   const handleLogout = () => {
-    sessionStorage.setItem("menuCart","{}");
+    sessionStorage.setItem("menu_cart","{}");
     sessionStorage.removeItem("order_id");
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("email");

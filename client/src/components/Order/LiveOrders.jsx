@@ -4,14 +4,14 @@ import NavBar from "../NavBar";
 import { io } from "socket.io-client";
 
 function LiveOrders() {
-  let [liveOrderInfo, setLiveOrderInfo] = useState([]);
-  let [orderHistoryInfo, setOrderHistoryInfo] = useState([]);
+  let [live_order_info, setLiveOrderInfo] = useState([]);
+  let [order_history_info, setOrderHistoryInfo] = useState([]);
 
   async function fetchOrders() {
     try{
       let response = await axios.post("http://localhost:3001/orders/your_orders", {user: sessionStorage.getItem("username"),})
-      setLiveOrderInfo(response.data.liveOrderItems);
-      setOrderHistoryInfo(response.data.orderHistoryItems)
+      setLiveOrderInfo(response.data.live_order_items);
+      setOrderHistoryInfo(response.data.order_history_items)
 
     } catch (error){
       console.error(error);
@@ -55,8 +55,8 @@ function LiveOrders() {
           <div className="live_orders">
             <h3>Live Orders</h3>
           </div>
-          {liveOrderInfo.length > 0 ? (
-          liveOrderInfo.map((orders) => (
+          {live_order_info.length > 0 ? (
+          live_order_info.map((orders) => (
               <div className="live-order-items">
                 <div className="indi-order" style={{alignItems:"center"}}>
 
@@ -110,8 +110,8 @@ function LiveOrders() {
             <div className="order_history">
             <h3>Order History</h3>
             </div>
-            {orderHistoryInfo.length > 0 ? (
-            orderHistoryInfo.slice().sort((x, y) => y.order_id.localeCompare(x.order_id)).map((orders) => (
+            {order_history_info.length > 0 ? (
+            order_history_info.slice().sort((x, y) => y.order_id.localeCompare(x.order_id)).map((orders) => (
               <div className="order-history-items">
                 <div className="indi-order" style={{alignItems:"center"}}>
                   <div>
