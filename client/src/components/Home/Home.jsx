@@ -44,7 +44,7 @@ function Home(){
                             <p>
                             Tasty Dash is a multi-cultural restaurant bringing in a wide range of meals that you can choose from by the finest 3-star michelin awarded chefs in Sri Lanka.
                             </p>
-                            <button type="button" class="btn btn-dark btn-lg ordernow" onClick={()=>{sessionStorage.setItem("AlertMsg","Please Sign In/Create An Account To Order")
+                            <button type="button" class="btn btn-dark btn-lg ordernow" onClick={()=>{sessionStorage.setItem("alert_msg","Please Sign In/Create An Account To Order")
                             nav("/signin")}}>
                             Order Now
                             </button>
