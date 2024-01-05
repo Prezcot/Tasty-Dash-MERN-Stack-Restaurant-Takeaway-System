@@ -1,8 +1,13 @@
 import react from "react";
 import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import { io } from "socket.io-client";
 import "../../BootstrapImports.js";
+import HomeOfferItem from "./HomeOfferItem.jsx";
 function Home(){
     const nav=useNavigate();
+
     return(
         <div style={{display:"flex",flexDirection:"column",height:"100vh",width:"100vw"}}>
             <nav class="py-3 navbar navbar-expand-lg fixed-top auto-hiding-navbar">
@@ -48,9 +53,17 @@ function Home(){
                             nav("/signin")}}>
                             Order Now
                             </button>
+
+                            <button type="button" class="btn btn-dark btn-lg ordernow" onClick={()=>{sessionStorage.setItem("AlertMsg","Please Sign In/Create An Account To Order")
+                            nav("/offerings")}} style={{backgroundColor:"#f85606", marginTop:"2%", color:"black"}}>
+                            Check out our menu ➤
+                            </button>
+                            
+
+                            
                         </div>
                         <div class="col img-col">
-                            <img src="" alt="" class="img-fluid" />
+                            <img src="" alt="" class="img-fluid"/>
                         </div>
                     </div>
                     <div class="row"></div>

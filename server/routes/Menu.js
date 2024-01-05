@@ -15,9 +15,9 @@ router.get('/data', async (req, res) => {
   });
   router.post('/add', async (req, res) => {
     try {
-      const newItemData = req.body;
-      const addedItem = await Menuitem.create(newItemData);
-      res.status(200).json(addedItem);
+      const new_item_data = req.body;
+      const added_item = await Menuitem.create(new_item_data);
+      res.status(200).json(added_item);
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Failed to add item to the database" });
@@ -25,15 +25,15 @@ router.get('/data', async (req, res) => {
   });
   
   router.delete('/delete/:itemName', async (req, res) => {
-    const itemName = decodeURIComponent(req.params.itemName);
+    const item_name = decodeURIComponent(req.params.itemName);
   
     try {
-      console.log(`Deleting item with name: ${itemName}`);
+      console.log(`Deleting item with name: ${item_name}`);
   
       // Use Mongoose to find and delete the document based on item name
-      const deletedItem = await Menuitem.findOneAndDelete({ itemName: itemName });
+      const deleted_item = await Menuitem.findOneAndDelete({ itemName: item_name });
   
-      if (!deletedItem) {
+      if (!deleted_item) {
         console.log('Item not found');
         return res.status(404).json({ error: 'Item not found' });
       }
@@ -45,6 +45,7 @@ router.get('/data', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+
   router.put("/edit/:itemName", async (req, res) => {
     const itemName = decodeURIComponent(req.params.itemName);
     const updatedItemData = req.body;

@@ -12,6 +12,7 @@ import LiveOrders from "./components/Order/LiveOrders";
 import Home from "./components/Home/Home";
 import axios from "axios";
 import { useState } from "react";
+import HomeMenu from "./components/Home/HomeMenu";
 
 function DenyDirectAccessRoutes() {
   var [isUser,setIsUser]=useState();
@@ -34,6 +35,7 @@ function DenyDirectAccessRoutes() {
   if (isUser) {
     return (
       <Routes>
+        <Route path="/offerings" element={<HomeMenu />}></Route>
         <Route path="/menu" element={<Menu />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/basket" element={<Basket />}></Route>
@@ -47,6 +49,7 @@ function DenyDirectAccessRoutes() {
   {
     return (
       <Routes>
+        <Route path="/offerings" element={<HomeMenu />}></Route>
         <Route path="/menu" element={<Menu />}></Route>
         <Route path="/admin" element={<AdminNavBar />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>

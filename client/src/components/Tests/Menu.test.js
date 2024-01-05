@@ -93,13 +93,13 @@ describe("UNIT TEST - MENU COMPONENT", () => {
           { itemName: 'Item1', itemPrice: 10 },
           { itemName: 'Item2', itemPrice: 15 },
         ];
-        const quantityMap = {
+        const quantity_map = {
           Item1: 2,
           Item2: 1,
         };
         var {getAllByText,getByAltText,getByText,getByRole} =render(
             <BrowserRouter>
-                <Cart items={items} quantityMap={quantityMap} />
+                <Cart items={items} quantity_map={quantity_map} />
             </BrowserRouter>);
       
         const cartIcon = getByAltText('Shopping Cart');
@@ -120,13 +120,13 @@ describe("INTEGRATION TEST - MENU COMPONENT",()=>{
           { itemName: 'Item1', itemPrice: 10 },
           { itemName: 'Item2', itemPrice: 15 },
         ];
-        const quantityMap = {
+        const quantity_map = {
           Item1: 2,
           Item2: 1,
         };
         var {getAllByText,getByAltText,getByText,getByRole} =render(
             <BrowserRouter>
-                <Cart items={items} quantityMap={quantityMap} />
+                <Cart items={items} quantity_map={quantity_map} />
             </BrowserRouter>);
       
         const cartIcon = getByAltText('Shopping Cart');

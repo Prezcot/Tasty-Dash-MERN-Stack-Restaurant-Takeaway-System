@@ -10,8 +10,8 @@ jest.mock('axios');
 window.setImmediate = window.setTimeout;
 
 describe('UNIT TEST ADMIN COMPONENT', () => {
-  it('enders AdminMenu component', async () => {
-    const mockItems = [
+  it('Renders AdminMenu component', async () => {
+    const mock_items = [
       {
         itemName: 'Starter1',
         itemDescription: 'Description for Starter1',
@@ -39,7 +39,7 @@ describe('UNIT TEST ADMIN COMPONENT', () => {
       },
     ];
 
-    axios.get.mockResolvedValue({ data: mockItems });
+    axios.get.mockResolvedValue({ data: mock_items });
 
     var {getByText}=render(
         <BrowserRouter>
@@ -48,7 +48,7 @@ describe('UNIT TEST ADMIN COMPONENT', () => {
     await waitFor(() => {
       expect(getByText('Starters')).toBeInTheDocument();
     });
-    mockItems.forEach((item) => {
+    mock_items.forEach((item) => {
       const itemNameElement = getByText(item.itemName);
       expect(itemNameElement).toBeInTheDocument();
     });
@@ -72,7 +72,7 @@ describe('UNIT TEST ADMIN COMPONENT', () => {
 
 
    it('Edits item price', async () => {
-    const mockItem = {
+    const mock_item = {
       itemName: 'TestItem',
       itemDescription: 'Test Description',
       itemPrice: 10.99,
@@ -82,7 +82,7 @@ describe('UNIT TEST ADMIN COMPONENT', () => {
     };
     axios.put.mockResolvedValue();
 
-    var {getByText,getByRole,getByTestId} = render(<AdminItem item={mockItem} onDelete={() => {}} />);
+    var {getByText,getByRole,getByTestId} = render(<AdminItem item={mock_item} onDelete={() => {}} />);
 
     expect(getByText('TestItem')).toBeInTheDocument();
     expect(getByText('Test Description')).toBeInTheDocument();
@@ -94,12 +94,12 @@ describe('UNIT TEST ADMIN COMPONENT', () => {
     
     await waitFor(() => {
       expect(axios.put).toHaveBeenCalledWith(
-        `http://localhost:3001/menu/edit/${mockItem.itemName}`,
+        `http://localhost:3001/menu/edit/${mock_item.itemName}`,
         {
-          itemName: mockItem.itemName,
-          itemDescription: mockItem.itemDescription,
+          itemName: mock_item.itemName,
+          itemDescription: mock_item.itemDescription,
           itemPrice: '15.99', 
-          itemImage: mockItem.itemImage,
+          itemImage: mock_item.itemImage,
           itemAvailability: 'in-stock',
         }
       );
@@ -111,7 +111,7 @@ describe('UNIT TEST ADMIN COMPONENT', () => {
 
 
 
-it('Adds a new item to the database', async () => {
+  it('Adds a new item to the database', async () => {
     
     axios.get.mockResolvedValue({ data: [] });
 
@@ -134,7 +134,7 @@ it('Adds a new item to the database', async () => {
       target: { value: '12' },
     });
 
-
+  
     axios.post.mockResolvedValue({});
 
     // Submit the form
@@ -147,7 +147,7 @@ it('Adds a new item to the database', async () => {
           itemName: 'Pizza',
           itemDescription: 'Delicious pizza description',
           itemPrice: 12,
-          itemImage: '',
+          itemImage: 'test.png',
           itemType: 'starter',
         },
       ],
@@ -217,7 +217,7 @@ it('should delete an item when the delete button is clicked', async () => {
   
   
   it('Edit item stock from in-stock to out-of-stock', async () => {
-    const mockItem = {
+    const mock_item = {
       itemName: 'TestItem',
       itemDescription: 'Test Description',
       itemPrice: 10.99,
@@ -231,14 +231,14 @@ it('should delete an item when the delete button is clicked', async () => {
     axios.put.mockResolvedValueOnce({ data: {} });
   
     
-    var {getByText,getByRole,getByTestId,getByLabelText} = render(<AdminItem item={mockItem} onDelete={() => {}} />);
+    var {getByText,getByRole,getByTestId,getByLabelText} = render(<AdminItem item={mock_item} onDelete={() => {}} />);
   
     
     fireEvent.click(getByTestId('change-price'));
   
     
-    const outOfStockRadioButton = getByLabelText('Out-of-Stock');
-    fireEvent.click(outOfStockRadioButton);
+    const out_Of_Stock_Radio_Button = getByLabelText('Out-of-Stock');
+    fireEvent.click(out_Of_Stock_Radio_Button);
   
 
     fireEvent.click(getByTestId('change-price'));
@@ -246,12 +246,12 @@ it('should delete an item when the delete button is clicked', async () => {
     
     await waitFor(() => {
       expect(axios.put).toHaveBeenCalledWith(
-        `http://localhost:3001/menu/edit/${mockItem.itemName}`,
+        `http://localhost:3001/menu/edit/${mock_item.itemName}`,
         {
-          itemName: mockItem.itemName,
-          itemDescription: mockItem.itemDescription,
-          itemPrice: mockItem.itemPrice.toFixed(2),
-          itemImage: mockItem.itemImage,
+          itemName: mock_item.itemName,
+          itemDescription: mock_item.itemDescription,
+          itemPrice: mock_item.itemPrice.toFixed(2),
+          itemImage: mock_item.itemImage,
           itemAvailability: 'out-of-stock',
         }
       );

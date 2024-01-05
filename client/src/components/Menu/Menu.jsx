@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Item from "./Item";
@@ -16,12 +15,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Menu() {
   const nav = useNavigate();
-  if(!sessionStorage.getItem("menuCart")){
-    sessionStorage.setItem("menuCart","{}");
+  if(!sessionStorage.getItem("menu_cart")){
+    sessionStorage.setItem("menu_cart","{}");
   }
   const [items, setItems] = useState([]);
-  const [hasToastAppeared, setHasToastAppeared] = useState(false);
-  const [quantityMap, setQuantityMap] = useState(JSON.parse(sessionStorage.getItem("menuCart")));
+  const [has_toast_appeared, setHasToastAppeared] = useState(false);
+  const [quantity_map, setQuantityMap] = useState(JSON.parse(sessionStorage.getItem("menu_cart")));
 
   var grabitems = async () => {
     try{
@@ -57,7 +56,7 @@ function Menu() {
 
 
 
-sessionStorage.setItem("menuCart", JSON.stringify(quantityMap));
+sessionStorage.setItem("menu_cart", JSON.stringify(quantity_map));
 
   
 const updateItems = (itemName, itemImage,action) => {
@@ -75,7 +74,7 @@ const updateItems = (itemName, itemImage,action) => {
   };
   
 function showBasket(){
-  if (!hasToastAppeared) {
+  if (!has_toast_appeared) {
     toast.info('View your basket here   ➜', {
       className : 'toast-position',
       autoClose: 3000,
@@ -135,7 +134,7 @@ return (
       <Item
         key={item.itemName}
         item={item}
-        quantity={quantityMap[item.itemName] || 0}
+        quantity={quantity_map[item.itemName] || 0}
         onAddToCart={() => updateItems(item.itemName, item.itemImage, "add")}
         onRemoveFromCart={() => updateItems(item.itemName, item.itemImage, "remove")}
       />
@@ -148,7 +147,7 @@ return (
       <Item
         key={item.itemName}
         item={item}
-        quantity={quantityMap[item.itemName] || 0}
+        quantity={quantity_map[item.itemName] || 0}
         onAddToCart={() => updateItems(item.itemName, item.itemImage, "add")}
         onRemoveFromCart={() => updateItems(item.itemName, item.itemImage, "remove")}
       />
@@ -161,14 +160,14 @@ return (
       <Item
         key={item.itemName}
         item={item}
-        quantity={quantityMap[item.itemName] || 0}
+        quantity={quantity_map[item.itemName] || 0}
         onAddToCart={() => updateItems(item.itemName, item.itemImage, "add")}
         onRemoveFromCart={() => updateItems(item.itemName, item.itemImage, "remove")}
       />
     ))}
   </div>
   
-  <Cart items={items} quantityMap={quantityMap}  data-testid="cart-icon"/>
+  <Cart items={items} quantity_map={quantity_map}  data-testid="cart-icon"/>
 </div>
 
 </>

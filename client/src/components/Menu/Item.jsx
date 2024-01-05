@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 function Item({ item, quantity, onAddToCart, onRemoveFromCart }) {
-  const [localQuantity, setLocalQuantity] = useState();
+  const [local_Quantity, setLocalQuantity] = useState();
 
   useEffect(() => {
     
@@ -15,7 +15,7 @@ function Item({ item, quantity, onAddToCart, onRemoveFromCart }) {
   };
 
   const handleRemoveFromCart = () => {
-    if (localQuantity > 0) {
+    if (local_Quantity > 0) {
       setLocalQuantity((prevQuantity) => prevQuantity - 1);
       onRemoveFromCart(); 
     }
@@ -39,7 +39,7 @@ function Item({ item, quantity, onAddToCart, onRemoveFromCart }) {
       {item.itemAvailability === "in-stock" ? (
         <div className="menu-actions">
           <img src="/images/Menu-Minus.png" className="remove-from-cart" onClick={handleRemoveFromCart} data-testid="minus" style={{ height: "40px", width: "70px" }} />
-          <label className="quantity-in-cart" data-testid="my-quantity">{localQuantity}</label>
+          <label className="quantity-in-cart" data-testid="my-quantity">{local_Quantity}</label>
           <img src="/images/Menu-Add.png" className="add-to-cart" onClick={handleAddToCart} data-testid="add" style={{ height: "40px", width: "70px" }} />
         </div>
       ) : (

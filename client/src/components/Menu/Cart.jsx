@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import {useNavigate } from 'react-router-dom';
 
 
-function Cart({ items, quantityMap}) {
+function Cart({ items, quantity_map}) {
   const nav = useNavigate();
 
-  const cartItems = items.filter((item) => quantityMap[item.itemName] > 0);
-  const uniqueItemsCount = cartItems.length;
-  const [isHovered, setIsHovered] = useState(false);
+  const cart_items = items.filter((item) => quantity_map[item.itemName] > 0);
+  const uniqueItemsCount = cart_items.length;
+  const [is_hovered, setIsHovered] = useState(false);
 
-  const formattedCart = cartItems.map((item) => `${item.itemName},${item.itemPrice},${quantityMap[item.itemName] }`);
+  const formattedCart = cart_items.map((item) => `${item.itemName},${item.itemPrice},${quantity_map[item.itemName] }`);
   useEffect(() => {
     sessionStorage.setItem("cart", JSON.stringify(formattedCart));
   }, [formattedCart]);
@@ -27,14 +27,14 @@ function Cart({ items, quantityMap}) {
         <label className="unique-items-count">{uniqueItemsCount}</label>
         </div>
         {/* Show the list underneath the icon */}
-        {isHovered && (
+        {is_hovered && (
           <div className='cart-contents'>
           <div className="cart-items-list">
           
-            {cartItems.map((item) => (
+            {cart_items.map((item) => (
               <label key={item.itemName}>
               
-                  {item.itemName} (x{quantityMap[item.itemName]})
+                  {item.itemName} (x{quantity_map[item.itemName]})
               </label>
             ))}
             

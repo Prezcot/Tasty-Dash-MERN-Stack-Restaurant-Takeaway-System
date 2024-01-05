@@ -183,7 +183,10 @@
   transform: translateY(70%);
   font-size: larger;
 }
-
+.validation-error {
+  color: red;
+  margin-top: 5px; /* Adjust as needed */
+}
 
 
 
