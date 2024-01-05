@@ -24,15 +24,15 @@ const AdminDashboard = () => {
     }
   };
 
-  const sortedOrderData = [...filtered_order_data].sort((a, b) => {
-    const orderStatusOrder = {
+  const sorted_order_data = [...filtered_order_data].sort((a, b) => {
+    const order_status_order = {
       Pending: 0,
       Approved: 1,
       Collected: 2,
       Declined: 3,
     };
-    const order_status_a = orderStatusOrder[a.order_status];
-    const order_status_b = orderStatusOrder[b.order_status];
+    const order_status_a = order_status_order[a.order_status];
+    const order_status_b = order_status_order[b.order_status];
 
     if (order_status_a !== order_status_b) {
       return order_status_a - order_status_b;
@@ -169,7 +169,7 @@ const AdminDashboard = () => {
         </span>
       </div>
       <ul className="list-group">
-        {sortedOrderData.map((items, index) => (
+        {sorted_order_data.map((items, index) => (
           <div key={index}>
             <li
               className={`list-group-item fs-6 ${
