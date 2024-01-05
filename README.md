@@ -10,17 +10,30 @@ This website allows two different types of users **Customers** and **Administrat
 - Customers can further update their order contents, including changing quantities of selected items, removing unwanted selections and also include any special instructions to be considered when the restaurant prepares their order(allergies, dietary restrictions, etc.).
 - Customers can review their final order summary and make secure payments using integrated PayPal services or their debit/credit cards.
 - Once an order is placed, customers can view the status of live orders and a history of all their past orders and refunded orders.
-- Customers are also able to change account information like their password, and also delete their account with the shop if they wish to.
+- Customers are also able to change account information like their password, and also delete their account with the restaurant if they wish to.
 
 ### Administrators
 
-- Admin logins are provided pre-made, and admins can sign in securely to get access to the admin feature suite.
-- Admins are presented with a dashboard that allows them to view all orders placed by customers. Admins can approve these orders and once completed, mark them as "collected". Furthermore, admins can decline orders in case they are unable to fulfill these orders due to unforeseen circumstances. The shop can then issue a refund to these customers.
+- Admin accounts are manually added to the user database, and admins can sign in securely to get access to the admin feature suite.
+- Admins are presented with a dashboard that allows them to view all orders placed by customers. Admins can approve these orders and once completed, mark them as "collected". Furthermore, admins can decline orders in case they are unable to fulfill these orders due to unforeseen circumstances. The restaurant may then issue a refund to these customers.
 - Admins can view a list of all declined orders that have had refunds issued for them.
-- Admins can view a history of all the shop's completed orders.
-- Finally, Admins are provided with the ability to add new menu items, change their prices, and manage the availability of existing items, to ensure that the menu is always up to date on the Customer side.
+- Admins can view a history of all the restaurant's completed orders.
+- Finally, Admins are provided with the ability to add new menu items, change their prices, and manage the availability of existing items, to ensure that the menu is always up to date on the customer's side.
 
-## How to run
+## Account Credentials:
+
+### Admin Login Credentials:
+
+- Username: admin
+- Password: admin
+- 
+### PayPal Payment Credentials:
+
+After an order's details have been finalized the following fictitious PayPal credentials can be used to mimic an actual PayPal account in the PayPal developer sandbox environment and make a test payment.
+- Username: sb-qrzuv28891158@personal.example.com
+- Password: *w+8&"6J
+
+## How to run the application
 
 ### Docker:
 
@@ -28,5 +41,17 @@ This website allows two different types of users **Customers** and **Administrat
 
 ### Windows:
 
-- Open Two different terminal windows in the root directory of the folder.
+- Open two different terminal windows in the root directory of the folder.
 - Run the commands `npm run client` and `npm run server` on each respectively.
+
+## How to run tests
+
+The following commands should be run in the root directory.
+
+### Client:
+
+- npm run client_test
+  
+### Server:
+
+- npm run server_test
