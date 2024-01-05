@@ -101,9 +101,9 @@ function Dashboard() {
     {
       const username=sessionStorage.getItem("username");
       await axios.delete(`http://localhost:3001/users/deleteaccount/${username}`).then((res)=>{
-      sessionStorage.setItem("AlertMsg",res.data.message); 
+      sessionStorage.setItem("alert_msg",res.data.message); 
       sessionStorage.removeItem("token"); 
-      nav("/signin")}).catch((err)=>{sessionStorage.setItem("AlertMsg",err.response.data.message)});
+      nav("/signin")}).catch((err)=>{sessionStorage.setItem("alert_msg",err.response.data.message)});
     }
   return (
     // <div style={{background:`url("/images/UserDashboardBackground.jpg")`,width:"100vw",height:"100vh",backgroundRepeat:"no-repeat"}}></div>
@@ -125,7 +125,7 @@ function Dashboard() {
                   <br></br><br></br>
                   <p style={{fontSize:"1.5vw"}}>Username: {user_info.username}</p>
                   <p style={{fontSize:"1.5vw"}}>Email: {user_info.email}</p>
-                  <p style={{fontSize:"1.5vw"}}>Phone Number: {user_info.phonenumber}</p>
+                  <p style={{fontSize:"1.5vw"}}>Phone Number: {user_info.phone_number}</p>
                   <button style={{backgroundColor: "red",color: "white",borderRadius: "0.5vh",border: "0.1vh solid black",fontSize:"2vh"}} onClick={handleAlert}>Delete Account</button>
               </div>) : (<div style={{flex:1, justifyContent:"center",display:"flex",flexDirection:"column",justifyContent:"center"}}>
                       <div style={{display:"flex",justifyContent:"center",flexDirection:"column",alignItems:"center"}}>

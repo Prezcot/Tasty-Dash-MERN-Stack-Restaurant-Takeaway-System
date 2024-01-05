@@ -55,7 +55,7 @@ router.get("/userinfo/:username",async (req,res,next)=>
         var query=await users.find({username:username});
         if (query.length>0)
         {
-            res.status(200).json({username:query[0].username,email:query[0].email,phonenumber:query[0].phonenumber});
+            res.status(200).json({username:query[0].username,email:query[0].email,phone_number:query[0].phonenumber});
         }
     }
     catch(err){
@@ -107,33 +107,33 @@ router.post("/signin",async (req,res,next)=>{ //This route handler handles all s
 });
 
 router.post("/signup",async(req,res,next)=>{ //This route handler handles all signup requests
-    var {username,email,phonenumber,password} = req.body;
+    var {username,email,phone_number,password} = req.body;
     var type="User";
     try{
         password= await bcrypt.hash(password,10);
-        var finduser=await users.find({username:username}).catch((err)=>console.log(err));
-        var findphonenumber=await users.find({phonenumber:phonenumber}).catch((err)=>console.log(err));
-        var findemail=await users.find({email:email}).catch((err)=>console.log(err));
-        if (finduser.length>0)
+        var find_user=await users.find({username:username}).catch((err)=>console.log(err));
+        var find_phone_number=await users.find({phonenumber:phone_number}).catch((err)=>console.log(err));
+        var find_email=await users.find({email:email}).catch((err)=>console.log(err));
+        if (find_user.length>0)
         {
             res.status(400).json({message:"Username Already Taken"});
         }
-        else if(findphonenumber.length>0)
+        else if(find_phone_number.length>0)
         {
             res.status(400).json({message:"Phone Number Already Taken"});
         }
-        else if(findemail.length>0)
+        else if(find_email.length>0)
         {
             res.status(400).json({message:"Email Already Taken"});    
         }
         else{
-            const User=new users({username,type,email,phonenumber,password});
+            const new_user=new users({username,type,email,phone_number,password});
             const user = {
                 username: username,
                 role: "User"  // assuming your user has a role
             };
             const token = jwt.sign(user, 'r+43kcgH@9u309gXemm#COPv:BNV.;-I`p283$(?{X|b=5R&', { expiresIn: '1h' });
-            await User.save().then(()=>res.status(200).json({message:"Successful Register",token:token})).catch((err)=>res.status(400).json({message:err}));
+            await new_user.save().then(()=>res.status(200).json({message:"Successful Register",token:token})).catch((err)=>res.status(400).json({message:err}));
             //the anonymous function inside .then promise handler would have a parameter that is related to the outer function which is User.save
             //which is the response from User.save() basically.
         }
@@ -143,19 +143,19 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
 });
 
 router.put("/checkpassword",async(req,res,next)=>{
-    var {username,currentpassword,newpassword}=req.body;
+    var {username,current_password,new_password}=req.body;
     try{
         var query= await users.find({username:username}).catch((err)=>console.log(err));
-        var hashedPassword= await bcrypt.hash(newpassword,10);
+        var hashed_password= await bcrypt.hash(new_password,10);
         if (query.length>0)
         {
-            var valid= await bcrypt.compare(currentpassword,query[0].password);
-            var doesExist=await bcrypt.compare(newpassword,query[0].password);
+            var valid= await bcrypt.compare(current_password,query[0].password);
+            var does_exist=await bcrypt.compare(new_password,query[0].password);
             if (valid)
             {
-                if (!doesExist)
+                if (!does_exist)
                 {
-                    await users.updateOne({username:username},{password:hashedPassword});
+                    await users.updateOne({username:username},{password:hashed_password});
                     res.status(200).json({message:"Password Successfully Changed"});
                 }
                 else{

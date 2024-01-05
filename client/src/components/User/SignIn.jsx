@@ -15,7 +15,7 @@ const UserInput = styled.input`
   border: 1px solid grey;
   border-radius: 1vh;
 `;
-const Tabcol = styled.td`
+const TabCol = styled.td`
   padding-bottom: 2vh;
   font-size: 3vh;
 `;
@@ -41,15 +41,15 @@ const SignIn = () => {
   }, []);
 
   useEffect(()=>{
-    if (sessionStorage.getItem("AlertMsg"))
+    if (sessionStorage.getItem("alert_msg"))
     {
-      setError(sessionStorage.getItem("AlertMsg"));
+      setError(sessionStorage.getItem("alert_msg"));
     }
   },[])
   function handleError() {
     //also called a render method
     if (error) {
-      if (!sessionStorage.getItem("AlertMsg"))
+      if (!sessionStorage.getItem("alert_msg"))
       {
         return (
           <center>
@@ -109,7 +109,7 @@ const SignIn = () => {
   async function handleSignIn(event) {
     event.preventDefault();
     sessionStorage.setItem("username", username);
-    sessionStorage.removeItem("AlertMsg");
+    sessionStorage.removeItem("alert_msg");
     if (username && password) {
       if (username.length >= 3 && username.length <= 12) {
         if (password.length >= 5) {
@@ -196,7 +196,7 @@ const SignIn = () => {
           <form onSubmit={handleSignIn}>
             <table id="login">
               <tr>
-                <Tabcol>Username: </Tabcol>
+                <TabCol>Username: </TabCol>
                 <td style={{ paddingBottom: "1vh", fontSize: "3vh" }}>
                   <UserInput
                     type="text"
@@ -207,15 +207,15 @@ const SignIn = () => {
                 </td>
               </tr>
               <tr>
-                <Tabcol>Password: </Tabcol>
-                <Tabcol>
+                <TabCol>Password: </TabCol>
+                <TabCol>
                   <UserInput
                     type="password"
                     value={password}
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                </Tabcol>
+                </TabCol>
               </tr>
               <tr>
                 <td>
