@@ -9,10 +9,10 @@ app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 require("dotenv").config();
 
-const User = require("./routes/User.js");
-const menuRouter = require("./routes/Menu.js");
-const adminDashboardData = require("./routes/AdminDashboardData");
-const orderRouter = require("./routes/Orders.js");
+const user = require("./routes/User.js");
+const menu_router = require("./routes/Menu.js");
+const admin_dashboard_data = require("./routes/AdminDashboardData");
+const order_router = require("./routes/Orders.js");
 
 const uri = process.env.ATLAS_URI;
 
@@ -38,10 +38,10 @@ app.get("/test", (req, res) => {
   res.send("Hello there!!!");
 });
 
-app.use("/users", User);
-app.use("/menu", menuRouter);
-app.use("/admin_dashboard_data", adminDashboardData);
-app.use("/orders", orderRouter);
+app.use("/users", user);
+app.use("/menu", menu_router);
+app.use("/admin_dashboard_data", admin_dashboard_data);
+app.use("/orders", order_router);
 
 io.on("connection", (socket) => {
   console.log("a user connected");

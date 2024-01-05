@@ -9,7 +9,7 @@ const UserInput=styled.input`
   border: 1px solid grey;
   border-radius: 1vh;
 `;
-const Tabcol=styled.td`
+const TabCol=styled.td`
     padding-bottom:2vh;
     font-size:3vh;
 `;
@@ -17,8 +17,8 @@ const Tabcol=styled.td`
 function SignUp()
 {
     const [email,setEmail]=useState();
-    const [phonenumber,setPhoneNumber]=useState();
-    const [cnfrmpassword,setCnfrmPassword]=useState();
+    const [phone_number,setPhoneNumber]=useState();
+    const [cnfrm_password,setCnfrmPassword]=useState();
     const [username,setUsername]=useState();
     const [password,setPassword]=useState();
     const [error,setError]=useState(null);
@@ -58,12 +58,10 @@ function SignUp()
         try{
             setUsername(username.toLowerCase().trim());
             setPassword(password.trim());
-            
-            //var hashedpassword=bcrypt.hash(password,10);
-            //setPassword(bcrypt.hash(password,10));
-            if (checkForLowerCase(password) && checkForUpperCase(password) && checkForSpecialChar(password) && username.length>=3 && validator.isEmail(email) && !isNaN(phonenumber) && phonenumber.length==10 && password.length>=5 && cnfrmpassword==password)
+    
+            if (checkForLowerCase(password) && checkForUpperCase(password) && checkForSpecialChar(password) && username.length>=4 && username.length<=12 && validator.isEmail(email) && !isNaN(phone_number) && phone_number.length==10 && password.length>=5 && cnfrm_password==password)
             {
-                await axios.post("http://localhost:3001/users/signup",{username,email,phonenumber,password}).then((res)=>{
+                await axios.post("http://localhost:3001/users/signup",{username,email,phone_number,password}).then((res)=>{
                     sessionStorage.setItem("username", username)
                     sessionStorage.setItem("email", email);
                     sessionStorage.setItem("token",res.data.token)
@@ -81,15 +79,15 @@ function SignUp()
             {
                 setError("Password Must Contain A Upper Case Character");
             }
-            else if (!username.length>=3)
+            else if (username.length<4 || username.length>12)
             {
-                setError("Please Enter Username Between 3 And 12 Characters");
+                setError("Please Enter A Username Between 4-12 Characters");
             }
-            else if (isNaN(phonenumber))
+            else if (isNaN(phone_number))
             {
                 setError("Please Enter A Valid Phone Number");
             }
-            else if (password!=cnfrmpassword)
+            else if (password!=cnfrm_password)
             {
                 setError("Passwords Not Matching");
             }
@@ -97,13 +95,13 @@ function SignUp()
             {
                 setError("Invalid Email");
             }
-            else if (phonenumber.length!=10)
+            else if (phone_number.length!=10)
             {
-                setError("Please Enter Phone Number With 10 Digits");
+                setError("Please Enter A Phone Number With 10 Digits");
             }
             else if(password.length<5)
             {
-                setError("Please Enter Password Above 4 Characters")
+                setError("Please Enter A Password Above 4 Characters")
             }
             else{
                 setError("Please Enter Valid Data");
@@ -129,24 +127,24 @@ function SignUp()
                 <form onSubmit={handleSignUp}>
                     <table id="signup" >
                         <tr>
-                            <Tabcol>Username: </Tabcol> 
-                            <td style={{paddingBottom:"1vh",fontSize:"3vh"}}><UserInput type="text" placeholder="Username" onChange={(e)=>setUsername(e.target.value)}/></td>
+                            <TabCol>Username: </TabCol> 
+                            <td style={{paddingBottom:"2vh",fontSize:"3vh"}}><UserInput type="text" placeholder="Username" onChange={(e)=>setUsername(e.target.value)}/></td>
                         </tr>
                         <tr>
-                            <Tabcol>Email: </Tabcol>
-                            <Tabcol><UserInput type="text" placeholder="Email" onChange={(e)=>setEmail(e.target.value)}/></Tabcol>
+                            <TabCol>Email: </TabCol>
+                            <TabCol><UserInput type="text" placeholder="Email" onChange={(e)=>setEmail(e.target.value)}/></TabCol>
                         </tr>
                         <tr>
-                            <Tabcol>Phone Number: </Tabcol>
-                            <Tabcol><UserInput type="text" placeholder="Phone Number" onChange={(e)=>setPhoneNumber(e.target.value)}/></Tabcol>
+                            <TabCol>Phone Number: </TabCol>
+                            <TabCol><UserInput type="text" placeholder="Phone Number" onChange={(e)=>setPhoneNumber(e.target.value)}/></TabCol>
                         </tr>
                         <tr>
-                            <Tabcol>Password: </Tabcol>
-                            <Tabcol><UserInput type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/></Tabcol>
+                            <TabCol>Password: </TabCol>
+                            <TabCol><UserInput type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/></TabCol>
                         </tr>
                         <tr>
-                            <Tabcol>Confirm Password: </Tabcol>
-                            <Tabcol><UserInput type="password" placeholder="Confirm Password" onChange={(e)=>setCnfrmPassword(e.target.value)}/></Tabcol>
+                            <TabCol>Confirm Password: </TabCol>
+                            <TabCol><UserInput type="password" placeholder="Confirm Password" onChange={(e)=>setCnfrmPassword(e.target.value)}/></TabCol>
                         </tr>
                     </table>
                     <br></br>

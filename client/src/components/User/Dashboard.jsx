@@ -9,18 +9,18 @@ const UserInput = styled.input`
   border: 1px solid grey;
   border-radius: 1vh;
 `;
-const Tabcol = styled.td`
+const TabCol = styled.td`
   padding-bottom: 2vh;
   font-size: 3vh;
 `;
 function Dashboard() {
     const [page,setPage]=useState(false);
-    const [userinfo,setUserInfo]=useState({});
-    const [currentpassword,setCurrentPassword]=useState(null);
-    const [newpassword,setNewPassword]=useState(null);
-    const [confirmpassword,setConfirmPassword]=useState(null);
+    const [user_info,setUserInfo]=useState({});
+    const [current_password,setCurrentPassword]=useState(null);
+    const [new_password,setNewPassword]=useState(null);
+    const [confirm_password,setConfirmPassword]=useState(null);
     const [error,setError]=useState(null);
-    const [alertmsg,setAlertMsg]=useState(false);
+    const [alert_msg,setAlertMsg]=useState(false);
     const username=sessionStorage.getItem("username");
     const token=sessionStorage.getItem("token");
     const nav = useNavigate();
@@ -70,13 +70,13 @@ function Dashboard() {
     async function handleSubmit(event)
     {
         event.preventDefault();
-        if (currentpassword && newpassword && confirmpassword)
+        if (current_password && new_password && confirm_password)
         {   
-            if (currentpassword.length>=5 || newpassword.length>=5)
+            if (current_password.length>=5 || new_password.length>=5)
             {
-                if(confirmpassword==newpassword)
+                if(confirm_password==new_password)
                 { try{
-                    await axios.put("http://localhost:3001/users/checkpassword",{username,currentpassword,newpassword}).then((res)=>setError(res.data.message)).catch((err)=>setError(err.response.data.message));
+                    await axios.put("http://localhost:3001/users/checkpassword",{username,current_password,new_password}).then((res)=>setError(res.data.message)).catch((err)=>setError(err.response.data.message));
                   }catch{
                     console.log("error");
                     }
@@ -118,14 +118,14 @@ function Dashboard() {
           color: "white",
           marginRight:"5vw",
           marginLeft:"5vw",backgroundColor:"#32383f"}}>
-            { !alertmsg ?
+            { !alert_msg ?
               (<div style={{flex:1}}>
                   <h1>Dashboard</h1>
-                  <p style={{fontSize:"2vw",display:"inline"}}>Welcome, {userinfo.username}</p>
+                  <p style={{fontSize:"2vw",display:"inline"}}>Welcome, {user_info.username}</p>
                   <br></br><br></br>
-                  <p style={{fontSize:"1.5vw"}}>Username: {userinfo.username}</p>
-                  <p style={{fontSize:"1.5vw"}}>Email: {userinfo.email}</p>
-                  <p style={{fontSize:"1.5vw"}}>Phone Number: {userinfo.phonenumber}</p>
+                  <p style={{fontSize:"1.5vw"}}>Username: {user_info.username}</p>
+                  <p style={{fontSize:"1.5vw"}}>Email: {user_info.email}</p>
+                  <p style={{fontSize:"1.5vw"}}>Phone Number: {user_info.phonenumber}</p>
                   <button style={{backgroundColor: "red",color: "white",borderRadius: "0.5vh",border: "0.1vh solid black",fontSize:"2vh"}} onClick={handleAlert}>Delete Account</button>
               </div>) : (<div style={{flex:1, justifyContent:"center",display:"flex",flexDirection:"column",justifyContent:"center"}}>
                       <div style={{display:"flex",justifyContent:"center",flexDirection:"column",alignItems:"center"}}>
@@ -146,32 +146,32 @@ function Dashboard() {
                 <form onSubmit={handleSubmit}>
                     <table>
                         <tr>
-                            <Tabcol>
+                            <TabCol>
                                 <p style={{fontSize:"1.5vw",paddingTop:"2vh"}}>Current Password:</p>
-                            </Tabcol>
-                            <Tabcol>
+                            </TabCol>
+                            <TabCol>
                                 <UserInput type="password" placeholder="Current Password" onChange={(e)=>setCurrentPassword(e.target.value)}/>
-                            </Tabcol>
+                            </TabCol>
                         </tr>
                         <tr>
-                            <Tabcol>
+                            <TabCol>
                                 <p style={{fontSize:"1.5vw",paddingTop:"2vh"}}>New Password:</p>
-                            </Tabcol>
-                            <Tabcol>
+                            </TabCol>
+                            <TabCol>
                                 <UserInput type="password" placeholder="New Password" onChange={(e)=>setNewPassword(e.target.value)}/>
-                            </Tabcol>
+                            </TabCol>
                         </tr>
                         <tr>
-                            <Tabcol>
+                            <TabCol>
                                 <p style={{fontSize:"1.5vw",paddingTop:"2vh"}}>Confirm Password:</p>
-                            </Tabcol>
-                            <Tabcol>
+                            </TabCol>
+                            <TabCol>
                                 <UserInput type="password" placeholder="Confirm Password" onChange={(e)=>setConfirmPassword(e.target.value)}/>
-                            </Tabcol>
+                            </TabCol>
                         </tr>
-                            <Tabcol>
+                            <TabCol>
                                 <input style={{fontSize:"2vh",backgroundColor: "green",color: "white",borderRadius: "0.5vh",border: "0.1vh solid black",}} type="submit" value="Change Password"></input>
-                            </Tabcol>
+                            </TabCol>
                     </table>
                 </form>
             </div>

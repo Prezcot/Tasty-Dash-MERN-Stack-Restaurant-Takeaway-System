@@ -63,10 +63,11 @@ router.post("/move_to_refund", async (req, res) => {
       data_to_move.order_status = "Refund Needed";
       const new_data = new refunds(data_to_move.toObject());
       await new_data.save();
-
       console.log("Data moved successfully!");
+      res.status(200);
     } else {
       console.log("Data not found.");
+      res.status(400);
     }
   } catch (error) {
     console.error("Error moving data:", error);
@@ -85,8 +86,10 @@ router.post("/move_to_collected_orders", async (req, res) => {
       await new_data.save();
 
       console.log("Data moved successfully!");
+      res.status(200);
     } else {
       console.log("Data not found.");
+      res.status(400);
     }
   } catch (error) {
     console.error("Error moving data:", error);

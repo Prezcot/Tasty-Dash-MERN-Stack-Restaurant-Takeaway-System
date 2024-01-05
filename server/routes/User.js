@@ -8,12 +8,12 @@ const {item,users}=require("../Schemas/Schemas");
 const jwt = require('jsonwebtoken');
 
 router.get("/authentication",async (req,res,next)=>{ //This route handler handles all security requests
-    const authHeader=req.headers.authorization;
-    if(!authHeader) {
+    const auth_header=req.headers.authorization;
+    if(!auth_header) {
     res.status(400).json({message:'Authorization header missing'});
         return;
     }
-    const token=authHeader.split(" ")[1];
+    const token=auth_header.split(" ")[1];
     jwt.verify(token, 'r+43kcgH@9u309gXemm#COPv:BNV.;-I`p283$(?{X|b=5R&', (err, user) => {
         if (err) {
           res.status(400).json({message:'Invalid token'});
@@ -36,13 +36,13 @@ router.get("/authentication",async (req,res,next)=>{ //This route handler handle
 router.get("/userinfo/:username",async (req,res,next)=>
 {
     var username=req.params.username;
-    const authHeader=req.headers.authorization;
+    const auth_header=req.headers.authorization;
     var verified=true;
-    if(!authHeader) {
+    if(!auth_header) {
         verified=false;
         res.status(400).json({message:'Authorization header missing'});
     }
-    const token=authHeader.split(" ")[1];
+    const token=auth_header.split(" ")[1];
     try{
         jwt.verify(token, 'r+43kcgH@9u309gXemm#COPv:BNV.;-I`p283$(?{X|b=5R&', (err, user) => {
             req.user = user;
@@ -114,9 +114,17 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
         var finduser=await users.find({username:username}).catch((err)=>console.log(err));
         var findphonenumber=await users.find({phonenumber:phonenumber}).catch((err)=>console.log(err));
         var findemail=await users.find({email:email}).catch((err)=>console.log(err));
-        if (finduser.length>0 || findphonenumber.length>0 || findemail.length>0)
+        if (finduser.length>0)
         {
-            res.status(400).json({message:"Account Already Exists"});
+            res.status(400).json({message:"Username Already Taken"});
+        }
+        else if(findphonenumber.length>0)
+        {
+            res.status(400).json({message:"Phone Number Already Taken"});
+        }
+        else if(findemail.length>0)
+        {
+            res.status(400).json({message:"Email Already Taken"});    
         }
         else{
             const User=new users({username,type,email,phonenumber,password});

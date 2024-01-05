@@ -25,7 +25,7 @@ const SignIn = () => {
   //an arrow function to it and you cant simultaneously export and assign.
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [currentlychked, setChecked] = useState(false);
+  const [currently_chked, setChecked] = useState(false);
   const [error, setError] = useState(null);
   const nav = useNavigate(); //this is used to navigate to a page on demand
 
@@ -34,7 +34,7 @@ const SignIn = () => {
       localStorage.setItem("checked", "false");
       setChecked(false);
     } else if (localStorage.getItem("checked") == "true") {
-      setUsername(localStorage.getItem("rememberusername"));
+      setUsername(localStorage.getItem("remember_username"));
       setPassword(localStorage.getItem("password"));
       setChecked(true);
     }
@@ -133,20 +133,20 @@ const SignIn = () => {
           } catch {
             console.log("error");
           }
-          if (currentlychked == true) {
-            localStorage.setItem("rememberusername", username);
-            localStorage.setItem("checked", JSON.stringify(currentlychked));
+          if (currently_chked == true) {
+            localStorage.setItem("remember_username", username);
+            localStorage.setItem("checked", JSON.stringify(currently_chked));
             localStorage.setItem("password", password);
           } else {
-            localStorage.setItem("checked", JSON.stringify(currentlychked));
+            localStorage.setItem("checked", JSON.stringify(currently_chked));
             localStorage.removeItem("password");
-            localStorage.removeItem("rememberusername");
+            localStorage.removeItem("remember_username");
           }
         } else {
-          setError("Please Enter Password Above 4 Characters");
+          setError("Please Enter A Password Above 4 Characters");
         }
       } else {
-        setError("Please Enter Username Between 3 And 12 Characters");
+        setError("Please Enter A Username Between 3 And 12 Characters");
       }
     } else {
       setError("Please Enter Valid Data");
@@ -222,7 +222,7 @@ const SignIn = () => {
                   <UserInput
                     style={{ width: "2vw", height: "2vh" }}
                     type="checkbox"
-                    checked={currentlychked}
+                    checked={currently_chked}
                     onChange={(e) => setChecked(e.target.checked)}
                   />
                   <p style={{ display: "inline", fontSize: "2vh" }}>
