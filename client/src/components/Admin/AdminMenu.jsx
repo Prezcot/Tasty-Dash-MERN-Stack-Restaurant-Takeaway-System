@@ -58,12 +58,12 @@ function AdminMenu() {
 
       const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setNewItemData((prevData) => ({
-          ...prevData,
+        setNewItemData((prev_data) => ({
+          ...prev_data,
           [name]: value,
         }));
-        setValidationErrors((prevErrors) => ({
-          ...prevErrors,
+        setValidationErrors((prev_errors) => ({
+          ...prev_errors,
           [name]: '',
         }));
       };
@@ -78,21 +78,21 @@ function AdminMenu() {
       
           reader.onloadend = () => {
             // reader.result is a base64-encoded string
-            setNewItemData((prevData) => ({
-              ...prevData,
+            setNewItemData((prev_data) => ({
+              ...prev_data,
               itemImage: reader.result,
             }));
           };
       
           reader.readAsDataURL(file);
 
-          setValidationErrors((prevErrors) => ({
-            ...prevErrors,
+          setValidationErrors((prev_errors) => ({
+            ...prev_errors,
             itemImage: '',
           }));
         } else {
-          setNewItemData((prevData) => ({
-            ...prevData,
+          setNewItemData((prev_data) => ({
+            ...prev_data,
             itemImage: null,
           }));
         }
