@@ -108,7 +108,6 @@ router.post("/signin",async (req,res,next)=>{ //This route handler handles all s
 
 router.post("/signup",async(req,res,next)=>{ //This route handler handles all signup requests
     var {username,email,phone_number,password} = req.body;
-    console.log("phonenumber",phone_number);
     var type="User";
     try{
         password= await bcrypt.hash(password,10);
