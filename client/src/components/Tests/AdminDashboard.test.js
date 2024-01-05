@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
 import {
   render,
+  rerender,
   screen,
   fireEvent,
   act,
@@ -12,6 +13,7 @@ import axios from "axios";
 import grabData from "../Admin/AdminDashboard";
 import AdminOrderRefund from "../Admin/AdminOrderRefund";
 import AdminCollectedOrder from "../Admin/AdminCollectedOrder";
+import { BrowserRouter } from "react-router-dom";
 
 jest.mock("axios");
 
@@ -120,7 +122,7 @@ describe("ADMIN DASHBOARD BUTTONS CHECK", () => {
   });
 });
 
-test("Whether data is retrieved properly in the grabData function", async () => {
+describe("DATA IS CALLED AND DISPLAYED PROPERLY IN ALL COMPONENTS ", () => {
   const mock_data = [
     {
       _id: { $oid: "6589e222e1a36019422ba3f4" },
@@ -135,15 +137,55 @@ test("Whether data is retrieved properly in the grabData function", async () => 
       __v: { $numberInt: "0" },
     },
   ];
-  axios.get.mockResolvedValueOnce({ data: mock_data });
+  test("<AdminDashboard> Component", async () => {
+    axios.get.mockResolvedValueOnce({ data: mock_data });
 
-  let component;
+    let component;
 
-  await act(async () => {
-    component = render(<AdminDashboard />);
+    await act(async () => {
+      component = render(<AdminDashboard />);
+    });
+    await act(async () => {
+      component.rerender(<AdminDashboard />);
+    });
+
+    expect(axios.get).toHaveBeenCalledWith(
+      "http://localhost:3001/admin_dashboard_data/receive/order_data"
+    );
+    expect(component.getByTestId("list-item-test")).toHaveTextContent("bob");
   });
+  test("<AdminOrderRefund> Component", async () => {
+    axios.get.mockResolvedValueOnce({ data: mock_data });
 
-  expect(axios.get).toHaveBeenCalledWith(
-    "http://localhost:3001/admin_dashboard_data/receive/order_data"
-  );
+    let component;
+
+    await act(async () => {
+      component = render(<AdminOrderRefund />);
+    });
+    await act(async () => {
+      component.rerender(<AdminOrderRefund />);
+    });
+
+    expect(axios.get).toHaveBeenCalledWith(
+      "http://localhost:3001/admin_dashboard_data/receive/refund_data"
+    );
+    expect(component.getByTestId("list-item-test")).toHaveTextContent("bob");
+  });
+  test("<AdminOrderCollected> Component", async () => {
+    axios.get.mockResolvedValueOnce({ data: mock_data });
+
+    let component;
+
+    await act(async () => {
+      component = render(<AdminCollectedOrder />);
+    });
+    await act(async () => {
+      component.rerender(<AdminCollectedOrder />);
+    });
+
+    expect(axios.get).toHaveBeenCalledWith(
+      "http://localhost:3001/admin_dashboard_data/receive/order_collected_data"
+    );
+    expect(component.getByTestId("list-item-test")).toHaveTextContent("bob");
+  });
 });

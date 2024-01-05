@@ -41,7 +41,10 @@ const AdminOrderRefund = () => {
       <ul className="list-group">
         {data.map((items, index) => (
           <div key={index}>
-            <li className="list-group-item fs-6 list-group-item-danger">
+            <li
+              data-testid="list-item-test"
+              className="list-group-item fs-6 list-group-item-danger"
+            >
               <b>Name: {items.username}</b>
               <br />
               <b>Paypal Email: {items.paypal_email}</b>
