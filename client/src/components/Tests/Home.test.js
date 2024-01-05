@@ -9,7 +9,8 @@ describe("UNIT TEST - HOME COMPONENT",()=>{
         const {getAllByText}=render(<BrowserRouter>
             <Home/>
             </BrowserRouter>);
-        const elementsinhome=getAllByText("Tasty Dash")[0];
+        const elements_in_home=getAllByText("Tasty Dash");
+        expect(elements_in_home.length).toBeGreaterThan(0);
     });
     
 });
@@ -19,8 +20,9 @@ describe("INTEGRATION TEST - HOME COMPONENT",()=>{
             <Home/>
             </BrowserRouter>);
         userEvent.click(getAllByText("Order Now")[0]);
-        render(<BrowserRouter>
+        const {getAllByText:getAllByTextInSignIn}=render(<BrowserRouter>
             <SignIn/>
             </BrowserRouter>);
+        expect(getAllByTextInSignIn("Sign In")[0]).toBeInTheDocument();
     })
 });
