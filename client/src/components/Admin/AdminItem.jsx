@@ -5,10 +5,10 @@ import { io } from "socket.io-client";
 
 
 function AdminItem({ item, onDelete }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedPrice, setEditedPrice] = useState(item.itemPrice.toFixed(2));
-  const [stockStatus, setStockStatus] = useState(item.itemAvailability);
-  const [edittext, setEdittext] = useState("/images/Edit.png");
+  const [is_Editing, setIsEditing] = useState(false);
+  const [edited_Price, setEditedPrice] = useState(item.itemPrice.toFixed(2));
+  const [stock_Status, setStockStatus] = useState(item.itemAvailability);
+  const [edit_text, setEdittext] = useState("/images/Edit.png");
 
   const handlePriceChange = (e) => {
     setEditedPrice(e.target.value);
@@ -20,13 +20,13 @@ function AdminItem({ item, onDelete }) {
   };
   
   const handleEditClick = async () => {
-    if (isEditing) {
+    if (is_Editing) {
       let setNewItemData = {
         itemName: item.itemName,
         itemDescription: item.itemDescription,
-        itemPrice: editedPrice,
+        itemPrice: edited_Price,
         itemImage: item.itemImage,
-        itemAvailability: stockStatus,
+        itemAvailability: stock_Status,
       };
       await axios.put(`http://localhost:3001/menu/edit/${setNewItemData.itemName}`, setNewItemData);
       setEdittext("/images/Edit.png");
@@ -40,7 +40,7 @@ function AdminItem({ item, onDelete }) {
     }
   };
   const cardStyle = {
-    backgroundColor: stockStatus === "in-stock" ? "#32383f" : "darkred",
+    backgroundColor: stock_Status === "in-stock" ? "#32383f" : "darkred",
   };
 
   return (
@@ -52,13 +52,13 @@ function AdminItem({ item, onDelete }) {
           {item.itemName}
         </h3>
         <p align="center">{item.itemDescription}</p>
-        {isEditing && (
+        {is_Editing && (
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <label>
               <input
                 type="radio"
                 value="in-stock"
-                checked={stockStatus === "in-stock"}
+                checked={stock_Status === "in-stock"}
                 onChange={handleStockStatusChange}
               />
               In-Stock
@@ -67,7 +67,7 @@ function AdminItem({ item, onDelete }) {
               <input
                 type="radio"
                 value="out-of-stock"
-                checked={stockStatus === "out-of-stock"}
+                checked={stock_Status === "out-of-stock"}
                 onChange={handleStockStatusChange}
               />
               Out-of-Stock
@@ -75,17 +75,17 @@ function AdminItem({ item, onDelete }) {
           </div>
         )}
         <p align="center" style={{ fontSize: "130%", fontWeight: "bold" }}>
-          {isEditing ? (
-            <input type="number" step="0.01" value={editedPrice} onChange={handlePriceChange} />
+          {is_Editing ? (
+            <input type="number" step="0.01" value={edited_Price} onChange={handlePriceChange} />
           ) : (
-            `$ ${editedPrice}`
+            `$ ${edited_Price}`
           )}
         </p>
       </div>
       <div className="menu-actions">
         <div className="quantity">
           <img
-            src={edittext}
+            src={edit_text}
             className="edit-button"
             data-testid="change-price"
             onClick={handleEditClick}

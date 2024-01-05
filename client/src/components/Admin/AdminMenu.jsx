@@ -3,13 +3,21 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import React from "react";
 import "../App.css";
+import { io } from "socket.io-client";
+
 
 
 function AdminMenu() {
     const [items, setItems] = useState([]);
-    const [editingItemId, setEditingItemId] = useState(null);
     const fileInput = React.useRef();
-    const [newItemData, setNewItemData] = useState({
+    const [validation_Errors, setValidationErrors] = useState({
+      itemName: '',
+      itemType: '',
+      itemDescription: '',
+      itemPrice: '',
+      itemImage: '',
+    });
+    const [new_Item_Data, setNewItemData] = useState({
         itemName: '',
         itemDescription: '',
         itemPrice: 0,
@@ -17,7 +25,7 @@ function AdminMenu() {
         itemType:'',
       });
 
-      useEffect(() => {
+      var grabitems = async () => {
         try{
           axios
             .get("http://localhost:3001/menu/data")
@@ -31,8 +39,22 @@ function AdminMenu() {
           }catch{
             console.log("error");
           }
+      };
+      
+      useEffect(() => {
+        grabitems();
+        
       }, []);
     
+      useEffect(() => {
+        const socket = io("http://localhost:3001");
+        socket.on("product changes", () => {
+          grabitems();
+        });
+        return () => {
+          socket.disconnect();
+        };
+      }, []);
 
       const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -40,7 +62,12 @@ function AdminMenu() {
           ...prevData,
           [name]: value,
         }));
+        setValidationErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: '',
+        }));
       };
+      
     
     // Callback function to update the items array
     const handleFileChange = (e) => {
@@ -58,6 +85,11 @@ function AdminMenu() {
           };
       
           reader.readAsDataURL(file);
+
+          setValidationErrors((prevErrors) => ({
+            ...prevErrors,
+            itemImage: '',
+          }));
         } else {
           setNewItemData((prevData) => ({
             ...prevData,
@@ -70,13 +102,37 @@ function AdminMenu() {
       // Function to add a new item
       const addNewItem = async (event) => {
         event.preventDefault();
+        const errors = {};
+
+        if (!new_Item_Data.itemName) {
+          errors.itemName = '*Item Name is required.';
+        }
+
+        if (!new_Item_Data.itemType) {
+          errors.itemType = '*Item Type is required.';
+        }
+
+        if (!new_Item_Data.itemDescription) {
+          errors.itemDescription = '*Item Description is required.';
+        }
+
+        if (!new_Item_Data.itemPrice || new_Item_Data.itemPrice <= 0) {
+          errors.itemPrice = '*Item Price must be greater than zero.';
+        }
+
+        
+        if (Object.keys(errors).length > 0) {
+          // If there are validation errors, update the state to display them
+          setValidationErrors(errors);
+          return;
+        }
         try {
           const newItem = {
-            itemName: newItemData.itemName,
-            itemDescription: newItemData.itemDescription,
-            itemPrice: newItemData.itemPrice,
-            itemImage: newItemData.itemImage,
-            itemType : newItemData.itemType,
+            itemName: new_Item_Data.itemName,
+            itemDescription: new_Item_Data.itemDescription,
+            itemPrice: new_Item_Data.itemPrice,
+            itemImage: new_Item_Data.itemImage,
+            itemType : new_Item_Data.itemType,
             itemAvailability:'in-stock',
           };
       
@@ -93,6 +149,13 @@ function AdminMenu() {
             itemImage: '',
             itemType: '',
             itemAvailability:'',
+          });
+          setValidationErrors({
+            itemName: '',
+            itemDescription: '',
+            itemPrice: 0,
+            itemImage: '', 
+            itemType:'',
           });
           fileInput.current.value = '';
         } catch (error) {
@@ -112,6 +175,8 @@ function AdminMenu() {
           console.error(error);
         }
       };
+
+      
     return (
       <>
       <div className="menu-everything" style={{
@@ -142,84 +207,90 @@ function AdminMenu() {
     
       }}>
     
-  <form onSubmit={addNewItem} className="item-form">
-    <table>
-      <tbody>
-        <tr className="add-item-field">
-          <td className="form-label">Item Name:</td>
-          <td>
-            <input
-              type="text"
-              name="itemName"
-              data-testid="item-name-input"
-              value={newItemData.itemName}
-              onChange={handleInputChange}
-              className="form-input"
-            />
-          </td>
-        </tr>
-        <tr className="add-item-field">
-          <td className="form-label">Item Type:</td>
-          <td>
-            <select
-              name="itemType"
-              data-testid="item-type-select"
-              value={newItemData.itemType}
-              onChange={handleInputChange}
-              className="form-input"
-            >
-              <option value="">Select Item Type</option>
-              <option value="starter">Starter</option>
-              <option value="mainCourse">Main Course</option>
-              <option value="dessert">Dessert</option>
-            </select>
-          </td>
-        </tr>
-        <tr className="add-item-field">
-          <td className="form-label">Item Description:</td>
-          <td>
-            <textarea
-              name="itemDescription"
-              data-testid="item-description-input"
-              value={newItemData.itemDescription}
-              onChange={handleInputChange}
-              className="form-input"
-            />
-          </td>
-        </tr>
-        <tr className="add-item-field">
-          <td className="form-label">Item Price:</td>
-          <td>
-            <input
-              type="number"
-              step="0.01"
-              name="itemPrice"
-              data-testid="item-price-input"
-              value={newItemData.itemPrice}
-              onChange={handleInputChange}
-              className="form-input"
-            />
-          </td>
-        </tr>
-        <tr className="add-item-field">
-          <td className="form-label">Item Image:</td>
-          <td>
-            <input
-              type="file"
-              accept="image/*"
-              data-testid="item-image-input"
-              ref={fileInput}
-              onChange={handleFileChange}
-              className="form-input"
-            />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <button type="submit" className="form-button" data-testid="add-item-button">
-      Add To Menu
-    </button>
-  </form>
+    <form onSubmit={addNewItem} className="item-form">
+        <table>
+          <tbody>
+            {/* ... (existing code) */}
+            <tr className="add-item-field">
+              <td className="form-label">Item Name:</td>
+              <td>
+                <input
+                  type="text"
+                  name="itemName"
+                  data-testid="item-name-input"
+                  value={new_Item_Data.itemName}
+                  onChange={handleInputChange}
+                  className="form-input"
+                />
+                <div className="validation-error">{validation_Errors.itemName}</div>
+              </td>
+            </tr>
+            <tr className="add-item-field">
+              <td className="form-label">Item Type:</td>
+              <td>
+                <select
+                  name="itemType"
+                  data-testid="item-type-select"
+                  value={new_Item_Data.itemType}
+                  onChange={handleInputChange}
+                  className="form-input"
+                >
+                  <option value="">Select Item Type</option>
+                  <option value="starter">Starter</option>
+                  <option value="mainCourse">Main Course</option>
+                  <option value="dessert">Dessert</option>
+                </select>
+                <div className="validation-error">{validation_Errors.itemType}</div>
+              </td>
+            </tr>
+            <tr className="add-item-field">
+              <td className="form-label">Item Description:</td>
+              <td>
+                <textarea
+                  name="itemDescription"
+                  data-testid="item-description-input"
+                  value={new_Item_Data.itemDescription}
+                  onChange={handleInputChange}
+                  className="form-input"
+                />
+                <div className="validation-error">{validation_Errors.itemDescription}</div>
+              </td>
+            </tr>
+            <tr className="add-item-field">
+              <td className="form-label">Item Price:</td>
+              <td>
+                <input
+                  type="number"
+                  step="0.01"
+                  name="itemPrice"
+                  data-testid="item-price-input"
+                  value={new_Item_Data.itemPrice}
+                  onChange={handleInputChange}
+                  className="form-input"
+                />
+                <div className="validation-error">{validation_Errors.itemPrice}</div>
+              </td>
+            </tr>
+            <tr className="add-item-field">
+              <td className="form-label">Item Image:</td>
+              <td>
+                <input
+                  type="file"
+                  accept="image/*"
+                  data-testid="item-image-input"
+                  ref={fileInput}
+                  onChange={handleFileChange}
+                  className="form-input"
+                />
+                <div className="validation-error">{validation_Errors.itemImage}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="submit" className="form-button" data-testid="add-item-button">
+          Add To Menu
+        </button>
+      </form>
 </div>
   <h2>Starters</h2>
   

@@ -8,8 +8,8 @@ require("dotenv").config();
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
-  const mongoUri = mongoServer.getUri();
-  await mongoose.connect(mongoUri);
+  const mongo_uri = mongoServer.getUri();
+  await mongoose.connect(mongo_uri);
   const menu = new Menuitem({
     itemName: "FakeItem",
     itemDescription: "This is a fake menu item",
@@ -38,7 +38,7 @@ describe("Menu Route Test", () => {
   });
 
   it("AddS a menu item", async () => {
-    const newItem = {
+    const new_item = {
       itemName: "NewFakeItem",
       itemDescription: "This is a new fake menu item",
       itemPrice: 15.99,
@@ -46,27 +46,27 @@ describe("Menu Route Test", () => {
       itemType: "NewFakeType",
     };
 
-    const response = await request(app).post("/menu/add").send(newItem);
+    const response = await request(app).post("/menu/add").send(new_item);
 
     expect(response.status).toBe(200);
     expect(response.body).toBeDefined();
 
     // Check if the added item matches the sent data
-    expect(response.body.itemName).toBe(newItem.itemName);
-    expect(response.body.itemDescription).toBe(newItem.itemDescription);
-    expect(response.body.itemPrice).toBe(newItem.itemPrice);
-    expect(response.body.itemImage).toBe(newItem.itemImage);
-    expect(response.body.itemType).toBe(newItem.itemType);
+    expect(response.body.itemName).toBe(new_item.itemName);
+    expect(response.body.itemDescription).toBe(new_item.itemDescription);
+    expect(response.body.itemPrice).toBe(new_item.itemPrice);
+    expect(response.body.itemImage).toBe(new_item.itemImage);
+    expect(response.body.itemType).toBe(new_item.itemType);
 
     // Check if the item is present in the database
-    const savedItem = await Menuitem.findOne({ itemName: newItem.itemName });
-    expect(savedItem).toBeDefined();
-    expect(savedItem.itemName).toBe(newItem.itemName);
+    const saved_item = await Menuitem.findOne({ itemName: new_item.itemName });
+    expect(saved_item).toBeDefined();
+    expect(saved_item.itemName).toBe(new_item.itemName);
   });
 
   it("should delete a menu item", async () => {
     // Create a menu item to be deleted
-    const newItem = {
+    const new_item = {
       itemName: "ItemToDelete",
       itemDescription: "This is a menu item to be deleted",
       itemPrice: 20.99,
@@ -74,10 +74,10 @@ describe("Menu Route Test", () => {
       itemType: "DeleteType",
     };
 
-    await Menuitem.create(newItem);
+    await Menuitem.create(new_item);
 
     const response = await request(app).delete(
-      `/menu/delete/${encodeURIComponent(newItem.itemName)}`
+      `/menu/delete/${encodeURIComponent(new_item.itemName)}`
     );
 
     expect(response.status).toBe(200);
@@ -85,13 +85,13 @@ describe("Menu Route Test", () => {
     expect(response.body.message).toBe("Item deleted successfully");
 
     // Check if the item is no longer present in the database
-    const deletedItem = await Menuitem.findOne({ itemName: newItem.itemName });
+    const deletedItem = await Menuitem.findOne({ itemName: new_item.itemName });
     expect(deletedItem).toBeNull();
   });
 
   it("should update a menu item", async () => {
     // Create a menu item to be updated
-    const newItem = {
+    const new_item = {
       itemName: "ItemToUpdate",
       itemDescription: "This is a menu item to be updated",
       itemPrice: 20.99,
@@ -100,10 +100,10 @@ describe("Menu Route Test", () => {
       itemAvailability: 'in-stock',
     };
 
-    await Menuitem.create(newItem);
+    await Menuitem.create(new_item);
 
     // Updated data
-    const updatedItemData = {
+    const updated_item_data = {
       itemDescription: "Updated description",
       itemPrice: 25.99,
       itemImage: "updated_image.jpg",
@@ -112,18 +112,18 @@ describe("Menu Route Test", () => {
     };
 
     const response = await request(app)
-      .put(`/menu/edit/${encodeURIComponent(newItem.itemName)}`)
-      .send(updatedItemData);
+      .put(`/menu/edit/${encodeURIComponent(new_item.itemName)}`)
+      .send(updated_item_data);
 
     expect(response.status).toBe(200);
     expect(response.text).toBe("Item updated successfully");
 
     // Check if the item is updated in the database
-    const updatedItem = await Menuitem.findOne({ itemName: newItem.itemName });
-    expect(updatedItem).toBeDefined();
-    expect(updatedItem.itemDescription).toBe(updatedItemData.itemDescription);
-    expect(updatedItem.itemPrice).toBe(updatedItemData.itemPrice);
-    expect(updatedItem.itemImage).toBe(updatedItemData.itemImage);
-    expect(updatedItem.itemType).toBe(updatedItemData.itemType);
+    const updated_item = await Menuitem.findOne({ itemName: new_item.itemName });
+    expect(updated_item).toBeDefined();
+    expect(updated_item.itemDescription).toBe(updated_item_data.itemDescription);
+    expect(updated_item.itemPrice).toBe(updated_item_data.itemPrice);
+    expect(updated_item.itemImage).toBe(updated_item_data.itemImage);
+    expect(updated_item.itemType).toBe(updated_item_data.itemType);
   });
 });
