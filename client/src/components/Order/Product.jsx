@@ -1,33 +1,33 @@
 import React from "react";
 import { useState } from "react";
 
-function Product ({itemProp,indexProp, cartProp, updateProp, quantityProp}){
+function Product ({item_prop,index_prop, cart_prop, update_prop, quantity_prop}){
 
-    let [name, price, qty] = itemProp.split(",");
-    console.log("full cart"+cartProp);
-    console.log("first entry"+cartProp[0]);
+    let [name, price, qty] = item_prop.split(",");
+    console.log("full cart"+cart_prop);
+    console.log("first entry"+cart_prop[0]);
 
     let [quantity,setQuantity] = useState(parseInt(qty));
 
     function handleQuantity(e){
         if(e.target.name=="minus" && quantity > 0){
-            updateProp();
+            update_prop();
             setQuantity(quantity=quantity-1);
-            cartProp[indexProp] = name+","+price+","+(JSON.stringify(quantity));
-            quantityProp[name] = quantity;
-            sessionStorage.setItem("cart",JSON.stringify(cartProp));
-            sessionStorage.setItem("menuCart", JSON.stringify(quantityProp));
-            console.log("changedItem"+cartProp[indexProp]);
+            cart_prop[index_prop] = name+","+price+","+(JSON.stringify(quantity));
+            quantity_prop[name] = quantity;
+            sessionStorage.setItem("cart",JSON.stringify(cart_prop));
+            sessionStorage.setItem("menu_cart", JSON.stringify(quantity_prop));
+            console.log("changedItem"+cart_prop[index_prop]);
             
         };
         if(e.target.name=="plus"){
-            updateProp();
+            update_prop();
             setQuantity(quantity=quantity+1);
-            cartProp[indexProp] = name+","+price+","+(JSON.stringify(quantity));
-            quantityProp[name] = quantity;
-            sessionStorage.setItem("cart",JSON.stringify(cartProp));
-            sessionStorage.setItem("menuCart", JSON.stringify(quantityProp));
-            console.log("changedItem"+cartProp[indexProp]);
+            cart_prop[index_prop] = name+","+price+","+(JSON.stringify(quantity));
+            quantity_prop[name] = quantity;
+            sessionStorage.setItem("cart",JSON.stringify(cart_prop));
+            sessionStorage.setItem("menu_cart", JSON.stringify(quantity_prop));
+            console.log("changedItem"+cart_prop[index_prop]);
             
         };
     }

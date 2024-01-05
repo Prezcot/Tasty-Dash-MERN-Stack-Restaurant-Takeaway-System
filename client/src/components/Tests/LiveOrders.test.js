@@ -16,11 +16,11 @@ describe("UNIT TEST - LIVE ORDERS COMPONENT", () => {
         <BrowserRouter>
             <LiveOrders/>
         </BrowserRouter>);
-      const titleElement01 = getByText('Live Orders');
-      expect(titleElement01).toBeInTheDocument();
+      const title_element_01 = getByText('Live Orders');
+      expect(title_element_01).toBeInTheDocument();
     
-      const titleElement02 = getByText('Order History');
-      expect(titleElement02).toBeInTheDocument();
+      const title_element_02 = getByText('Order History');
+      expect(title_element_02).toBeInTheDocument();
       });
 });
 
@@ -40,8 +40,8 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
           setItem: jest.fn(),
         });
 
-        const sampleData = {
-            liveOrderItems: [
+        const sample_data = {
+            live_order_items: [
               {
                 __v: 0,
                 _id: "65915ebd62be743115175d94",
@@ -56,10 +56,10 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
                 order_total: '59.99',
               },
             ],
-            orderHistoryItems: [],
+            order_history_items: [],
           };
 
-        axios.post.mockResolvedValueOnce({ data: sampleData });
+        axios.post.mockResolvedValueOnce({ data: sample_data });
         var {getByTestId} =render(
             <BrowserRouter>
                 <LiveOrders/>
@@ -87,9 +87,9 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
           setItem: jest.fn(),
         });
 
-        const sampleData = {
-            liveOrderItems: [],
-            orderHistoryItems: [
+        const sample_data = {
+            live_order_items: [],
+            order_history_items: [
                 {
                     __v: 0,
                     _id: "6593f234cd4a4307d0f1d1cb",
@@ -120,7 +120,7 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
             ],
           };
 
-        axios.post.mockResolvedValueOnce({ data: sampleData });
+        axios.post.mockResolvedValueOnce({ data: sample_data });
         var {getAllByTestId} =render(
             <BrowserRouter>
                 <LiveOrders/>
@@ -151,8 +151,8 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
         setItem: jest.fn(),
     });
 
-    const sampleData = {
-        liveOrderItems: [
+    const sample_data = {
+        live_order_items: [
             {
               __v: 0,
               _id: "65915ebd62be743115175d94",
@@ -167,7 +167,7 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
               order_total: '59.99',
             },
           ],
-          orderHistoryItems: [
+          order_history_items: [
             {
                 __v: 0,
                 _id: "6593f234cd4a4307d0f1d1cb",
@@ -198,7 +198,7 @@ describe("INTEGRATION TEST - LIVE ORDERS COMPONENT", () => {
         ],
       };
 
-    axios.post.mockResolvedValue({ data: sampleData });
+    axios.post.mockResolvedValue({ data: sample_data });
     var {getByTestId, getAllByTestId} =render(
         <BrowserRouter>
             <LiveOrders/>

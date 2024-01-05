@@ -16,8 +16,8 @@ router.get('/get_order_id', async (req, res) => {
 
 router.post("/addorder", async (req, res) => {
     try {
-      const newOrder = req.body;
-      const addedOrder = await item.create(newOrder);
+      const new_order = req.body;
+      const added_order = await item.create(new_order);
       res.json("Order placed successfully");
     } catch (error) {
       console.error(error);
@@ -28,9 +28,9 @@ router.post("/addorder", async (req, res) => {
 
   router.put("/update_order_id/:document_id", async (req, res) => {
     const document_id = decodeURIComponent(req.params.document_id);
-    const updatedID = req.body.temp; /*OR const updatedID = req.body.temp;*/ 
+    const updated_id = req.body.temp; /*OR const updated_id = req.body.temp;*/ 
     try {
-      await order_identification.updateOne({ _id:document_id }, {orderID:updatedID});
+      await order_identification.updateOne({ _id:document_id }, {orderID:updated_id});
       res.status(200).send("Item updated successfully");
     } catch (error) {
       console.error(error);
@@ -46,21 +46,21 @@ router.post("/your_orders", async(req,res) => {
     // let condition1 = {username:user};
     // let condition2 = {order_status:notCollectedStatus};
 
-    let liveOrderItems= await item.find({ username:user }).catch((err)=>res.status(400).json({message:err}));
+    let live_order_items= await item.find({ username:user }).catch((err)=>res.status(400).json({message:err}));
 
     let refunded_orders = await refunds.find({ username:user }).catch((err)=>res.status(400).json({message:err}));
     let completed_orders = await collected_orders.find({ username:user }).catch((err)=>res.status(400).json({message:err}));
 
-    let orderHistoryItems = [...refunded_orders, ...completed_orders];
+    let order_history_items = [...refunded_orders, ...completed_orders];
     
 
 
-    const allData = {
-      liveOrderItems: liveOrderItems,
-      orderHistoryItems: orderHistoryItems
+    const all_data = {
+      live_order_items: live_order_items,
+      order_history_items: order_history_items
     };
 
-    res.status(200).json(allData);
+    res.status(200).json(all_data);
   } catch (error){
     console.error(error);
     res.status(500).json({ message:"Internal Server Error" })

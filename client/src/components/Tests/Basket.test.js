@@ -23,11 +23,11 @@ describe("UNIT TEST - BASKET COMPONENT", () => {
         <BrowserRouter>
             <Basket/>
         </BrowserRouter>);
-      const titleElement = getByText('Your Basket');
-      expect(titleElement).toBeInTheDocument();
+      const title_element = getByText('Your Basket');
+      expect(title_element).toBeInTheDocument();
     
-      const backButton = getByText('Back to Menu');
-      expect(backButton).toBeInTheDocument();
+      const back_button = getByText('Back to Menu');
+      expect(back_button).toBeInTheDocument();
       });
 
 
@@ -38,18 +38,18 @@ describe("UNIT TEST - BASKET COMPONENT", () => {
         
         const { getByText,getByTestId } = render(
             <Product
-            itemProp={item}
-            indexProp={0}
-            cartProp={cart}
-            updateProp={update}
-            quantityProp={{ Pizza: 1 }}
+            item_prop={item}
+            index_prop={0}
+            cart_prop={cart}
+            update_prop={update}
+            quantity_prop={{ Pizza: 1 }}
             />
         );
         
-        const plusButton = getByTestId("plus-button");
-        fireEvent.click(plusButton);
-        const updatedQuantityLabel = getByText("2"); 
-        expect(updatedQuantityLabel).toBeInTheDocument();
+        const plus_button = getByTestId("plus-button");
+        fireEvent.click(plus_button);
+        const updated_quantity_label = getByText("2"); 
+        expect(updated_quantity_label).toBeInTheDocument();
         });
 
 
@@ -60,18 +60,18 @@ describe("UNIT TEST - BASKET COMPONENT", () => {
       
         const { getByTestId, getByText } = render(
           <Product
-            itemProp={item}
-            indexProp={0}
-            cartProp={cart}
-            updateProp={update}
-            quantityProp={{ Pizza: 2 }}
+            item_prop={item}
+            index_prop={0}
+            cart_prop={cart}
+            update_prop={update}
+            quantity_prop={{ Pizza: 2 }}
           />
         );
       
-        const minusButton = getByTestId("minus-button");
-        fireEvent.click(minusButton);
-        const updatedQuantityLabel = getByText("1");
-        expect(updatedQuantityLabel).toBeInTheDocument();
+        const minus_button = getByTestId("minus-button");
+        fireEvent.click(minus_button);
+        const updated_quantity_label = getByText("1");
+        expect(updated_quantity_label).toBeInTheDocument();
       });
 
     
@@ -82,18 +82,18 @@ describe("UNIT TEST - BASKET COMPONENT", () => {
     
     const { queryByText, getByTestId } = render(
         <Product
-        itemProp={item}
-        indexProp={0}
-        cartProp={cart}
-        updateProp={update}
-        quantityProp={{ Pizza: 1 }}
+        item_prop={item}
+        index_prop={0}
+        cart_prop={cart}
+        update_prop={update}
+        quantity_prop={{ Pizza: 1 }}
         />
     );
     
-    const minusButton = getByTestId("minus-button");
-    fireEvent.click(minusButton);
-    const removedItemLabel = queryByText("Pizza");
-    expect(removedItemLabel).toBeNull();
+    const minus_button = getByTestId("minus-button");
+    fireEvent.click(minus_button);
+    const removed_item_label = queryByText("Pizza");
+    expect(removed_item_label).toBeNull();
     });
 
 
@@ -103,11 +103,11 @@ describe("UNIT TEST - BASKET COMPONENT", () => {
         <BrowserRouter>
             <Basket/>
         </BrowserRouter>);
-        const instructionTextarea = getByTestId("spe-ins-test-comp");
+        const instruction_text_area = getByTestId("spe-ins-test-comp");
 
-        fireEvent.change(instructionTextarea, { target: { value: "Please make it spicy" } });
+        fireEvent.change(instruction_text_area, { target: { value: "Please make it spicy" } });
 
-        expect(instructionTextarea.value).toBe("Please make it spicy");
+        expect(instruction_text_area.value).toBe("Please make it spicy");
     });
 
 
@@ -117,33 +117,33 @@ describe("UNIT TEST - BASKET COMPONENT", () => {
             <Basket/>
         </BrowserRouter>);
 
-        const proceedToPaymentButton = getByTestId("payment-button-test");
-        fireEvent.click(proceedToPaymentButton);
+        const proceed_to_payment_button = getByTestId("payment-button-test");
+        fireEvent.click(proceed_to_payment_button);
         await waitFor(() => {
         expect(document.querySelector(".Toastify__toast")).toBeInTheDocument();
         });
-        const toastMessage = document.querySelector(".Toastify__toast-body");
-        expect(toastMessage).toHaveTextContent("Basket is empty");
+        const toast_message = document.querySelector(".Toastify__toast-body");
+        expect(toast_message).toHaveTextContent("Basket is empty");
     });
 
 
     it("Calculate accurate total value according to chosen items", () => {
-        const getItemMock = jest.fn((key) => {
+        const get_item_mock = jest.fn((key) => {
           switch (key) {
             case 'cart':
               return JSON.stringify(["Pizza,5.99,2", "Nasi Goreng,3.99,3", "Lava Cake,2.99,2"]);
-            case 'menuCart':
+            case 'menu_cart':
               return JSON.stringify({ "Pizza": 2, "Nasi Goreng": 3, "Lava Cake": 2 });
             default:
               return null;
           }
         });
       
-        const setItemMock = jest.fn();
+        const set_item_mock = jest.fn();
       
         jest.spyOn(global, 'sessionStorage', 'get').mockReturnValue({
-          getItem: getItemMock,
-          setItem: setItemMock,
+          getItem: get_item_mock,
+          setItem: set_item_mock,
         });
       
         const { getByTestId} = render(
@@ -151,8 +151,8 @@ describe("UNIT TEST - BASKET COMPONENT", () => {
             <Basket/>
           </BrowserRouter>
         );
-        const totalElement = getByTestId("order-total-test");
-        expect(totalElement.textContent).toBe("$29.93");
+        const total_element = getByTestId("order-total-test");
+        expect(total_element.textContent).toBe("$29.93");
       });
 
 });
@@ -161,22 +161,22 @@ describe("INTEGRATION TEST - BASKET COMPONENT", () => {
 
     it("'Back to Menu' button takes users back to Menu page", () => {
 
-    const getItemMock = jest.fn((key) => {
+    const get_item_mock = jest.fn((key) => {
         switch (key) {
         case 'cart':
             return JSON.stringify(["Pizza,5.99,2", "Nasi Goreng,3.99,3", "Lava Cake,2.99,2"]);
-        case 'menuCart':
+        case 'menu_cart':
             return JSON.stringify({ "Pizza": 2, "Nasi Goreng": 3, "Lava Cake": 2 });
         default:
             return null;
         }
     });
     
-    const setItemMock = jest.fn();
+    const set_item_mock = jest.fn();
     
     jest.spyOn(global, 'sessionStorage', 'get').mockReturnValue({
-        getItem: getItemMock,
-        setItem: setItemMock,
+        getItem: get_item_mock,
+        setItem: set_item_mock,
     });
 
         var {getByTestId} =render(
@@ -189,8 +189,8 @@ describe("INTEGRATION TEST - BASKET COMPONENT", () => {
         <BrowserRouter>
           <Menu/>
         </BrowserRouter>);
-        var elementsinmenu=getByText("Starters");
-        expect(elementsinmenu).toBeInTheDocument();
+        var elements_in_menu=getByText("Starters");
+        expect(elements_in_menu).toBeInTheDocument();
 
     });
 
@@ -198,24 +198,24 @@ describe("INTEGRATION TEST - BASKET COMPONENT", () => {
 
     it('Clicking "Proceed to Payment" should navigate to Payment component', () => {
         // Mock the useNavigate function
-        const mockNavigate = jest.fn();
+        const mock_navigate = jest.fn();
 
-        const getItemMock = jest.fn((key) => {
+        const get_item_mock = jest.fn((key) => {
             switch (key) {
             case 'cart':
                 return JSON.stringify(["Pizza,5.99,2", "Nasi Goreng,3.99,3", "Lava Cake,2.99,2"]);
-            case 'menuCart':
+            case 'menu_cart':
                 return JSON.stringify({ "Pizza": 2, "Nasi Goreng": 3, "Lava Cake": 2 });
             default:
                 return null;
             }
         });
         
-        const setItemMock = jest.fn();
+        const set_item_mock = jest.fn();
         
         jest.spyOn(global, 'sessionStorage', 'get').mockReturnValue({
-            getItem: getItemMock,
-            setItem: setItemMock,
+            getItem: get_item_mock,
+            setItem: set_item_mock,
         });
         // Render the Basket component inside MemoryRouter
         var {getByTestId} =render(
@@ -223,10 +223,10 @@ describe("INTEGRATION TEST - BASKET COMPONENT", () => {
                 <Basket/>
             </BrowserRouter>);
     
-        // Mock the useNavigate hook to return the mockNavigate function
+        // Mock the useNavigate hook to return the mock_navigate function
         jest.mock('react-router-dom', () => ({
           ...jest.requireActual('react-router-dom'),
-          useNavigate: () => mockNavigate,
+          useNavigate: () => mock_navigate,
         }));
     
         // Find the "Proceed to Payment" button and click it
@@ -238,8 +238,8 @@ describe("INTEGRATION TEST - BASKET COMPONENT", () => {
             </BrowserRouter>);
     
         // Check if the navigate function was called with the correct path
-        var headinginpayment=getByText("Confirm Details and Checkout");
-        expect(headinginpayment).toBeInTheDocument();
+        var heading_in_payment=getByText("Confirm Details and Checkout");
+        expect(heading_in_payment).toBeInTheDocument();
 
       });
 });
