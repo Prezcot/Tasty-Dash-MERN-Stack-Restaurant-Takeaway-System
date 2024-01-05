@@ -26,7 +26,12 @@ This website allows two different types of users **Customers** and **Administrat
 
 - Username: admin
 - Password: admin
-- 
+
+### Test User Login Credentials:
+
+- Username: user
+- Password: User!
+  
 ### PayPal Payment Credentials:
 
 After an order's details have been finalized the following fictitious PayPal credentials can be used to mimic an actual PayPal account in the PayPal developer sandbox environment and make a test payment.
@@ -50,8 +55,8 @@ The following commands should be run in the root directory.
 
 ### Client:
 
-- npm run client_test
+- `npm run client_test`
   
 ### Server:
 
-- npm run server_test
+- `npm run server_test`
