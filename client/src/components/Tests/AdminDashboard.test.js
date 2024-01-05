@@ -19,7 +19,7 @@ jest.mock("axios");
 
 window.setImmediate = window.setTimeout;
 
-describe("ADMINDASHBOARD - COMPONENTS RENDER", () => {
+describe("UNIT-TESTS - ADMINDASHBOARD - COMPONENTS RENDER", () => {
   test("Whether AdminNavBar renders properly", () => {
     render(<AdminNavBar />);
     const title = screen.getByText(/admin dashboard/i);
@@ -43,7 +43,7 @@ describe("ADMINDASHBOARD - COMPONENTS RENDER", () => {
   });
 });
 
-describe("ADMIN DASHBOARD BUTTONS CHECK", () => {
+describe("UNIT-TESTS - ADMIN DASHBOARD BUTTONS CHECK", () => {
   const mock_order_get = [
     {
       _id: { $oid: "6589e222e1a36019422ba3f4" },
@@ -122,7 +122,7 @@ describe("ADMIN DASHBOARD BUTTONS CHECK", () => {
   });
 });
 
-describe("DATA IS CALLED AND DISPLAYED PROPERLY IN ALL COMPONENTS ", () => {
+describe("INTEGRATION-TESTS - DATA IS CALLED AND DISPLAYED PROPERLY IN ALL COMPONENTS ", () => {
   const mock_data = [
     {
       _id: { $oid: "6589e222e1a36019422ba3f4" },
