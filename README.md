@@ -14,7 +14,7 @@ This website allows two different types of users **Customers** and **Administrat
 ### Administrators
 
 - Admin logins are provided pre-made, and admins can sign in securely to get access to the admin feature suite.
-- Admins are presented with a dashboard that allows them view all orders placed by customers. Admins can approve these orders and once completed, mark them as "collected"(moving these orders to the Collected Orders page). Furthermore admins can decline orders(moving these orders to the Refunded Items page), in the case they are unable to fulfill these orders due to unforseen cicumstances.
+- Admins are presented with a dashboard that allows them view all orders placed by customers. Admins can approve these orders and once completed, mark them as "collected". Furthermore admins can decline orders in the case they are unable to fulfill these orders due to unforseen cicumstances. The shop can then issue a refund to these customers.
 - Admins can view a list of all declined orders that have had refunds issued for them.
 - Admins can view a history of all the shop's completed orders.
 - Finally, Admins are provided with the ability to add new menu items, change their prices, manage availability of existing items, to ensure that the menu is always up to date on the Customer side.
