@@ -42,7 +42,7 @@ describe("ADMINDASHBOARD - COMPONENTS RENDER", () => {
 });
 
 describe("ADMIN DASHBOARD BUTTONS CHECK", () => {
-  const mockOrderGet = [
+  const mock_order_get = [
     {
       _id: { $oid: "6589e222e1a36019422ba3f4" },
       username: "bob",
@@ -57,11 +57,11 @@ describe("ADMIN DASHBOARD BUTTONS CHECK", () => {
     },
   ];
 
-  const mockOrderPut = [{ username: "bob" }];
+  const mock_order_put = [{ username: "bob" }];
 
   test("triggers updateOrderStatus function with correct arguments on Approve button click", async () => {
-    axios.get.mockResolvedValueOnce({ data: mockOrderGet });
-    axios.put.mockResolvedValueOnce({ data: mockOrderPut });
+    axios.get.mockResolvedValueOnce({ data: mock_order_get });
+    axios.put.mockResolvedValueOnce({ data: mock_order_put });
 
     const { queryByTestId } = render(<AdminDashboard />);
 
@@ -78,12 +78,12 @@ describe("ADMIN DASHBOARD BUTTONS CHECK", () => {
 
     expect(axios.put).toHaveBeenCalledWith(
       "http://localhost:3001/admin_dashboard_data/set_order_status",
-      { object_id: mockOrderGet[0]._id, order_status: "Approved" }
+      { object_id: mock_order_get[0]._id, order_status: "Approved" }
     );
   });
 
   test("triggers move_to_refund when Decline button is clicked", async () => {
-    axios.get.mockResolvedValueOnce({ data: mockOrderGet });
+    axios.get.mockResolvedValueOnce({ data: mock_order_get });
 
     const { queryByTestId } = render(<AdminDashboard />);
 
@@ -97,11 +97,11 @@ describe("ADMIN DASHBOARD BUTTONS CHECK", () => {
 
     expect(axios.post).toHaveBeenCalledWith(
       "http://localhost:3001/admin_dashboard_data/move_to_refund",
-      { object_id: mockOrderGet[0]._id }
+      { object_id: mock_order_get[0]._id }
     );
   });
   test("triggers move_to_order_collected when Decline button is clicked", async () => {
-    axios.get.mockResolvedValueOnce({ data: mockOrderGet });
+    axios.get.mockResolvedValueOnce({ data: mock_order_get });
 
     const { queryByTestId } = render(<AdminDashboard />);
 
@@ -115,13 +115,13 @@ describe("ADMIN DASHBOARD BUTTONS CHECK", () => {
 
     expect(axios.post).toHaveBeenCalledWith(
       "http://localhost:3001/admin_dashboard_data/move_to_collected_orders",
-      { object_id: mockOrderGet[0]._id }
+      { object_id: mock_order_get[0]._id }
     );
   });
 });
 
 test("Whether data is retrieved properly in the grabData function", async () => {
-  const mockData = [
+  const mock_data = [
     {
       _id: { $oid: "6589e222e1a36019422ba3f4" },
       username: "bob",
@@ -135,7 +135,7 @@ test("Whether data is retrieved properly in the grabData function", async () => 
       __v: { $numberInt: "0" },
     },
   ];
-  axios.get.mockResolvedValueOnce({ data: mockData });
+  axios.get.mockResolvedValueOnce({ data: mock_data });
 
   let component;
 
