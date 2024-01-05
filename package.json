@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "test": "cd ./client && npm i && npm test",
-    "server": "cd ./server && npm i && npm uninstall bcrypt && npm i bcrypt && npm start", 
+    "client_test": "cd ./client && npm i && npm test",
+    "server_test": "cd ./server && npm i && npm test",
+    "server": "cd ./server && npm i && npm uninstall bcrypt && npm i bcrypt && npm start",
     "client": "cd ./client && npm i && npm start"
   }
 }

@@ -11,9 +11,7 @@ jobs:
       - uses: actions/setup-node@v3
       - run: |
           cd client
-          npm i
           npm test
       - run: |
           cd server
-          npm i
           npm test
