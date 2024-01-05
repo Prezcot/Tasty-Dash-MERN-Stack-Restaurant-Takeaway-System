@@ -108,6 +108,7 @@ router.post("/signin",async (req,res,next)=>{ //This route handler handles all s
 
 router.post("/signup",async(req,res,next)=>{ //This route handler handles all signup requests
     var {username,email,phone_number,password} = req.body;
+    console.log("phonenumber",phone_number);
     var type="User";
     try{
         password= await bcrypt.hash(password,10);
@@ -127,7 +128,7 @@ router.post("/signup",async(req,res,next)=>{ //This route handler handles all si
             res.status(400).json({message:"Email Already Taken"});    
         }
         else{
-            const new_user=new users({username,type,email,phone_number,password});
+            const new_user=new users({username,type,email,phonenumber:phone_number,password});
             const user = {
                 username: username,
                 role: "User"  // assuming your user has a role

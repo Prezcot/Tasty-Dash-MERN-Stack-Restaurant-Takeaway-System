@@ -39,7 +39,7 @@ function Dashboard() {
     },[]);
     function handleError() {
         //also called a render method
-        if (error) {
+        if (error && error!="Password Successfully Changed") {
           return (
             <center>
               <div
@@ -58,6 +58,34 @@ function Dashboard() {
                     textAlign: "center",
                     fontWeight: "normal",
                     color: "red",
+                  }}
+                >
+                  {error}
+                </p>
+              </div>
+            </center>
+          );
+        }
+        else if (error=="Password Successfully Changed")
+        {
+          return (
+            <center>
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  border: "0.1vh solid green",
+                  borderRadius: "1vh",
+                  paddingTop: "2vh",
+                  paddingLeft: "2vh",
+                  paddingRight: "2vh",
+                }}
+              >
+                <p
+                  style={{
+                    textAlign: "center",
+                    fontWeight: "normal",
+                    color: "green",
                   }}
                 >
                   {error}
@@ -86,7 +114,7 @@ function Dashboard() {
                 }
             }
             else{
-                setError("Please Enter Password Above 8 Characters");
+                setError("Please Enter A Password Above 4 Characters");
             }
         }
         else{
