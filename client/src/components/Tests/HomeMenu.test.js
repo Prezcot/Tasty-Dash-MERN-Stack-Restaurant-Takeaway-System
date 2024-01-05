@@ -28,7 +28,7 @@ describe("UNIT TEST - HOMEMENU COMPONENT", () => {
                 <HomeMenu/>
             </BrowserRouter>);
         setTimeout(()=>{
-            const elementswithmenu=getAllByText("$");// we use + because all items consist of that constant display and now the test would work regardless of which item is removed(unless its out of stock).
+            const elementswithmenu=getAllByText("$");
             expect(elementswithmenu.length).toBeGreaterThan(0);
         },5000);
         
