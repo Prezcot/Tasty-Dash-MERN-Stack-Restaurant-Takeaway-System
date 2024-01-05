@@ -6,10 +6,11 @@ This website allows two different types of users **Customers** and **Administrat
 
 - Customers can securely sign in to their accounts to access personalized features and information.
 - New customers can easily sign up with our website to enjoy a ordering experience tailored to them.
-- Once signed in, customers can explore the diverse selection of menu items, and then add them to and remove them from their baskets.
+- Once signed in, customers can explore the diverse selection of menu items, and then add them to or remove them from their baskets.
 - Customers can further update their order contents, including changing quantities of selected items, removing unwanted selections and also include any special instructions to be considered when the restaurant prepares their order(allergies, dietary restrictions etc.).
 - Customers can the review their final order summary and make secure payments using integrated PayPal services or their debit/credit cards.
 - Once an order is placed, customers can track the status of live orders as well as view a history of all their past orders and refunded orders.
+- Customers are also able to change account information like their password, and also delete their account with the shop if they wish to.
 
 ### Administrators
 
