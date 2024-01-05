@@ -20,8 +20,8 @@ describe("UNIT TEST - PAYMENT COMPONENT", () => {
             </BrowserRouter>);
     
         // Check if the navigate function was called with the correct path
-        var headinginpayment=getByText("Confirm Details and Checkout");
-        expect(headinginpayment).toBeInTheDocument();
+        var heading_in_payment=getByText("Confirm Details and Checkout");
+        expect(heading_in_payment).toBeInTheDocument();
     });
 
 });
@@ -30,13 +30,13 @@ describe("UNIT TEST - PAYMENT COMPONENT", () => {
 describe("INTEGRATION TEST - PAYMENT COMPONENT", () => {
     
     it("Values set in Basket page appear in Payment page", () => {
-        const mockNavigate = jest.fn();
+        const mock_navigate = jest.fn();
 
-        const getItemMock = jest.fn((key) => {
+        const get_item_mock = jest.fn((key) => {
             switch (key) {
             case 'cart':
                 return JSON.stringify(["Pizza,5.99,2"]);
-            case 'menuCart':
+            case 'menu_cart':
                 return JSON.stringify({ "Pizza": 2});
             case 'customer_instruction':
                 return "I have an allergy to nuts";
@@ -47,11 +47,11 @@ describe("INTEGRATION TEST - PAYMENT COMPONENT", () => {
             }
         });
         
-        const setItemMock = jest.fn();
+        const set_item_mock = jest.fn();
         
         jest.spyOn(global, 'sessionStorage', 'get').mockReturnValue({
-            getItem: getItemMock,
-            setItem: setItemMock,
+            getItem: get_item_mock,
+            setItem: set_item_mock,
         });
         // Render the Basket component inside MemoryRouter
         var {getByTestId} =render(
@@ -59,10 +59,10 @@ describe("INTEGRATION TEST - PAYMENT COMPONENT", () => {
                 <Basket/>
             </BrowserRouter>);
     
-        // Mock the useNavigate hook to return the mockNavigate function
+        // Mock the useNavigate hook to return the mock_navigate function
         jest.mock('react-router-dom', () => ({
           ...jest.requireActual('react-router-dom'),
-          useNavigate: () => mockNavigate,
+          useNavigate: () => mock_navigate,
         }));
     
         // Find the "Proceed to Payment" button and click it

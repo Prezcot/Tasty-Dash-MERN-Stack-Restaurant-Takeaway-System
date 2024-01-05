@@ -14,17 +14,17 @@ function Basket() {
   // let[itemsPresent, setItemsPresent] = useState(sessionStorage.getItem("present"));
 
   const nav = useNavigate();
-  let [instructionfromcust, setInstructionFromCust] = useState(sessionStorage.getItem("customer_instruction") || "");
+  let [instruction_from_cust, setInstructionFromCust] = useState(sessionStorage.getItem("customer_instruction") || "");
 
   // Thinals side
   // let thinalcart = ["Pizza,600,1","Pebbles,400,3","Lava Cake,200,2"];
   // sessionStorage.setItem("cart",JSON.stringify(thinalcart));
-  let quantityMap = JSON.parse(sessionStorage.getItem("menuCart"));
+  let quantity_map = JSON.parse(sessionStorage.getItem("menu_cart"));
   // my side
   let cart = JSON.parse(sessionStorage.getItem("cart"));
 
   // state for summary
-  let [updatedqty, setUpdatedQty] = useState(false);
+  let [updated_qty, setUpdatedQty] = useState(false);
 
   // TO trigger the order summary update
   function UpdateSummary() {
@@ -33,13 +33,13 @@ function Basket() {
 
   // To collect the instruction provided
   function setInstructions(e) {
-    let existingInstruction = sessionStorage.getItem("customer_instruction");
-    let defaultValue = existingInstruction ? existingInstruction : "";
+    let existing_instruction = sessionStorage.getItem("customer_instruction");
+    let default_value = existing_instruction ? existing_instruction : "";
     setInstructionFromCust(e.target.value);
-    console.log("instruction received: " + instructionfromcust);
+    console.log("instruction received: " + instruction_from_cust);
   }
 
-  let [finalTotal, setFinalTotal] = useState(0.0);
+  let [final_total, setFinalTotal] = useState(0.0);
 
   useEffect(() => {
     // Calculate the total when cart changes
@@ -55,14 +55,14 @@ function Basket() {
 
   //sending order data to mongo
   async function handleOrder() {
-    if(finalTotal>0){
+    if(final_total>0){
 
-      let finalcart = cart.filter((item) => {
+      let final_cart = cart.filter((item) => {
         const [, , quantity] = item.split(",");
         return parseInt(quantity) > 0;});
-      sessionStorage.setItem("cart", JSON.stringify(finalcart))
+      sessionStorage.setItem("cart", JSON.stringify(final_cart))
 
-      sessionStorage.setItem("customer_instruction", instructionfromcust);
+      sessionStorage.setItem("customer_instruction", instruction_from_cust);
       
       nav("/payment");
       
@@ -112,11 +112,11 @@ function Basket() {
               {cart.length > 0 ? (
                 cart.map((item, index) => (
                   <Product 
-                  itemProp={item} 
-                  indexProp={index}
-                  cartProp={cart} 
-                  quantityProp={quantityMap}
-                  updateProp={() => UpdateSummary()}
+                  item_prop={item} 
+                  index_prop={index}
+                  cart_prop={cart} 
+                  quantity_prop={quantity_map}
+                  update_prop={() => UpdateSummary()}
                   
                   />
                 ))
@@ -127,19 +127,19 @@ function Basket() {
   
               <div className="instruction">
                 <h3 className="textcolor">Special Instructions for Preparation</h3>
-                <textarea value ={instructionfromcust} className="textarea" data-testid="spe-ins-test-comp" onChange={setInstructions}></textarea>
+                <textarea value ={instruction_from_cust} className="textarea" data-testid="spe-ins-test-comp" onChange={setInstructions}></textarea>
               </div>
             </div>
   
             <div className="summary">
               <h2 className="textcolor">Order Summary</h2>
               {cart.map((item, index) => (
-                <SummaryItem itemProp2={item} indexProp2={index} cartProp2={cart}/>
+                <SummaryItem item_prop2={item} index_prop2={index} cart_prop2={cart}/>
               ))}
               <div className="finalize">
                 <div id="indi-detail">
                   <p className="textcolor">Total</p>
-                  <p className="textcolor" data-testid="order-total-test">${finalTotal}</p>
+                  <p className="textcolor" data-testid="order-total-test">${final_total}</p>
                 </div>
                 <button id="payment-button" data-testid="payment-button-test" onClick={handleOrder}><b>Proceed to Payment</b></button>
               </div>

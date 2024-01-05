@@ -172,6 +172,7 @@ const AdminDashboard = () => {
         {sorted_order_data.map((items, index) => (
           <div key={index}>
             <li
+              data-testid="list-item-test"
               className={`list-group-item fs-6 ${
                 items.order_status === "Approved"
                   ? "list-group-item-success"

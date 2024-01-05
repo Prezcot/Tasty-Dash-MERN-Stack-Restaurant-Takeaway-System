@@ -60,16 +60,16 @@ sessionStorage.setItem("menu_cart", JSON.stringify(quantity_map));
 
   
 const updateItems = (itemName, itemImage,action) => {
-    setQuantityMap((prevMap) => {
-      const currentQuantity = prevMap[itemName] || 0;
-      const newQuantity =
-        action === "add" ? currentQuantity + 1 : Math.max(currentQuantity - 1, 0);
+    setQuantityMap((prev_map) => {
+      const current_quantity = prev_map[itemName] || 0;
+      const new_quantity =
+        action === "add" ? current_quantity + 1 : Math.max(currentQuantity - 1, 0);
 
-        const updatedMap = newQuantity === 0
-        ? Object.fromEntries(Object.entries(prevMap).filter(([key]) => key !== itemName))
-        : { ...prevMap, [itemName]: newQuantity };
+        const updated_map = new_quantity === 0
+        ? Object.fromEntries(Object.entries(prev_map).filter(([key]) => key !== itemName))
+        : { ...prev_map, [itemName]: new_quantity };
       showBasket();
-      return updatedMap;
+      return updated_map;
     });
   };
   
