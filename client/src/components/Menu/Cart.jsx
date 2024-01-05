@@ -6,7 +6,7 @@ function Cart({ items, quantity_map}) {
   const nav = useNavigate();
 
   const cart_items = items.filter((item) => quantity_map[item.itemName] > 0);
-  const uniqueItemsCount = cart_items.length;
+  const unique_items_count = cart_items.length;
   const [is_hovered, setIsHovered] = useState(false);
 
   const formattedCart = cart_items.map((item) => `${item.itemName},${item.itemPrice},${quantity_map[item.itemName] }`);
@@ -24,7 +24,7 @@ function Cart({ items, quantity_map}) {
         onMouseLeave={() => setIsHovered(false)}>
       <div className="cart-icon" style={{position:"fixed"}} title="Hover to view and proceed to basket">
         <img src="/images/Cart.png" alt="Shopping Cart" />
-        <label className="unique-items-count">{uniqueItemsCount}</label>
+        <label className="unique-items-count">{unique_items_count}</label>
         </div>
         {/* Show the list underneath the icon */}
         {is_hovered && (
