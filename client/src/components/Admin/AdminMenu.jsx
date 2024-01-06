@@ -153,7 +153,7 @@ function AdminMenu() {
           setValidationErrors({
             itemName: '',
             itemDescription: '',
-            itemPrice: 0,
+            itemPrice: '',
             itemImage: '', 
             itemType:'',
           });
