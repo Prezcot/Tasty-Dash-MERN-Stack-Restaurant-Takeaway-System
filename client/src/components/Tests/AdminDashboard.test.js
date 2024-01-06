@@ -90,30 +90,63 @@ describe("UNIT-TESTS - ADMIN DASHBOARD BUTTONS CHECK", () => {
     const { queryByTestId } = render(<AdminDashboard />);
 
     await waitFor(() => {
-      const declineButton = queryByTestId("Decline");
-      expect(declineButton).toBeInTheDocument();
+      const decline_button = queryByTestId("Decline");
+      expect(decline_button).toBeInTheDocument();
     });
 
-    const declineButton = queryByTestId("Decline");
-    fireEvent.click(declineButton);
+    const decline_button = queryByTestId("Decline");
+    fireEvent.click(decline_button);
 
     expect(axios.post).toHaveBeenCalledWith(
       "http://localhost:3001/admin_dashboard_data/move_to_refund",
       { object_id: mock_order_get[0]._id }
     );
   });
-  test("triggers move_to_order_collected when Decline button is clicked", async () => {
+
+  test("triggers move_to_order_collected when Collected button is clicked", async () => {
     axios.get.mockResolvedValueOnce({ data: mock_order_get });
 
-    const { queryByTestId } = render(<AdminDashboard />);
-
-    await waitFor(() => {
-      const declineButton = queryByTestId("Collected");
-      expect(declineButton).toBeInTheDocument();
+    let component;
+    await act(async () => {
+      component = render(<AdminDashboard />);
     });
 
-    const declineButton = queryByTestId("Collected");
-    fireEvent.click(declineButton);
+    let approve_button;
+
+    approve_button = component.queryByTestId("Approve");
+
+    expect(approve_button).toBeInTheDocument();
+
+    fireEvent.click(approve_button);
+    const mock_order_get2 = [
+      {
+        _id: { $oid: "6589e222e1a36019422ba3f4" },
+        username: "bob",
+        order_id: "6",
+        payment_id: "PAYMENT PENDING!",
+        email: "bob@gmail.com",
+        items: ["Spring rolls,400,1"],
+        order_status: "Approved",
+        instructions: "",
+        order_total: "400",
+        __v: { $numberInt: "0" },
+      },
+    ];
+    axios.get.mockResolvedValueOnce({ data: mock_order_get2 });
+
+    await act(async () => {
+      component.rerender(<AdminDashboard />);
+    });
+    approve_button = component.queryByTestId("Approve");
+    expect(approve_button).not.toBeInTheDocument();
+
+    let collected_button;
+    await waitFor(() => {
+      collected_button = component.queryByTestId("Collected");
+    });
+    expect(collected_button).toBeInTheDocument();
+
+    fireEvent.click(collected_button);
 
     expect(axios.post).toHaveBeenCalledWith(
       "http://localhost:3001/admin_dashboard_data/move_to_collected_orders",

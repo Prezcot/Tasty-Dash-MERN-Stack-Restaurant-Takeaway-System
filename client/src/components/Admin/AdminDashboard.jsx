@@ -123,22 +123,40 @@ const AdminDashboard = () => {
       }
     } else {
       console.log("Object ID: ", object_id);
-      await axios
-        .put("http://localhost:3001/admin_dashboard_data/set_order_status", {
-          object_id: object_id,
-          order_status: new_status,
-        })
-        .then((res) => {
-          const socket = io("http://localhost:3001");
-          socket.emit("order_status_update", {
-            username: username,
-            status: new_status,
-          });
-          grabData();
-        })
-        .catch((err) => {
-          console.error(err);
+      // await axios
+      //   .put("http://localhost:3001/admin_dashboard_data/set_order_status", {
+      //     object_id: object_id,
+      //     order_status: new_status,
+      //   })
+      //   .then((res) => {
+      //     const socket = io("http://localhost:3001");
+      //     socket.emit("order_status_update", {
+      //       username: username,
+      //       status: new_status,
+      //     });
+      //     grabData();
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //   });
+      try {
+        await axios.put(
+          "http://localhost:3001/admin_dashboard_data/set_order_status",
+          {
+            object_id: object_id,
+            order_status: new_status,
+          }
+        );
+
+        const socket = io("http://localhost:3001");
+        socket.emit("order_status_update", {
+          username: username,
+          status: new_status,
         });
+        grabData();
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
