@@ -47,7 +47,7 @@ const AdminNavBar = () => {
                   onClick={() => setPage("admin_order_refund")}
                   style={{ cursor: "pointer" }}
                 >
-                  Refunded Items
+                  Refunds
                 </a>
               </li>
               <li className="nav-item">
