@@ -209,7 +209,7 @@ const AdminDashboard = () => {
                     <button
                       type="button"
                       className="btn btn-success me-4 btn-lg"
-                      onClick={() => updateOrderStatus(items._id, "Approved")}
+                      onClick={() => updateOrderStatus(items._id, "Approved",items.username)}
                       data-testid="Approve"
                     >
                       <i className="bi bi-check">Approve</i>
@@ -217,7 +217,7 @@ const AdminDashboard = () => {
                     <button
                       type="button"
                       className="btn btn-danger me-4 btn-lg"
-                      onClick={() => updateOrderStatus(items._id, "Declined")}
+                      onClick={() => updateOrderStatus(items._id, "Declined",items.username)}
                       data-testid="Decline"
                     >
                       <i className="bi bi-x">Decline</i>
@@ -228,7 +228,7 @@ const AdminDashboard = () => {
                   <button
                     type="button"
                     className="btn btn-warning btn-lg"
-                    onClick={() => updateOrderStatus(items._id, "Collected")}
+                    onClick={() => updateOrderStatus(items._id, "Collected",items.username)}
                     data-testid="Collected"
                   >
                     <i>Order Collected</i>

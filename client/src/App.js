@@ -51,7 +51,7 @@ function App() {
   useEffect(() => {
     const socket = io("http://localhost:3001");
     socket.on("order_status_update", function(data) {
-      console.log(''+data.status);
+      console.log(data.username);
       notify(data);
     });
     return () => {

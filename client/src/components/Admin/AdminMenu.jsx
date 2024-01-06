@@ -149,6 +149,10 @@ function AdminMenu() {
         itemType: "",
       });
       fileInput.current.value = "";
+
+      const socket = io("http://localhost:3001");
+      socket.emit("product changes");
+
     } catch (error) {
       console.error(error);
     }
@@ -165,6 +169,8 @@ function AdminMenu() {
         "http://localhost:3001/menu/data"
       );
       setItems(updatedItemsResponse.data);
+      const socket = io("http://localhost:3001");
+      socket.emit("product changes");
     } catch (error) {
       console.error(error);
     }
