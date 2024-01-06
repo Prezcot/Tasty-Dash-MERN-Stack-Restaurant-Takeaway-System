@@ -26,7 +26,6 @@ function Cart({ items, quantity_map}) {
         <img src="/images/Cart.png" alt="Shopping Cart" />
         <label className="unique-items-count">{unique_items_count}</label>
         </div>
-        {/* Show the list underneath the icon */}
         {is_hovered && (
           <div className='cart-contents'>
           <div className="cart-items-list">

@@ -37,10 +37,7 @@ const collected_orders = mongoose.model("collected_orders", {
   order_total: String,
 });
 
-//Orders.js
-// const order_identification = mongoose.model("order_id", {
-//   orderID:Number,
-// });
+
 
 const order_identification = mongoose.model(
   "order_identification",

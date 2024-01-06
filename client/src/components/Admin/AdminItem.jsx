@@ -34,7 +34,7 @@ function AdminItem({ item, onDelete }) {
       const socket = io("http://localhost:3001");
       socket.emit("product changes");
     } else {
-      // Enter edit mode
+      
       setEdittext("/images/Apply.png");
       setIsEditing(true);
     }

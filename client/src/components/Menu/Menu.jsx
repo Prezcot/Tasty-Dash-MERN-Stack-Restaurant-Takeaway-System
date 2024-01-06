@@ -122,8 +122,6 @@ function Menu() {
         <div className="menu-header">
           <h1 align="center">Menu</h1>
         </div>
-
-        {/* Separate items based on their types */}
         <h2>Starters</h2>
 
         <div className="menu-item-div">

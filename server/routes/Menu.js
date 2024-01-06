@@ -30,7 +30,7 @@ router.get('/data', async (req, res) => {
     try {
       console.log(`Deleting item with name: ${item_name}`);
   
-      // Use Mongoose to find and delete the document based on item name
+      
       const deleted_item = await Menuitem.findOneAndDelete({ itemName: item_name });
   
       if (!deleted_item) {
