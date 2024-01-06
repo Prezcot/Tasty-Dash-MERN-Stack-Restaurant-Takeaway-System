@@ -1,6 +1,6 @@
 # Restaurant Takeaway Website
 
-This website allows two different types of users **Customers** and **Administrators** to enjoy the following features on this MERN stack takeaway ordering website.
+This website allows two different types of users **Customers** and **Administrators** to enjoy the following features on this MERN stack takeaway ordering system.
 
 ### Customers
 
@@ -15,8 +15,8 @@ This website allows two different types of users **Customers** and **Administrat
 ### Administrators
 
 - Admin accounts are manually added to the user database, and admins can sign in securely to get access to the admin feature suite.
-- Admins are presented with a dashboard that allows them to view all orders placed by customers. Admins can approve these orders and once completed, mark them as "collected". Furthermore, admins can decline orders in case they are unable to fulfill these orders due to unforeseen circumstances. The restaurant may then issue a refund to these customers.
-- Admins can view a list of all declined orders that have had refunds issued for them.
+- Admins are presented with a dashboard that allows them to view all orders placed by customers. Admins can approve these orders and once completed(prepared by restarant and collected by customer), mark them as "collected". Furthermore, admins can decline orders in case they are unable to fulfill these orders due to unforeseen circumstances. The restaurant may then issue a refund to these customers.
+- Admins can view a list of all declined orders that need refunds issued for them.
 - Admins can view a history of all the restaurant's completed orders.
 - Finally, Admins are provided with the ability to add new menu items, change their prices, and manage the availability of existing items, to ensure that the menu is always up to date on the customer's side.
 
