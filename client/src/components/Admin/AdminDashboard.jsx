@@ -201,37 +201,7 @@ const AdminDashboard = () => {
               <br />
               <hr style={{ margin: "10px" }} />
               <span className="d-flex mt-3">
-                <button
-                  type="button"
-                  className="btn btn-success me-4 btn-lg"
-                  onClick={() =>
-                    updateOrderStatus(items._id, "Approved", items.username)
-                  }
-                  data-testid="Approve"
-                >
-                  <i className="bi bi-check">Approve</i>
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-danger me-4 btn-lg"
-                  onClick={() =>
-                    updateOrderStatus(items._id, "Declined", items.username)
-                  }
-                  data-testid="Decline"
-                >
-                  <i className="bi bi-x">Decline</i>
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-warning btn-lg"
-                  onClick={() =>
-                    updateOrderStatus(items._id, "Collected", items.username)
-                  }
-                  data-testid="Collected"
-                >
-                  <i>Order Collected</i>
-                </button>
-                {/* {items.order_status === "Pending" && (
+                {items.order_status === "Pending" && (
                   <>
                     <button
                       type="button"
@@ -260,7 +230,7 @@ const AdminDashboard = () => {
                   >
                     <i>Order Collected</i>
                   </button>
-                )} */}
+                )}
                 <h4
                   style={{
                     marginLeft: "50px",
