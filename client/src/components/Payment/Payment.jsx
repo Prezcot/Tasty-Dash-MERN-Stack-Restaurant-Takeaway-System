@@ -36,7 +36,7 @@ let cus_email = sessionStorage.getItem('email');
   
   <div className="payment-detail-button-container" style={{marginBottom:"10%", height:"fit-content"}}>
 
-  <div style={{display:"flex", flexDirection:"column",justifyContent:"space-around", height:"50vh",borderRight:"7px solid orange", padding:"10%", paddingLeft:"3%", paddingRight:"17%"}}>
+  <div style={{display:"flex", flexDirection:"column",justifyContent:"space-around", height:"fit-content",borderRight:"7px solid orange", padding:"3%", paddingLeft:"3%", paddingRight:"17%"}}>
   
   {/* <div>
       <h3>Email</h3>
