@@ -57,12 +57,9 @@ function Paypal() {
         },
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
-          console.log(order);
           let response = await axios.get("http://localhost:3001/orders/get_order_id");
-          console.log("this is the axios response"+response);
           setLOID(latest_order_id=response.data);
           let temp = latest_order_id+1;
-          console.log("temp varaible is:"+temp);
           let order_details = {
             username: sessionStorage.getItem("username"),
             order_id: temp,

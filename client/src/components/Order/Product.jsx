@@ -4,8 +4,6 @@ import { useState } from "react";
 function Product ({item_prop,index_prop, cart_prop, update_prop, quantity_prop}){
 
     let [name, price, qty] = item_prop.split(",");
-    console.log("full cart"+cart_prop);
-    console.log("first entry"+cart_prop[0]);
 
     let [quantity,setQuantity] = useState(parseInt(qty));
 
@@ -17,7 +15,6 @@ function Product ({item_prop,index_prop, cart_prop, update_prop, quantity_prop})
             quantity_prop[name] = quantity;
             sessionStorage.setItem("cart",JSON.stringify(cart_prop));
             sessionStorage.setItem("menu_cart", JSON.stringify(quantity_prop));
-            console.log("changedItem"+cart_prop[index_prop]);
             
         };
         if(e.target.name=="plus"){
@@ -27,7 +24,6 @@ function Product ({item_prop,index_prop, cart_prop, update_prop, quantity_prop})
             quantity_prop[name] = quantity;
             sessionStorage.setItem("cart",JSON.stringify(cart_prop));
             sessionStorage.setItem("menu_cart", JSON.stringify(quantity_prop));
-            console.log("changedItem"+cart_prop[index_prop]);
             
         };
     }
