@@ -78,7 +78,7 @@ const AdminDashboard = () => {
     console.log("updated order status function");
     toast.info("The Order Status Has Been Updated!", {
       position: "top-center",
-      autoClose: 500,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
