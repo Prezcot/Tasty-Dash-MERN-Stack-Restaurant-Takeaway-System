@@ -9,7 +9,7 @@ function Home(){
     const nav=useNavigate();
 
     return(
-        <div style={{display:"flex",flexDirection:"column",height:"100vh",width:"100vw"}}>
+        <div className="home-everything" style={{display:"flex",flexDirection:"column",height:"100vh",width:"100vw"}}>
             <nav className="py-3 navbar navbar-expand-lg fixed-top auto-hiding-navbar">
                 <div className="container">
                     <a className="navbar-brand">
