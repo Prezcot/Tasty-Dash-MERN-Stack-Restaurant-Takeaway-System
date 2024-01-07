@@ -14,7 +14,6 @@ router.get("/get_order_id", async (req, res) => {
     let response = await order_identification.find({
       _id: "659aab5891c6823058f07bd4",
     });
-    console.log(response[0].orderID);
     res.status(200).json(response[0].orderID);
   } catch (error) {
     console.error(error);
