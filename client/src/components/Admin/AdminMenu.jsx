@@ -152,7 +152,6 @@ function AdminMenu() {
 
       const socket = io("http://localhost:3001");
       socket.emit("product changes");
-
     } catch (error) {
       console.error(error);
     }

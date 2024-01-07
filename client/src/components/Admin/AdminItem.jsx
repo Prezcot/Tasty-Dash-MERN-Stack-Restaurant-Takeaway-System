@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-
 function AdminItem({ item, onDelete }) {
   const [is_Editing, setIsEditing] = useState(false);
   const [edited_Price, setEditedPrice] = useState(item.itemPrice.toFixed(2));
@@ -15,10 +14,9 @@ function AdminItem({ item, onDelete }) {
   };
 
   const handleStockStatusChange = (e) => {
-
     setStockStatus(e.target.value);
   };
-  
+
   const handleEditClick = async () => {
     if (is_Editing) {
       let setNewItemData = {
@@ -28,13 +26,15 @@ function AdminItem({ item, onDelete }) {
         itemImage: item.itemImage,
         itemAvailability: stock_Status,
       };
-      await axios.put(`http://localhost:3001/menu/edit/${setNewItemData.itemName}`, setNewItemData);
+      await axios.put(
+        `http://localhost:3001/menu/edit/${setNewItemData.itemName}`,
+        setNewItemData
+      );
       setEdittext("/images/Edit.png");
       setIsEditing(false);
       const socket = io("http://localhost:3001");
       socket.emit("product changes");
     } else {
-      
       setEdittext("/images/Apply.png");
       setIsEditing(true);
     }
@@ -45,7 +45,6 @@ function AdminItem({ item, onDelete }) {
 
   return (
     <div className="menu-card" data-testid="menu-item" style={cardStyle}>
-      
       <img src={item.itemImage} alt={item.itemName} />
       <div className="menu-info">
         <h3 align="center" style={{ fontWeight: "600" }}>
@@ -53,7 +52,13 @@ function AdminItem({ item, onDelete }) {
         </h3>
         <p align="center">{item.itemDescription}</p>
         {is_Editing && (
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <label>
               <input
                 type="radio"
@@ -76,7 +81,12 @@ function AdminItem({ item, onDelete }) {
         )}
         <p align="center" style={{ fontSize: "130%", fontWeight: "bold" }}>
           {is_Editing ? (
-            <input type="number" step="0.01" value={edited_Price} onChange={handlePriceChange} />
+            <input
+              type="number"
+              step="0.01"
+              value={edited_Price}
+              onChange={handlePriceChange}
+            />
           ) : (
             `$ ${edited_Price}`
           )}
