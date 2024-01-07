@@ -7,7 +7,6 @@ import "../../BootstrapImports.js";
 import HomeOfferItem from "./HomeOfferItem.jsx";
 function HomeMenu() {
   const nav = useNavigate();
-
   const [items, setItems] = useState([]);
 
   var grabitems = async () => {

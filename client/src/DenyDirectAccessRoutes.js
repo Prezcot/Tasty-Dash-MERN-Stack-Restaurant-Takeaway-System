@@ -37,10 +37,10 @@ function DenyDirectAccessRoutes() {
     }
   }
   checkUser();
-  if (!sessionStorage.getItem("username")) {
-    return <Navigate to="/home"></Navigate>;
-  }
-  if (isUser) {
+  // if (!sessionStorage.getItem("username")) {
+  //   return <Navigate to="/home"></Navigate>;
+  // }
+  if (isUser || !sessionStorage.getItem("username")) {
     return (
       <Routes>
         <Route path="/offerings" element={<HomeMenu />}></Route>
@@ -55,7 +55,7 @@ function DenyDirectAccessRoutes() {
         <Route path="*" element={<Home />}></Route>
       </Routes>
     );
-  } else if (!isUser) {
+  } else if (!isUser || !sessionStorage.getItem("username")) {
     return (
       <Routes>
         <Route path="/offerings" element={<HomeMenu />}></Route>
