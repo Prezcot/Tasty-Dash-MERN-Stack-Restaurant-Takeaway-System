@@ -1,6 +1,6 @@
 import Dashboard from "./User/Dashboard";
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function NavBar(props) {
   const nav = useNavigate();
@@ -10,7 +10,7 @@ function NavBar(props) {
     setPage(new_page);
   };
   const handleLogout = () => {
-    sessionStorage.setItem("menu_cart","{}");
+    sessionStorage.setItem("menu_cart", "{}");
     sessionStorage.removeItem("order_id");
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("email");
@@ -22,9 +22,7 @@ function NavBar(props) {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark top fixed-top">
         <div className="container-fluid">
-          <a className="navbar-brand">
-            Tasty Dash
-          </a>
+          <a className="navbar-brand">Tasty Dash</a>
           <button
             className="navbar-toggler"
             type="button"

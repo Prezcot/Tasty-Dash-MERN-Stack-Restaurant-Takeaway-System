@@ -40,17 +40,15 @@ const SignIn = () => {
     }
   }, []);
 
-  useEffect(()=>{
-    if (sessionStorage.getItem("alert_msg"))
-    {
+  useEffect(() => {
+    if (sessionStorage.getItem("alert_msg")) {
       setError(sessionStorage.getItem("alert_msg"));
     }
-  },[])
+  }, []);
   function handleError() {
     //also called a render method
     if (error) {
-      if (!sessionStorage.getItem("alert_msg"))
-      {
+      if (!sessionStorage.getItem("alert_msg")) {
         return (
           <center>
             <div
@@ -76,9 +74,8 @@ const SignIn = () => {
             </div>
           </center>
         );
-      }
-      else{
-        return(
+      } else {
+        return (
           <center>
             <div
               style={{
@@ -102,7 +99,7 @@ const SignIn = () => {
               </p>
             </div>
           </center>
-        )
+        );
       }
     }
   }
@@ -154,17 +151,34 @@ const SignIn = () => {
   }
   //use vh and vw for margins and padding and other attributes
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-start",
-      backgroundImage: `url("/images/LoginBackground.jpg")`,
-      backgroundSize: "100vw 100vh",
-      backgroundRepeat: "no-repeat",
-      width: "100vw",
-      height: "100vh"}}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        backgroundImage: `url("/images/LoginBackground.jpg")`,
+        backgroundSize: "100vw 100vh",
+        backgroundRepeat: "no-repeat",
+        width: "100vw",
+        height: "100vh",
+      }}
+    >
       <div>
-        <button onClick={()=>nav("/home")} style={{float:"left",marginTop:"1vh",marginLeft:"1vh",backgroundColor: "black",color: "white",borderRadius: "1vh",border: "0.1vh solid black",fontSize:"2vh"}}>Back To Home</button>
+        <button
+          onClick={() => nav("/home")}
+          style={{
+            float: "left",
+            marginTop: "1vh",
+            marginLeft: "1vh",
+            backgroundColor: "black",
+            color: "white",
+            borderRadius: "1vh",
+            border: "0.1vh solid black",
+            fontSize: "2vh",
+          }}
+        >
+          Back To Home
+        </button>
       </div>
       <div
         style={{
@@ -245,13 +259,13 @@ const SignIn = () => {
                 value="Sign In"
               ></input>
               <p style={{ cursor: "pointer" }} onClick={() => nav("/signup")}>
-                <u style={{display:"block"}}>Create an account</u>
+                <u style={{ display: "block" }}>Create an account</u>
               </p>
             </center>
           </form>
         </div>
       </div>
-      </div>
+    </div>
   );
 };
 

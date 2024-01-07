@@ -15,20 +15,22 @@ import { useState } from "react";
 import HomeMenu from "./components/Home/HomeMenu";
 
 function DenyDirectAccessRoutes() {
-  var [isUser,setIsUser]=useState();
-  const token=sessionStorage.getItem("token");
-  async function checkUser(){
-    if (sessionStorage.getItem("token"))
-    {
-      await axios.get(`http://localhost:3001/users/authentication`,{ headers: { Authorization: `Bearer ${token}` }}).then((res)=>{
-        if (res.data.message=="User")
-        {
-          setIsUser(true);
-        }
-        else if(res.data.message=="Admin")
-      {
-        setIsUser(false);
-      }}).catch((err)=>console.log(err));
+  var [isUser, setIsUser] = useState();
+  const token = sessionStorage.getItem("token");
+  async function checkUser() {
+    if (sessionStorage.getItem("token")) {
+      await axios
+        .get(`http://localhost:3001/users/authentication`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          if (res.data.message == "User") {
+            setIsUser(true);
+          } else if (res.data.message == "Admin") {
+            setIsUser(false);
+          }
+        })
+        .catch((err) => console.log(err));
     }
   }
   checkUser();
@@ -39,14 +41,15 @@ function DenyDirectAccessRoutes() {
         <Route path="/menu" element={<Menu />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/basket" element={<Basket />}></Route>
-        <Route path="/payment" element={<Payment renderPayPal = {true} />}></Route>
+        <Route
+          path="/payment"
+          element={<Payment renderPayPal={true} />}
+        ></Route>
         <Route path="/orders" element={<LiveOrders />}></Route>
-        <Route path="*" element={<Home/>}></Route>
+        <Route path="*" element={<Home />}></Route>
       </Routes>
     );
-  } 
-  else if(!isUser)
-  {
+  } else if (!isUser) {
     return (
       <Routes>
         <Route path="/offerings" element={<HomeMenu />}></Route>
@@ -54,13 +57,16 @@ function DenyDirectAccessRoutes() {
         <Route path="/admin" element={<AdminNavBar />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/basket" element={<Basket />}></Route>
-        <Route path="/payment" element={<Payment renderPayPal = {true} />}></Route>
+        <Route
+          path="/payment"
+          element={<Payment renderPayPal={true} />}
+        ></Route>
         <Route path="/orders" element={<LiveOrders />}></Route>
-        <Route path="*" element={<Home/>}></Route>
+        <Route path="*" element={<Home />}></Route>
       </Routes>
-    );  
+    );
   }
-  if(!sessionStorage.getItem("username")){
+  if (!sessionStorage.getItem("username")) {
     return <Navigate to="/home"></Navigate>;
   }
 }
