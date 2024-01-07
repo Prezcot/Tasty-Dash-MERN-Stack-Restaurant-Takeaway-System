@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import Home from "./components/Home/Home";
-
+import HomeMenu from "./components/Home/HomeMenu";
 function App() {
   const nav = useNavigate();
 
@@ -63,6 +63,7 @@ function App() {
         <Route path="/home" element={<Home />}></Route>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />}></Route>
+        <Route path="/offerings" element={<HomeMenu />}></Route>
         <Route path="*" element={<DenyDirectAccessRoutes />} />
       </Routes>
       <ToastContainer />
