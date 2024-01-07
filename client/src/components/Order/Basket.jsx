@@ -11,16 +11,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Basket() {
 
-  // let[itemsPresent, setItemsPresent] = useState(sessionStorage.getItem("present"));
-
   const nav = useNavigate();
   let [instruction_from_cust, setInstructionFromCust] = useState(sessionStorage.getItem("customer_instruction") || "");
 
-  // Thinals side
-  // let thinalcart = ["Pizza,600,1","Pebbles,400,3","Lava Cake,200,2"];
-  // sessionStorage.setItem("cart",JSON.stringify(thinalcart));
   let quantity_map = JSON.parse(sessionStorage.getItem("menu_cart"));
-  // my side
+
   let cart = JSON.parse(sessionStorage.getItem("cart"));
 
   // state for summary

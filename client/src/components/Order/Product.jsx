@@ -28,7 +28,6 @@ function Product ({item_prop,index_prop, cart_prop, update_prop, quantity_prop})
         };
     }
 
-    // let thinalcart = ["Pizza,600,1","Pebbles,400,3","Lava Cake,200,2"];
     
     if (quantity > 0) {
         return(

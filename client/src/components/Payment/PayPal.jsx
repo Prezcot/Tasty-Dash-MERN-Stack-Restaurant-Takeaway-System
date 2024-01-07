@@ -46,7 +46,7 @@ function Paypal() {
             intent: "CAPTURE",
             purchase_units: [
               {
-                description: "Payment Page",
+                description: "Your Payment",
                 amount: {
                   currency_code: "USD",
                   value: sessionStorage.getItem("total"),

@@ -5,13 +5,9 @@ import NavBar from "../NavBar";
 
 function Payment ({ renderPayPal = true }){
 
-const [checkout, setCheckOut] = useState(false);
-
-let username = sessionStorage.getItem('username');
 let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 let total_amount = sessionStorage.getItem('total');
 let customer_ins = sessionStorage.getItem('customer_instruction');
-let cus_email = sessionStorage.getItem('email');
 
 
   return (
@@ -37,11 +33,6 @@ let cus_email = sessionStorage.getItem('email');
   <div className="payment-detail-button-container" style={{marginBottom:"10%", height:"fit-content"}}>
 
   <div style={{display:"flex", flexDirection:"column",justifyContent:"space-around", height:"fit-content",borderRight:"7px solid orange", padding:"3%", paddingLeft:"3%", paddingRight:"17%"}}>
-  
-  {/* <div>
-      <h3>Email</h3>
-      <h6 data-testid="payment-username-test" style={{ fontWeight: 'normal' }}>{cus_email}</h6>
-    </div><br/> */}
 
     <div>
       <h3>Items Ordered</h3>
