@@ -128,10 +128,10 @@ function AdminMenu() {
 
       await axios.post("http://localhost:3001/menu/add", newItem);
 
-      const updatedItemsResponse = await axios.get(
+      const updated_items_response = await axios.get(
         "http://localhost:3001/menu/data"
       );
-      setItems(updatedItemsResponse.data);
+      setItems(updated_items_response.data);
 
       setNewItemData({
         itemName: "",
