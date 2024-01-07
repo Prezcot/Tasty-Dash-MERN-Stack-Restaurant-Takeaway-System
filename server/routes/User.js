@@ -55,13 +55,11 @@ router.get("/userinfo/:username", async (req, res, next) => {
   try {
     var query = await users.find({ username: username });
     if (query.length > 0) {
-      res
-        .status(200)
-        .json({
-          username: query[0].username,
-          email: query[0].email,
-          phone_number: query[0].phonenumber,
-        });
+      res.status(200).json({
+        username: query[0].username,
+        email: query[0].email,
+        phone_number: query[0].phonenumber,
+      });
     }
   } catch (err) {
     res.status(400).json({ message: err });
@@ -92,14 +90,12 @@ router.post("/signin", async (req, res, next) => {
           "r+43kcgH@9u309gXemm#COPv:BNV.;-I`p283$(?{X|b=5R&",
           { expiresIn: "1h" }
         );
-        res
-          .status(200)
-          .json({
-            message: "Account Registered",
-            user: "User",
-            email: query[0].email,
-            token: token,
-          });
+        res.status(200).json({
+          message: "Account Registered",
+          user: "User",
+          email: query[0].email,
+          token: token,
+        });
       } else {
         const user = {
           username: username,

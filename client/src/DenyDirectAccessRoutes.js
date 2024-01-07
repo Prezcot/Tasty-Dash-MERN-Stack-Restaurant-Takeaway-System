@@ -31,8 +31,7 @@ function DenyDirectAccessRoutes() {
           }
         })
         .catch((err) => console.log(err));
-    }
-    else{
+    } else {
       return <Navigate to="/home"></Navigate>;
     }
   }

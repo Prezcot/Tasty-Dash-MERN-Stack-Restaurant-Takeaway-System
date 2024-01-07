@@ -37,8 +37,6 @@ const collected_orders = mongoose.model("collected_orders", {
   order_total: String,
 });
 
-
-
 const order_identification = mongoose.model(
   "order_identification",
   new mongoose.Schema({

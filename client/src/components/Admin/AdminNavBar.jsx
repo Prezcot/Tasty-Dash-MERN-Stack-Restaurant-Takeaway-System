@@ -78,8 +78,10 @@ const AdminNavBar = () => {
                 <a
                   className="nav-link"
                   href="/signin"
-                  onClick={()=>{sessionStorage.removeItem("token")
-                sessionStorage.removeItem("username")}}
+                  onClick={() => {
+                    sessionStorage.removeItem("token");
+                    sessionStorage.removeItem("username");
+                  }}
                 >
                   Logout
                 </a>

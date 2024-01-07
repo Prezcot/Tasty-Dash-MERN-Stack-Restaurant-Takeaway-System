@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { io } from "socket.io-client";
 
 function Paypal() {
-  const paypal = useRef();  
+  const paypal = useRef();
   const nav = useNavigate();
   let [latest_order_id, setLOID] = useState(0);
 

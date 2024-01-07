@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate,Navigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import Paypal from "./PayPal";
 import "../App.css";
 import NavBar from "../NavBar";
@@ -8,15 +8,14 @@ function Payment({ renderPayPal = true }) {
   let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
   let total_amount = sessionStorage.getItem("total");
   let customer_ins = sessionStorage.getItem("customer_instruction");
-  const nav=useNavigate();
+  const nav = useNavigate();
   if (!sessionStorage.getItem("total")) {
-    return(
+    return (
       <>
-      <Navigate to="/orders"></Navigate>;
+        <Navigate to="/orders"></Navigate>;
       </>
     );
-  }
-  else{
+  } else {
     return (
       <>
         <div className="everything" style={{ paddingTop: "4%" }}>
