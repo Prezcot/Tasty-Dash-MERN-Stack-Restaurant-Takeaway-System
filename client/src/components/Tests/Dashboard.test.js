@@ -34,7 +34,7 @@ describe("INTEGRATION TEST - DASHBOARD COMPONENT", () => {
       </BrowserRouter>
     );
     fireEvent.change(getByPlaceholderText("Current Password"), {
-      target: { value: "User12," },
+      target: { value: "User!" },
     });
     fireEvent.change(getByPlaceholderText("New Password"), {
       target: { value: "Newpassword12," },
@@ -45,17 +45,16 @@ describe("INTEGRATION TEST - DASHBOARD COMPONENT", () => {
     fireEvent.click(getAllByText("Change Password")[0]);
     await axios.put("http://localhost:3001/users/checkpassword", {
       username: "user",
-      currentpassword: "User12,",
+      currentpassword: "User!",
       newpassword: "Newpassword12,",
     });
     await expect(axios.put).toHaveBeenCalledWith(
       "http://localhost:3001/users/checkpassword",
       {
         username: "user",
-        currentpassword: "User12,",
+        currentpassword: "User!",
         newpassword: "Newpassword12,",
       }
     );
-    //expect(getByText("Password Successfully Changed")).toBeInTheDocument();
   });
 });
