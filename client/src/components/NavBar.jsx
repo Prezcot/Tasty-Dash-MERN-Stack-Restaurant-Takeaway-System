@@ -1,7 +1,6 @@
 import Dashboard from "./User/Dashboard";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate,Navigate } from "react-router-dom";
 function NavBar(props) {
   const nav = useNavigate();
   const [page, setPage] = useState("home");
@@ -15,7 +14,7 @@ function NavBar(props) {
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("email");
     sessionStorage.removeItem("token");
-    nav("/signin");
+    nav("/home",{replace:true});
   };
 
   return (

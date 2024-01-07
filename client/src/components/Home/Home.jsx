@@ -1,5 +1,5 @@
 import react from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Navigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
@@ -7,7 +7,11 @@ import "../../BootstrapImports.js";
 import HomeOfferItem from "./HomeOfferItem.jsx";
 function Home() {
   const nav = useNavigate();
-
+  sessionStorage.setItem("menu_cart", "{}");
+  sessionStorage.removeItem("order_id");
+  sessionStorage.removeItem("username");
+  sessionStorage.removeItem("email");
+  sessionStorage.removeItem("token");
   return (
     <div
       className="home-everything"

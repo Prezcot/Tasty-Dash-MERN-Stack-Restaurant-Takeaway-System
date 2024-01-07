@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { io } from "socket.io-client";
 
 function Paypal() {
-  const paypal = useRef();
+  const paypal = useRef();  
   const nav = useNavigate();
   let [latest_order_id, setLOID] = useState(0);
 
@@ -79,7 +79,7 @@ function Paypal() {
           );
 
           let document_id =
-            "6589770129060833d3f653b1"; /*this document does not change and is singular in the mongodb collection*/
+            "659aab5891c6823058f07bd4"; /*this document does not change and is singular in the mongodb collection*/
           await axios.put(
             `http://localhost:3001/orders/update_order_id/${document_id}`,
             { temp }

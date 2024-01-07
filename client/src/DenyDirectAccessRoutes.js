@@ -32,8 +32,14 @@ function DenyDirectAccessRoutes() {
         })
         .catch((err) => console.log(err));
     }
+    else{
+      return <Navigate to="/home"></Navigate>;
+    }
   }
   checkUser();
+  if (!sessionStorage.getItem("username")) {
+    return <Navigate to="/home"></Navigate>;
+  }
   if (isUser) {
     return (
       <Routes>
@@ -65,9 +71,6 @@ function DenyDirectAccessRoutes() {
         <Route path="*" element={<Home />}></Route>
       </Routes>
     );
-  }
-  if (!sessionStorage.getItem("username")) {
-    return <Navigate to="/home"></Navigate>;
   }
 }
 

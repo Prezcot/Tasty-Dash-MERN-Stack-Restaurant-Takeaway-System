@@ -5,7 +5,7 @@ const {item,order_identification,users,collected_orders,refunds,}=require("../Sc
 
 router.get('/get_order_id', async (req, res) => {
   try{
-      let response = await order_identification.find({_id:"6589770129060833d3f653b1"});
+      let response = await order_identification.find({_id:"659aab5891c6823058f07bd4"});
       console.log(response[0].orderID);
       res.status(200).json(response[0].orderID);
   } catch (error){
@@ -42,9 +42,6 @@ router.post("/addorder", async (req, res) => {
 router.post("/your_orders", async(req,res) => {
   try{
     let user = req.body.user;
-    // let notCollectedStatus = { $ne: "Collected" };
-    // let condition1 = {username:user};
-    // let condition2 = {order_status:notCollectedStatus};
 
     let live_order_items= await item.find({ username:user }).catch((err)=>res.status(400).json({message:err}));
 
@@ -66,28 +63,5 @@ router.post("/your_orders", async(req,res) => {
     res.status(500).json({ message:"Internal Server Error" })
   }
 });
-
-
-// router.delete('/cancel_order/:orderId', async (req, res) => {
-//   let cancel_id = req.params.orderId;
-
-//   try {
-//     console.log(`Deleting order with id: ${cancel_id}`);
-
-//     // Use Mongoose to find and delete the document based on item name
-//     let deletedItem = await item.findOneAndDelete({ order_id: cancel_id });
-
-//     if (!deletedItem) {
-//       console.log('Item not found');
-//       return res.status(404).json({ error: 'Item not found' });
-//     }
-
-//     console.log('Item deleted successfully');
-//     return res.json({ message: 'Item deleted successfully' });
-//   } catch (error) {
-//     console.error('Error deleting item:', error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
 
 module.exports=router;
