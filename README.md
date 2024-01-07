@@ -34,7 +34,7 @@ This website allows two different types of users **Customers** and **Administrat
   
 ### PayPal Payment Credentials:
 
-After an order's details have been finalized the following fictitious PayPal credentials can be used to mimic an actual PayPal account in the PayPal developer sandbox environment and make a test payment.
+After an order's details have been finalized, to pay with PayPal, the following fictitious personal account credentials can be used to make a test payment in the PayPal developer sandbox environment.
 - Username: sb-qrzuv28891158@personal.example.com
 - Password: *w+8&"6J
 
